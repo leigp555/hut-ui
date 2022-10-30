@@ -19,7 +19,7 @@ jobs:
         run: yarn install
 
       - name: Build
-        run: yarn build --base=https://leigp555.github.io/vue-ui
+        run: yarn build --base=./
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
