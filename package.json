@@ -1,8 +1,8 @@
 {
-  "name": "vite-vue3-tem",
+  "name": "vue-ui",
   "version": "0.0.1",
   "private": false,
-  "description": "A Vite2.x + Vue3 + TypeScript template starter",
+  "description": "ui",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -16,18 +16,19 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com:leigp555/vue3-template.git"
+    "url": "https://github.com/leigp555/vue-ui"
   },
   "keywords": [
+    "vue",
+    "ui",
     "Vite",
     "Vue3",
-    "TypeScript",
-    "Starter"
+    "TypeScript"
   ],
-  "author": "XPoet",
+  "author": "lgp",
   "license": "MIT",
   "bugs": {
-    "url": "https://git@github.com:leigp555/vue3-template/issues"
+    "url": "https://github.com/leigp555/vue-ui"
   },
   "homepage": "https://git@github.com:leigp555/vue3-template",
   "lint-staged": {
@@ -44,7 +45,6 @@
     "nprogress": "^0.2.0",
     "pinia": "^2.0.14",
     "qs": "^6.10.3",
-    "vant": "^3.4.9",
     "vue": "^3.2.6",
     "vue-router": "^4.0.15"
   },

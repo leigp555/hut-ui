@@ -4,14 +4,10 @@ import vue from '@vitejs/plugin-vue'
 import { resolve } from 'path'
 import { viteMockServe } from 'vite-plugin-mock'
 import viteCompression from 'vite-plugin-compression'
-import styleImport, { VantResolve } from 'vite-plugin-style-import'
 
 export default defineConfig({
   plugins: [
     vue(),
-    styleImport({
-      resolves: [VantResolve()]
-    }),
     viteMockServe({
       // default
       mockPath: 'mock'
@@ -42,14 +38,6 @@ export default defineConfig({
   },
   server: {
     port: 4500, // 设置服务启动端口号
-    open: true, // 设置服务启动时是否自动打开浏览器
-    cors: true, // 允许跨域
-    proxy: {
-      '/api': {
-        target: 'http://localhost:8888/',
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, '')
-      }
-    }
+    open: true // 设置服务启动时是否自动打开浏览器
   }
 })
