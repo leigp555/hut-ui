@@ -1,9 +1,11 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
+
 // 如果编辑器提示 path 模块找不到，则可以安装一下 @types/node -> npm i @types/node -D
-import { resolve } from 'path'
+import path, { resolve } from 'path'
 import { viteMockServe } from 'vite-plugin-mock'
 import viteCompression from 'vite-plugin-compression'
+import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 
 export default defineConfig({
   plugins: [
@@ -12,7 +14,14 @@ export default defineConfig({
       // default
       mockPath: 'mock'
     }),
-    viteCompression()
+    viteCompression(),
+    createSvgIconsPlugin({
+      // 指定需要缓存的图标文件夹
+      iconDirs: [path.resolve(process.cwd(), 'src/lib/icons')],
+      // 指定symbolId格式
+      symbolId: 'icon-[name]',
+      inject: 'body-first'
+    })
   ],
   resolve: {
     alias: {

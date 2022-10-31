@@ -8,6 +8,7 @@ import router from '@/router/index'
 import '@/style/global.scss'
 import '@/style/reset.scss'
 import '@/style/font.css'
+import 'virtual:svg-icons-register'
 
 const app = createApp(App)
 app.use(router).use(createPinia()).mount('#app')

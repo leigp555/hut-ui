@@ -1,6 +1,5 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios'
 import qs from 'qs'
-import { Toast } from 'vant'
 
 // 获取Token
 const AUTH_TOKEN: () => string | boolean = () =>
@@ -33,22 +32,22 @@ instance.interceptors.response.use(
   (error) => {
     if (!window.navigator.onLine) {
       // 断网处理比如跳转到断网页面
-      Toast.fail('网络异常，请检查网络')
+      window.alert('网络异常，请检查网络')
       return Promise.reject(error)
     }
     if (!error.response) {
-      Toast.fail('系统繁忙，请稍后再试')
+      window.alert('系统繁忙，请稍后再试')
       return Promise.reject(error)
     }
     // 统一处理400以上的状态码
     if (error.response.status === 401) {
-      Toast.fail('用户未认证')
+      window.alert('用户未认证')
     } else if (error.response.status === 403) {
-      Toast.fail('token过期了')
+      window.alert('token过期了')
     } else if (error.response.status === 404) {
-      Toast.fail('访问内容不存在')
+      window.alert('访问内容不存在')
     } else if (error.response.status === 500) {
-      Toast.fail('系统繁忙，请稍后再试')
+      window.alert('系统繁忙，请稍后再试')
     }
     return Promise.reject(error)
   }
@@ -71,7 +70,7 @@ const httpRequest = (url: string, type = 'GET', data = {}) => {
           resolve(res.data)
         } else {
           // 此处可统一处理非200-400之间的状态码
-          Toast.fail(res.data.msg)
+          window.alert(res.data.msg)
           reject(res.data)
         }
       })

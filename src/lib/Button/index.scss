@@ -1,0 +1,129 @@
+$normal_color: #1890ff;
+$default_font_color: #636567;
+$white: #ffffff;
+$font_color: #f5f5f5;
+$disable_color: #b8b8cb;
+.ui-button {
+  &:hover {
+    border: none;
+    outline: none;
+    box-shadow: none;
+  }
+  &.primary {
+    background-color: $normal_color;
+    color: $font_color;
+    outline: 1px solid $normal_color;
+    &:hover {
+      outline: 1px solid $normal_color;
+      background-color: lighten($normal_color, 10);
+    }
+    &.disabled {
+      background-color: $font_color;
+      color: $disable_color;
+      outline: 1px solid $disable_color;
+      &:hover {
+      }
+    }
+  }
+  &.default {
+    background-color: $white;
+    color: $default_font_color;
+    outline: 1px solid $disable_color;
+    &:hover {
+      outline: 1px solid $normal_color;
+      color: $normal_color;
+    }
+    &.disabled {
+      background-color: $font_color;
+      color: $disable_color;
+      &:hover {
+      }
+    }
+  }
+  &.text {
+    background-color: $white;
+    color: $default_font_color;
+    &:hover {
+      -webkit-filter: brightness(95%);
+    }
+    &.disabled {
+      background-color: $font_color;
+      color: $disable_color;
+      outline: 1px solid $disable_color;
+      &:hover {
+      }
+    }
+
+  }
+  &.dashed {
+    background-color: $white;
+    color: $default_font_color;
+    outline: 1px dashed $disable_color;
+    &:hover {
+      color: $normal_color;
+      outline: 1px dashed $normal_color;
+    }
+    &.disabled {
+      background-color: $font_color;
+      color: $disable_color;
+      outline: 1px solid $disable_color;
+      &:hover {
+      }
+    }
+  }
+  &.link {
+    background-color: inherit;
+    color: $normal_color;
+    &.disabled {
+      color: $disable_color;
+    }
+  }
+  border: none;
+  outline: none;
+  box-shadow: none;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 15px;
+  transition: all 250ms;
+  border-radius: 1px;
+  & > .ui-button-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: ui-button-icon-action infinite 1s linear;
+  }
+  &.big {
+    padding: 8px 19px;
+    font-size: 18px;
+  }
+  &.normal {
+    padding: 4px 15px;
+    font-size: 16px;
+  }
+  &.small {
+    padding: 2px 8px;
+    font-size: 14px;
+  }
+  &.loading {
+    padding: 6px 10px;
+  }
+  &.disabled {
+    cursor: not-allowed;
+  }
+  cursor: pointer;
+  &.radius {
+    border-radius: 3px;
+  }
+  white-space: nowrap;
+}
+
+@keyframes ui-button-icon-action {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
