@@ -49,6 +49,7 @@ withDefaults(
     padding: 2px 5px;
     text-align: center;
     font-size: 14px;
+    border-radius: 2px;
   }
   &.ui-strong {
     font-weight: 700;

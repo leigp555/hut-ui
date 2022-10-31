@@ -1,9 +1,15 @@
 <template>
-  <div>
-    <TypographyEg />
+  <div class="test">
+    <DividerEg />
   </div>
 </template>
 
 <script setup lang="ts">
-import TypographyEg from '@/eg/TypographyEg.vue'
+import DividerEg from '@/eg/DividerEg.vue'
 </script>
+
+<style>
+.test {
+  padding: 20px 10px;
+}
+</style>
