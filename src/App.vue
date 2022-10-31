@@ -1,9 +1,9 @@
 <template>
   <div>
-    <ButtonEg />
+    <TypographyEg />
   </div>
 </template>
 
 <script setup lang="ts">
-import ButtonEg from '@/eg/ButtonEg.vue'
+import TypographyEg from '@/eg/TypographyEg.vue'
 </script>

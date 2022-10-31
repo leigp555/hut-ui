@@ -46,7 +46,7 @@
 </template>
 
 <script setup lang="ts">
-import Button from '@/lib/Button/Button.vue'
+import Button from '@/lib/button/Button.vue'
 import SvgIcon from '@/lib/common/SvgIcon.vue'
 
 const toggle = () => {
