@@ -1,11 +1,11 @@
 <template>
   <div class="test">
-    <LayoutEg />
+    <SpaceEg />
   </div>
 </template>
 
 <script setup lang="ts">
-import LayoutEg from '@/eg/LayoutEg.vue'
+import SpaceEg from '@/eg/SpaceEg.vue'
 </script>
 
 <style>
