@@ -28,10 +28,8 @@ const style = computed(() => {
 
 <style lang="scss">
 .ui-grid-col {
-  height: 100%;
   white-space: nowrap;
   display: flex;
   flex-wrap: nowrap;
-  width: 100px;
 }
 </style>

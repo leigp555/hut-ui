@@ -1,90 +1,34 @@
 <template>
   <div class="wrap">
     <Layout>
-      <Header>
-        <Row>
-          <Col class="header">Header</Col>
-        </Row>
-      </Header>
-      <Content>
-        <Row>
-          <Col class="content">Content</Col>
-        </Row>
-      </Content>
-      <Footer>
-        <Row>
-          <Col class="footer">Footer</Col>
-        </Row>
-      </Footer>
+      <Header class="header"> Header </Header>
+      <Content class="content"> Content </Content>
+      <Footer class="footer"> Footer </Footer>
     </Layout>
     <Layout>
-      <Header>
-        <Row>
-          <Col class="header">Header</Col>
-        </Row>
-      </Header>
+      <Header class="header">Header</Header>
       <Layout row>
-        <Aside>
-          <Row>
-            <Col class="aside" span="20">Aside</Col>
-          </Row>
-        </Aside>
-        <Content>
-          <Row>
-            <Col class="content" span="80">Content</Col>
-          </Row>
-        </Content>
+        <Aside class="aside">Sider</Aside>
+        <Content class="content">Content</Content>
       </Layout>
-      <Footer>
-        <Row>
-          <Col class="footer">Footer</Col>
-        </Row>
-      </Footer>
+      <Footer class="footer">Footer</Footer>
     </Layout>
 
-    <Layout>
-      <Header>
-        <Row>
-          <Col class="header">Header</Col>
-        </Row>
-      </Header>
-      <Layout row>
-        <Content>
-          <Row>
-            <Col class="content">Content</Col>
-          </Row>
-        </Content>
-        <Aside>
-          <Row>
-            <Col class="aside">Aside</Col>
-          </Row>
-        </Aside>
+    <Layout gap="5px">
+      <Header class="header">Header</Header>
+      <Layout row gap="5px">
+        <Content class="content">Content</Content>
+        <Aside class="aside">Sider</Aside>
       </Layout>
-      <Footer>
-        <Row>
-          <Col class="footer">Footer</Col>
-        </Row>
-      </Footer>
+      <Footer class="footer">Footer</Footer>
     </Layout>
 
     <Layout row>
-      <Aside>Sider</Aside>
+      <Aside class="aside">Sider</Aside>
       <Layout>
-        <Header>
-          <Row>
-            <Col class="header">Header</Col>
-          </Row>
-        </Header>
-        <Content>
-          <Row>
-            <Col class="content">Content</Col>
-          </Row>
-        </Content>
-        <Footer>
-          <Row>
-            <Col class="footer">Footer</Col>
-          </Row>
-        </Footer>
+        <Header class="header">Header</Header>
+        <Content class="content">Content</Content>
+        <Footer class="footer">Footer</Footer>
       </Layout>
     </Layout>
   </div>
@@ -96,8 +40,6 @@ import Aside from '@/lib/layout/Aside.vue'
 import Header from '@/lib/layout/Header.vue'
 import Content from '@/lib/layout/Content.vue'
 import Footer from '@/lib/layout/Footer.vue'
-import Row from '@/lib/grid/Row.vue'
-import Col from '@/lib/grid/Col.vue'
 </script>
 
 <style lang="scss" scoped>
@@ -109,29 +51,29 @@ import Col from '@/lib/grid/Col.vue'
     background-color: #7dbcea;
     height: 60px;
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
   }
   .content {
     background-color: #108ee9;
-    height: 200px;
+    height: 250px;
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
   }
   .footer {
     background-color: #7dbcea;
-    height: 40px;
+    height: 50px;
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
   }
   .aside {
-    background-color: yellow;
-    height: 40px;
+    background-color: #3ba0e9;
+    width: 200px;
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
   }
 }
 </style>

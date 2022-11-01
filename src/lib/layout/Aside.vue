@@ -1,5 +1,5 @@
 <template>
-  <div><slot /></div>
+  <div class="ui-layout-aside"><slot /></div>
 </template>
 
 <script lang="ts" setup></script>

@@ -1,20 +1,22 @@
 <template>
-  <section class="ui-layout-layout" :class="{ 'ui-layout-row': row }"><slot /></section>
+  <section class="ui-layout-layout" :class="{ 'ui-layout-row': row }" :style="{ gap }">
+    <slot />
+  </section>
 </template>
 
 <script lang="ts" setup>
 import { withDefaults, defineProps } from 'vue'
 
-withDefaults(defineProps<{ row?: boolean }>(), { row: false })
+withDefaults(defineProps<{ row?: boolean; gap?: string }>(), { row: false, gap: '0px' })
 </script>
 
 <style lang="scss">
 .ui-layout-layout {
   display: flex;
   flex-direction: column;
-  max-width: 100vw;
-  border: 3px solid black;
+  flex-grow: 10;
   &.ui-layout-row {
+    display: flex;
     flex-direction: row;
   }
 }
