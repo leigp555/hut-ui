@@ -1,11 +1,11 @@
 <template>
   <div class="test">
-    <SpaceEg />
+    <AffixEg />
   </div>
 </template>
 
 <script setup lang="ts">
-import SpaceEg from '@/eg/SpaceEg.vue'
+import AffixEg from '@/eg/AffixEg.vue'
 </script>
 
 <style>
