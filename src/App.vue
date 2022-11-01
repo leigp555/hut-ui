@@ -1,11 +1,11 @@
 <template>
   <div class="test">
-    <BreadcrumbEg />
+    <DropdownEg />
   </div>
 </template>
 
 <script setup lang="ts">
-import BreadcrumbEg from '@/eg/BreadcrumbEg.vue'
+import DropdownEg from '@/eg/DropdownEg.vue'
 </script>
 
 <style>
