@@ -1,5 +1,5 @@
 <template>
-  <!--  外层元素不能删除，需要踏占位,这点很重要-->
+  <!--  外层元素不能删除，需要占位,这点很重要-->
   <div class="ui-affix-wrap" ref="containerRef">
     <div
       ref="innerRef"
@@ -13,6 +13,7 @@
 </template>
 
 <script lang="ts" setup>
+// 此组件的外层元素必须是一个滑动的元素因为要监听他的滑动式事件
 import { withDefaults, defineProps, ref, onMounted, onUnmounted } from 'vue'
 
 const props = withDefaults(
