@@ -1,11 +1,11 @@
 <template>
   <div class="test">
-    <GridEg />
+    <LayoutEg />
   </div>
 </template>
 
 <script setup lang="ts">
-import GridEg from '@/eg/GridEg.vue'
+import LayoutEg from '@/eg/LayoutEg.vue'
 </script>
 
 <style>
