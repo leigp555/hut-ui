@@ -1,9 +1,8 @@
 <template>
-  <div class="ui-dropdown-wrap" @mouseenter="enter" @mouseleave="leave">
+  <div class="ui-dropdown-wrap">
     <div tabindex="-1" class="ui-dropdown-tip" @click="toggle" @blur="hide">
       <slot />
     </div>
-
     <div class="ui-dropdown-pop" :class="{ opening: isOpen }">
       <slot name="pop" />
     </div>
@@ -11,23 +10,14 @@
 </template>
 
 <script setup lang="ts">
-import { withDefaults, defineProps, ref } from 'vue'
+import { ref } from 'vue'
 
-const props = withDefaults(defineProps<{ trigger: 'click' | 'hover' }>(), {
-  trigger: 'hover'
-})
 const isOpen = ref<boolean>(false)
 const toggle = () => {
-  if (props.trigger === 'click') isOpen.value = !isOpen.value
+  isOpen.value = !isOpen.value
 }
 const hide = () => {
-  if (props.trigger === 'click') isOpen.value = false
-}
-const enter = () => {
-  if (props.trigger === 'hover') isOpen.value = true
-}
-const leave = () => {
-  if (props.trigger === 'hover') isOpen.value = false
+  isOpen.value = false
 }
 </script>
 
@@ -38,7 +28,7 @@ const leave = () => {
   .ui-dropdown-tip {
     color: #1890ff;
     font-size: 14px;
-    cursor: default;
+    cursor: pointer;
     user-select: none;
     display: inline-block;
   }
@@ -57,6 +47,7 @@ const leave = () => {
     z-index: 10;
     transform: translateY(100%);
     opacity: 0;
+    overflow: hidden;
     transition: all 250ms;
     &.opening {
       opacity: 1;

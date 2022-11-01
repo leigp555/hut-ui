@@ -1,21 +1,6 @@
 <template>
   <div class="wrap">
-    <Dropdown trigger="hover">
-      <span>click me</span>
-      <template #pop>
-        <div>
-          <a href="javascript:;">item1</a>
-        </div>
-        <div>
-          <a href="javascript:;">item2</a>
-        </div>
-        <div>
-          <a href="javascript:;">item3</a>
-        </div>
-      </template>
-    </Dropdown>
-
-    <Dropdown trigger="click">
+    <Dropdown>
       <span>click me</span>
       <template #pop>
         <div>
