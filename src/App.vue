@@ -1,11 +1,11 @@
 <template>
   <div class="test">
-    <AffixEg />
+    <BreadcrumbEg />
   </div>
 </template>
 
 <script setup lang="ts">
-import AffixEg from '@/eg/AffixEg.vue'
+import BreadcrumbEg from '@/eg/BreadcrumbEg.vue'
 </script>
 
 <style>
