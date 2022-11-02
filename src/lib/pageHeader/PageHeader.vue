@@ -54,6 +54,9 @@ const emitBack = () => {
         <slot name="actions" />
       </div>
     </div>
+    <div class="ui-PageHeader-descriptions">
+      <slot name="descriptions" />
+    </div>
   </div>
 </template>
 
@@ -61,7 +64,7 @@ const emitBack = () => {
 .ui-PageHeader-wrap {
   padding: 10px;
   > .ui-PageHeader-Breadcrumb {
-    margin-bottom: 25px;
+    margin-bottom: 20px;
     > .breadcrumb {
       display: flex;
       align-items: center;
@@ -94,6 +97,7 @@ const emitBack = () => {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    margin-bottom: 25px;
     > .ui-PageHeader-title {
       display: flex;
       align-items: center;
@@ -127,6 +131,13 @@ const emitBack = () => {
       align-items: center;
       gap: 5px;
     }
+  }
+  > .ui-PageHeader-descriptions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+    font-size: 14px;
   }
 }
 </style>
