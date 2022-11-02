@@ -16,7 +16,7 @@ withDefaults(defineProps<{ label: string }>(), { label: 'Label' })
 <style lang="scss">
 .ui-description-wrap {
   display: flex;
-  gap: 5px;
+  gap: 8px;
   margin-right: 5vw;
   > .ui-description-label {
     white-space: nowrap;

@@ -76,6 +76,9 @@ const emitBack = () => {
         display: flex;
         align-items: center;
         gap: 8px;
+        > .linkName {
+          white-space: nowrap;
+        }
         &:not(:first-child) {
           cursor: pointer;
           color: #8c8c8c;
@@ -103,7 +106,6 @@ const emitBack = () => {
       align-items: center;
       > .title-icon {
         margin-right: 12px;
-        margin-left: 2px;
         display: flex;
         align-items: center;
         cursor: pointer;

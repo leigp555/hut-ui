@@ -3,7 +3,7 @@
     <span>
       <slot name="icon" />
     </span>
-    <span> <slot /></span>
+    <span class="ui-BreadcrumbItem-name"> <slot /></span>
   </a>
 </template>
 
@@ -21,5 +21,8 @@ withDefaults(defineProps<{ href?: string }>(), { href: 'javascript:;' })
   display: flex;
   align-items: center;
   gap: 2px;
+  > .ui-BreadcrumbItem-name {
+    white-space: nowrap;
+  }
 }
 </style>
