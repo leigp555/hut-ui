@@ -2,7 +2,7 @@
   <div class="wrap">
     <Pagination
       v-model:current="current"
-      :total="50"
+      :total="30"
       v-model:pageSize="pageSize"
       @pageSizeChange="pageSize = $event"
       :disabled="false"
@@ -23,7 +23,7 @@
 import { ref } from 'vue'
 import Pagination from '@/lib/pagination/Pagination.vue'
 
-const current = ref<number>(10)
+const current = ref<number>(1)
 const pageSize = ref<number>(10)
 const pageSizeOptions = ref<string[]>(['10', '20', '30', '40', '50'])
 </script>

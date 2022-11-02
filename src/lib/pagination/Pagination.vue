@@ -50,27 +50,43 @@ const {
   total, // 总共多少条数据
   pageSize, // 每页放多少条数据
   disabled // 书否可以点击
-  // showQuickJumper, // 是否显示页码输入框
-  // showTotal, // 是否展示数据总数
-  // pageSizeOptions // 每页放多少条数据选择框内容
 } = toRefs(props)
+
+const totalPage = computed(() => {
+  return Math.ceil(total.value / pageSize.value)
+})
+
 const startPage = computed(() => {
-  if (current.value >= 3) {
+  if (totalPage.value <= 5) {
+    return 0
+  }
+  if (current.value >= 3 && current.value + 2 <= totalPage.value) {
     return current.value - 3
+  }
+  if (current.value >= 3 && current.value + 1 === totalPage.value) {
+    return current.value - 4
+  }
+  if (current.value >= 3 && current.value === totalPage.value) {
+    return current.value - 5
   }
   return 0
 })
 onMounted(() => {
-  // 检查初始页码是否合理 >1
-  if (current.value < 1) current.value = 1
+  // 检查初始页码是否合理 >1   <totalPage
+  if (current.value <= 1) {
+    emits('change', 1)
+  } else if (current.value >= totalPage.value) {
+    emits('change', totalPage.value)
+  }
 })
+
 const pageSub = () => {
   if (current.value > 1) {
     emits('change', current.value - 1)
   }
 }
 const pageAdd = () => {
-  if (current.value < Math.ceil(total.value / pageSize.value)) {
+  if (current.value < totalPage.value) {
     emits('change', current.value + 1)
   }
 }
@@ -90,7 +106,7 @@ const selectPage = (e: Event) => {
         <SvgIcon name="back" width="1em" height="1em" />
       </li>
       <li
-        v-for="item in 5"
+        v-for="item in totalPage <= 5 ? totalPage : 5"
         :key="item"
         :class="{
           'ui-pagination-currentPage': startPage + item === current ? true : false
