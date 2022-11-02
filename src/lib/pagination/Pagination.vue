@@ -4,11 +4,15 @@
       <li>
         <SvgIcon name="back" width="1em" height="1em" />
       </li>
-      <li>1</li>
-      <li>2</li>
-      <li>3</li>
-      <li>4</li>
-      <li>5</li>
+      <li
+        v-for="item in 5"
+        :key="item"
+        :class="{
+          'ui-pagination-currentPage': startPage + item === current ? true : false
+        }"
+      >
+        {{ startPage + item }}
+      </li>
       <li :style="{ transform: 'rotate(180deg)' }">
         <SvgIcon name="back" width="1em" height="1em" />
       </li>
@@ -17,13 +21,59 @@
 </template>
 
 <script setup lang="ts">
-import { withDefaults, defineProps } from 'vue'
+import {
+  withDefaults,
+  defineProps,
+  defineEmits,
+  computed,
+  toRefs,
+  onMounted
+} from 'vue'
 import SvgIcon from '@/lib/common/SvgIcon.vue'
 
-// const emits = defineEmits(['update:current'])
-withDefaults(defineProps<{ current?: number; total: number }>(), {
-  current: 1,
-  total: 0
+// v-model:current="current"
+// :total="50"
+// v-model:pageSize="pageSize"
+// @pageSizeChange="pageSize = $event"
+// disabled
+//   :pageSizeOptions="pageSizeOptions"
+// showQuickJumper
+// showTotal
+// @change="current = $event"
+
+defineEmits(['update:current', 'update:pageSize', 'pageSizeChange', 'change'])
+const props = withDefaults(
+  defineProps<{
+    current?: number
+    total: number
+    pageSize: number
+    disabled: boolean
+    showQuickJumper: boolean
+    showTotal: boolean
+    pageSizeOptions: []
+  }>(),
+  {
+    current: 1,
+    total: 0,
+    pageSize: 10,
+    disabled: false,
+    showQuickJumper: false,
+    showTotal: false,
+    pageSizeOptions: () => ['10', '20', '30', '40', '50']
+  }
+)
+const {
+  current // 当前第几页
+} = toRefs(props)
+const startPage = computed(() => {
+  if (current.value >= 3) {
+    return current.value - 3
+  }
+  return 0
+})
+onMounted(() => {
+  // 检查初始页码是否合理 >1
+  if (current.value < 1) current.value = 1
 })
 </script>
 
@@ -60,6 +110,10 @@ withDefaults(defineProps<{ current?: number; total: number }>(), {
         svg {
           fill: #1890ff;
         }
+      }
+      &.ui-pagination-currentPage {
+        border: 1px solid #1890ff;
+        color: #1890ff;
       }
     }
   }

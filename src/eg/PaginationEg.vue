@@ -23,7 +23,7 @@
 import { ref } from 'vue'
 import Pagination from '@/lib/pagination/Pagination.vue'
 
-const current = ref<number>(1)
+const current = ref<number>(10)
 const pageSize = ref<number>(10)
 const pageSizeOptions = ref<string[]>(['10', '20', '30', '40', '50'])
 </script>
