@@ -50,6 +50,9 @@ const {
   total, // 总共多少条数据
   pageSize, // 每页放多少条数据
   disabled // 书否可以点击
+  // showQuickJumper, // 是否显示页码输入框
+  // showTotal, // 是否展示数据总数
+  // pageSizeOptions // 每页放多少条数据选择框内容
 } = toRefs(props)
 
 const totalPage = computed(() => {
@@ -102,20 +105,28 @@ const selectPage = (e: Event) => {
 <template>
   <div class="ui-pagination-wrap" :class="{ disabled }">
     <ol class="ui-pagination-ol" @click="selectPage" :class="{ disabled }">
-      <li @click="pageSub">
+      <li
+        @click="pageSub"
+        class="ui-pagination-subIcon"
+        :class="{ subDisabled: current <= 1 }"
+      >
         <SvgIcon name="back" width="1em" height="1em" />
       </li>
       <li
         v-for="item in totalPage <= 5 ? totalPage : 5"
         :key="item"
         :class="{
-          'ui-pagination-currentPage': startPage + item === current ? true : false
+          'ui-pagination-currentPage': startPage + item === current
         }"
         data-spec="pageNumber"
       >
         {{ startPage + item }}
       </li>
-      <li :style="{ transform: 'rotate(180deg)' }" @click="pageAdd">
+      <li
+        @click="pageAdd"
+        class="ui-pagination-addIcon"
+        :class="{ addDisabled: current >= totalPage }"
+      >
         <SvgIcon name="back" width="1em" height="1em" />
       </li>
     </ol>
@@ -166,6 +177,17 @@ const selectPage = (e: Event) => {
       &.ui-pagination-currentPage {
         border: 1px solid #1890ff;
         color: #1890ff;
+      }
+      &.ui-pagination-addIcon {
+        transform: rotate(180deg);
+        &.addDisabled {
+          cursor: not-allowed;
+        }
+      }
+      &.ui-pagination-subIcon {
+        &.subDisabled {
+          cursor: not-allowed;
+        }
       }
     }
   }
