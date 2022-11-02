@@ -42,19 +42,25 @@ const emitBack = () => {
         </a>
       </div>
     </div>
-    <div class="ui-PageHeader-title">
-      <span class="title-icon" @click="emitBack">
-        <SvgIcon name="left" width="1.2em" height="1.2em" />
-      </span>
-      <span class="title-item title-titleItem">{{ title }}</span>
-      <span class="title-item title-subtitleItem">{{ subtitle }}</span>
+    <div class="ui-PageHeader-content">
+      <div class="ui-PageHeader-title">
+        <span class="title-icon" @click="emitBack">
+          <SvgIcon name="left" width="1.2em" height="1.2em" />
+        </span>
+        <span class="title-item title-titleItem">{{ title }}</span>
+        <span class="title-item title-subtitleItem">{{ subtitle }}</span>
+      </div>
+      <div class="ui-PageHeader-actions">
+        <slot name="actions" />
+      </div>
     </div>
   </div>
 </template>
 
 <style lang="scss">
 .ui-PageHeader-wrap {
-  .ui-PageHeader-Breadcrumb {
+  padding: 10px;
+  > .ui-PageHeader-Breadcrumb {
     margin-bottom: 25px;
     > .breadcrumb {
       display: flex;
@@ -84,32 +90,42 @@ const emitBack = () => {
       }
     }
   }
-  .ui-PageHeader-title {
+  > .ui-PageHeader-content {
     display: flex;
     align-items: center;
-    > .title-icon {
-      margin-right: 12px;
-      margin-left: 2px;
+    justify-content: space-between;
+    > .ui-PageHeader-title {
       display: flex;
       align-items: center;
-      cursor: pointer;
-      svg:hover {
-        fill: #1890ff;
+      > .title-icon {
+        margin-right: 12px;
+        margin-left: 2px;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        svg:hover {
+          fill: #1890ff;
+        }
+      }
+      > .title-item {
+        margin-right: 10px;
+        cursor: text;
+        display: flex;
+        align-items: center;
+        &.title-titleItem {
+          font-weight: 700;
+          color: #262626;
+        }
+        &.title-subtitleItem {
+          color: #8c8c8c;
+          font-size: 14px;
+        }
       }
     }
-    > .title-item {
-      margin-right: 10px;
-      cursor: text;
+    > .ui-PageHeader-actions {
       display: flex;
       align-items: center;
-      &.title-titleItem {
-        font-weight: 700;
-        color: #262626;
-      }
-      &.title-subtitleItem {
-        color: #8c8c8c;
-        font-size: 14px;
-      }
+      gap: 5px;
     }
   }
 }

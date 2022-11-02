@@ -6,14 +6,19 @@
       subtitle="This is a subtitle"
       @back="back"
       :breadcrumb="routes"
-    ></PageHeader>
+    >
+      <template #actions>
+        <Button type="text">Operation</Button>
+        <Button type="link">Operation</Button>
+        <Button>Primary</Button>
+      </template>
+    </PageHeader>
   </div>
 </template>
 
 <script setup lang="ts">
 import PageHeader from '@/lib/pageHeader/PageHeader.vue'
-// import Descriptions from '@/lib/pageHeader/Descriptions.vue'
-// import DescriptionsItem from '@/lib/pageHeader/DescriptionsItem.vue'
+import Button from '@/lib/button/Button.vue'
 
 const back = () => {
   console.log('back')
@@ -38,6 +43,6 @@ const routes = [
 .wrap {
   display: flex;
   flex-direction: column;
-  gap: 50px;
+  gap: 150px;
 }
 </style>
