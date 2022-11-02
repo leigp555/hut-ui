@@ -2,12 +2,13 @@
   <div class="wrap">
     <Pagination
       v-model:current="current"
-      :total="100"
+      :total="1000"
       v-model:pageSize="pageSize"
       @pageSizeChange="pageSize = $event"
       :disabled="false"
       :pageSizeOptions="pageSizeOptions"
       showQuickJumper
+      showSizeChanger
       showTotal
       @change="current = $event"
     >
