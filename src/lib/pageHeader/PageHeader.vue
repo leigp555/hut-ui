@@ -1,28 +1,25 @@
-<template>
-  <div class="ui-template-wrap">
-    <div class="ui-template-title">
-      <span class="title-icon" @click="emitBack">
-        <SvgIcon name="left" width="1em" height="1em" />
-      </span>
-      <span class="title-item title-titleItem">{{ title }}</span>
-      <span class="title-item title-subtitleItem">{{ subtitle }}</span>
-    </div>
-  </div>
-</template>
-
 <script setup lang="ts">
 import { withDefaults, defineProps, defineEmits } from 'vue'
 import SvgIcon from '@/lib/common/SvgIcon.vue'
 
 const emits = defineEmits(['back'])
+
+type BreadcrumbTp = {
+  path: string
+  breadcrumbName: string
+}
+
 withDefaults(
   defineProps<{
-    title: string
-    subtitle: string
+    title?: string
+    subtitle?: string
+    breadcrumb?: BreadcrumbTp[] | []
   }>(),
   {
     title: 'Title',
-    subtitle: 'Subtitle'
+    subtitle: 'Subtitle',
+    // eslint-disable-next-line vue/require-valid-default-prop
+    breadcrumb: []
   }
 )
 const emitBack = () => {
@@ -30,13 +27,69 @@ const emitBack = () => {
 }
 </script>
 
+<template>
+  <div class="ui-PageHeader-wrap">
+    <div class="ui-PageHeader-Breadcrumb">
+      <div class="breadcrumb">
+        <a
+          v-for="(item, index) in breadcrumb"
+          :key="item.path"
+          :href="item.path"
+          class="link"
+        >
+          <span v-if="index !== 0" class="separator">/</span>
+          <span class="linkName">{{ item.breadcrumbName }}</span>
+        </a>
+      </div>
+    </div>
+    <div class="ui-PageHeader-title">
+      <span class="title-icon" @click="emitBack">
+        <SvgIcon name="left" width="1.2em" height="1.2em" />
+      </span>
+      <span class="title-item title-titleItem">{{ title }}</span>
+      <span class="title-item title-subtitleItem">{{ subtitle }}</span>
+    </div>
+  </div>
+</template>
+
 <style lang="scss">
-.ui-template-wrap {
-  .ui-template-title {
+.ui-PageHeader-wrap {
+  .ui-PageHeader-Breadcrumb {
+    margin-bottom: 25px;
+    > .breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 16px;
+      > .link {
+        text-decoration: none;
+        color: inherit;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        &:not(:first-child) {
+          cursor: pointer;
+          color: #8c8c8c;
+        }
+        &:first-child {
+          cursor: text;
+        }
+        &:not(:first-child):hover {
+          color: #1890ff;
+        }
+        > .separator {
+          cursor: text;
+          color: #8c8c8c;
+        }
+      }
+    }
+  }
+  .ui-PageHeader-title {
     display: flex;
     align-items: center;
     > .title-icon {
       margin-right: 12px;
+      margin-left: 2px;
       display: flex;
       align-items: center;
       cursor: pointer;
@@ -46,7 +99,7 @@ const emitBack = () => {
     }
     > .title-item {
       margin-right: 10px;
-      user-select: none;
+      cursor: text;
       display: flex;
       align-items: center;
       &.title-titleItem {

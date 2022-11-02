@@ -1,6 +1,12 @@
 <template>
   <div class="wrap">
     <PageHeader title="Title" subtitle="This is a subtitle" @back="back"></PageHeader>
+    <PageHeader
+      title="Title"
+      subtitle="This is a subtitle"
+      @back="back"
+      :breadcrumb="routes"
+    ></PageHeader>
   </div>
 </template>
 
@@ -12,9 +18,26 @@ import PageHeader from '@/lib/pageHeader/PageHeader.vue'
 const back = () => {
   console.log('back')
 }
+const routes = [
+  {
+    path: 'index',
+    breadcrumbName: 'First-level Menu'
+  },
+  {
+    path: 'first',
+    breadcrumbName: 'Second-level Menu'
+  },
+  {
+    path: 'second',
+    breadcrumbName: 'Third-level Menu'
+  }
+]
 </script>
 
 <style lang="scss">
-.ui-template-wrap {
+.wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
 }
 </style>
