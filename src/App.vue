@@ -1,11 +1,11 @@
 <template>
   <div class="test">
-    <DropdownEg />
+    <PageHeaderEg />
   </div>
 </template>
 
 <script setup lang="ts">
-import DropdownEg from '@/eg/DropdownEg.vue'
+import PageHeaderEg from '@/eg/PageHeaderEg.vue'
 </script>
 
 <style>
