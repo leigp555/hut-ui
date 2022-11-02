@@ -1,25 +1,3 @@
-<template>
-  <div class="ui-pagination-wrap">
-    <ol class="ui-pagination-ol">
-      <li>
-        <SvgIcon name="back" width="1em" height="1em" />
-      </li>
-      <li
-        v-for="item in 5"
-        :key="item"
-        :class="{
-          'ui-pagination-currentPage': startPage + item === current ? true : false
-        }"
-      >
-        {{ startPage + item }}
-      </li>
-      <li :style="{ transform: 'rotate(180deg)' }">
-        <SvgIcon name="back" width="1em" height="1em" />
-      </li>
-    </ol>
-  </div>
-</template>
-
 <script setup lang="ts">
 import {
   withDefaults,
@@ -41,7 +19,12 @@ import SvgIcon from '@/lib/common/SvgIcon.vue'
 // showTotal
 // @change="current = $event"
 
-defineEmits(['update:current', 'update:pageSize', 'pageSizeChange', 'change'])
+const emits = defineEmits([
+  'update:current',
+  'update:pageSize',
+  'pageSizeChange',
+  'change'
+])
 const props = withDefaults(
   defineProps<{
     current?: number
@@ -63,7 +46,13 @@ const props = withDefaults(
   }
 )
 const {
-  current // 当前第几页
+  current, // 当前第几页
+  total, // 总共多少条数据
+  pageSize, // 每页放多少条数据
+  disabled // 书否可以点击
+  // showQuickJumper, // 是否显示页码输入框
+  // showTotal, // 是否展示数据总数
+  // pageSizeOptions // 每页放多少条数据选择框内容
 } = toRefs(props)
 const startPage = computed(() => {
   if (current.value >= 3) {
@@ -75,11 +64,58 @@ onMounted(() => {
   // 检查初始页码是否合理 >1
   if (current.value < 1) current.value = 1
 })
+const pageSub = () => {
+  if (current.value > 1) {
+    emits('change', current.value - 1)
+  }
+}
+const pageAdd = () => {
+  if (current.value < Math.ceil(total.value / pageSize.value)) {
+    emits('change', current.value + 1)
+  }
+}
+const selectPage = (e: Event) => {
+  const el = e.target as HTMLElement
+  const spec = el.getAttribute('data-spec')
+  if (el.tagName.toLowerCase() === 'li' && spec === 'pageNumber') {
+    emits('change', parseInt(el.innerText, 10))
+  }
+}
 </script>
+
+<template>
+  <div class="ui-pagination-wrap" :class="{ disabled }">
+    <ol class="ui-pagination-ol" @click="selectPage" :class="{ disabled }">
+      <li @click="pageSub">
+        <SvgIcon name="back" width="1em" height="1em" />
+      </li>
+      <li
+        v-for="item in 5"
+        :key="item"
+        :class="{
+          'ui-pagination-currentPage': startPage + item === current ? true : false
+        }"
+        data-spec="pageNumber"
+      >
+        {{ startPage + item }}
+      </li>
+      <li :style="{ transform: 'rotate(180deg)' }" @click="pageAdd">
+        <SvgIcon name="back" width="1em" height="1em" />
+      </li>
+    </ol>
+  </div>
+</template>
 
 <style lang="scss">
 .ui-pagination-wrap {
+  display: inline-block;
+  &.disabled {
+    cursor: not-allowed;
+  }
   .ui-pagination-ol {
+    &.disabled {
+      pointer-events: none;
+    }
     list-style: none;
     display: flex;
     > li {

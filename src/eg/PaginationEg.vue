@@ -5,7 +5,7 @@
       :total="50"
       v-model:pageSize="pageSize"
       @pageSizeChange="pageSize = $event"
-      disabled
+      :disabled="false"
       :pageSizeOptions="pageSizeOptions"
       showQuickJumper
       showTotal
