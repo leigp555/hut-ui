@@ -14,7 +14,68 @@
     >
       <template #buildOptionText="props">
         <span v-if="props.value !== '50'">{{ props.value }}条/页</span>
-        <span v-else>全部</span>
+      </template>
+    </Pagination>
+
+    <Pagination
+      v-model:current="current"
+      :total="1000"
+      v-model:pageSize="pageSize"
+      @pageSizeChange="pageSize = $event"
+      :disabled="true"
+      :pageSizeOptions="pageSizeOptions"
+      showQuickJumper
+      showSizeChanger
+      showTotal
+      @change="current = $event"
+    >
+      <template #buildOptionText="props">
+        <span v-if="props.value !== '50'">{{ props.value }}条/页</span>
+      </template>
+    </Pagination>
+
+    <Pagination
+      v-model:current="current"
+      :total="1000"
+      v-model:pageSize="pageSize"
+      @pageSizeChange="pageSize = $event"
+      :disabled="false"
+      :pageSizeOptions="pageSizeOptions"
+      showSizeChanger
+      showTotal
+      @change="current = $event"
+    >
+      <template #buildOptionText="props">
+        <span v-if="props.value !== '50'">{{ props.value }}条/页</span>
+      </template>
+    </Pagination>
+
+    <Pagination
+      v-model:current="current"
+      :total="1000"
+      v-model:pageSize="pageSize"
+      @pageSizeChange="pageSize = $event"
+      :disabled="false"
+      :pageSizeOptions="pageSizeOptions"
+      showSizeChanger
+      @change="current = $event"
+    >
+      <template #buildOptionText="props">
+        <span v-if="props.value !== '50'">{{ props.value }}条/页</span>
+      </template>
+    </Pagination>
+
+    <Pagination
+      v-model:current="current"
+      :total="1000"
+      v-model:pageSize="pageSize"
+      @pageSizeChange="pageSize = $event"
+      :disabled="false"
+      :pageSizeOptions="pageSizeOptions"
+      @change="current = $event"
+    >
+      <template #buildOptionText="props">
+        <span v-if="props.value !== '50'">{{ props.value }}条/页</span>
       </template>
     </Pagination>
   </div>
@@ -31,7 +92,9 @@ const pageSizeOptions = ref<string[]>(['10', '20', '30', '40', '50'])
 
 <style lang="scss">
 .wrap {
-  margin-left: 200px;
-  margin-top: 200px;
+  margin-top: 100px;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
 }
 </style>

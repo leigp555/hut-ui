@@ -30,12 +30,12 @@ const props = withDefaults(
   defineProps<{
     current?: number
     total: number
-    pageSize: number
-    disabled: boolean
-    showQuickJumper: boolean
-    showTotal: boolean
-    showSizeChanger: boolean
-    pageSizeOptions: []
+    pageSize?: number
+    disabled?: boolean
+    showQuickJumper?: boolean
+    showTotal?: boolean
+    showSizeChanger?: boolean
+    pageSizeOptions?: string[]
   }>(),
   {
     current: 1,
@@ -54,8 +54,8 @@ const {
   pageSize, // 每页放多少条数据
   disabled, // 书否可以点击
   showSizeChanger, // 是否可以改变 pageSize
-  // showQuickJumper, // 是否显示页码输入框
-  // showTotal, // 是否展示数据总数
+  showQuickJumper, // 是否显示页码输入框
+  showTotal, // 是否展示数据总数
   pageSizeOptions // 每页放多少条数据选择框内容
 } = toRefs(props)
 
@@ -114,8 +114,35 @@ const listHidden = () => {
 const selectPageSize = (e: Event) => {
   const el = e.target as HTMLElement
   const newPageSize = el.getAttribute('data-pageSize')
-  emits('pageSizeChange', parseInt(newPageSize, 10))
-  pageSizeList.value!.classList.remove('list-show')
+  if (el.tagName.toLowerCase() === 'li' && newPageSize) {
+    emits('pageSizeChange', parseInt(newPageSize, 10))
+    pageSizeList.value!.classList.remove('list-show')
+  }
+}
+
+const jump = (e: Event) => {
+  const el = e.target as HTMLInputElement
+  const value = el.value.trim()
+  let jumpPage: number
+  try {
+    jumpPage = parseInt(value, 10)
+    if (jumpPage) {
+      if (jumpPage > totalPage.value) {
+        emits('change', totalPage.value)
+        el.value = ''
+      } else if (jumpPage < 1) {
+        emits('change', 1)
+        el.value = ''
+      } else {
+        emits('change', jumpPage)
+        el.value = ''
+      }
+    } else {
+      el.value = ''
+    }
+  } catch (err: Error) {
+    el.value = ''
+  }
 }
 </script>
 
@@ -149,7 +176,7 @@ const selectPageSize = (e: Event) => {
       </li>
     </ol>
     <!--    pageSizeList部分-->
-    <div class="ui-pageSizeList-wrap">
+    <div class="ui-pageSizeList-wrap" :class="{ disabled }">
       <div
         class="ui-pagination-pageSize ui-pagination-item"
         v-if="showSizeChanger"
@@ -173,19 +200,32 @@ const selectPageSize = (e: Event) => {
         </li>
       </ol>
     </div>
+    <!--    showQuickJumper部分-->
+    <div class="ui-quickJumper-wrap" v-if="showQuickJumper" :class="{ disabled }">
+      <span>跳至</span>
+      <input type="text" @change="jump" />
+      <span>页</span>
+    </div>
+    <!--    showTotal部分-->
+    <div class="ui-pageTotal-wrap" v-if="showTotal" :class="{ disabled }">
+      <span>共</span>
+      <span>{{ current }}/{{ totalPage }}</span>
+      <span>页</span>
+    </div>
   </div>
 </template>
 
 <style lang="scss">
 .ui-pagination-wrap {
   display: inline-flex;
+  align-items: center;
   &.disabled {
     cursor: not-allowed;
   }
+  > .disabled {
+    pointer-events: none;
+  }
   .ui-pagination-ol {
-    &.disabled {
-      pointer-events: none;
-    }
     list-style: none;
     display: flex;
     > li {
@@ -213,6 +253,7 @@ const selectPageSize = (e: Event) => {
       display: inline-flex;
       align-items: center;
       gap: 5px;
+      white-space: nowrap;
       > .ui-pageSizeIcon {
         transform: rotate(-90deg);
       }
@@ -242,6 +283,9 @@ const selectPageSize = (e: Event) => {
         white-space: nowrap;
         color: rgba(0, 0, 0, 0.85);
         cursor: pointer;
+        &:not(:last-child) {
+          margin-bottom: 5px;
+        }
         &.selected {
           color: #1890ff;
           background-color: #e6f7ff;
@@ -251,6 +295,43 @@ const selectPageSize = (e: Event) => {
           background-color: #e6f7ff;
         }
       }
+    }
+  }
+  .ui-quickJumper-wrap {
+    display: inline-flex;
+    align-items: center;
+    margin-right: 8px;
+    > span {
+      white-space: nowrap;
+      font-size: 14px;
+      color: rgba(0, 0, 0, 0.85);
+    }
+    > input {
+      font-size: 14px;
+      color: rgba(0, 0, 0, 0.85);
+      width: 3.5em;
+      height: 32px;
+      padding: 2px 5px;
+      border-radius: 2px;
+      margin-left: 8px;
+      margin-right: 8px;
+      text-align: center;
+      border: 1px solid #d9d9d9;
+      &:focus {
+        border: 1px solid #1890ff;
+        outline: none;
+        box-shadow: 0 0 0 2px rgba(24, 114, 255, 0.2);
+      }
+    }
+  }
+  .ui-pageTotal-wrap {
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    span {
+      white-space: nowrap;
+      font-size: 14px;
+      color: rgba(0, 0, 0, 0.85);
     }
   }
 }
