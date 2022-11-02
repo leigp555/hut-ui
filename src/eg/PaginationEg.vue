@@ -1,0 +1,36 @@
+<template>
+  <div class="wrap">
+    <Pagination
+      v-model:current="current"
+      :total="50"
+      v-model:pageSize="pageSize"
+      @pageSizeChange="pageSize = $event"
+      disabled
+      :pageSizeOptions="pageSizeOptions"
+      showQuickJumper
+      showTotal
+      @change="current = $event"
+    >
+      <template #buildOptionText="props">
+        <span v-if="props.value !== '50'">{{ props.value }}条/页</span>
+        <span v-else>全部</span>
+      </template>
+    </Pagination>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { ref } from 'vue'
+import Pagination from '@/lib/pagination/Pagination.vue'
+
+const current = ref<number>(1)
+const pageSize = ref<number>(10)
+const pageSizeOptions = ref<string[]>(['10', '20', '30', '40', '50'])
+</script>
+
+<style lang="scss">
+.wrap {
+  margin-left: 200px;
+  margin-top: 200px;
+}
+</style>
