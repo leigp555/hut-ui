@@ -86,7 +86,8 @@ $selected_color: #f5f5f5;
     flex-grow: 10;
     padding: 0 11px;
     outline: none;
-    border: 1px solid $font_color;
+    box-shadow: none;
+    border: 1px solid darken($selected_color, 20%);
     font-size: 14px;
     color: $font_color;
     line-height: 1.5em;
@@ -105,9 +106,11 @@ $selected_color: #f5f5f5;
     transform: translateY(calc(100% + 4px));
     box-shadow: 0 0 30px 3px rgba(0, 0, 0, 0.1);
     opacity: 0;
+    visibility: hidden;
     transition: all 250ms;
     &.autoComplete-pop-show {
       opacity: 1;
+      visibility: visible;
     }
     > .autoComplete-list-item {
       text-overflow: ellipsis;
