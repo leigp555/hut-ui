@@ -13,24 +13,20 @@
 
 <script setup lang="ts">
 import { withDefaults, defineProps, ref } from 'vue'
-import AutoComplete from '@/lib/autoComplete/AutoComplete.vue'
+import AutoComplete, { OptionType } from '@/lib/autoComplete/AutoComplete.vue'
 
 withDefaults(defineProps<{}>(), {})
 
-interface MockVal {
-  value: string
-}
-const mockVal = (str: string, repeat = 1): MockVal => {
-  return {
-    value: str.repeat(repeat)
-  }
-}
 const value = ref('')
-const options = ref<MockVal[]>([])
+const options = ref<OptionType[]>([])
 const onSearch = (searchText: string) => {
   options.value = !searchText
     ? []
-    : [mockVal(searchText), mockVal(searchText, 2), mockVal(searchText, 3)]
+    : [
+        { value: `${searchText}@qq.com` },
+        { value: `${searchText}@google.com` },
+        { value: `${searchText}@138.com` }
+      ]
 }
 const onSelect = (text: string) => {
   console.log('onSelect', text)

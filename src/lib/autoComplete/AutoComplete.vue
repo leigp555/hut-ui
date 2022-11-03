@@ -2,8 +2,12 @@
 import { withDefaults, defineProps, toRefs, defineEmits, watch, ref } from 'vue'
 
 const emits = defineEmits(['search', 'update:value', 'select'])
+
+export interface OptionType {
+  value: string
+}
 const props = withDefaults(
-  defineProps<{ value: string; options: { value: string }[]; placeholder: string }>(),
+  defineProps<{ value: string; options: OptionType[]; placeholder: string }>(),
   {
     value: '',
     options: () => [],
@@ -63,6 +67,7 @@ const inputBlur = () => {
         class="autoComplete-list-item"
         :class="{ selected: item.value === value }"
         data-value="list"
+        :title="item.value"
       >
         {{ item.value }}
       </p>
@@ -107,6 +112,7 @@ $selected_color: #f5f5f5;
     > .autoComplete-list-item {
       text-overflow: ellipsis;
       overflow: hidden;
+      white-space: nowrap;
       font-size: 14px;
       color: $font_color;
       padding: 0 11px;
