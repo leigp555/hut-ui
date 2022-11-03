@@ -1,11 +1,11 @@
 <template>
   <div class="test">
-    <PaginationEg />
+    <StepsEg />
   </div>
 </template>
 
 <script setup lang="ts">
-import PaginationEg from '@/eg/PaginationEg.vue'
+import StepsEg from '@/eg/StepsEg.vue'
 </script>
 
 <style>
