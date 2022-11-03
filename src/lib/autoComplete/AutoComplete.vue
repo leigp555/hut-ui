@@ -12,6 +12,7 @@ const props = withDefaults(
 )
 const { value, options, placeholder } = toRefs(props)
 const hasSelected = ref<boolean>(false)
+const popRef = ref<HTMLElement | null>(null)
 const inputEvent = (e: Event) => {
   const el = e.target as HTMLInputElement
   emits('update:value', el.value)
@@ -29,11 +30,18 @@ const userSelect = (e: Event) => {
   const spec = el.getAttribute('data-value')
   if (el.tagName.toLowerCase() === 'p' && spec === 'list') {
     emits('select', el.innerText)
+    popRef.value?.classList.remove('autoComplete-pop-show')
     if (el.innerText !== value.value) {
       emits('update:value', el.innerText)
       hasSelected.value = true
     }
   }
+}
+const inputFocus = () => {
+  popRef.value?.classList.add('autoComplete-pop-show')
+}
+const inputBlur = () => {
+  popRef.value?.classList.remove('autoComplete-pop-show')
 }
 </script>
 
@@ -45,12 +53,15 @@ const userSelect = (e: Event) => {
       :placeholder="placeholder"
       :value="value"
       @input="inputEvent"
+      @focus="inputFocus"
+      @blur="inputBlur"
     />
-    <div class="ui-autoComplete-pop" @click="userSelect">
+    <div class="ui-autoComplete-pop" @mousedown="userSelect" ref="popRef">
       <p
         v-for="item in options"
         :key="item"
         class="autoComplete-list-item"
+        :class="{ selected: item.value === value }"
         data-value="list"
       >
         {{ item.value }}
@@ -88,6 +99,11 @@ $selected_color: #f5f5f5;
     left: 0;
     transform: translateY(calc(100% + 4px));
     box-shadow: 0 0 30px 3px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    transition: all 250ms;
+    &.autoComplete-pop-show {
+      opacity: 1;
+    }
     > .autoComplete-list-item {
       text-overflow: ellipsis;
       overflow: hidden;
@@ -98,6 +114,9 @@ $selected_color: #f5f5f5;
       cursor: pointer;
       &:last-child {
         margin-bottom: 4px;
+      }
+      &.selected {
+        background-color: $selected_color;
       }
       &:hover {
         background-color: $selected_color;
