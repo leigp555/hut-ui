@@ -42,11 +42,15 @@ const totalStep = inject<number>('ui_step_totalStep')
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 0 16px;
-
+  &:not(:last-child) {
+    padding-right: 10px;
+  }
+  &:not(:first-child) {
+    padding-left: 10px;
+  }
   > .ui-step-order {
-    width: 2em;
-    height: 2em;
+    width: 1.8em;
+    height: 1.8em;
     font-size: 16px;
     border-radius: 50%;
     display: flex;
@@ -81,6 +85,7 @@ const totalStep = inject<number>('ui_step_totalStep')
   > .ui-step-title {
     color: #bfbfbf;
     font-size: 16px;
+    white-space: nowrap;
     &.step-complete {
       color: #262626;
     }
@@ -91,6 +96,7 @@ const totalStep = inject<number>('ui_step_totalStep')
   border-top: 1px solid #bfbfbf;
   flex-grow: 10;
   transition: all 250ms;
+  min-width: 20px;
   &.step-complete {
     border-top: 1px solid #1890ff;
   }
