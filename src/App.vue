@@ -1,11 +1,11 @@
 <template>
   <div class="test">
-    <StepsEg />
+    <AutoComplete />
   </div>
 </template>
 
 <script setup lang="ts">
-import StepsEg from '@/eg/StepsEg.vue'
+import AutoComplete from '@/eg/AutoCompleteEg.vue'
 </script>
 
 <style>
