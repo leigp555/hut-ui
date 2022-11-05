@@ -1,11 +1,11 @@
 <template>
-  <div class="test">
-    <AutoComplete />
+  <div class="test" :style="{ width: '200px' }">
+    <CascaderEg />
   </div>
 </template>
 
 <script setup lang="ts">
-import AutoComplete from '@/eg/AutoCompleteEg.vue'
+import CascaderEg from '@/eg/CascaderEg.vue'
 </script>
 
 <style>

@@ -80,7 +80,7 @@ $font_color: rgba(0, 0, 0, 0.85);
 $main_color: #1890ff;
 $selected_color: #f5f5f5;
 .ui-autoComplete-wrap {
-  display: flex;
+  display: inline-flex;
   position: relative;
   .ui-autoComplete-input {
     flex-grow: 10;
