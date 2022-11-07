@@ -18,7 +18,7 @@ const toggle = (item: CascaderOptions) => {
   if (!item.children && popVisibility) {
     popVisibility.value = false
   }
-  if (item.parent && changeValue && !item.children) {
+  if (item.parent && changeValue) {
     changeValue(item.parent)
   }
 }
