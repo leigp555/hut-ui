@@ -1,12 +1,3 @@
-<template>
-  <div class="ui-cascader-wrap" tabindex="-1" @blur="onBlur">
-    <input class="ui-cascader-input" type="text" @focus="inputFocus" />
-    <div class="cascader-pop-content" ref="popRef">
-      <CascaderPop :options="options" :visibility="popVisibility" />
-    </div>
-  </div>
-</template>
-
 <script setup lang="ts">
 import { withDefaults, defineProps, ref, provide } from 'vue'
 import CascaderPop from '@/lib/cascader/CascaderPop.vue'
@@ -41,6 +32,15 @@ const onBlur = () => {
 }
 </script>
 
+<template>
+  <div class="ui-cascader-wrap" tabindex="-1" @blur="onBlur">
+    <input class="ui-cascader-input" type="text" @focus="inputFocus" />
+    <div class="cascader-pop-content" v-if="popVisibility">
+      <CascaderPop :options="options" />
+    </div>
+  </div>
+</template>
+
 <style lang="scss">
 $font_color: rgba(0, 0, 0, 0.85);
 $main_color: #1890ff;
@@ -70,9 +70,6 @@ $selected_color: #f5f5f5;
     bottom: 0;
     left: 0;
     transform: translateY(calc(100% + 4px));
-    //box-shadow: 0 0 30px 3px rgba(0, 0, 0, 0.1);
-    //opacity: 0;
-    //visibility: hidden;
     transition: all 250ms;
   }
 }

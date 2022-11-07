@@ -1,5 +1,5 @@
 <template>
-  <div class="test" :style="{ width: '200px' }">
+  <div class="test">
     <CascaderEg />
   </div>
 </template>
