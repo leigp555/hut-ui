@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { withDefaults, defineProps, ref, inject, Ref } from 'vue'
+import { withDefaults, defineProps, ref, inject, Ref, computed } from 'vue'
 import { CascaderOptions } from '@/lib/cascader/Cascader.vue'
 import SvgIcon from '@/lib/common/SvgIcon.vue'
 
@@ -11,6 +11,7 @@ const popVisibility = inject<Ref<boolean>>('popVisibility')
 // eslint-disable-next-line no-unused-vars
 const changeValue = inject<(newValue: string) => void>('changeValue')
 const clickLabelChild = ref<string>('')
+const initValue = inject<Ref<string>>('initValue')
 const toggle = (item: CascaderOptions) => {
   // 这一步是控制显示或者隐藏的关键，获取点击的item的children中第一个对象的value来判断是否显示
   if (item.children) clickLabelChild.value = item.children[0].value
@@ -21,12 +22,19 @@ const toggle = (item: CascaderOptions) => {
     changeValue(item.parent)
   }
 }
+const selectedArr = computed(() => {
+  return initValue?.value.split('/')
+})
 </script>
 
 <template>
   <div class="ui-cascader-pop" ref="popRef" v-if="options">
     <div v-for="item in options" :key="item.label" class="cascader-list-item">
-      <div class="cascader-label" @click="toggle(item)">
+      <div
+        class="cascader-label"
+        :class="{ selected: selectedArr.indexOf(item.value) >= 0 }"
+        @click="toggle(item)"
+      >
         <span class="item-label-value">{{ item.label }}</span>
         <SvgIcon
           name="back"
@@ -74,6 +82,9 @@ $selected_color: #f5f5f5;
         transform: rotate(180deg);
       }
       &:hover {
+        background-color: #e6f7ff;
+      }
+      &.selected {
         background-color: #e6f7ff;
       }
     }

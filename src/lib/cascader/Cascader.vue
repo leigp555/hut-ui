@@ -31,6 +31,7 @@ const changeValue = (newValue: string) => {
 const { value, options } = toRefs(props)
 provide('popVisibility', popVisibility)
 provide('changeValue', changeValue)
+provide('initValue', value)
 
 const inputFocus = () => {
   popVisibility.value = true
