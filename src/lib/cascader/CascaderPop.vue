@@ -28,31 +28,33 @@ const selectedArr = computed(() => {
 </script>
 
 <template>
-  <div class="ui-cascader-pop" ref="popRef" v-if="options">
-    <div v-for="item in options" :key="item.label" class="cascader-list-item">
-      <div
-        class="cascader-label"
-        :class="{ selected: selectedArr.indexOf(item.value) >= 0 }"
-        @click="toggle(item)"
-      >
-        <span class="item-label-value">{{ item.label }}</span>
-        <SvgIcon
-          name="back"
-          width="1em"
-          height="1em"
+  <keep-alive>
+    <div class="ui-cascader-pop" ref="popRef" v-if="options">
+      <div v-for="item in options" :key="item.label" class="cascader-list-item">
+        <div
+          class="cascader-label"
+          :class="{ selected: selectedArr.indexOf(item.value) >= 0 }"
+          @click="toggle(item)"
+        >
+          <span class="item-label-value">{{ item.label }}</span>
+          <SvgIcon
+            name="back"
+            width="1em"
+            height="1em"
+            v-if="item.children"
+            class="item-label-icon"
+          />
+        </div>
+        <div
+          class="cascader-loop"
+          :class="{ open: clickLabelChild === item.children[0].value }"
           v-if="item.children"
-          class="item-label-icon"
-        />
-      </div>
-      <div
-        class="cascader-loop"
-        :class="{ open: clickLabelChild === item.children[0].value }"
-        v-if="item.children"
-      >
-        <CascaderPop :options="item.children" />
+        >
+          <CascaderPop :options="item.children" />
+        </div>
       </div>
     </div>
-  </div>
+  </keep-alive>
 </template>
 
 <style lang="scss">
