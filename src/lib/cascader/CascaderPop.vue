@@ -7,12 +7,18 @@ withDefaults(defineProps<{ options: CascaderOptions[] | null }>(), {
   options: null
 })
 const popVisibility = inject<Ref<boolean>>('popVisibility')
+
+// eslint-disable-next-line no-unused-vars
+const changeValue = inject<(newValue: string) => void>('changeValue')
 const clickLabelChild = ref<string>('')
 const toggle = (item: CascaderOptions) => {
   // 这一步是控制显示或者隐藏的关键，获取点击的item的children中第一个对象的value来判断是否显示
   if (item.children) clickLabelChild.value = item.children[0].value
   if (!item.children && popVisibility) {
     popVisibility.value = false
+  }
+  if (item.parent && changeValue && !item.children) {
+    changeValue(item.parent)
   }
 }
 </script>
@@ -21,7 +27,7 @@ const toggle = (item: CascaderOptions) => {
   <div class="ui-cascader-pop" ref="popRef" v-if="options">
     <div v-for="item in options" :key="item.label" class="cascader-list-item">
       <div class="cascader-label" @click="toggle(item)">
-        <span>{{ item.label }}</span>
+        <span class="item-label-value">{{ item.label }}</span>
         <SvgIcon
           name="back"
           width="1em"
@@ -61,6 +67,9 @@ $selected_color: #f5f5f5;
       align-items: center;
       gap: 8px;
       justify-content: space-between;
+      .item-label-value {
+        user-select: none;
+      }
       .item-label-icon {
         transform: rotate(180deg);
       }
@@ -74,9 +83,11 @@ $selected_color: #f5f5f5;
       right: -2px;
       transform: translateX(100%);
       opacity: 0;
+      visibility: hidden;
       transition: opacity 250ms;
       &.open {
         opacity: 1;
+        visibility: visible;
       }
     }
   }
