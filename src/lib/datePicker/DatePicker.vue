@@ -27,9 +27,11 @@ const onInput = () => {
 <style lang="scss">
 .ui-datePicker-wrap {
   input {
-    line-height: 1.8em;
-    height: 1.8em;
-    text-align: center;
+    line-height: 2em;
+    display: flex;
+    gap: 5px;
+    justify-content: start;
+    align-items: center;
     color: rgba(0, 0, 0, 0.85);
     border: 1px solid rgba(0, 0, 0, 0.85);
     padding: 0 11px;
