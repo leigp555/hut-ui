@@ -2,7 +2,7 @@
 import { withDefaults, defineProps, toRefs, ref } from 'vue'
 
 const emits = defineEmits(['update:value'])
-const props = withDefaults(defineProps<{ value: string; placeholder: string }>(), {
+const props = withDefaults(defineProps<{ value: string; placeholder?: string }>(), {
   value: '',
   placeholder: ''
 })

@@ -1,11 +1,11 @@
 <template>
   <div class="test">
-    <InputEg />
+    <InputNumber />
   </div>
 </template>
 
 <script setup lang="ts">
-import InputEg from '@/eg/InputEg.vue'
+import InputNumber from '@/eg/InputNumberEg.vue'
 </script>
 
 <style>
