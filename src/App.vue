@@ -1,11 +1,11 @@
 <template>
   <div class="test">
-    <CheckboxEg />
+    <DatePickerEg />
   </div>
 </template>
 
 <script setup lang="ts">
-import CheckboxEg from '@/eg/CheckboxEg.vue'
+import DatePickerEg from '@/eg/DatePickerEg.vue'
 </script>
 
 <style>
