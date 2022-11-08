@@ -1,11 +1,11 @@
 <template>
   <div class="test">
-    <CascaderEg />
+    <CheckboxEg />
   </div>
 </template>
 
 <script setup lang="ts">
-import CascaderEg from '@/eg/CascaderEg.vue'
+import CheckboxEg from '@/eg/CheckboxEg.vue'
 </script>
 
 <style>
