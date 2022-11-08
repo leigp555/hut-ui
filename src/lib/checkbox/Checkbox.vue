@@ -1,28 +1,32 @@
+<script setup lang="ts">
+import { withDefaults, defineProps, toRefs } from 'vue'
+
+const emits = defineEmits(['update:checked'])
+const props = withDefaults(defineProps<{ checked?: boolean; disabled?: boolean }>(), {
+  checked: false,
+  disabled: false
+})
+const { checked, disabled } = toRefs(props)
+const onInput = () => {
+  emits('update:checked', !checked.value)
+}
+</script>
+
 <template>
-  <div class="ui-checkbox-wrap">
+  <label class="ui-checkbox-wrap">
     <input
       class="ui-checkbox-input"
       type="checkbox"
       :checked="checked"
       @input="onInput"
       role="checkbox"
+      :disabled="disabled"
     />
-    <span class="ui-checkbox-title"><slot /></span>
-  </div>
+    <span class="ui-checkbox-title">
+      <slot />
+    </span>
+  </label>
 </template>
-
-<script setup lang="ts">
-import { withDefaults, defineProps, toRefs } from 'vue'
-
-const emits = defineEmits(['update:checked'])
-const props = withDefaults(defineProps<{ checked?: boolean }>(), {
-  checked: false
-})
-const { checked } = toRefs(props)
-const onInput = () => {
-  emits('update:checked', !checked.value)
-}
-</script>
 
 <style lang="scss">
 .ui-checkbox-wrap {
@@ -33,6 +37,7 @@ const onInput = () => {
   > .ui-checkbox-input {
     width: 1em;
     height: 1em;
+    font-size: 14px;
   }
   > .ui-checkbox-title {
     font-size: 14px;
