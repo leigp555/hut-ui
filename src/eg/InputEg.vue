@@ -35,9 +35,15 @@
       :autoSize="{ minRows: 3, maxRows: 5 }"
     />
     <Textarea
-      v-model:value="value2"
+      v-model:value="value3"
       placeholder="Autosize height based on content lines"
       resize
+    />
+    <Textarea
+      v-model:value="value4"
+      placeholder="Autosize height based on content lines"
+      :maxlength="20"
+      showCount
     />
   </div>
 </template>
@@ -52,6 +58,8 @@ import Button from '@/lib/button/Button.vue'
 const value = ref<string>('')
 const value1 = ref<string>('')
 const value2 = ref<string>('')
+const value3 = ref<string>('')
+const value4 = ref<string>('')
 const iconClick = () => {
   console.log('点击了')
 }
