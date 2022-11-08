@@ -24,15 +24,20 @@
         <Button :style="{ marginLeft: '4px' }">search</Button>
       </template>
     </Input>
-    <!--    <Textarea-->
-    <!--      v-model:value="value1"-->
-    <!--      placeholder="Autosize height based on content lines"-->
-    <!--      autoSize-->
-    <!--    />-->
     <Textarea
       v-model:value="value1"
       placeholder="Autosize height based on content lines"
+      autoSize
+    />
+    <Textarea
+      v-model:value="value2"
+      placeholder="Autosize height based on content lines"
       :autoSize="{ minRows: 3, maxRows: 5 }"
+    />
+    <Textarea
+      v-model:value="value2"
+      placeholder="Autosize height based on content lines"
+      resize
     />
   </div>
 </template>
@@ -46,6 +51,7 @@ import Button from '@/lib/button/Button.vue'
 
 const value = ref<string>('')
 const value1 = ref<string>('')
+const value2 = ref<string>('')
 const iconClick = () => {
   console.log('点击了')
 }

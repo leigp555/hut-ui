@@ -5,17 +5,19 @@ const emits = defineEmits(['update:value'])
 const props = withDefaults(
   defineProps<{
     value: string
-    placeholder: string
+    placeholder?: string
     autoSize?: boolean | { minRows: number; maxRows: number }
+    resize?: boolean
   }>(),
   {
     value: '',
     placeholder: '',
-    autoSize: false
+    autoSize: false,
+    resize: false
   }
 )
 
-const { value, placeholder, autoSize } = toRefs(props)
+const { value, placeholder, autoSize, resize } = toRefs(props)
 const textareaRef = ref<HTMLInputElement | null>(null)
 
 const onInput = () => {
@@ -40,9 +42,12 @@ const onInput = () => {
 }
 const style = computed(() => {
   if (autoSize && typeof autoSize.value !== 'boolean') {
-    return { minHeight: `${autoSize.value.minRows * 1.5 * 14 + 10}px` }
+    return {
+      minHeight: `${autoSize.value.minRows * 1.5 * 14 + 10}px`,
+      resize: resize.value ? 'both' : 'none'
+    }
   }
-  return {}
+  return { resize: resize.value ? 'both' : 'none' }
 })
 </script>
 
