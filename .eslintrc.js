@@ -20,6 +20,7 @@ module.exports = {
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     "vue/no-v-model-argument": "off",
+    "import/first":'off',
     "no-param-reassign":"off",
     'import/no-unresolved': 'off',
     'import/prefer-default-export': 'off',

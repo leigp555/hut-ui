@@ -1,11 +1,11 @@
 <template>
   <div class="test">
-    <DatePickerEg />
+    <InputEg />
   </div>
 </template>
 
 <script setup lang="ts">
-import DatePickerEg from '@/eg/DatePickerEg.vue'
+import InputEg from '@/eg/InputEg.vue'
 </script>
 
 <style>

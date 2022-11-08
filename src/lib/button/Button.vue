@@ -5,8 +5,9 @@
   >
     <slot name="icon" />
     <span class="ui-button-icon" v-if="loading">
-      <SvgIcon name="loading" width="1em" height="1em" fill="#eff7ff" /></span
-    ><slot />
+      <SvgIcon name="loading" width="1em" height="1em" fill="#eff7ff" />
+    </span>
+    <slot />
   </button>
 </template>
 
