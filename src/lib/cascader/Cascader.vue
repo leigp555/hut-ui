@@ -40,26 +40,26 @@ const onBlur = () => {
   popVisibility.value = false
 }
 
-// 改造options
+// 改造options像option数据结构中添加parent属性
 const addParentAttr = (list: CascaderOptions[]) => {
-  if (list) {
-    for (let i = 0; i < list.length; i++) {
-      if (list[i].children) {
-        for (let j = 0; j < list[i].children!.length; j++) {
-          if (list[i].parent) {
-            list[i].children![j].parent = `${list[i].parent}/${
-              list[i].children![j].value
-            }`
-          } else {
-            list[i].children![j].parent = `${list[i].value}/${
-              list[i].children![j].value
-            }`
-          }
+  for (let i = 0; i < list.length; i++) {
+    if (!list[i].parent) {
+      list[i].parent = list[i].value
+    }
+    if (list[i].children) {
+      for (let j = 0; j < list[i].children!.length; j++) {
+        if (list[i].parent) {
+          list[i].children![j].parent = `${list[i].parent}/${
+            list[i].children![j].value
+          }`
+        } else {
+          list[i].children![j].parent = `${list[i].value}/${list[i].children![j].value}`
         }
-        addParentAttr(list[i].children!)
       }
+      addParentAttr(list[i].children!)
     }
   }
+
   return list
 }
 const newOptions = computed(() => {

@@ -88,6 +88,7 @@ $selected_color: #f5f5f5;
       }
       &.selected {
         background-color: #e6f7ff;
+        font-weight: 600;
       }
     }
     .cascader-loop {
