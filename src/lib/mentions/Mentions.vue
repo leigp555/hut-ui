@@ -33,9 +33,22 @@ const userSelect = (e: Event) => {
   const el = e.target as HTMLElement
   const spec = el.getAttribute('data-value')
   if (el.tagName.toLowerCase() === 'p' && spec === 'list') {
-    emits('update:value', value.value + el.innerText)
+    const inputDom = inputRef.value as HTMLInputElement
+    const startIndex = inputDom.selectionStart
+    const newContent =
+      value.value.substring(0, startIndex) +
+      el.innerText +
+      value.value.substring(startIndex)
+    emits('update:value', newContent)
     emits('select', el.innerText)
     popRef.value?.classList.remove('mentions-pop-show')
+    setTimeout(() => {
+      inputDom.focus()
+      inputDom.setSelectionRange(
+        startIndex + el.innerText.length,
+        startIndex + el.innerText.length
+      )
+    })
   }
 }
 
@@ -53,6 +66,7 @@ const inputBlur = () => {
       :value="value"
       @input="inputEvent"
       @blur="inputBlur"
+      autofocus
     />
     <div class="ui-mentions-pop" @mousedown="userSelect" ref="popRef">
       <p
