@@ -1,31 +1,31 @@
 <script setup lang="ts">
 import { withDefaults, defineProps, toRefs, defineEmits, watch, ref } from 'vue'
 
-const emits = defineEmits(['search', 'update:value', 'select'])
+const emits = defineEmits(['select', 'update:value'])
 
-export interface OptionType {
+export type Options = {
+  label: string
   value: string
 }
-const props = withDefaults(
-  defineProps<{ value: string; options: OptionType[]; placeholder: string }>(),
-  {
-    value: '',
-    options: () => [],
-    placeholder: ''
-  }
-)
-const { value, options, placeholder } = toRefs(props)
-const hasSelected = ref<boolean>(false)
+const props = withDefaults(defineProps<{ value: string; options: Options[] }>(), {
+  value: '',
+  options: () => []
+})
+const { value, options } = toRefs(props)
+
 const popRef = ref<HTMLElement | null>(null)
+const inputRef = ref<HTMLInputElement | null>(null)
 const inputEvent = (e: Event) => {
   const el = e.target as HTMLInputElement
   emits('update:value', el.value)
 }
 watch(value, () => {
-  if (!hasSelected.value) {
-    emits('search', value.value)
+  const el = inputRef.value as HTMLInputElement
+  const lastStr = value.value.substring(el.selectionStart - 1, el.selectionStart)
+  if (lastStr === '@') {
+    popRef.value?.classList.add('mentions-pop-show')
   } else {
-    hasSelected.value = false
+    popRef.value?.classList.remove('mentions-pop-show')
   }
 })
 
@@ -33,43 +33,36 @@ const userSelect = (e: Event) => {
   const el = e.target as HTMLElement
   const spec = el.getAttribute('data-value')
   if (el.tagName.toLowerCase() === 'p' && spec === 'list') {
+    emits('update:value', value.value + el.innerText)
     emits('select', el.innerText)
-    popRef.value?.classList.remove('autoComplete-pop-show')
-    if (el.innerText !== value.value) {
-      emits('update:value', el.innerText)
-      hasSelected.value = true
-    }
+    popRef.value?.classList.remove('mentions-pop-show')
   }
 }
-const inputFocus = () => {
-  popRef.value?.classList.add('autoComplete-pop-show')
-}
+
 const inputBlur = () => {
-  popRef.value?.classList.remove('autoComplete-pop-show')
+  popRef.value?.classList.remove('mentions-pop-show')
 }
 </script>
 
 <template>
-  <div class="ui-autoComplete-wrap">
+  <div class="ui-mentions-wrap">
     <input
-      class="ui-autoComplete-input"
+      class="ui-mentions-input"
       type="text"
-      :placeholder="placeholder"
+      ref="inputRef"
       :value="value"
       @input="inputEvent"
-      @focus="inputFocus"
       @blur="inputBlur"
     />
-    <div class="ui-autoComplete-pop" @mousedown="userSelect" ref="popRef">
+    <div class="ui-mentions-pop" @mousedown="userSelect" ref="popRef">
       <p
         v-for="item in options"
         :key="item"
-        class="autoComplete-list-item"
-        :class="{ selected: item.value === value }"
+        class="mentions-list-item"
         data-value="list"
         :title="item.value"
       >
-        {{ item.value }}
+        {{ item.label }}
       </p>
     </div>
   </div>
@@ -78,11 +71,11 @@ const inputBlur = () => {
 <style lang="scss">
 $font_color: rgba(0, 0, 0, 0.85);
 $main_color: #1890ff;
-$selected_color: #f5f5f5;
-.ui-autoComplete-wrap {
+$selected_color: #e6f7ff;
+.ui-mentions-wrap {
   display: inline-flex;
   position: relative;
-  .ui-autoComplete-input {
+  .ui-mentions-input {
     flex-grow: 10;
     padding: 0 11px;
     outline: none;
@@ -101,34 +94,30 @@ $selected_color: #f5f5f5;
       border: 1px solid $main_color;
     }
   }
-  .ui-autoComplete-pop {
+  .ui-mentions-pop {
     position: absolute;
-    width: 100%;
     bottom: 0;
     left: 0;
-    transform: translateY(calc(100% + 4px));
+    transform: translateY(calc(100% + 4px)) translateX(50%);
     box-shadow: 0 0 30px 3px rgba(0, 0, 0, 0.1);
     opacity: 0;
     visibility: hidden;
     transition: all 250ms;
-    &.autoComplete-pop-show {
+    &.mentions-pop-show {
       opacity: 1;
       visibility: visible;
     }
-    > .autoComplete-list-item {
+    > .mentions-list-item {
       text-overflow: ellipsis;
       overflow: hidden;
       white-space: nowrap;
       font-size: 14px;
       color: $font_color;
-      padding: 0 11px;
+      padding: 0 16px;
       line-height: 2.5em;
       cursor: pointer;
       &:last-child {
         margin-bottom: 4px;
-      }
-      &.selected {
-        background-color: $selected_color;
       }
       &:hover {
         background-color: $selected_color;
