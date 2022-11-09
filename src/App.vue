@@ -1,11 +1,11 @@
 <template>
   <div class="test">
-    <RadioEg />
+    <RateEg />
   </div>
 </template>
 
 <script setup lang="ts">
-import RadioEg from '@/eg/RadioEg.vue'
+import RateEg from '@/eg/RateEg.vue'
 </script>
 
 <style>
