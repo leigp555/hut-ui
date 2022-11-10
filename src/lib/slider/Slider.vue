@@ -43,10 +43,12 @@ const onMousemove = (e: Event) => {
       sliderBlockRef.value.style.transform = `translate3d(${wrapWidth.value}px,-50%,0)`
       sliderLineRef.value.style.transform = `translate3d(${wrapWidth.value}px,0,0)`
       emits('update:value', 100)
+      distance.value = wrapWidth.value
     } else if (result < 0) {
       sliderBlockRef.value.style.transform = `translate3d(0px,-50%,0)`
       sliderLineRef.value.style.transform = `translate3d(0px,0,0)`
       emits('update:value', 0)
+      distance.value = 0
     }
   }
 }
