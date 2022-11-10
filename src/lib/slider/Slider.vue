@@ -7,14 +7,19 @@ const props = withDefaults(defineProps<{ value?: number }>(), {
 })
 const { value } = toRefs(props)
 
-const initDistance = ref<number>(0)
 const sliderWrapRef = ref<HTMLDivElement | null>(null)
 const sliderLineRef = ref<HTMLDivElement | null>(null)
 const sliderBlockRef = ref<HTMLDivElement | null>(null)
 const isMove = ref<boolean>(false)
-const initX = ref<number>(0)
 const wrapWidth = ref<number>(0)
+
+// 记录每一次按下前的滑块位置
+const initDistance = ref<number>(0)
+// 鼠标按下时记录横坐标
+const initClickX = ref<number>(0)
+// 记录上一次的移动距离
 const lastDistance = ref<number>(0)
+// 记录当前此的移动距离
 const distance = ref<number>(0)
 
 onMounted(() => {
@@ -34,7 +39,9 @@ const onMousemove = (e: Event) => {
   e.stopPropagation()
   e.preventDefault()
   if (isMove.value) {
-    distance.value = lastDistance.value + e.clientX - initX.value
+    // 必须加上上一次的滑动距离不然会回弹
+    distance.value = lastDistance.value + e.clientX - initClickX.value
+    // 记录滑动到的位置
     const result = initDistance.value + distance.value - lastDistance.value
     if (result <= wrapWidth.value && result >= 0) {
       sliderBlockRef.value.style.transform = `translate3d(${distance.value}px,-50%,0)`
@@ -54,7 +61,6 @@ const onMousemove = (e: Event) => {
   }
 }
 const onMouseup = () => {
-  console.log('结束')
   lastDistance.value = distance.value
   isMove.value = false
   document.documentElement.removeEventListener('mousemove', onMousemove)
@@ -63,8 +69,10 @@ const onMouseup = () => {
 
 const onMouseDown = (e: Event) => {
   isMove.value = true
-  initX.value = e.clientX
-  console.log('开始')
+  initClickX.value = e.clientX
+  // 初始化点击时的位置
+  initDistance.value = (value.value / 100) * wrapWidth.value
+  // 事件绑定在html元素上效果更好
   document.documentElement.addEventListener('mousemove', onMousemove)
   document.documentElement.addEventListener('mouseup', onMouseup)
 }
