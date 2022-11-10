@@ -19,6 +19,6 @@ const disabled = ref<boolean>(false)
 
 <style lang="scss">
 .ui-template-wrap {
-  margin: 300px;
+  margin: 200px;
 }
 </style>

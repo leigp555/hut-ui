@@ -1,11 +1,11 @@
 <template>
   <div class="test">
-    <SliderEg />
+    <SwitchEg />
   </div>
 </template>
 
 <script setup lang="ts">
-import SliderEg from '@/eg/SliderEg.vue'
+import SwitchEg from '@/eg/SwitchEg.vue'
 </script>
 
 <style>
