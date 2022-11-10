@@ -14,6 +14,8 @@ const sliderBlockRef = ref<HTMLDivElement | null>(null)
 const isMove = ref<boolean>(false)
 const initX = ref<number>(0)
 const wrapWidth = ref<number>(0)
+const lastDistance = ref<number>(0)
+const distance = ref<number>(0)
 
 onMounted(() => {
   // 容器宽度
@@ -25,12 +27,17 @@ onMounted(() => {
 })
 
 const onMousemove = (e: Event) => {
+  // 这是组件核心重点，必须阻止默认事件不然mouseup事件会监听失败
+  // 这是组件核心重点，必须阻止默认事件不然mouseup事件会监听失败
+  // 这是组件核心重点，必须阻止默认事件不然mouseup事件会监听失败
+  e.stopPropagation()
+  e.preventDefault()
   if (isMove.value) {
-    const distance = e.clientX - initX.value
-    const result = initDistance.value + distance
+    distance.value = lastDistance.value + e.clientX - initX.value
+    const result = initDistance.value + distance.value
     if (result <= wrapWidth.value && result >= 0) {
-      sliderBlockRef.value.style.transform = `translate3d(${distance}px,-50%,0)`
-      sliderLineRef.value.style.transform = `translate3d(${distance}px,0,0)`
+      sliderBlockRef.value.style.transform = `translate3d(${distance.value}px,-50%,0)`
+      sliderLineRef.value.style.transform = `translate3d(${distance.value}px,0,0)`
       emits('update:value', Math.ceil((result / wrapWidth.value) * 100))
     } else if (result > wrapWidth.value) {
       sliderBlockRef.value.style.transform = `translate3d(${wrapWidth.value}px,-50%,0)`
@@ -44,6 +51,8 @@ const onMousemove = (e: Event) => {
   }
 }
 const onMouseup = () => {
+  console.log('结束')
+  lastDistance.value = distance.value
   isMove.value = false
   document.documentElement.removeEventListener('mousemove', onMousemove)
   document.documentElement.removeEventListener('mouseup', onMouseup)
@@ -63,7 +72,12 @@ const onMouseDown = (e: Event) => {
     <div class="ui-slider-view">
       <div class="ui-slider-line" ref="sliderLineRef" />
     </div>
-    <div class="ui-slider-block" ref="sliderBlockRef" @mousedown="onMouseDown" />
+    <div
+      class="ui-slider-block"
+      ref="sliderBlockRef"
+      @mousedown="onMouseDown"
+      @mouseup="onMouseup"
+    />
   </div>
 </template>
 
