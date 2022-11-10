@@ -46,8 +46,9 @@ $normal_color: #f0f0f0;
   flex-flow: row-reverse;
   li {
     transition: all 250ms;
-    padding: 0 8px;
+    padding: 0 4px;
     fill: $normal_color;
+    font-size: 18px;
     &.selected {
       fill: $start_color;
     }
