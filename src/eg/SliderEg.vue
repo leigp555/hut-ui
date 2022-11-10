@@ -13,11 +13,12 @@
 import { ref } from 'vue'
 import Slider from '@/lib/slider/Slider.vue'
 
-const value1 = ref<number>(0)
+const value1 = ref<number>(50)
 const disabled = ref<boolean>(false)
 </script>
 
 <style lang="scss">
 .ui-template-wrap {
+  margin: 300px;
 }
 </style>

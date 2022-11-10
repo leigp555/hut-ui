@@ -22,6 +22,7 @@ onMounted(() => {
   wrapWidth.value = sliderWrapRef.value.getBoundingClientRect().width - 16
   // 初始移动
   initDistance.value = (value.value / 100) * wrapWidth.value
+  lastDistance.value = initDistance.value
   sliderBlockRef.value.style.transform = `translate3d(${initDistance.value}px,-50%,0)`
   sliderLineRef.value.style.transform = `translate3d(${initDistance.value}px,0,0)`
 })
@@ -34,7 +35,7 @@ const onMousemove = (e: Event) => {
   e.preventDefault()
   if (isMove.value) {
     distance.value = lastDistance.value + e.clientX - initX.value
-    const result = initDistance.value + distance.value
+    const result = initDistance.value + distance.value - lastDistance.value
     if (result <= wrapWidth.value && result >= 0) {
       sliderBlockRef.value.style.transform = `translate3d(${distance.value}px,-50%,0)`
       sliderLineRef.value.style.transform = `translate3d(${distance.value}px,0,0)`
