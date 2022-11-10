@@ -65,6 +65,7 @@ const onMouseup = () => {
   isMove.value = false
   document.documentElement.removeEventListener('mousemove', onMousemove)
   document.documentElement.removeEventListener('mouseup', onMouseup)
+  sliderBlockRef.value!.classList.remove('ui-slider-drag')
 }
 
 const onMouseDown = (e: Event) => {
@@ -75,6 +76,7 @@ const onMouseDown = (e: Event) => {
   // 事件绑定在html元素上效果更好
   document.documentElement.addEventListener('mousemove', onMousemove)
   document.documentElement.addEventListener('mouseup', onMouseup)
+  sliderBlockRef.value!.classList.add('ui-slider-drag')
 }
 </script>
 
@@ -88,16 +90,20 @@ const onMouseDown = (e: Event) => {
       ref="sliderBlockRef"
       @mousedown="onMouseDown"
       @mouseup="onMouseup"
-    />
+    >
+      <span class="ui-slider-tip">{{ value }}</span>
+    </div>
   </div>
 </template>
 
 <style lang="scss">
-$success_color: blue;
-$fail_color: green;
+$success_color: #91d5ff;
+$fail_color: #f5f5f5;
+$tip_color: #404040;
 .ui-slider-wrap {
   min-height: 8px;
-  background-color: $fail_color;
+  background-color: darken($fail_color, 5);
+
   position: relative;
   border-radius: 8px;
   > .ui-slider-view {
@@ -126,6 +132,41 @@ $fail_color: green;
     border-radius: 50%;
     transform: translateY(-50%);
     cursor: pointer;
+    > .ui-slider-tip {
+      background-color: $tip_color;
+      font-size: 14px;
+      color: #ffffff;
+      position: absolute;
+      top: 0;
+      left: 50%;
+      padding: 6px 8px;
+      line-height: 1.5em;
+      transform: translate(-50%, calc(-100% - 12px));
+      opacity: 0;
+      visibility: hidden;
+      transition: all 250ms;
+      &:after {
+        content: '';
+        width: 8px;
+        height: 8px;
+        position: absolute;
+        left: 50%;
+        bottom: 0;
+        transform: translate(-50%, 50%) rotate(45deg);
+        background-color: $tip_color;
+      }
+    }
+    &.ui-slider-drag {
+      box-shadow: 0 0 0 4px rgba(24, 144, 255, 0.2);
+      & .ui-slider-tip {
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+    &:hover .ui-slider-tip {
+      opacity: 1;
+      visibility: visible;
+    }
   }
 }
 </style>
