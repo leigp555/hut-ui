@@ -1,6 +1,7 @@
 <template>
   <div class="ui-template-wrap">
     <Switch v-model:checked="checked" />
+    <Switch v-model:checked="checked" disabled />
   </div>
 </template>
 
@@ -13,5 +14,8 @@ const checked = ref<boolean>(false)
 
 <style lang="scss">
 .ui-template-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
 }
 </style>

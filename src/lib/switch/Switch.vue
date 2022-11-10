@@ -2,7 +2,7 @@
   <div
     class="ui-switch-wrap"
     @click="onClick"
-    :class="{ 'switch-wrap-checked': checked }"
+    :class="{ 'switch-wrap-checked': checked, 'switch-wrap-disable': disabled }"
   >
     <span class="ui-switch-dot" :class="{ 'switch-dot-on': checked }" />
   </div>
@@ -13,10 +13,13 @@ import { withDefaults, defineProps } from 'vue'
 
 const emits = defineEmits(['update:checked'])
 
-const props = withDefaults(defineProps<{ checked?: boolean }>(), { checked: false })
+const props = withDefaults(defineProps<{ checked?: boolean; disabled?: boolean }>(), {
+  checked: false,
+  disabled: false
+})
 
 const onClick = () => {
-  emits('update:checked', !props.checked)
+  if (!props.disabled) emits('update:checked', !props.checked)
 }
 </script>
 
@@ -33,6 +36,10 @@ $dot_width: 18px;
   &.switch-wrap-checked {
     background-color: #1890ff;
   }
+  &.switch-wrap-disable {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
   &:active {
     box-shadow: 0 0 0 4px rgba(24, 114, 255, 0.2);
     > .ui-switch-dot {
@@ -46,6 +53,7 @@ $dot_width: 18px;
     height: $dot_width;
     border-radius: $dot_width/2;
     position: absolute;
+    cursor: pointer;
     left: 3px;
     top: 2px;
     transition: all 250ms;
