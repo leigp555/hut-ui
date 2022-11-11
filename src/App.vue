@@ -1,11 +1,11 @@
 <template>
   <div class="test">
-    <TreeSelectEg />
+    <UploadEg />
   </div>
 </template>
 
 <script setup lang="ts">
-import TreeSelectEg from '@/eg/TreeSelectEg.vue'
+import UploadEg from '@/eg/UploadEg.vue'
 </script>
 
 <style>
