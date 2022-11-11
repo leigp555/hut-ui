@@ -5,6 +5,7 @@
     <CheckboxGroup v-model:value="value" :options="options" />
     <CheckboxGroup v-model:value="value" :options="options" disabled />
     <CheckboxGroup v-model:value="value" :options="options2" disabled />
+    <CheckboxGroup v-model:value="value" :options="options2" direction="column" />
   </div>
 </template>
 

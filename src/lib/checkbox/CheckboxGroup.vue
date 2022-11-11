@@ -11,11 +11,13 @@ const props = withDefaults(
     value?: string[]
     options?: Option[] | string[]
     disabled?: boolean
+    direction?: 'row' | 'column'
   }>(),
   {
     value: () => [],
     options: () => [],
-    disabled: false
+    disabled: false,
+    direction: 'row'
   }
 )
 
@@ -54,7 +56,10 @@ const checked = (item: string | Option): boolean => {
 </script>
 
 <template>
-  <div class="ui-checkboxGroup-wrap">
+  <div
+    class="ui-checkboxGroup-wrap"
+    :class="{ 'ui-checkboxGroup-column': direction === 'column' }"
+  >
     <label class="ui-checkboxGroup-label" v-for="item in options" :key="item">
       <input
         class="ui-checkbox-input"
@@ -76,6 +81,10 @@ const checked = (item: string | Option): boolean => {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
+  &.ui-checkboxGroup-column {
+    flex-direction: column;
+    align-items: start;
+  }
   > .ui-checkboxGroup-label {
     display: flex;
     align-items: center;
