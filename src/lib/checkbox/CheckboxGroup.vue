@@ -8,7 +8,7 @@ type Option = {
 
 const props = withDefaults(
   defineProps<{
-    value?: string[]
+    value?: string[] | { label: string; value: string }[]
     options?: Option[] | string[]
     disabled?: boolean
     direction?: 'row' | 'column'
@@ -34,13 +34,18 @@ const onInput = (item: string | Option) => {
       newArr.splice(index, 1)
       emits('update:value', newArr)
     }
-  } else if (value.value.indexOf(item.value) < 0) {
-    emits('update:value', [...value.value, item.value])
+  } else if (value.value.length > 0) {
+    for (let i = 0; i < value.value.length; i++) {
+      if (value.value[i].value === item.value) {
+        const newArr = [...value.value]
+        newArr.splice(i, 1)
+        emits('update:value', newArr)
+      } else {
+        emits('update:value', [...value.value, item])
+      }
+    }
   } else {
-    const index = value.value.indexOf(item.value)
-    const newArr = [...value.value]
-    newArr.splice(index, 1)
-    emits('update:value', newArr)
+    emits('update:value', [...value.value, item])
   }
 }
 

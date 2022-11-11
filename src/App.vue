@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import TransferEg from '@/eg/TransferEg.vue'
+import TransferEg from '@/eg/CheckboxEg.vue'
 </script>
 
 <style>

@@ -4,8 +4,10 @@
     <Checkbox v-model:checked="checked" disabled>Checkbox</Checkbox>
     <CheckboxGroup v-model:value="value" :options="options" />
     <CheckboxGroup v-model:value="value" :options="options" disabled />
-    <CheckboxGroup v-model:value="value" :options="options2" disabled />
-    <CheckboxGroup v-model:value="value" :options="options2" direction="column" />
+    <CheckboxGroup v-model:value="value2" :options="options2" disabled />
+    <CheckboxGroup v-model:value="value2" :options="options2" direction="column" />
+
+    <CheckboxGroup v-model:value="value" :options="options" />
   </div>
 </template>
 
@@ -21,7 +23,7 @@ watch(checked, () => {
 })
 
 // 复选组示例
-const value = ref<string[]>(['apple', 'orange'])
+const value = ref<{ label: string; value: string }[]>([])
 const options = [
   { label: 'Apple', value: 'apple' },
   { label: 'Pear', value: 'pear' },
@@ -35,6 +37,11 @@ watch(value, () => {
 
 // 支持option可以为字符串数组
 const options2 = ['apple', 'pear', 'orange']
+const value2 = ref<string[]>([])
+watch(value2, () => {
+  console.log('value2.value')
+  console.log(value2.value)
+})
 </script>
 
 <style lang="scss">
