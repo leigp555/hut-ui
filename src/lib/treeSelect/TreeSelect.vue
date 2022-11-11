@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { withDefaults, defineProps, ref } from 'vue'
+import { withDefaults, defineProps, ref, toRefs, provide } from 'vue'
 import SvgIcon from '@/lib/common/SvgIcon.vue'
 import TreePop from './TreePop.vue'
 
@@ -7,10 +7,11 @@ import TreePop from './TreePop.vue'
 export interface TreeSelectOptions {
   title: string
   value: string
-  children: TreeSelectOptions[]
+  children?: TreeSelectOptions[]
 }
 
-withDefaults(
+const emits = defineEmits(['update:value'])
+const props = withDefaults(
   defineProps<{
     value?: string
     treeData?: TreeSelectOptions[]
@@ -20,9 +21,10 @@ withDefaults(
     placeholder: '请选择'
   }
 )
+const { value } = toRefs(props)
 
 const wrapRef = ref<HTMLDivElement | null>(null)
-const shouldPopShow = ref<boolean>(true)
+const shouldPopShow = ref<boolean>(false)
 const isSelect = ref<boolean>(false)
 
 const onFocus = () => {
@@ -44,6 +46,10 @@ const popBlur = () => {
 const userSelect = () => {
   isSelect.value = true
 }
+const onSelect = (selectStr: string) => {
+  emits('update:value', selectStr)
+}
+provide('change_treeSelect_value', onSelect)
 </script>
 
 <template>

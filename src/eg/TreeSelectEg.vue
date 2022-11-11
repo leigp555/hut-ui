@@ -12,7 +12,7 @@
 import { ref, watch } from 'vue'
 import TreeSelect, { TreeSelectOptions } from '@/lib/treeSelect/TreeSelect.vue'
 
-const treeData: TreeSelectOptions = [
+const treeData: TreeSelectOptions[] = [
   {
     title: 'Node1',
     value: '0-0',
@@ -31,7 +31,20 @@ const treeData: TreeSelectOptions = [
       {
         title: 'Child Node3',
         value: '0-1-0',
-        disabled: true
+        children: [
+          {
+            title: 'Child Node10',
+            value: '0-1-0'
+          },
+          {
+            title: 'Child Node11',
+            value: '0-1-1'
+          },
+          {
+            title: 'Child Node12',
+            value: '0-1-2'
+          }
+        ]
       },
       {
         title: 'Child Node4',

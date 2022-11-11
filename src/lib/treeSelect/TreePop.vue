@@ -1,30 +1,50 @@
 <script setup lang="ts">
-import { withDefaults, defineProps } from 'vue'
+import { withDefaults, defineProps, ref, inject } from 'vue'
 import { TreeSelectOptions } from './TreeSelect.vue'
 import SvgIcon from '@/lib/common/SvgIcon.vue'
 
 withDefaults(defineProps<{ options: TreeSelectOptions[] }>(), {})
+
+const clickLabelChild = ref<string>('')
+const toggle = (item: TreeSelectOptions) => {
+  if (item.children) {
+    if (clickLabelChild.value !== item.children[0].value) {
+      clickLabelChild.value = item.children[0].value
+    } else {
+      clickLabelChild.value = ''
+    }
+  }
+}
+
+// provide('ui_treeSelect_value', value)
+// eslint-disable-next-line no-unused-vars
+const change = inject<(item: string) => void>('change_treeSelect_value')
+const onSelect = (e: Event) => {
+  const el = e.target as HTMLSpanElement
+  if (change) change(el.innerText)
+}
 </script>
 
 <template>
   <div class="ui-treePop-wrap">
     <section class="ui-treePop-section" v-for="item in options" :key="item.value">
       <div class="treePop-section">
-        <span
-          class="ui-treePop-icon"
-          :style="{ transform: 'rotate(-90deg)' }"
-          v-if="item.children"
-        >
+        <span class="ui-treePop-icon" @click="toggle(item)">
           <SvgIcon
+            v-if="item.children"
             name="sanjiao"
             width="0.6em"
             height="0.6em"
             fill="rgba(0,0,0,0.85)"
           />
         </span>
-        <span class="ui-treePop-title">{{ item.title }}</span>
+        <span class="ui-treePop-title" @click="onSelect">{{ item.title }}</span>
       </div>
-      <div class="ui-treePop-repeat" v-if="item.children">
+      <div
+        class="ui-treePop-repeat"
+        v-if="item.children"
+        :class="{ 'treePop-repeat-open': clickLabelChild === item.children[0].value }"
+      >
         <TreePop :options="item.children" />
       </div>
     </section>
@@ -49,6 +69,7 @@ $selected_color: #f5f5f5;
         width: 24px;
         height: 24px;
         cursor: pointer;
+        transform: rotate(-90deg);
       }
       > .ui-treePop-title {
         padding: 0 4px;
@@ -57,11 +78,17 @@ $selected_color: #f5f5f5;
         display: flex;
         align-items: center;
         cursor: pointer;
+        user-select: none;
       }
     }
     > .ui-treePop-repeat {
       margin-left: 24px;
       margin-bottom: 4px;
+      display: none;
+      transition: all 250ms;
+      &.treePop-repeat-open {
+        display: block;
+      }
     }
   }
 }
