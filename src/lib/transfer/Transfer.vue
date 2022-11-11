@@ -56,12 +56,36 @@ const onCheckedSelect = () => {
 const toSelect = () => {
   const newSelectArr = [...value2.value, ...props.selected]
   emits('update:selected', newSelectArr)
+  const newSourceArr = [...props.source]
+  for (let i = 0; i < newSourceArr.length; i++) {
+    for (let j = 0; j < value2.value.length; j++) {
+      if (newSourceArr[i].value === value2.value[j].value) {
+        newSourceArr.splice(i, 1)
+        // eslint-disable-next-line no-unused-expressions
+        i > 1 ? (i -= 1) : (i = -1)
+        break
+      }
+    }
+  }
+  emits('update:source', newSourceArr)
   value2.value = []
   if (checkedSource.value) checkedSource.value = false
 }
 const toSource = () => {
   const newSourceArr = [...value3.value, ...props.source]
   emits('update:source', newSourceArr)
+  const newSelectArr = [...props.selected]
+  for (let i = 0; i < newSelectArr.length; i++) {
+    for (let j = 0; j < value3.value.length; j++) {
+      if (newSelectArr[i].value === value3.value[j].value) {
+        newSelectArr.splice(i, 1)
+        // eslint-disable-next-line no-unused-expressions
+        i > 1 ? (i -= 1) : (i = -1)
+        break
+      }
+    }
+  }
+  emits('update:selected', newSelectArr)
   value3.value = []
   if (checkedSelect.value) checkedSelect.value = false
 }
@@ -128,7 +152,7 @@ $selected_color: #f5f5f5;
       padding: 4px 10px;
     }
     .transfer-source-content {
-      height: 20em;
+      height: 15em;
       padding: 4px 10px;
       overflow-y: scroll;
     }
