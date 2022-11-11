@@ -1,11 +1,11 @@
 <template>
   <div class="test">
-    <TransferEg />
+    <TreeSelectEg />
   </div>
 </template>
 
 <script setup lang="ts">
-import TransferEg from '@/eg/TransferEg.vue'
+import TreeSelectEg from '@/eg/TreeSelectEg.vue'
 </script>
 
 <style>
