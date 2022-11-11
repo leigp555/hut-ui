@@ -1,11 +1,11 @@
 <template>
   <div class="test">
-    <SwitchEg />
+    <TimePickerEg />
   </div>
 </template>
 
 <script setup lang="ts">
-import SwitchEg from '@/eg/SwitchEg.vue'
+import TimePickerEg from '@/eg/TimePickerEg.vue'
 </script>
 
 <style>
