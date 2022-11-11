@@ -6,12 +6,15 @@ import SvgIcon from '@/lib/common/SvgIcon.vue'
 withDefaults(defineProps<{ options: TreeSelectOptions[] }>(), {})
 
 const clickLabelChild = ref<string>('')
+const clickLabelSelf = ref<string>('')
 const toggle = (item: TreeSelectOptions) => {
   if (item.children) {
     if (clickLabelChild.value !== item.children[0].value) {
       clickLabelChild.value = item.children[0].value
+      clickLabelSelf.value = item.value
     } else {
       clickLabelChild.value = ''
+      clickLabelSelf.value = ''
     }
   }
 }
@@ -29,7 +32,11 @@ const onSelect = (e: Event) => {
   <div class="ui-treePop-wrap">
     <section class="ui-treePop-section" v-for="item in options" :key="item.value">
       <div class="treePop-section">
-        <span class="ui-treePop-icon" @click="toggle(item)">
+        <span
+          class="ui-treePop-icon"
+          @click="toggle(item)"
+          :class="{ isOpen: clickLabelSelf === item.value }"
+        >
           <SvgIcon
             v-if="item.children"
             name="sanjiao"
@@ -70,6 +77,10 @@ $selected_color: #f5f5f5;
         height: 24px;
         cursor: pointer;
         transform: rotate(-90deg);
+        transition: all 250ms;
+        &.isOpen {
+          transform: rotate(0);
+        }
       }
       > .ui-treePop-title {
         padding: 0 4px;

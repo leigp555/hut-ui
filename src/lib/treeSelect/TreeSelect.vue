@@ -135,6 +135,8 @@ $select_color: #e6f7ff;
   }
   > .ui-treeSelect-pop {
     width: 100%;
+    max-height: 15em;
+    overflow: auto;
     display: inline-flex;
     flex-direction: column;
     font-size: 14px;
@@ -151,6 +153,22 @@ $select_color: #e6f7ff;
     &.treeSelect-pop-show {
       opacity: 1;
       visibility: visible;
+    }
+    &::-webkit-scrollbar {
+      //整个滚动条的宽高设置
+      width: 8px; //宽高只有一个能生效，如果是横向滚动条高度生效，纵向滚动条宽度生效
+      height: 8px;
+    }
+    &::-webkit-scrollbar-thumb {
+      //滚动条滑块的设置
+      border-radius: 3px;
+      -moz-border-radius: 3px;
+      -webkit-border-radius: 3px;
+      background-color: #c3c3c3;
+    }
+    &::-webkit-scrollbar-track {
+      //滚动条轨道设置
+      background-color: transparent;
     }
   }
 }
