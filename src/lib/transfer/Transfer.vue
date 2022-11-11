@@ -68,6 +68,7 @@ const toSelect = () => {
     }
   }
   emits('update:source', newSourceArr)
+  emits('change', newSourceArr, newSelectArr)
   value2.value = []
   if (checkedSource.value) checkedSource.value = false
 }
@@ -86,6 +87,7 @@ const toSource = () => {
     }
   }
   emits('update:selected', newSelectArr)
+  emits('change', newSourceArr, newSelectArr)
   value3.value = []
   if (checkedSelect.value) checkedSelect.value = false
 }
