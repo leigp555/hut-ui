@@ -53,10 +53,16 @@ const checked = (item: string | Option): boolean => {
   if (typeof item === 'string') {
     return value.value.indexOf(item) >= 0
   }
-  if (value.value.indexOf(item) < 0) {
-    return value.value.indexOf(item.value) >= 0
+  let x: boolean
+  for (let i = 0; i < value.value.length; i++) {
+    if (value.value[i].value === item.value) {
+      x = true
+      break
+    } else {
+      x = false
+    }
   }
-  return false
+  return x
 }
 </script>
 

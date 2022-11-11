@@ -11,7 +11,7 @@ export interface MockData {
   description: string
 }
 
-// const emits = defineEmits(['change'])
+const emits = defineEmits(['change', 'update:source', 'update:selected'])
 const props = withDefaults(
   defineProps<{
     source?: MockData[]
@@ -40,7 +40,7 @@ const title3 = computed(() => {
 const onCheckedSource = () => {
   checkedSource.value = !checkedSource.value
   if (checkedSource.value) {
-    value2.value = props.source.map((item) => item.value)
+    value2.value = props.source
   } else {
     value2.value = []
   }
@@ -48,16 +48,22 @@ const onCheckedSource = () => {
 const onCheckedSelect = () => {
   checkedSelect.value = !checkedSelect.value
   if (checkedSelect.value) {
-    value3.value = props.selected.map((item) => item.value)
+    value3.value = props.selected
   } else {
     value3.value = []
   }
 }
 const toSelect = () => {
-  console.log('xxx')
+  const newSelectArr = [...value2.value, ...props.selected]
+  emits('update:selected', newSelectArr)
+  value2.value = []
+  if (checkedSource.value) checkedSource.value = false
 }
 const toSource = () => {
-  console.log('yyy')
+  const newSourceArr = [...value3.value, ...props.source]
+  emits('update:source', newSourceArr)
+  value3.value = []
+  if (checkedSelect.value) checkedSelect.value = false
 }
 </script>
 

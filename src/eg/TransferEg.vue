@@ -15,7 +15,7 @@ import Transfer, { MockData } from '@/lib/transfer/Transfer.vue'
 
 // 模拟数据
 const mockData: MockData[] = []
-for (let i = 0; i < 100; i++) {
+for (let i = 0; i < 2; i++) {
   mockData.push({
     label: `content${i + 1}`,
     value: `content${i + 1}`,
