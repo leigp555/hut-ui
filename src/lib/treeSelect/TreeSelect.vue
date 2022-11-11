@@ -1,25 +1,9 @@
-<template>
-  <div class="ui-treeSelect-wrap">
-    <label class="ui-label-wrap" tabindex="-1" ref="wrapRef">
-      <input
-        class="ui-input"
-        type="text"
-        :placeholder="placeholder"
-        :value="value"
-        ref="inputRef"
-        @focus="onFocus"
-        @blur="onBlur"
-      />
-    </label>
-    <div class="ui-treeSelect-pop">
-      <TreeSelectPop />
-    </div>
-  </div>
-</template>
-
 <script setup lang="ts">
 import { withDefaults, defineProps, ref } from 'vue'
+import SvgIcon from '@/lib/common/SvgIcon.vue'
+import TreePop from './TreePop.vue'
 
+// const emits = defineEmits(['update:value'])
 export interface TreeSelectOptions {
   title: string
   value: string
@@ -29,7 +13,7 @@ export interface TreeSelectOptions {
 withDefaults(
   defineProps<{
     value?: string
-    treeDate?: TreeSelectOptions[]
+    treeData?: TreeSelectOptions[]
     placeholder?: string
   }>(),
   {
@@ -38,22 +22,68 @@ withDefaults(
 )
 
 const wrapRef = ref<HTMLDivElement | null>(null)
+const shouldPopShow = ref<boolean>(true)
+const isSelect = ref<boolean>(false)
 
 const onFocus = () => {
   wrapRef.value?.classList.add('wrap-focus')
+  shouldPopShow.value = true
 }
 const onBlur = () => {
+  if (!isSelect.value) {
+    wrapRef.value?.classList.remove('wrap-focus')
+    shouldPopShow.value = false
+  }
+}
+
+const popBlur = () => {
+  isSelect.value = false
   wrapRef.value?.classList.remove('wrap-focus')
+  shouldPopShow.value = false
+}
+const userSelect = () => {
+  isSelect.value = true
 }
 </script>
+
+<template>
+  <div class="ui-treeSelect-wrap">
+    <label class="ui-label-wrap" tabindex="-1" ref="wrapRef">
+      <input
+        class="ui-input"
+        type="text"
+        :placeholder="placeholder"
+        :value="value"
+        @focus="onFocus"
+        @blur="onBlur"
+        readonly
+      />
+      <span class="input-icon">
+        <SvgIcon name="down" width="1em" height="1em" />
+      </span>
+    </label>
+    <div
+      tabindex="-1"
+      class="ui-treeSelect-pop"
+      :class="{ 'treeSelect-pop-show': shouldPopShow }"
+      @mousedown="userSelect"
+      @blur="popBlur"
+      ref="popRef"
+    >
+      <TreePop :options="treeData" />
+    </div>
+  </div>
+</template>
 
 <style lang="scss">
 $font_color: #000000d9;
 $border_color: #d9d9d9;
 $main_color: #1890ff;
+$hover_color: #f5f5f5;
+$select_color: #e6f7ff;
 .ui-treeSelect-wrap {
+  position: relative;
   > .ui-label-wrap {
-    flex-grow: 10;
     padding: 4px 11px;
     background-color: #ffffff;
     display: flex;
@@ -69,6 +99,11 @@ $main_color: #1890ff;
     &:hover {
       border: 1px solid $main_color;
     }
+    > .input-icon {
+      display: flex;
+      align-items: center;
+      font-size: 14px;
+    }
     > .ui-input {
       width: 100%;
       text-overflow: ellipsis;
@@ -80,6 +115,8 @@ $main_color: #1890ff;
       box-shadow: none;
       color: $font_color;
       line-height: 1.5em;
+      display: flex;
+      align-items: center;
       &:hover {
         border: none;
         outline: none;
@@ -88,6 +125,26 @@ $main_color: #1890ff;
         border: none;
         outline: none;
       }
+    }
+  }
+  > .ui-treeSelect-pop {
+    width: 100%;
+    display: inline-flex;
+    flex-direction: column;
+    font-size: 14px;
+    color: $font_color;
+    padding: 8px 4px;
+    box-shadow: 0 3px 6px -4px #0000001f, 0 6px 16px #00000014, 0 9px 28px 8px #0000000d;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    transform: translateY(calc(100% + 5px));
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 250ms;
+    &.treeSelect-pop-show {
+      opacity: 1;
+      visibility: visible;
     }
   }
 }

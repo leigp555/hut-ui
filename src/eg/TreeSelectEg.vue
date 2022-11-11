@@ -2,7 +2,7 @@
   <div class="ui-template-wrap">
     <TreeSelect
       v-model:value="value"
-      :tree-data="treeData"
+      :treeData="treeData"
       placeholder="Please select"
     />
   </div>
