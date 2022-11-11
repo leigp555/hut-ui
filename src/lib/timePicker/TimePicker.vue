@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { withDefaults, defineProps, ref, computed, nextTick } from 'vue'
+import { withDefaults, defineProps, ref, computed } from 'vue'
 import dayjs from 'dayjs'
 import SvgIcon from '@/lib/common/SvgIcon.vue'
 
@@ -10,6 +10,7 @@ const props = withDefaults(defineProps<{ value?: string }>(), {
 
 const wrapRef = ref<HTMLDivElement | null>(null)
 const shouldPopShow = ref<boolean>(false)
+const isSelect = ref<boolean>(false)
 const timeArr = computed<string[]>(() => {
   return props.value.split(':')
 })
@@ -19,8 +20,9 @@ const onFocus = () => {
   shouldPopShow.value = true
 }
 const onBlur = () => {
-  if (!shouldPopShow.value) {
+  if (!isSelect.value) {
     wrapRef.value?.classList.remove('wrap-focus')
+    shouldPopShow.value = false
   }
 }
 const now = () => {
@@ -29,10 +31,12 @@ const now = () => {
   shouldPopShow.value = false
 }
 const popBlur = () => {
+  isSelect.value = false
   wrapRef.value?.classList.remove('wrap-focus')
   shouldPopShow.value = false
 }
 const userSelect = (e: Event) => {
+  isSelect.value = true
   const el = e.target as HTMLLIElement
   const spec = el.getAttribute('data-value')
   if (el.tagName.toLowerCase() === 'li' && spec && spec === 'hour') {
@@ -51,10 +55,6 @@ const userSelect = (e: Event) => {
     const newTime = [...timeArr.value.slice(0, 2), el.innerText]
     emits('update:value', newTime.join(':'))
   }
-  nextTick(() => {
-    wrapRef.value?.classList.add('wrap-focus')
-    shouldPopShow.value = true
-  })
 }
 </script>
 
