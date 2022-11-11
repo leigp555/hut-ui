@@ -1,10 +1,9 @@
 <template>
-  <div class="ui-transfer-wrap">
+  <div class="ui-template-wrap">
     <Transfer
-      v-model:sorce="sourceValue"
+      v-model:source="sourceValue"
       v-model:selected="selectedValue"
       :titles="['Source', 'Target']"
-      :render="(item) => item.title"
       @change="handleChange"
     />
   </div>
@@ -18,16 +17,14 @@ import Transfer, { MockData } from '@/lib/transfer/Transfer.vue'
 const mockData: MockData[] = []
 for (let i = 0; i < 100; i++) {
   mockData.push({
-    key: i.toString(),
-    title: `content${i + 1}`,
-    description: `description of content${i + 1}`,
-    disabled: false
+    label: `content${i + 1}`,
+    value: `content${i + 1}`,
+    description: `description of content${i + 1}`
   })
 }
 
-const sourceValue = ref<MockData[]>(mockData.filter((item) => +item.key % 2 !== 0))
-
-const selectedValue = ref<MockData[]>(mockData.filter((item) => +item.key % 2 === 0))
+const sourceValue = ref<MockData[]>(mockData.filter((item, index) => index % 2 !== 0))
+const selectedValue = ref<MockData[]>(mockData.filter((item, index) => index % 2 === 0))
 
 const handleChange = (sourceArr: MockData, targetArr: MockData) => {
   console.log('sourceArr: ', sourceArr)
@@ -36,6 +33,6 @@ const handleChange = (sourceArr: MockData, targetArr: MockData) => {
 </script>
 
 <style lang="scss">
-.ui-transfer-wrap {
+.ui-template-wrap {
 }
 </style>

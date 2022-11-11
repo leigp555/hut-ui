@@ -84,6 +84,7 @@ const checked = (item: string | Option): boolean => {
   &.ui-checkboxGroup-column {
     flex-direction: column;
     align-items: start;
+    justify-content: center;
   }
   > .ui-checkboxGroup-label {
     display: flex;
@@ -102,9 +103,6 @@ const checked = (item: string | Option): boolean => {
       display: flex;
       align-items: center;
       vertical-align: center;
-      font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue,
-        Arial, Noto Sans, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        Segoe UI Symbol, 'Noto Color Emoji';
     }
   }
 }

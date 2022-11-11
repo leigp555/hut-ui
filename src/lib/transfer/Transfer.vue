@@ -1,33 +1,140 @@
-<template>
-  <div class="ui-transfer-wrap">
-    <section class="ui-transfer-source"></section>
-  </div>
-</template>
-
 <script setup lang="ts">
-// import { withDefaults, defineProps } from 'vue'
+import { withDefaults, defineProps, computed, ref } from 'vue'
+import SvgIcon from '../common/SvgIcon.vue'
+import Button from '../button/Button.vue'
+import CheckboxGroup from '../checkbox/CheckboxGroup.vue'
+import Checkbox from '../checkbox/Checkbox.vue'
 
 export interface MockData {
-  key: string
-  title: string
+  label: string
+  value: string
   description: string
-  disabled: boolean
 }
 
 // const emits = defineEmits(['change'])
-// const props = withDefaults(
-//   defineProps<{
-//     source?: MockData
-//     selected?: MockData
-//     title?: string[]
-//     // eslint-disable-next-line no-unused-vars
-//     render: (item: MockData) => void
-//   }>(),
-//   {}
-// )
+const props = withDefaults(
+  defineProps<{
+    source?: MockData[]
+    selected?: MockData[]
+    titles?: string[]
+  }>(),
+  {
+    source: () => [],
+    selected: () => []
+  }
+)
+
+const checkedSource = ref<boolean>(false)
+const checkedSelect = ref<boolean>(false)
+// source数据
+const value2 = ref<string[]>([])
+const title2 = computed(() => {
+  return `${value2.value.length} / ${props.source.length} 项 ${props.titles[0]}`
+})
+// target数据
+const value3 = ref<string[]>([])
+const title3 = computed(() => {
+  return `${value3.value.length} / ${props.selected.length} 项 ${props.titles[1]}`
+})
+
+const onCheckedSource = () => {
+  checkedSource.value = !checkedSource.value
+  if (checkedSource.value) {
+    value2.value = props.source.map((item) => item.value)
+  } else {
+    value2.value = []
+  }
+}
+const onCheckedSelect = () => {
+  checkedSelect.value = !checkedSelect.value
+  if (checkedSelect.value) {
+    value3.value = props.selected.map((item) => item.value)
+  } else {
+    value3.value = []
+  }
+}
+const toSelect = () => {
+  console.log('xxx')
+}
+const toSource = () => {
+  console.log('yyy')
+}
 </script>
 
+<template>
+  <div class="ui-transfer-wrap">
+    <section class="ui-transfer-source">
+      <div class="transfer-source-title">
+        <Checkbox :checked="checkedSource" @update:checked="onCheckedSource">{{
+          title2
+        }}</Checkbox>
+      </div>
+      <div class="transfer-source-content">
+        <CheckboxGroup v-model:value="value2" :options="source" direction="column" />
+      </div>
+    </section>
+    <section class="transfer-action-wrap">
+      <div class="transfer-actions">
+        <Button @click="toSelect">
+          <template #icon>
+            <SvgIcon
+              name="back"
+              width="1em"
+              height="1em"
+              :style="{ transform: 'rotate(180deg)' }"
+            />
+          </template>
+        </Button>
+        <Button type="default" @click="toSource">
+          <template #icon>
+            <SvgIcon name="back" width="1em" height="1em" />
+          </template>
+        </Button>
+      </div>
+    </section>
+    <section class="ui-transfer-source">
+      <div class="transfer-source-title">
+        <Checkbox :checked="checkedSelect" @update:checked="onCheckedSelect">{{
+          title3
+        }}</Checkbox>
+      </div>
+      <div class="transfer-source-content">
+        <CheckboxGroup v-model:value="value3" :options="selected" direction="column" />
+      </div>
+    </section>
+  </div>
+</template>
+
 <style lang="scss">
+$font_color: rgba(0, 0, 0, 0.85);
+$main_color: #1890ff;
+$selected_color: #f5f5f5;
+
 .ui-transfer-wrap {
+  display: inline-flex;
+  gap: 10px;
+  > .ui-transfer-source {
+    width: 200px;
+    border-radius: 2px;
+    border: 1px solid darken($selected_color, 20);
+    .transfer-source-title {
+      border-bottom: 1px solid darken($selected_color, 20);
+      padding: 4px 10px;
+    }
+    .transfer-source-content {
+      height: 20em;
+      padding: 4px 10px;
+      overflow-y: scroll;
+    }
+  }
+  > .transfer-action-wrap {
+    display: flex;
+    align-items: center;
+    > .transfer-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+  }
 }
 </style>
