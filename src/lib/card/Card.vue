@@ -1,5 +1,5 @@
 <template>
-  <div class="ui-card-wrap" :class="{ bordered: border }">
+  <div class="ui-card-wrap" :class="{ bordered: border, shadow }">
     <div class="ui-card-title">
       <div class="card-title">{{ title }}</div>
       <div class="card-action">
@@ -15,7 +15,10 @@
 <script setup lang="ts">
 import { withDefaults, defineProps } from 'vue'
 
-withDefaults(defineProps<{ border?: boolean; title?: string }>(), { border: true })
+withDefaults(defineProps<{ border?: boolean; title?: string; shadow?: boolean }>(), {
+  border: true,
+  shadow: false
+})
 </script>
 
 <style lang="scss">
@@ -24,6 +27,10 @@ $border_color: #d9d9d9;
 .ui-card-wrap {
   &.bordered {
     border: 1px solid $border_color;
+  }
+  &.shadow:hover {
+    border-color: transparent;
+    box-shadow: 0 1px 2px -2px #00000029, 0 3px 6px #0000001f, 0 5px 12px 4px #00000017;
   }
   > .ui-card-title {
     padding: 16px 24px;

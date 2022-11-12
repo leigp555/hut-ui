@@ -9,7 +9,15 @@
       <p>card content</p>
     </Card>
 
-    <Card title="Default size card" style="width: 500px" :border="false">
+    <Card title="Default size card" style="width: 500px" shadow>
+      <template #extra>
+        <a href="#">more</a>
+      </template>
+      <p>card content</p>
+      <p>card content</p>
+      <p>card content</p>
+    </Card>
+    <Card title="Default size card" style="width: 500px" :border="false" shadow>
       <template #extra>
         <a href="#">more</a>
       </template>
