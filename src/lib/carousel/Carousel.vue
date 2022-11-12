@@ -49,6 +49,14 @@ onMounted(() => {
   const el = olRef.value as HTMLOListElement
   contentRef.value.style.height = `${el.children[0].getBoundingClientRect().height}px`
 })
+const indicatorClick = (e: Event) => {
+  const el = e.target as HTMLElement
+  const spec = el.getAttribute('data-list')
+  if (el.tagName.toLowerCase() === 'button' && spec === 'indicator') {
+    const order = parseInt(el.getAttribute('data-order'), 10)
+    emits('update:init', order)
+  }
+}
 </script>
 
 <template>
@@ -66,9 +74,13 @@ onMounted(() => {
           </li>
         </TransitionGroup>
       </ol>
-      <ol class="ui-carousel-indicator" v-if="indicator">
+      <ol class="ui-carousel-indicator" v-if="indicator" @click="indicatorClick">
         <li v-for="(item, index) in slots.length" :key="item">
-          <button :class="{ select: index + 1 === init }" />
+          <button
+            :class="{ select: index + 1 === init }"
+            data-list="indicator"
+            :data-order="index + 1"
+          />
         </li>
       </ol>
     </div>
