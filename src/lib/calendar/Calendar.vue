@@ -1,30 +1,100 @@
 <script setup lang="ts">
-import { withDefaults, defineProps, ref } from 'vue'
+import { withDefaults, defineProps, ref, toRefs, computed } from 'vue'
+import dayjs, { Dayjs } from 'dayjs'
 import Select, { OptionType } from '../select/Select.vue'
 
-withDefaults(defineProps<{}>(), {})
-
+const emits = defineEmits(['update:value'])
+const props = withDefaults(defineProps<{ value: Dayjs }>(), {
+  value: dayjs().format('YYYY-MM-DD')
+})
+const { value } = toRefs(props)
+const dateArr = computed<string[]>(() => {
+  return value.value.split('-')
+})
 // 年选择
-const year = ref<string>('2022')
+const year = ref<string>(dateArr.value[0])
 const yearOptions = ref<OptionType[]>([])
 for (let i = 0; i < 12; i++) {
   yearOptions.value.push({ value: (2022 - 6 + i).toString() })
 }
 const changeYear = (newYear: string) => {
   year.value = newYear
+  const newDate = [newYear, ...dateArr.value.slice(1)].join('-')
+  emits('update:value', newDate)
 }
 // 月选择
-const month = ref<string>('11')
+const month = ref<string>(dateArr.value[1])
 const monthOptions = ref<OptionType[]>([])
 for (let i = 0; i < 12; i++) {
   monthOptions.value.push({ value: (i + 1).toString() })
 }
 const changeMonth = (newMonth: string) => {
   month.value = newMonth
+  const newDate = [dateArr.value[0], newMonth, dateArr.value[2]].join('-')
+  emits('update:value', newDate)
 }
 
 // 周
 const week = ['一', '二', '三', '四', '五', '六', '日']
+
+// ===============================
+// 获取一个月总天数  //31
+const getTotalMonthDay = (time: Dayjs) => {
+  return dayjs(time).daysInMonth()
+}
+// 获取星期  // 从1(星期一)到7(星期日)
+const getWeekday = (time: Dayjs) => {
+  let weekday: number
+  if (dayjs(time).day() !== 0) {
+    weekday = dayjs(time).day()
+  } else {
+    weekday = 7
+  }
+  return weekday
+}
+// 获取当月首日  //2022-11-12
+const getFirstMonthDay = (time: Dayjs) => {
+  const timeArr = time.split('-')
+  return [...timeArr.slice(0, 2), '01'].join('-')
+}
+// 获取当月末日
+// const getLastMonthDay = (time: Dayjs) => {
+//   const totalMonthDay = getTotalMonthDay(time)
+//   const timeArr = time.split('-')
+//   return [...timeArr.slice(0, 2), totalMonthDay].join('-')
+// }
+// 获取上个月总天数
+const getPreviousMonthTotalDay = (time: Dayjs) => {
+  const timeArr = time.split('-')
+  const lastMonth = parseInt(timeArr[1], 10) - 1
+  const newDate = [timeArr[0], lastMonth, timeArr[2]].join('-')
+  return getTotalMonthDay(newDate)
+}
+
+// 展示数据
+const dateShow = (row: number, column: number) => {
+  let day: number
+  // 获取当月首日星期
+  const firstWeekDay = getWeekday(getFirstMonthDay(value.value))
+  // 获取当月末日星期
+  // const lastWeekDay = getWeekday(getLastMonthDay(value.value))
+  // 确定第一天的位置
+  if (firstWeekDay === 1) {
+    // 第一天是星期一的情况
+    day = (row - 1) * 7 + column
+  } else if (firstWeekDay > 1 && firstWeekDay <= 7) {
+    // 第一天是星期二~天的情况
+    const previousMonthTotalDay = getPreviousMonthTotalDay(value.value)
+    if (column - firstWeekDay < 0 && row === 1) {
+      day = previousMonthTotalDay - firstWeekDay + 1 + column
+    } else if (column - firstWeekDay >= 0 && row === 1) {
+      day = column - firstWeekDay + 1
+    } else {
+      day = (row - 1) * 7 + column - firstWeekDay + 1
+    }
+  }
+  return day
+}
 </script>
 
 <template>
@@ -57,7 +127,7 @@ const week = ['一', '二', '三', '四', '五', '六', '日']
         <tr v-for="row in 6" :key="row">
           <td v-for="column in 7" :key="column">
             <div class="ui-calendar-item">
-              {{ 10 }}
+              {{ dateShow(row, column) }}
             </div>
           </td>
         </tr>
