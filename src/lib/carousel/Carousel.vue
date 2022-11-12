@@ -66,6 +66,11 @@ onMounted(() => {
           </li>
         </TransitionGroup>
       </ol>
+      <ol class="ui-carousel-indicator" v-if="indicator">
+        <li v-for="(item, index) in slots.length" :key="item">
+          <button :class="{ select: index + 1 === init }" />
+        </li>
+      </ol>
     </div>
   </div>
 </template>
@@ -86,6 +91,33 @@ onMounted(() => {
         top: 0;
         left: 0;
         width: 100%;
+      }
+    }
+    > .ui-carousel-indicator {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      position: absolute;
+      bottom: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+      list-style: none;
+      button {
+        width: 16px;
+        height: 3px;
+        border-radius: 1px;
+        outline: none;
+        border: none;
+        cursor: pointer;
+        opacity: 0.3;
+        transition: all 400ms;
+        background-color: #ffffff;
+        display: block;
+        &.select {
+          width: 24px;
+          opacity: 1;
+        }
       }
     }
   }
