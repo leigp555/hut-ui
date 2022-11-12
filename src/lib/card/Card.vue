@@ -15,7 +15,7 @@
 <script setup lang="ts">
 import { withDefaults, defineProps } from 'vue'
 
-withDefaults(defineProps<{ border?: boolean; title: string }>(), { border: true })
+withDefaults(defineProps<{ border?: boolean; title?: string }>(), { border: true })
 </script>
 
 <style lang="scss">
