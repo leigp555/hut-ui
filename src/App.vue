@@ -1,11 +1,11 @@
 <template>
   <div class="test">
-    <CalendarEg />
+    <CardEg />
   </div>
 </template>
 
 <script setup lang="ts">
-import CalendarEg from '@/eg/CalendarEg.vue'
+import CardEg from '@/eg/CardEg.vue'
 </script>
 
 <style>
