@@ -26,8 +26,9 @@ const onChange = (newKey: string[]) => {
 </script>
 
 <style lang="scss">
+$border_color: #d9d9d9;
 .ui-collapse-wrap {
-  width: 100%;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  border: 1px solid $border_color;
+  border-radius: 2px;
 }
 </style>
