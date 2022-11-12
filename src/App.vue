@@ -1,11 +1,11 @@
 <template>
   <div class="test">
-    <CarouselEg />
+    <CollapseEg />
   </div>
 </template>
 
 <script setup lang="ts">
-import CarouselEg from '@/eg/CarouselEg.vue'
+import CollapseEg from '@/eg/CollapseEg.vue'
 </script>
 
 <style>
