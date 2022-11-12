@@ -1,11 +1,11 @@
 <template>
   <div class="test">
-    <CardEg />
+    <CarouselEg />
   </div>
 </template>
 
 <script setup lang="ts">
-import CardEg from '@/eg/CardEg.vue'
+import CarouselEg from '@/eg/CarouselEg.vue'
 </script>
 
 <style>
