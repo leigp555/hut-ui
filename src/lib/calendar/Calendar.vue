@@ -4,7 +4,7 @@ import dayjs, { Dayjs } from 'dayjs'
 import Select, { OptionType } from '../select/Select.vue'
 import SvgIcon from '../common/SvgIcon.vue'
 
-const emits = defineEmits(['update:value'])
+const emits = defineEmits(['update:value', 'change'])
 const props = withDefaults(defineProps<{ value: Dayjs }>(), {
   value: dayjs().format('YYYY-MM-DD')
 })
@@ -71,7 +71,7 @@ const getPreviousMonthTotalDay = (time: Dayjs) => {
 
 // 展示数据
 const dateShow = (row: number, column: number) => {
-  let day: number
+  let day: number | string
   // eslint-disable-next-line no-shadow
   let month = parseInt(dateArr.value[1], 10)
   // eslint-disable-next-line no-shadow
@@ -89,20 +89,46 @@ const dateShow = (row: number, column: number) => {
     const previousMonthTotalDay = getPreviousMonthTotalDay(value.value)
     if (column - firstWeekDay < 0 && row === 1) {
       day = previousMonthTotalDay - firstWeekDay + 1 + column
-      month -= 1
+      if (month - 1 > 0) {
+        month -= 1
+      } else {
+        month = 12
+      }
     } else if (column - firstWeekDay >= 0 && row === 1) {
       day = column - firstWeekDay + 1
     } else {
       day = (row - 1) * 7 + column - firstWeekDay + 1
     }
   }
-
   if (day > monthTotalDay && row > 1) {
     // 这个是关键用计算后的day减去本月的总天数就能算出多余多少天
     day -= monthTotalDay
-    month += 1
+    if (month + 1 <= 12) {
+      month += 1
+    } else {
+      month = 1
+    }
+  }
+  if (day < 10) {
+    day = `0${day}`
   }
   return [year, month, day]
+}
+
+const onClick = (e: Event) => {
+  const el = e.target as HTMLElement
+  const spec = el.getAttribute('data-list')
+  if (el.tagName.toLowerCase() === 'div' && spec === 'day') {
+    const newDay = el.getAttribute('title')
+    const newDayArr = newDay.split('-')
+    const dP1 = /^\d{4}(-)\d{1,2}\1\d{1,2}$/
+    if (dP1.test(newDay)) {
+      emits('update:value', newDay)
+      emits('change', newDay)
+      year.value = newDayArr[0]
+      month.value = newDayArr[1]
+    }
+  }
 }
 </script>
 
@@ -137,14 +163,16 @@ const dateShow = (row: number, column: number) => {
       </table>
     </div>
     <div class="ui-calendar-day">
-      <table>
+      <table @click="onClick">
         <tr v-for="row in 6" :key="row">
           <td v-for="column in 7" :key="column">
             <div
               class="ui-calendar-item"
+              :title="dateShow(row, column).join('-')"
+              data-list="day"
               :class="{
                 isToady: now === dateShow(row, column).join('-'),
-                isSelect: dateShow(row, column).join('-') === value
+                isSelect: dateShow(row, column).join('-') === value.toString()
               }"
             >
               {{ dateShow(row, column)[2] }}
