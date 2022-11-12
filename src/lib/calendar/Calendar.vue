@@ -2,6 +2,7 @@
 import { withDefaults, defineProps, ref, toRefs, computed } from 'vue'
 import dayjs, { Dayjs } from 'dayjs'
 import Select, { OptionType } from '../select/Select.vue'
+import SvgIcon from '../common/SvgIcon.vue'
 
 const emits = defineEmits(['update:value'])
 const props = withDefaults(defineProps<{ value: Dayjs }>(), {
@@ -99,18 +100,23 @@ const dateShow = (row: number, column: number) => {
 <template>
   <div class="ui-calendar-wrap">
     <div class="ui-calendar-actions">
-      <Select
-        v-model:value="year"
-        :options="yearOptions"
-        :style="{ width: '80px' }"
-        @change="changeYear"
-      />
-      <Select
-        v-model:value="month"
-        :options="monthOptions"
-        :style="{ width: '60px' }"
-        @change="changeMonth"
-      />
+      <span class="calendar-actions-icon">
+        <SvgIcon name="calendar" width="1.5em" height="1.5em" fill="#1890ff" />
+      </span>
+      <div class="calendar-actions-input">
+        <Select
+          v-model:value="year"
+          :options="yearOptions"
+          :style="{ width: '80px' }"
+          @change="changeYear"
+        />
+        <Select
+          v-model:value="month"
+          :options="monthOptions"
+          :style="{ width: '60px' }"
+          @change="changeMonth"
+        />
+      </div>
     </div>
     <div class="ui-calendar-week">
       <table>
@@ -143,14 +149,23 @@ $selected_color: #f5f5f5;
   display: flex;
   flex-direction: column;
   border: 1px solid darken($selected_color, 20);
+  background-color: #ffffff;
   min-width: 300px;
+  max-width: 400px;
   .ui-calendar-actions {
     display: flex;
-    justify-content: end;
+    justify-content: space-between;
     align-items: center;
     padding: 8px 12px;
-    gap: 10px;
     border-bottom: 1px solid darken($selected_color, 20);
+    > .calendar-actions-icon {
+      margin-left: 20px;
+    }
+    > .calendar-actions-input {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
   }
   .ui-calendar-week {
     padding: 18px 10px 10px 10px;

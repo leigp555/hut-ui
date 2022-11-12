@@ -14,5 +14,6 @@ const data = ref<Dayjs>('2022-11-13')
 
 <style lang="scss">
 .ui-template-wrap {
+  margin: 100px;
 }
 </style>
