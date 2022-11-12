@@ -1,11 +1,11 @@
 <template>
   <div class="test">
-    <BadgeEg />
+    <CalendarEg />
   </div>
 </template>
 
 <script setup lang="ts">
-import BadgeEg from '@/eg/BadgeEg.vue'
+import CalendarEg from '@/eg/CalendarEg.vue'
 </script>
 
 <style>

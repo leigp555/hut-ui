@@ -65,8 +65,9 @@ $selected_color: #f5f5f5;
 .ui-select-wrap {
   display: inline-flex;
   position: relative;
+  cursor: default;
   .ui-select-input {
-    min-width: 120px;
+    min-width: 4em;
     height: 30px;
     padding: 0 8px 0 11px;
     display: flex;
@@ -93,8 +94,10 @@ $selected_color: #f5f5f5;
   }
   .ui-select-pop {
     position: absolute;
+    z-index: 10;
     width: 100%;
     max-height: 8em;
+    background-color: #ffffff;
     overflow-y: scroll;
     bottom: 0;
     left: 0;
