@@ -9,7 +9,7 @@ import { ref } from 'vue'
 import { Dayjs } from 'dayjs'
 import Calendar from '@/lib/calendar/Calendar.vue'
 
-const data = ref<Dayjs>('2022-11-13')
+const data = ref<Dayjs>('2022-11-12')
 </script>
 
 <style lang="scss">
