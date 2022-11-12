@@ -57,12 +57,6 @@ const getFirstMonthDay = (time: Dayjs) => {
   const timeArr = time.split('-')
   return [...timeArr.slice(0, 2), '01'].join('-')
 }
-// 获取当月末日
-// const getLastMonthDay = (time: Dayjs) => {
-//   const totalMonthDay = getTotalMonthDay(time)
-//   const timeArr = time.split('-')
-//   return [...timeArr.slice(0, 2), totalMonthDay].join('-')
-// }
 // 获取上个月总天数
 const getPreviousMonthTotalDay = (time: Dayjs) => {
   const timeArr = time.split('-')
@@ -76,8 +70,8 @@ const dateShow = (row: number, column: number) => {
   let day: number
   // 获取当月首日星期
   const firstWeekDay = getWeekday(getFirstMonthDay(value.value))
-  // 获取当月末日星期
-  // const lastWeekDay = getWeekday(getLastMonthDay(value.value))
+  // 获取当月总天数
+  const monthTotalDay = getTotalMonthDay(value.value)
   // 确定第一天的位置
   if (firstWeekDay === 1) {
     // 第一天是星期一的情况
@@ -92,6 +86,11 @@ const dateShow = (row: number, column: number) => {
     } else {
       day = (row - 1) * 7 + column - firstWeekDay + 1
     }
+  }
+
+  if (day > monthTotalDay && row > 1) {
+    // 这个是关键用计算后的day减去本月的总天数就能算出多余多少天
+    day -= monthTotalDay
   }
   return day
 }
