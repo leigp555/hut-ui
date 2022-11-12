@@ -8,23 +8,23 @@ const props = withDefaults(
     autoPlay?: boolean
     duration?: number
     init?: number
-    dot?: boolean
+    quickJump?: boolean
     direction?: 'forward' | 'back'
     indicator?: boolean
   }>(),
   {
-    autoPlay: true,
+    autoPlay: false,
     duration: 3000,
     init: 0,
-    dot: true,
+    quickJump: false,
     direction: 'forward',
-    indicator: true
+    indicator: false
   }
 )
 
 const slots = useSlots().default()
 
-const { init, direction, duration, autoPlay } = toRefs(props)
+const { init, direction, duration, autoPlay, quickJump } = toRefs(props)
 
 const olRef = ref<HTMLOListElement | null>(null)
 const contentRef = ref<HTMLDivElement | null>(null)
@@ -107,10 +107,10 @@ const onForward = () => {
           />
         </li>
       </ol>
-      <div class="carousel-left-icon" @click="onBack">
+      <div class="carousel-left-icon" @click="onBack" v-if="quickJump">
         <SvgIcon name="left2" width="2em" height="2em" fill="rgba(255,255,255,0.3)" />
       </div>
-      <div class="carousel-right-icon" @click="onForward">
+      <div class="carousel-right-icon" @click="onForward" v-if="quickJump">
         <SvgIcon name="left2" width="2em" height="2em" fill="rgba(255,255,255,0.3)" />
       </div>
     </div>
@@ -164,6 +164,7 @@ const onForward = () => {
     }
     > .carousel-left-icon {
       position: absolute;
+      cursor: pointer;
       top: 50%;
       left: 10px;
       transform: translateY(-50%);
@@ -171,6 +172,7 @@ const onForward = () => {
     }
     > .carousel-right-icon {
       position: absolute;
+      cursor: pointer;
       top: 50%;
       right: 10px;
       transform: translateY(-50%);

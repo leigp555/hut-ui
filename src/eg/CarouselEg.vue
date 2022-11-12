@@ -5,7 +5,7 @@
       :autoPlay="true"
       :duration="3000"
       v-model:init="init"
-      :dot="true"
+      :quickJump="true"
       direction="forward"
       :indicator="true"
     >
@@ -29,6 +29,9 @@ const onChange = (current: number) => {
 
 <style lang="scss">
 .ui-template-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
   .item {
     text-align: center;
     height: 160px;
