@@ -1,11 +1,23 @@
 <template>
   <div class="ui-template-wrap">
-    <Upload @change="onChange($event)" />
+    <Upload @change="onChange($event)" :style="{ height: '220px' }">
+      <p :style="{ marginBottom: '10px' }">
+        <SvgIcon name="img_push" width="2.5em" height="2.5em" />
+      </p>
+      <p :style="{ marginBottom: '4px', fontSize: '16px' }">
+        Click or drag file to this area to upload
+      </p>
+      <p :style="{ marginBottom: '4px', fontSize: '14px' }">
+        Support for a single or bulk upload. Strictly prohibit from uploading company
+        data or other band files
+      </p>
+    </Upload>
   </div>
 </template>
 
 <script setup lang="ts">
 import Upload from '@/lib/upload/Upload.vue'
+import SvgIcon from '@/lib/common/SvgIcon.vue'
 
 const onChange = ({ blobs, urlPromises }) => {
   console.log(blobs)
@@ -15,5 +27,6 @@ const onChange = ({ blobs, urlPromises }) => {
 
 <style lang="scss">
 .ui-template-wrap {
+  margin: 100px;
 }
 </style>

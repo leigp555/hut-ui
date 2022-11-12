@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { withDefaults, defineProps, ref } from 'vue'
-import SvgIcon from '../common/SvgIcon.vue'
 
 const fileToUrl = (file: Blob): Promise<string> => {
   return new Promise((resolve, reject) => {
@@ -44,10 +43,7 @@ const onDrop = (e: Event) => {
 <template>
   <div class="ui-upload-wrap">
     <section class="ui-upload-tip">
-      <div class="ui-upload-icon">
-        <SvgIcon name="img_push" width="2.5em" height="2.5em" />
-      </div>
-      <span class="ui-upload-description">点击或拖拽上传图片</span>
+      <slot />
     </section>
     <input
       class="ui-upload-input"
@@ -65,30 +61,31 @@ $font_color: #000000d9;
 $border_color: #d9d9d9;
 .ui-upload-wrap {
   border: 1px dashed $border_color;
-  min-height: 100px;
-  height: 100%;
   position: relative;
-  width: 100%;
   display: flex;
+  min-height: 150px;
   flex-direction: column;
   background-color: #fafafa;
   > .ui-upload-input {
     display: block;
     flex-grow: 10;
-    width: 100%;
     opacity: 0;
   }
   > .ui-upload-tip {
     color: $font_color;
     position: absolute;
+
     top: 50%;
     left: 50%;
+    width: 100%;
     transform: translate(-50%, -50%);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 10px;
+    padding: 16px 10px;
+    text-align: center;
   }
 }
 </style>
