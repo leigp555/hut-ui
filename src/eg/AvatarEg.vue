@@ -5,14 +5,19 @@
         <SvgIcon name="user" width="2em" height="2em" />
       </template>
     </Avatar>
-    <Avatar :size="64">
+    <Avatar :size="48">
       <template #icon>
         <SvgIcon name="user" width="2em" height="2em" />
       </template>
     </Avatar>
-    <Avatar :size="64" shape="square">
+    <Avatar :size="48" shape="square">
       <template #icon>
         <SvgIcon name="user" width="2em" height="2em" />
+      </template>
+    </Avatar>
+    <Avatar :size="56" shape="square" :style="{ background: '#1890ff' }">
+      <template #icon>
+        <SvgIcon name="user" width="2em" height="2em" fill="#fff" />
       </template>
     </Avatar>
     <Avatar :size="64" shape="square" src="https://joeschmoe.io/api/v1/random">
