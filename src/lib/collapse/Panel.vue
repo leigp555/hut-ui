@@ -25,15 +25,11 @@ const headerClick = (e: Event) => {
     e.preventDefault()
     return
   }
-  if (currentKey?.value[0] !== keyValue.value) {
-    emits('change', [keyValue.value])
-  } else {
-    emits('change', [])
-  }
+  emits('change', keyValue.value)
 }
 onMounted(() => {
   watchEffect(() => {
-    if (currentKey?.value[0] === keyValue.value) {
+    if (currentKey?.value?.indexOf(keyValue.value) >= 0) {
       divRef2.value.style.height = `${divRef.value.getBoundingClientRect().height}px`
     } else {
       divRef2.value.style.height = `${0}px`
@@ -45,15 +41,15 @@ onMounted(() => {
 <template>
   <div class="ui-panel-wrap">
     <div class="ui-panel-header" @click="headerClick" :class="{ disabled }">
-      <span :class="{ 'icon-down': currentKey[0] === keyValue }">
-        <SvgIcon name="down" width="1em" height="1em" />
+      <span :class="{ 'icon-down': currentKey.indexOf(keyValue) >= 0 }">
+        <SvgIcon name="down" width="0.8em" height="0.8em" />
       </span>
       <p>{{ header }}</p>
     </div>
     <div
       class="ui-panel-content"
       ref="divRef2"
-      :class="{ 'content-open': currentKey[0] === keyValue }"
+      :class="{ 'content-open': currentKey.indexOf(keyValue) >= 0 }"
     >
       <div class="panel-content" ref="divRef">
         <slot />

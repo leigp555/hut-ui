@@ -16,12 +16,28 @@ import { withDefaults, defineProps, useSlots } from 'vue'
 const slots = useSlots().default()
 
 const emits = defineEmits(['update:activeKey'])
-withDefaults(defineProps<{ activeKey?: string[]; accordion?: boolean }>(), {
-  activeKey: () => [],
-  accordion: false
-})
-const onChange = (newKey: string[]) => {
-  emits('update:activeKey', newKey)
+const props = withDefaults(
+  defineProps<{ activeKey?: string[]; accordion?: boolean }>(),
+  {
+    activeKey: () => [],
+    accordion: false
+  }
+)
+const onChange = (newKey: string) => {
+  if (props.accordion) {
+    if (props.activeKey.indexOf(newKey) >= 0) {
+      emits('update:activeKey', [])
+    } else {
+      emits('update:activeKey', [newKey])
+    }
+  } else if (props.activeKey.indexOf(newKey) >= 0) {
+    const index = props.activeKey.indexOf(newKey)
+    const newArr = [...props.activeKey]
+    newArr.splice(index, 1)
+    emits('update:activeKey', newArr)
+  } else {
+    emits('update:activeKey', [...props.activeKey, newKey])
+  }
 }
 </script>
 
