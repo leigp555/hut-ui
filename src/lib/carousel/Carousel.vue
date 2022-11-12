@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { withDefaults, defineProps, useSlots, toRefs, onMounted, ref } from 'vue'
+import SvgIcon from '../common/SvgIcon.vue'
 
 const emits = defineEmits(['change', 'update:init'])
 const props = withDefaults(
@@ -34,14 +35,18 @@ onMounted(() => {
       if (direction.value === 'forward') {
         if (init.value + 1 > slots.length) {
           emits('update:init', 1)
+          emits('change', 1)
         } else {
           emits('update:init', init.value + 1)
+          emits('change', init.value + 1)
         }
       } else if (direction.value === 'back') {
         if (init.value - 1 <= 0) {
           emits('update:init', slots.length)
+          emits('change', slots.length)
         } else {
           emits('update:init', init.value - 1)
+          emits('change', init.value - 1)
         }
       }
     }, duration.value)
@@ -55,6 +60,25 @@ const indicatorClick = (e: Event) => {
   if (el.tagName.toLowerCase() === 'button' && spec === 'indicator') {
     const order = parseInt(el.getAttribute('data-order'), 10)
     emits('update:init', order)
+    emits('change', order)
+  }
+}
+const onBack = () => {
+  if (init.value - 1 <= 0) {
+    emits('update:init', slots.length)
+    emits('change', slots.length)
+  } else {
+    emits('update:init', init.value - 1)
+    emits('change', init.value - 1)
+  }
+}
+const onForward = () => {
+  if (init.value + 1 > slots.length) {
+    emits('update:init', 1)
+    emits('change', 1)
+  } else {
+    emits('update:init', init.value + 1)
+    emits('change', init.value + 1)
   }
 }
 </script>
@@ -62,7 +86,7 @@ const indicatorClick = (e: Event) => {
 <template>
   <div class="ui-carousel-wrap">
     <div class="ui-carousel-content" ref="contentRef">
-      <ol ref="olRef">
+      <ol ref="olRef" class="carousel-content">
         <TransitionGroup name="list">
           <li
             v-for="(item, index) in slots"
@@ -83,6 +107,12 @@ const indicatorClick = (e: Event) => {
           />
         </li>
       </ol>
+      <div class="carousel-left-icon" @click="onBack">
+        <SvgIcon name="left2" width="2em" height="2em" fill="rgba(255,255,255,0.3)" />
+      </div>
+      <div class="carousel-right-icon" @click="onForward">
+        <SvgIcon name="left2" width="2em" height="2em" fill="rgba(255,255,255,0.3)" />
+      </div>
     </div>
   </div>
 </template>
@@ -95,7 +125,7 @@ const indicatorClick = (e: Event) => {
     width: 100%;
     position: relative;
     overflow: hidden;
-    ol {
+    > .carousel-content {
       list-style: none;
       width: 100%;
       > .ui-carousel-item {
@@ -131,6 +161,20 @@ const indicatorClick = (e: Event) => {
           opacity: 1;
         }
       }
+    }
+    > .carousel-left-icon {
+      position: absolute;
+      top: 50%;
+      left: 10px;
+      transform: translateY(-50%);
+      z-index: 10;
+    }
+    > .carousel-right-icon {
+      position: absolute;
+      top: 50%;
+      right: 10px;
+      transform: translateY(-50%);
+      z-index: 10;
     }
   }
 }
