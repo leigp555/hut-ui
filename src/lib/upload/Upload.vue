@@ -70,6 +70,7 @@ $border_color: #d9d9d9;
     display: block;
     flex-grow: 10;
     opacity: 0;
+    cursor: pointer;
   }
   > .ui-upload-tip {
     color: $font_color;
