@@ -51,6 +51,7 @@ onMounted(() => {
     height: 0;
     opacity: 0;
     visibility: hidden;
+    transition: opacity 250ms;
     &.avatar-img-show {
       opacity: 1;
       visibility: visible;
