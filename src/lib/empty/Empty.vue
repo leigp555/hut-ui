@@ -31,6 +31,7 @@ $font_color: #000000d9;
   gap: 30px;
   padding: 30px 20px 50px;
   border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 2px;
   > .ui-empty-icon {
     display: flex;
     align-items: center;
