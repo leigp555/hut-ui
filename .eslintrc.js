@@ -21,6 +21,7 @@ module.exports = {
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     "vue/no-v-model-argument": "off",
     'prefer-destructuring':'off',
+    'camelcase':'off',
     "import/first":'off',
     "no-param-reassign":"off",
     'import/no-unresolved': 'off',
