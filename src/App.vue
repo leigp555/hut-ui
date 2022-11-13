@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import DescriptionsEg from '@/eg/DescriptionsEg.vue'
+import DescriptionsEg from '@/eg/EmptyEg.vue'
 </script>
 
 <style>
