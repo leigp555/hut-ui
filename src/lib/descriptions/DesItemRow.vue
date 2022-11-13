@@ -15,7 +15,7 @@ withDefaults(defineProps<{}>(), {})
   display: table-row;
   padding: 42px 24px 50px;
   &:not(:last-child) {
-    border-bottom: 1px solid #c6c6c6;
+    border-bottom: 1px solid #f0f0f0;
   }
 }
 </style>
