@@ -1,11 +1,11 @@
 <template>
   <div class="test">
-    <DescriptionsEg />
+    <Example />
   </div>
 </template>
 
 <script setup lang="ts">
-import DescriptionsEg from '@/eg/EmptyEg.vue'
+import Example from '@/eg/ImageEg.vue'
 </script>
 
 <style>
