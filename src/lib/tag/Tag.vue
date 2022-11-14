@@ -4,7 +4,7 @@
     :style="{ backgroundColor: bacColor, border: `1px solid ${color}` }"
     :class="{ tagHide }"
   >
-    <span class="ui-tag-icon">
+    <span class="ui-tag-icon" v-if="$slots.icon">
       <slot name="icon" />
     </span>
     <span class="ui-tag-content" :style="{ color }" ref="contentRef">
