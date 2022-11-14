@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import Example from '@/eg/TagEg.vue'
+import Example from '@/eg/TimelineEg.vue'
 </script>
 
 <style>
