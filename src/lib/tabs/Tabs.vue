@@ -67,7 +67,7 @@ onMounted(() => {
         data-title="tabs"
         :data-key="item.key"
       >
-        {{ item.title }}{{ item.disabled }}
+        {{ item.title }}
       </div>
       <span class="indicator" ref="indicatorRef"></span>
     </div>
