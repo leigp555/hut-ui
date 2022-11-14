@@ -1,16 +1,75 @@
+<script setup lang="ts">
+import {
+  withDefaults,
+  defineProps,
+  useSlots,
+  computed,
+  ref,
+  onMounted,
+  watchEffect
+} from 'vue'
+
+const emits = defineEmits(['update:activeKey'])
+const props = withDefaults(defineProps<{ activeKey?: string }>(), {
+  activeKey: '1'
+})
+const slots = useSlots().default()
+const titleRef = ref<HTMLElement | null>(null)
+const indicatorRef = ref<HTMLElement | null>(null)
+
+const titleArr = computed(() => {
+  const arr: { title: string; key: string; disabled: boolean }[] = []
+  slots.forEach((item) => {
+    arr.push({
+      title: item.props.tab,
+      key: item.props.keyValue,
+      disabled: item.props.disabled !== undefined
+    })
+  })
+  return arr
+})
+
+const onChange = (e: Event) => {
+  const el = e.target as HTMLElement
+  const spec = el.getAttribute('data-title')
+  if (el.tagName.toLowerCase() === 'div' && spec === 'tabs') {
+    const newKey = el.getAttribute('data-key')
+    emits('update:activeKey', newKey)
+  }
+}
+
+onMounted(() => {
+  watchEffect(() => {
+    const { left: left1 } = titleRef.value!.getBoundingClientRect()
+    Array.from(titleRef.value!.children).forEach((item) => {
+      const key = item.getAttribute('data-key')
+      if (item.tagName.toLowerCase() === 'div' && key && key === props.activeKey) {
+        const { width: width2, left: left2 } = item!.getBoundingClientRect()
+        indicatorRef.value!.style.width = `${width2}px`
+        indicatorRef.value!.style.left = `${left2 - left1}px`
+        item.classList.add('select')
+      } else {
+        item.classList.remove('select')
+      }
+    })
+  })
+})
+</script>
+
 <template>
   <div class="ui-tabs-wrap">
-    <div class="ui-tabs-titles" @click="onChange">
+    <div class="ui-tabs-titles" @click="onChange" ref="titleRef">
       <div
         class="title-item"
+        :class="{ disabled: item.disabled }"
         v-for="item in titleArr"
         :key="item"
         data-title="tabs"
         :data-key="item.key"
       >
-        {{ item.title }}
+        {{ item.title }}{{ item.disabled }}
       </div>
-      <div class="indicator" ref="indicatorRef"></div>
+      <span class="indicator" ref="indicatorRef"></span>
     </div>
     <div class="ui-tabs-contents">
       <TransitionGroup name="tab">
@@ -27,34 +86,6 @@
   </div>
 </template>
 
-<script setup lang="ts">
-import { withDefaults, defineProps, useSlots, computed, ref } from 'vue'
-
-const emits = defineEmits(['update:activeKey'])
-withDefaults(defineProps<{ activeKey?: string }>(), {
-  activeKey: '1'
-})
-const slots = useSlots().default()
-const indicatorRef = ref<HTMLElement | null>(null)
-
-const titleArr = computed(() => {
-  const arr: { title: string; key: string }[] = []
-  slots.forEach((item) => {
-    arr.push({ title: item.props.tab, key: item.props.keyValue })
-  })
-  return arr
-})
-
-const onChange = (e: Event) => {
-  const el = e.target as HTMLElement
-  const spec = el.getAttribute('data-title')
-  if (el.tagName.toLowerCase() === 'div' && spec === 'tabs') {
-    const newKey = el.getAttribute('data-key')
-    emits('update:activeKey', newKey)
-  }
-}
-</script>
-
 <style lang="scss">
 .ui-tabs-wrap {
   display: flex;
@@ -66,14 +97,14 @@ const onChange = (e: Event) => {
   > .ui-tabs-titles {
     position: relative;
     display: flex;
-    transition: transform 0.3s;
     white-space: nowrap;
     > .indicator {
+      display: inline-block;
       position: absolute;
-      width: 32px;
       bottom: 0;
       height: 2px;
       background-color: #1890ff;
+      transition: all 0.3s;
     }
     > .title-item {
       display: inline-flex;
@@ -83,6 +114,14 @@ const onChange = (e: Event) => {
       background: transparent;
       cursor: pointer;
       user-select: none;
+      &.select {
+        color: #1890ff;
+      }
+      &.disabled {
+        pointer-events: none;
+        color: #00000040;
+        cursor: default;
+      }
       &:not(:first-child) {
         margin-left: 32px;
       }
