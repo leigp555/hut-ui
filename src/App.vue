@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import Example from '@/eg/PopoverEg.vue'
+import Example from '@/eg/StatisticEg.vue'
 </script>
 
 <style>
