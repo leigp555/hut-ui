@@ -10,7 +10,7 @@
     <span class="ui-tag-content" :style="{ color }" ref="contentRef">
       <slot />
     </span>
-    <span class="ui-tag-close" @click="onClick">
+    <span class="ui-tag-close" @click="onClick" v-if="closable">
       <SvgIcon name="cha" width="1em" height="1em" :fill="color" />
     </span>
   </div>
