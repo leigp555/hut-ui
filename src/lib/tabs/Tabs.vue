@@ -10,8 +10,9 @@ import {
 } from 'vue'
 
 const emits = defineEmits(['update:activeKey'])
-const props = withDefaults(defineProps<{ activeKey?: string }>(), {
-  activeKey: '1'
+const props = withDefaults(defineProps<{ activeKey?: string; centered: boolean }>(), {
+  activeKey: '1',
+  centered: false
 })
 const slots = useSlots().default()
 const titleRef = ref<HTMLElement | null>(null)
@@ -58,7 +59,7 @@ onMounted(() => {
 
 <template>
   <div class="ui-tabs-wrap">
-    <div class="ui-tabs-titles" @click="onChange" ref="titleRef">
+    <div class="ui-tabs-titles" @click="onChange" ref="titleRef" :class="{ centered }">
       <div
         class="title-item"
         :class="{ disabled: item.disabled }"
@@ -98,6 +99,9 @@ onMounted(() => {
     position: relative;
     display: flex;
     white-space: nowrap;
+    &.centered {
+      justify-content: center;
+    }
     > .indicator {
       display: inline-block;
       position: absolute;
