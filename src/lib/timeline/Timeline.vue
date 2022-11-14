@@ -18,6 +18,8 @@ withDefaults(defineProps<{ mode?: 'left' | 'right' | 'alternate' }>(), { mode: '
   justify-content: start;
   overflow: hidden;
   padding: 10px 20px;
+  color: #000000d9;
+  font-size: 14px;
   &.timeLine-wrap-alternate {
     justify-content: center;
   }
