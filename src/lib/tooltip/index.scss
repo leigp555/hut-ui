@@ -1,0 +1,179 @@
+.ui-tooltip-wrap{
+  position: relative;
+  display: inline-block;
+  .ui-tooltip-tip {
+    position: absolute;
+    min-width: 30px;
+    min-height: 32px;
+    padding: 6px 8px;
+    color: #000000d9;
+    text-align: left;
+    text-decoration: none;
+    word-wrap: break-word;
+    background-color: #ffffff;
+    border-radius: 2px;
+    box-shadow: 0 3px 6px -4px #0000001f, 0 6px 16px #00000014, 0 9px 28px 8px #0000000d;
+    white-space: nowrap;
+    z-index: 20;
+    border-color: transparent;
+    &:after {
+      content: '';
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background-color: inherit;
+      z-index:-1;
+    }
+  }
+  //
+  > .ui-tooltip-tip.topLeft {
+    top: 0;
+    left: 0;
+    transform: translateY(calc(-100% - 15px));
+    &:after {
+      bottom: 0;
+      left: 25%;
+      transform: translate(-25%, 50%) rotate(45deg);
+      border-right: 1px solid rgba(0, 0, 0, 0.1);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    }
+  }
+  > .ui-tooltip-tip.topCenter {
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, calc(-100% - 15px));
+    &:after {
+      bottom: 0;
+      left: 50%;
+      transform: translate(-50%, 50%) rotate(45deg);
+      border-right: 1px solid rgba(0, 0, 0, 0.1);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    }
+  }
+  > .ui-tooltip-tip.topRight {
+    top: 0;
+    right: 0;
+    transform: translateY(calc(-100% - 15px));
+    &:after {
+      bottom: 0;
+      left: 75%;
+      transform: translate(-75%, 50%) rotate(45deg);
+      border-right: 1px solid rgba(0, 0, 0, 0.1);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  //
+  > .ui-tooltip-tip.bottomLeft {
+    bottom: 0;
+    left: 0;
+    transform: translateY(calc(100% + 15px));
+    &:after {
+      top: 0;
+      left: 25%;
+      transform: translate(-25%, -50%) rotate(45deg);
+      border-left: 1px solid rgba(0, 0, 0, 0.1);
+      border-top: 1px solid rgba(0, 0, 0, 0.1);
+    }
+  }
+  > .ui-tooltip-tip.bottomCenter {
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%,calc(100% + 15px));
+    &:after {
+      top: 0;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(45deg);
+      border-left: 1px solid rgba(0, 0, 0, 0.1);
+      border-top: 1px solid rgba(0, 0, 0, 0.1);
+    }
+  }
+  > .ui-tooltip-tip.bottomRight {
+    bottom: 0;
+    right: 0;
+    transform: translateY(calc(100% + 15px));
+    &:after {
+      top: 0;
+      left: 75%;
+      transform: translate(-50%, -50%) rotate(45deg);
+      border-left: 1px solid rgba(0, 0, 0, 0.1);
+      border-top: 1px solid rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  //
+  > .ui-tooltip-tip.leftTop{
+    bottom: 0;
+    left: 0;
+    transform: translateX(calc(-100% - 15px));
+    &:after {
+      top: 50%;
+      right: 0;
+      transform: translate(50%, -50%) rotate(45deg);
+      border-right: 1px solid rgba(0, 0, 0, 0.1);
+      border-top: 1px solid rgba(0, 0, 0, 0.1);
+    }
+  }
+  > .ui-tooltip-tip.leftCenter {
+    top: 50%;
+    left: 0;
+    transform: translate(calc(-100% - 15px),-50%);
+    &:after {
+      top: 50%;
+      right: 0;
+      transform: translate(50%, -50%) rotate(45deg);
+      border-right: 1px solid rgba(0, 0, 0, 0.1);
+      border-top: 1px solid rgba(0, 0, 0, 0.1);
+    }
+  }
+  > .ui-tooltip-tip.leftBottom {
+    top: 0;
+    left: 0;
+    transform: translateX(calc(-100% - 15px));
+    &:after {
+      top: 50%;
+      right: 0;
+      transform: translate(50%, -50%) rotate(45deg);
+      border-right: 1px solid rgba(0, 0, 0, 0.1);
+      border-top: 1px solid rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  //
+  > .ui-tooltip-tip.rightTop{
+    bottom: 0;
+    right: 0;
+    transform: translateX(calc(100% + 15px));
+    &:after {
+      top: 50%;
+      left: 0;
+      transform: translate(-50%, -50%) rotate(45deg);
+      border-left: 1px solid rgba(0, 0, 0, 0.1);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    }
+  }
+  > .ui-tooltip-tip.rightCenter {
+    top: 50%;
+    right: 0;
+    transform: translate(calc(100% + 15px),-50%);
+    &:after {
+      top: 50%;
+      left: 0;
+      transform: translate(-50%, -50%) rotate(45deg);
+      border-left: 1px solid rgba(0, 0, 0, 0.1);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    }
+  }
+  > .ui-tooltip-tip.rightBottom {
+    top: 0;
+    right: 0;
+    transform: translateX(calc(100% + 15px));
+    &:after {
+      top: 50%;
+      left: 0;
+      transform: translate(-50%, -50%) rotate(45deg);
+      border-left: 1px solid rgba(0, 0, 0, 0.1);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    }
+  }
+}
