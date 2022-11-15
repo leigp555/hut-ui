@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import Example from '@/eg/TooltipEg.vue'
+import Example from '@/eg/TreeEg.vue'
 </script>
 
 <style>
