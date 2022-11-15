@@ -1,12 +1,16 @@
 <template>
   <div class="ui-template-wrap">
-    <Tree :options="treeData" />
+    <Tree :options="treeData" @select="onSelect" />
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue'
 import Tree, { TreeOptions } from '@/lib/tree/Tree.vue'
+
+const onSelect = (position: string) => {
+  console.log(position)
+}
 
 const treeData = ref<TreeOptions[]>([
   {
