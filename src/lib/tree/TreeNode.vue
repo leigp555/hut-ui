@@ -39,7 +39,12 @@ const isSelect = (value: string): boolean => {
 // 复选框模式下的逻辑
 const checked = (check: boolean, item: TreeOptions) => {
   item.checked = check
-  const newArr: string[] = [...selectArr!.value]
+  let newArr: string[]
+  try {
+    newArr = [...selectArr!.value]
+  } catch (err: Error) {
+    newArr = []
+  }
   if (check) {
     // 将所有的儿子选中
     newArr.push(item.value)
