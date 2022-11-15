@@ -65,7 +65,7 @@ const isSelect = (value: string): boolean => {
       <div
         class="ui-tree-repeat"
         :class="{ open: item.show }"
-        v-show="item.show"
+        v-show="item.show && item.children"
         :style="{ paddingLeft: '21px' }"
       >
         <TreeNode :options="item.children" />
