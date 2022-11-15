@@ -59,28 +59,26 @@ const checked = (check: boolean, item: TreeOptions) => {
     loop(item)
     const str = newArr.join('/')
     selectArrFn(str)
-    // 找到他的父亲判断父亲的儿子是否都选中了，如果都选中了自己页应当checked
-    const yy = item.parent?.split('/')
-    const fatherNode = yy[yy.length - 2] || yy[yy.length - 1]
-    const loopAll = (xx: TreeOptions[]) => {
-      for (let j = 0; j < xx.length; j++) {
-        if (!xx[j].children) return
-        if (xx[j].value === fatherNode) {
-          let mid = false
-          for (let i = 0; i < xx[j].children.length; i++) {
-            if (xx[j].children[i].checked && xx[j].children[i].checked !== false) {
-              mid = true
-            } else {
-              mid = false
-            }
-          }
-          xx[j].checked = mid
-          return
-        }
-        loopAll(xx[j].children)
-      }
-    }
-    loopAll(originSource?.value)
+    // // 找到他的父亲判断父亲的儿子是否都选中了，如果都选中了自己页应当checked
+    // const yy = item.parent?.split('/')
+    // const fatherNode = yy[yy.length - 2] || yy[yy.length - 1]
+    // const loopAll = (xx: TreeOptions[]) => {
+    //   for (let j = 0; j < xx.length; j++) {
+    //     if (!xx[j].children) return
+    //     if (xx[j].value === fatherNode) {
+    //       let mid = true
+    //       for (let i = 0; i < xx[j].children.length; i++) {
+    //         if (xx[j].children[i].checked === false) {
+    //           mid = false
+    //         }
+    //       }
+    //       xx[j].checked = mid
+    //       return
+    //     }
+    //     loopAll(xx[j].children)
+    //   }
+    // }
+    // loopAll(originSource?.value)
   } else {
     // 将所有的儿子删除
     newArr.splice(newArr.indexOf(item.value), 1)
@@ -97,6 +95,26 @@ const checked = (check: boolean, item: TreeOptions) => {
     const str = newArr.join('/')
     selectArrFn(str)
   }
+  // 找到他的父亲判断父亲的儿子是否都选中了，如果都选中了自己页应当checked
+  const yy = item.parent?.split('/')
+  const fatherNode = yy[yy.length - 2] || yy[yy.length - 1]
+  const loopAll = (xx: TreeOptions[]) => {
+    for (let j = 0; j < xx.length; j++) {
+      if (!xx[j].children) return
+      if (xx[j].value === fatherNode) {
+        let mid = true
+        for (let i = 0; i < xx[j].children.length; i++) {
+          if (xx[j].children[i].checked === false) {
+            mid = false
+          }
+        }
+        xx[j].checked = mid
+        return
+      }
+      loopAll(xx[j].children)
+    }
+  }
+  loopAll(originSource?.value)
 }
 </script>
 
