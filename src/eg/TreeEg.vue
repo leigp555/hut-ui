@@ -23,9 +23,9 @@ const treeData = ref<TreeOptions[]>([
         value: '0-0-0',
         show: false,
         children: [
-          { title: '0-0-0-0', value: '0-0-0-0' },
-          { title: '0-0-0-1', value: '0-0-0-1' },
-          { title: '0-0-0-2', value: '0-0-0-2' }
+          { title: '0-0-0-0', value: '0-0-0-0', color: 'red' },
+          { title: '0-0-0-1', value: '0-0-0-1', color: 'red' },
+          { title: '0-0-0-2', value: '0-0-0-2', color: 'red' }
         ]
       },
       {
@@ -50,9 +50,19 @@ const treeData = ref<TreeOptions[]>([
         value: '1-0-0',
         show: false,
         children: [
-          { title: '1-0-0-0', value: '1-0-0-0' },
-          { title: '1-0-0-1', value: '1-0-0-1' },
-          { title: '1-0-0-2', value: '1-0-0-2' }
+          {
+            title: '1-0-0-0',
+            value: '1-0-0-0',
+            href: 'javascript:;',
+            color: '#1890ff'
+          },
+          {
+            title: '1-0-0-1',
+            value: '1-0-0-1',
+            href: 'javascript:;',
+            color: '#1890ff'
+          },
+          { title: '1-0-0-2', value: '1-0-0-2', href: 'javascript:;', color: '#1890ff' }
         ]
       },
       {

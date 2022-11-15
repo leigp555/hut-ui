@@ -1,27 +1,23 @@
 <script setup lang="ts">
-import { withDefaults, defineProps, toRefs, computed } from 'vue'
-
-import SvgIcon from '@/lib/common/SvgIcon.vue'
+import { withDefaults, defineProps, toRefs, computed, provide } from 'vue'
+import TreeNode from './TreeNode.vue'
 
 export interface TreeOptions {
   title: string
   value: string
   show?: boolean
+  color?: string
+  href?: boolean
   children?: TreeOptions[]
   parent?: string
 }
 
 const emits = defineEmits(['select'])
+
 const props = withDefaults(defineProps<{ options: TreeOptions[] }>(), {
   options: () => []
 })
 const { options } = toRefs(props)
-
-const onSelect = (item: TreeOptions) => {
-  item.show = !item.show
-  emits('select', item.parent)
-}
-
 // 改造options像option数据结构中添加parent属性
 const addParentAttr = (list: TreeOptions[]) => {
   for (let i = 0; i < list.length; i++) {
@@ -48,33 +44,17 @@ const addParentAttr = (list: TreeOptions[]) => {
 const newOptions = computed(() => {
   return addParentAttr(options.value)
 })
+
+const getPosition = (position: string) => {
+  emits('select', position)
+}
+// eslint-disable-next-line no-unused-vars
+provide<(position: string) => void>('ui-tree-position', getPosition)
 </script>
 
 <template>
   <div class="ui-tree-wrap">
-    <section class="ui-tree-section" v-for="item in newOptions" :key="item.value">
-      <div class="tree-section" @click="onSelect(item)">
-        <span class="ui-tree-icon" :class="{ 'icon-rotate': item.show }">
-          <SvgIcon
-            v-if="item.children"
-            name="sanjiao"
-            width="10px"
-            height="10px"
-            fill="rgba(0,0,0,0.85)"
-          />
-        </span>
-        <span class="ui-tree-title">{{ item.title }}</span>
-      </div>
-
-      <div
-        class="ui-tree-repeat"
-        :class="{ open: item.show }"
-        v-show="item.show"
-        :style="{ paddingLeft: '21px' }"
-      >
-        <Tree :options="item.children" />
-      </div>
-    </section>
+    <TreeNode :options="newOptions" />
   </div>
 </template>
 
@@ -82,44 +62,6 @@ const newOptions = computed(() => {
 $font_color: rgba(0, 0, 0, 0.85);
 $main_color: #1890ff;
 $selected_color: #f5f5f5;
-
 .ui-tree-wrap {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  font-size: 14px;
-  line-height: 1.5em;
-  > .ui-tree-section {
-    > .tree-section {
-      cursor: pointer;
-      user-select: none;
-      display: inline-flex;
-      align-items: center;
-      margin-bottom: 2px;
-      > .ui-tree-title {
-        padding: 0 4px;
-      }
-      > .ui-tree-icon {
-        width: 24px;
-        height: 24px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        transform: rotate(-90deg);
-        transition: all 100ms;
-        &.icon-rotate {
-          transform: rotate(0deg);
-        }
-      }
-    }
-    > .ui-tree-repeat {
-      margin-bottom: 2px;
-      transition: all 50ms;
-      opacity: 0;
-      &.open {
-        opacity: 1;
-      }
-    }
-  }
 }
 </style>

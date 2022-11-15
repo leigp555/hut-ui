@@ -22,6 +22,7 @@ module.exports = {
     "vue/no-v-model-argument": "off",
     'prefer-destructuring':'off',
     'camelcase':'off',
+    'no-script-url':'off',
     "import/first":'off',
     "no-param-reassign":"off",
     'import/no-unresolved': 'off',
