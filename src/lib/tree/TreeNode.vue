@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { withDefaults, defineProps, toRefs, inject, Ref } from 'vue'
 
-import SvgIcon from '@/lib/common/SvgIcon.vue'
+import SvgIcon from '../common/SvgIcon.vue'
+import Checkbox from '../checkbox/Checkbox.vue'
 
 export interface TreeOptions {
   title: string
@@ -21,22 +22,69 @@ const position = inject<(pos: string) => void>('ui-tree-position')
 const selectArr = inject<Ref<string[]>>('ui-tree-select-arr')
 // eslint-disable-next-line no-unused-vars
 const selectArrFn = inject<(posStr: string) => void>('ui-tree-select-arrFn')
+const checkable = inject<Ref<boolean>>('ui-tree-select-checkable')
 
 const onSelect = (item: TreeOptions) => {
   item.show = !item.show
-  position(item.parent)
-  selectArrFn(item.parent)
+  if (!checkable?.value) {
+    position(item.parent)
+    selectArrFn(item.parent)
+  }
 }
 const isSelect = (value: string): boolean => {
   return selectArr?.value.indexOf(value) >= 0
+}
+
+const checked = (check: boolean, item: TreeOptions) => {
+  item.checked = check
+  const newArr: string[] = []
+  if (check) {
+    // 将所有的儿子选中
+    const loop = (xx: TreeOptions) => {
+      if (!xx.children) return
+      xx.children.forEach((x) => {
+        newArr.push(x.value)
+        x.checked = true
+        loop(x)
+      })
+    }
+    loop(item)
+    const str = newArr.join('/')
+    selectArrFn(`${item.parent}/${str}`)
+    // 找到他的父亲判断父亲的儿子是否都选中了，如果都选中了自己页应当checked
+    const yy = item.parent?.split('/')
+    console.log('xxx')
+    console.log(yy[yy.length - 2])
+  } else {
+    // 将所有的儿子删除
+    newArr.splice(newArr.indexOf(item.value), 1)
+    const loop = (xx: TreeOptions) => {
+      if (!xx.children) return
+      xx.children.forEach((x) => {
+        const index = newArr.indexOf(x.value)
+        newArr.splice(index, 1)
+        x.checked = false
+        loop(x)
+      })
+    }
+    loop(item)
+    const yy = item.parent?.split('/')
+    yy.splice(yy.length - 1, 1)
+    const str = yy.join('/')
+    selectArrFn(str)
+  }
 }
 </script>
 
 <template>
   <div class="ui-tree-wrap">
     <section class="ui-tree-section" v-for="item in options" :key="item.value">
-      <div class="tree-section" @click="onSelect(item)">
-        <span class="ui-tree-icon" :class="{ 'icon-rotate': item.show }">
+      <div class="tree-section">
+        <span
+          class="ui-tree-icon"
+          :class="{ 'icon-rotate': item.show }"
+          @click="onSelect(item)"
+        >
           <SvgIcon
             v-if="item.children"
             name="sanjiao"
@@ -45,9 +93,15 @@ const isSelect = (value: string): boolean => {
             fill="rgba(0,0,0,0.85)"
           />
         </span>
+        <Checkbox
+          v-if="checkable"
+          @update:checked="checked($event, item)"
+          :checked="item.checked"
+          >{{ item.title }}</Checkbox
+        >
         <a
           class="ui-tree-title"
-          v-if="item.href"
+          v-else-if="item.href"
           :href="item.href"
           :style="{ color: item.color }"
           :class="{ 'ui-value-selected': isSelect(item.value) }"

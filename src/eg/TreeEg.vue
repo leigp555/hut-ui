@@ -4,6 +4,7 @@
       :options="treeData"
       @select="onSelect"
       v-model:selectedValues="selectedValues"
+      checkable
     />
   </div>
 </template>

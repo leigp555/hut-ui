@@ -10,18 +10,24 @@ export interface TreeOptions {
   href?: boolean
   children?: TreeOptions[]
   parent?: string
+  checked?: boolean
 }
 
 const emits = defineEmits(['select', 'update:selectedValues'])
 
 const props = withDefaults(
-  defineProps<{ options: TreeOptions[]; selectedValues?: string[] }>(),
+  defineProps<{
+    options: TreeOptions[]
+    selectedValues?: string[]
+    checkable: boolean
+  }>(),
   {
     options: () => [],
-    selectedValues: () => []
+    selectedValues: () => [],
+    checkable: false
   }
 )
-const { options, selectedValues } = toRefs(props)
+const { options, selectedValues, checkable } = toRefs(props)
 // 改造options像option数据结构中添加parent属性
 const addParentAttr = (list: TreeOptions[]) => {
   for (let i = 0; i < list.length; i++) {
@@ -64,6 +70,9 @@ provide<(position: string) => void>('ui-tree-position', getPosition)
 provide<Ref<string[]>>('ui-tree-select-arr', selectedValues)
 // eslint-disable-next-line no-unused-vars
 provide<(position: string) => void>('ui-tree-select-arrFn', selectValueFn)
+
+// 提供给子组件是否要多选框
+provide<Ref<boolean>>('ui-tree-select-checkable', checkable)
 </script>
 
 <template>
