@@ -39,9 +39,10 @@ const isSelect = (value: string): boolean => {
 // 复选框模式下的逻辑
 const checked = (check: boolean, item: TreeOptions) => {
   item.checked = check
-  const newArr: string[] = []
+  const newArr: string[] = [...selectArr!.value]
   if (check) {
     // 将所有的儿子选中
+    newArr.push(item.value)
     const loop = (xx: TreeOptions) => {
       if (!xx.children) return
       xx.children.forEach((x) => {
@@ -52,7 +53,7 @@ const checked = (check: boolean, item: TreeOptions) => {
     }
     loop(item)
     const str = newArr.join('/')
-    selectArrFn(`${item.parent}/${str}`)
+    selectArrFn(str)
     // 找到他的父亲判断父亲的儿子是否都选中了，如果都选中了自己页应当checked
     const yy = item.parent?.split('/')
     const fatherNode = yy[yy.length - 2] || yy[yy.length - 1]
@@ -88,9 +89,7 @@ const checked = (check: boolean, item: TreeOptions) => {
       })
     }
     loop(item)
-    const yy = item.parent?.split('/')
-    yy.splice(yy.length - 1, 1)
-    const str = yy.join('/')
+    const str = newArr.join('/')
     selectArrFn(str)
   }
 }
