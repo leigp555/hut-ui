@@ -1,16 +1,25 @@
 <template>
   <div class="ui-template-wrap">
-    <Tree :options="treeData" @select="onSelect" />
+    <Tree
+      :options="treeData"
+      @select="onSelect"
+      v-model:selectedValues="selectedValues"
+    />
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import Tree, { TreeOptions } from '@/lib/tree/Tree.vue'
 
 const onSelect = (position: string) => {
   console.log(position)
 }
+const selectedValues = ref<string[]>([])
+watch(selectedValues, () => {
+  console.log('selectedValues')
+  console.log(selectedValues.value)
+})
 
 const treeData = ref<TreeOptions[]>([
   {

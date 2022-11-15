@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { withDefaults, defineProps, toRefs, inject } from 'vue'
+import { withDefaults, defineProps, toRefs, inject, Ref } from 'vue'
 
 import SvgIcon from '@/lib/common/SvgIcon.vue'
 
@@ -18,10 +18,17 @@ const { options } = toRefs(props)
 
 // eslint-disable-next-line no-unused-vars
 const position = inject<(pos: string) => void>('ui-tree-position')
+const selectArr = inject<Ref<string[]>>('ui-tree-select-arr')
+// eslint-disable-next-line no-unused-vars
+const selectArrFn = inject<(posStr: string) => void>('ui-tree-select-arrFn')
 
 const onSelect = (item: TreeOptions) => {
   item.show = !item.show
   position(item.parent)
+  selectArrFn(item.parent)
+}
+const isSelect = (value: string): boolean => {
+  return selectArr?.value.indexOf(value) >= 0
 }
 </script>
 
@@ -43,11 +50,16 @@ const onSelect = (item: TreeOptions) => {
           v-if="item.href"
           :href="item.href"
           :style="{ color: item.color }"
+          :class="{ 'ui-value-selected': isSelect(item.value) }"
           >{{ item.title }}</a
         >
-        <span class="ui-tree-title" v-else :style="{ color: item.color }">{{
-          item.title
-        }}</span>
+        <span
+          class="ui-tree-title"
+          v-else
+          :style="{ color: item.color }"
+          :class="{ 'ui-value-selected': isSelect(item.value) }"
+          >{{ item.title }}</span
+        >
       </div>
 
       <div
@@ -86,6 +98,9 @@ $selected_color: #f5f5f5;
         text-decoration: none;
         &:hover {
           background-color: $selected_color;
+        }
+        &.ui-value-selected {
+          background-color: #bae7ff;
         }
       }
       > .ui-tree-icon {

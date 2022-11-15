@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { withDefaults, defineProps, toRefs, computed, provide } from 'vue'
+import { withDefaults, defineProps, toRefs, computed, provide, Ref } from 'vue'
 import TreeNode from './TreeNode.vue'
 
 export interface TreeOptions {
@@ -12,12 +12,16 @@ export interface TreeOptions {
   parent?: string
 }
 
-const emits = defineEmits(['select'])
+const emits = defineEmits(['select', 'update:selectedValues'])
 
-const props = withDefaults(defineProps<{ options: TreeOptions[] }>(), {
-  options: () => []
-})
-const { options } = toRefs(props)
+const props = withDefaults(
+  defineProps<{ options: TreeOptions[]; selectedValues?: string[] }>(),
+  {
+    options: () => [],
+    selectedValues: () => []
+  }
+)
+const { options, selectedValues } = toRefs(props)
 // 改造options像option数据结构中添加parent属性
 const addParentAttr = (list: TreeOptions[]) => {
   for (let i = 0; i < list.length; i++) {
@@ -48,8 +52,18 @@ const newOptions = computed(() => {
 const getPosition = (position: string) => {
   emits('select', position)
 }
+const selectValueFn = (position: string) => {
+  const selectedArr = position.split('/')
+  emits('update:selectedValues', selectedArr)
+}
+// 提供给子组件修改层级用的函数
 // eslint-disable-next-line no-unused-vars
 provide<(position: string) => void>('ui-tree-position', getPosition)
+
+// 提供给子组件判断是否被选择的字符串数组,以及修改他的函数
+provide<Ref<string[]>>('ui-tree-select-arr', selectedValues)
+// eslint-disable-next-line no-unused-vars
+provide<(position: string) => void>('ui-tree-select-arrFn', selectValueFn)
 </script>
 
 <template>
