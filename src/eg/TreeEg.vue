@@ -5,9 +5,10 @@
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue'
 import Tree, { TreeOptions } from '@/lib/tree/Tree.vue'
 
-const treeData: TreeOptions[] = [
+const treeData = ref<TreeOptions[]>([
   {
     title: '0-0',
     value: '0-0',
@@ -88,7 +89,7 @@ const treeData: TreeOptions[] = [
       }
     ]
   }
-]
+])
 </script>
 
 <style lang="scss">

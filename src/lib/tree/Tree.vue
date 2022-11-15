@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { withDefaults, defineProps, ref, toRefs } from 'vue'
+import { withDefaults, defineProps, toRefs } from 'vue'
 
 import SvgIcon from '@/lib/common/SvgIcon.vue'
 
@@ -13,20 +13,16 @@ export interface TreeOptions {
 const props = withDefaults(defineProps<{ options: TreeOptions[] }>(), {
   options: () => []
 })
-const { options: xxx } = toRefs(props)
-
-const selectItem = ref<TreeOptions>({ value: 'xx', title: 'xx', show: false })
+const { options } = toRefs(props)
 
 const onSelect = (item: TreeOptions) => {
   item.show = !item.show
-  console.log(xxx.value)
-  selectItem.value = { ...item }
 }
 </script>
 
 <template>
   <div class="ui-tree-wrap">
-    <section class="ui-tree-section" v-for="item in xxx" :key="item.value">
+    <section class="ui-tree-section" v-for="item in options" :key="item.value">
       <div class="tree-section" @click="onSelect(item)">
         <span class="ui-tree-icon">
           <SvgIcon
@@ -40,9 +36,16 @@ const onSelect = (item: TreeOptions) => {
         </span>
         <span class="ui-tree-title">{{ item.title }}</span>
       </div>
-      <div class="ui-tree-repeat" v-show="item.show" :style="{ paddingLeft: '21px' }">
-        <Tree :options="item.children" v-if="item.children" />
-      </div>
+      <Transition name="tree">
+        <div
+          class="ui-tree-repeat"
+          :class="{ open: item.show }"
+          v-show="item.show"
+          :style="{ paddingLeft: '21px' }"
+        >
+          <Tree :options="item.children" />
+        </div>
+      </Transition>
     </section>
   </div>
 </template>
@@ -81,17 +84,22 @@ $selected_color: #f5f5f5;
     }
     > .ui-tree-repeat {
       margin-bottom: 2px;
+      transition: all 50ms;
+      opacity: 0;
+      &.open {
+        opacity: 1;
+      }
     }
   }
 }
 
-//.xx-enter-active,
-//.xx-leave-active {
-//  transition: all 250ms linear;
+//.tree-enter-active,
+//.tree-leave-active {
+//  transition: height 2s linear;
 //}
 //
-//.xx-enter-from,
-//.xx-leave-to {
-//  height: 0;
+//.tree-enter-from,
+//.tree-leave-to {
+//  opacity: 0;
 //}
 </style>
