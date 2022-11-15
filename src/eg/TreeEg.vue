@@ -11,10 +11,12 @@ const treeData: TreeOptions[] = [
   {
     title: '0-0',
     value: '0-0',
+    show: false,
     children: [
       {
         title: '0-0-0',
         value: '0-0-0',
+        show: false,
         children: [
           { title: '0-0-0-0', value: '0-0-0-0' },
           { title: '0-0-0-1', value: '0-0-0-1' },
@@ -24,6 +26,7 @@ const treeData: TreeOptions[] = [
       {
         title: '0-0-1',
         value: '0-0-1',
+        show: false,
         children: [
           { title: '0-0-1-0', value: '0-0-1-0' },
           { title: '0-0-1-1', value: '0-0-1-1' },
@@ -35,10 +38,12 @@ const treeData: TreeOptions[] = [
   {
     title: '1-0',
     value: '1-0',
+    show: false,
     children: [
       {
         title: '1-0-0',
         value: '1-0-0',
+        show: false,
         children: [
           { title: '1-0-0-0', value: '1-0-0-0' },
           { title: '1-0-0-1', value: '1-0-0-1' },
@@ -48,16 +53,19 @@ const treeData: TreeOptions[] = [
       {
         title: '1-0-1',
         value: '1-0-1',
+        show: false,
         children: [
           { title: '1-0-1-0', value: '1-0-1-0' },
           { title: '1-0-1-1', value: '1-0-1-1' },
           {
             title: '1-0-1-2',
             value: '1-0-1-2',
+            show: false,
             children: [
               {
                 title: '3-0-0',
                 value: '3-0-0',
+                show: false,
                 children: [
                   { title: '3-0-0-0', value: '3-0-0-0' },
                   { title: '3-0-0-1', value: '3-0-0-1' },
@@ -67,6 +75,7 @@ const treeData: TreeOptions[] = [
               {
                 title: '3-0-1',
                 value: '3-0-1',
+                show: false,
                 children: [
                   { title: '3-0-1-0', value: '3-0-1-0' },
                   { title: '3-0-1-1', value: '3-0-1-1' },
