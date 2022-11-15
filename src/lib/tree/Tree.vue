@@ -31,6 +31,7 @@ const { options, selectedValues, checkable } = toRefs(props)
 // 改造options像option数据结构中添加parent属性
 const addParentAttr = (list: TreeOptions[]) => {
   for (let i = 0; i < list.length; i++) {
+    list[i].checked = false
     if (!list[i].parent) {
       list[i].parent = list[i].value
     }
@@ -73,6 +74,9 @@ provide<(position: string) => void>('ui-tree-select-arrFn', selectValueFn)
 
 // 提供给子组件是否要多选框
 provide<Ref<boolean>>('ui-tree-select-checkable', checkable)
+
+// 提供给子组件源数据
+provide<Ref<TreeOptions[]>>('ui-tree-origin-source', newOptions)
 </script>
 
 <template>

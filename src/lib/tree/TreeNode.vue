@@ -23,6 +23,7 @@ const selectArr = inject<Ref<string[]>>('ui-tree-select-arr')
 // eslint-disable-next-line no-unused-vars
 const selectArrFn = inject<(posStr: string) => void>('ui-tree-select-arrFn')
 const checkable = inject<Ref<boolean>>('ui-tree-select-checkable')
+const originSource = inject<Ref<TreeOptions[]>>('ui-tree-origin-source')
 
 const onSelect = (item: TreeOptions) => {
   item.show = !item.show
@@ -35,6 +36,7 @@ const isSelect = (value: string): boolean => {
   return selectArr?.value.indexOf(value) >= 0
 }
 
+// 复选框模式下的逻辑
 const checked = (check: boolean, item: TreeOptions) => {
   item.checked = check
   const newArr: string[] = []
@@ -53,8 +55,26 @@ const checked = (check: boolean, item: TreeOptions) => {
     selectArrFn(`${item.parent}/${str}`)
     // 找到他的父亲判断父亲的儿子是否都选中了，如果都选中了自己页应当checked
     const yy = item.parent?.split('/')
-    console.log('xxx')
-    console.log(yy[yy.length - 2])
+    const fatherNode = yy[yy.length - 2] || yy[yy.length - 1]
+    const loopAll = (xx: TreeOptions[]) => {
+      for (let j = 0; j < xx.length; j++) {
+        if (!xx[j].children) return
+        if (xx[j].value === fatherNode) {
+          let mid = false
+          for (let i = 0; i < xx[j].children.length; i++) {
+            if (xx[j].children[i].checked && xx[j].children[i].checked !== false) {
+              mid = true
+            } else {
+              mid = false
+            }
+          }
+          xx[j].checked = mid
+          return
+        }
+        loopAll(xx[j].children)
+      }
+    }
+    loopAll(originSource?.value)
   } else {
     // 将所有的儿子删除
     newArr.splice(newArr.indexOf(item.value), 1)
