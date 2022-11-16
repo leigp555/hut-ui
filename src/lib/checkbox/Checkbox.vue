@@ -41,7 +41,8 @@ const onInput = () => {
   }
   > .ui-checkbox-title {
     font-size: 14px;
-    padding: 0 8px;
+    padding: 0 4px;
+    margin-left: 4px;
     white-space: nowrap;
     display: flex;
     align-items: center;
@@ -49,6 +50,9 @@ const onInput = () => {
     font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue,
       Arial, Noto Sans, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
       Segoe UI Symbol, 'Noto Color Emoji';
+    &:hover {
+      background-color: #f5f5f5;
+    }
   }
 }
 </style>

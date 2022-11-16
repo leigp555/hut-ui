@@ -57,7 +57,8 @@ const checked = (check: boolean, item: TreeOptions) => {
     const loop = (children: TreeOptions) => {
       if (!children.children) return
       children.children.forEach((child) => {
-        newSelectArr.push(child.value)
+        const index = newSelectArr.indexOf(child.value)
+        if (index < 0) newSelectArr.push(child.value)
         child.checked = true
         loop(child)
       })
