@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import Example from '@/eg/TreeEg.vue'
+import Example from '@/eg/AlertEg.vue'
 </script>
 
 <style>
