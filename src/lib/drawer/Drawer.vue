@@ -13,17 +13,25 @@ type PlacementType = 'top' | 'bottom' | 'left' | 'right'
 const emits = defineEmits(['update:visible', 'afterClose'])
 
 const props = withDefaults(
-  defineProps<{ visible?: boolean; placement?: PlacementType; classname?: string }>(),
+  defineProps<{
+    visible?: boolean
+    placement?: PlacementType
+    classname?: string
+    maskClosable?: boolean
+  }>(),
   {
     visible: false,
     placement: 'left',
-    classname: 'ui-custom'
+    classname: 'ui-custom',
+    maskClosable: true
   }
 )
-const { visible } = toRefs(props)
+const { visible, maskClosable } = toRefs(props)
 const onClose = () => {
-  emits('update:visible', false)
-  emits('afterClose')
+  if (maskClosable.value) {
+    emits('update:visible', false)
+    emits('afterClose')
+  }
 }
 
 const wrapShow = ref<boolean>(false)
