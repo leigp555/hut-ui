@@ -6,46 +6,78 @@
       <Button type="primary" @click="showDrawer3">Open</Button>
       <Button type="primary" @click="showDrawer4">Open</Button>
     </div>
-
+    <!--    左边-->
     <Drawer
       v-model:visible="visible1"
-      title="Basic Drawer"
       placement="left"
       @afterClose="afterClose"
+      classname="custom"
     >
-      <p>Some contents...</p>
-      <p>Some contents...</p>
-      <p>Some contents...</p>
+      <template #title>
+        <span class="title" :style="{ width: '300px' }">Basic Drawer</span>
+      </template>
+      <template #content>
+        <div class="content">
+          <p>Some contents...</p>
+          <p>Some contents...</p>
+          <p>Some contents...</p>
+        </div>
+      </template>
     </Drawer>
+    <!--    右边-->
     <Drawer
       v-model:visible="visible2"
-      title="Basic Drawer"
       placement="right"
       @afterClose="afterClose"
+      classname="custom"
+      :style="{ width: '300px' }"
     >
-      <p>Some contents...</p>
-      <p>Some contents...</p>
-      <p>Some contents...</p>
+      <template #title>
+        <span class="title">Basic Drawer</span>
+      </template>
+      <template #content>
+        <div class="content">
+          <p>Some contents...</p>
+          <p>Some contents...</p>
+          <p>Some contents...</p>
+        </div>
+      </template>
     </Drawer>
+    <!--    上边-->
     <Drawer
       v-model:visible="visible3"
-      title="Basic Drawer"
       placement="top"
       @afterClose="afterClose"
+      classname="custom"
     >
-      <p>Some contents...</p>
-      <p>Some contents...</p>
-      <p>Some contents...</p>
+      <template #title>
+        <span class="title">Basic Drawer</span>
+      </template>
+      <template #content>
+        <div class="content">
+          <p>Some contents...</p>
+          <p>Some contents...</p>
+          <p>Some contents...</p>
+        </div>
+      </template>
     </Drawer>
+    <!--    下边-->
     <Drawer
       v-model:visible="visible4"
-      title="Basic Drawer"
       placement="bottom"
       @afterClose="afterClose"
+      classname="custom"
     >
-      <p>Some contents...</p>
-      <p>Some contents...</p>
-      <p>Some contents...</p>
+      <template #title>
+        <span class="title">Basic Drawer</span>
+      </template>
+      <template #content>
+        <div class="content">
+          <p>Some contents...</p>
+          <p>Some contents...</p>
+          <p>Some contents...</p>
+        </div>
+      </template>
     </Drawer>
   </div>
 </template>
@@ -83,6 +115,19 @@ const afterClose = () => {
   > .action {
     display: flex;
     gap: 50px;
+  }
+}
+.custom {
+  .title {
+    display: flex;
+    align-items: center;
+    padding: 16px 24px;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  .content {
+    padding: 24px;
+    line-height: 1.5em;
+    color: red;
   }
 }
 </style>

@@ -1,15 +1,23 @@
+<script lang="ts">
+export default {
+  inheritAttrs: false
+}
+</script>
+
 <script setup lang="ts">
 import { withDefaults, defineProps, toRefs, onMounted, watch, ref } from 'vue'
 import { addClass } from '@/lib/drawer/helper'
 
-type Position = 'top' | 'bottom' | 'left' | 'right'
+type PlacementType = 'top' | 'bottom' | 'left' | 'right'
 
 const emits = defineEmits(['update:visible', 'afterClose'])
+
 const props = withDefaults(
-  defineProps<{ visible?: boolean; title?: string; placement?: Position }>(),
+  defineProps<{ visible?: boolean; placement?: PlacementType; classname?: string }>(),
   {
     visible: false,
-    placement: 'left'
+    placement: 'left',
+    classname: 'ui-custom'
   }
 )
 const { visible } = toRefs(props)
@@ -48,14 +56,15 @@ onMounted(() => {
       <Transition :name="`content-${placement}`">
         <div
           class="ui-drawer-body"
-          :class="{ [`drawer-body-${placement}`]: true }"
+          v-bind="$attrs"
+          :class="{ [`drawer-body-${placement}`]: true, [classname]: true }"
           v-show="visible"
         >
-          <div class="ui-drawer-title">
-            {{ title }}
+          <div class="ui-drawer-title" v-if="$slots.title">
+            <slot name="title" />
           </div>
-          <div class="ui-drawer-content">
-            <slot />
+          <div class="ui-drawer-content" v-if="$slots.content">
+            <slot name="content" />
           </div>
         </div>
       </Transition>
@@ -98,15 +107,15 @@ body {
     &.drawer-body-left {
       top: 0;
       left: 0;
-      width: 300px;
-      box-shadow: -6px 0 16px -8px #00000014, -9px 0 28px #0000000d,
-        -12px 0 48px 16px #00000008;
+      min-width: 100px;
+      box-shadow: 6px 0 16px -8px #00000014, 9px 0 28px #0000000d,
+        12px 0 48px 16px #00000008;
       height: 100vh;
     }
     &.drawer-body-right {
       top: 0;
       right: 0;
-      width: 300px;
+      min-width: 100px;
       box-shadow: -6px 0 16px -8px #00000014, -9px 0 28px #0000000d,
         -12px 0 48px 16px #00000008;
       height: 100vh;
@@ -115,32 +124,33 @@ body {
       top: 0;
       left: 0;
       width: 100vw;
-      box-shadow: -6px 0 16px -8px #00000014, -9px 0 28px #0000000d,
-        -12px 0 48px 16px #00000008;
-      height: 200px;
+      box-shadow: 0 6px 16px -8px #00000014, 0 9px 28px #0000000d,
+        0 12px 48px 16px #00000008;
+      min-height: 50px;
     }
     &.drawer-body-bottom {
       bottom: 0;
       left: 0;
       width: 100vw;
-      box-shadow: -6px 0 16px -8px #00000014, -9px 0 28px #0000000d,
-        -12px 0 48px 16px #00000008;
-      height: 200px;
+      box-shadow: 0 -6px 16px -8px #00000014, 0 -9px 28px #0000000d,
+        0 -12px 48px 16px #00000008;
+      min-height: 50px;
     }
     > .ui-drawer-title {
     }
     > .ui-drawer-content {
     }
   }
+}
 
-  .mask-enter-active,
-  .mask-leave-active {
-    transition: opacity 300ms;
-  }
-  .mask-enter-from,
-  .mask-leave-to {
-    opacity: 0;
-  }
+//遮罩层动画
+.mask-enter-active,
+.mask-leave-active {
+  transition: opacity 300ms;
+}
+.mask-enter-from,
+.mask-leave-to {
+  opacity: 0;
 }
 //right
 .content-right-enter-active,
