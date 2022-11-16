@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { withDefaults, defineProps, toRefs, onMounted, watchEffect } from 'vue'
+import { withDefaults, defineProps, toRefs, onMounted, watch, ref } from 'vue'
 import { addClass } from '@/lib/drawer/helper'
 
 type Position = 'top' | 'bottom' | 'left' | 'right'
@@ -17,28 +17,44 @@ const onClose = () => {
   emits('update:visible', false)
   emits('afterClose')
 }
+
+const wrapShow = ref<boolean>(false)
 onMounted(() => {
-  watchEffect(() => {
+  watch(visible, () => {
     if (visible.value) {
       addClass(visible.value)
+      wrapShow.value = true
+    } else {
+      setTimeout(() => {
+        addClass(visible.value)
+        wrapShow.value = false
+      }, 300)
     }
-    addClass(visible.value)
   })
 })
 </script>
 
 <template>
   <Teleport to="body">
-    <div class="ui-drawer-wrap" v-if="visible">
-      <div class="ui-drawer-mask" @click="onClose"></div>
-      <div class="ui-drawer-body">
-        <div class="ui-drawer-title">
-          {{ title }}
+    <div class="ui-drawer-wrap" v-show="wrapShow">
+      <Transition name="mask">
+        <div
+          class="ui-drawer-mask"
+          @click="onClose"
+          :class="{ 'mask-open': visible }"
+          v-show="visible"
+        ></div>
+      </Transition>
+      <Transition name="content">
+        <div class="ui-drawer-body" v-show="visible">
+          <div class="ui-drawer-title">
+            {{ title }}
+          </div>
+          <div class="ui-drawer-content">
+            <slot />
+          </div>
         </div>
-        <div class="ui-drawer-content">
-          <slot />
-        </div>
-      </div>
+      </Transition>
     </div>
   </Teleport>
 </template>
@@ -68,7 +84,7 @@ body {
     width: 100%;
     height: 100%;
     z-index: 10;
-    opacity: 0.5;
+    opacity: 1;
   }
   > .ui-drawer-body {
     border: 2px solid red;
@@ -82,5 +98,24 @@ body {
     right: 0;
     z-index: 100;
   }
+  .mask-enter-active,
+  .mask-leave-active {
+    transition: opacity 300ms;
+  }
+
+  .mask-enter-from,
+  .mask-leave-to {
+    opacity: 0;
+  }
+}
+
+.content-enter-active,
+.content-leave-active {
+  transition: all 300ms;
+}
+
+.content-enter-from,
+.content-leave-to {
+  transform: translateX(100%);
 }
 </style>
