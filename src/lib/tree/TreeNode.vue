@@ -43,60 +43,65 @@ const isSelect = (value: string): boolean => {
 // 复选框模式下的逻辑
 const checked = (check: boolean, item: TreeOptions) => {
   item.checked = check
-  let newArr: string[]
+  let newSelectArr: string[]
   try {
-    newArr = [...selectArr!.value]
+    newSelectArr = [...selectArr!.value]
   } catch (err: unknown) {
-    newArr = []
+    newSelectArr = []
   }
   if (check) {
     // 将所有的儿子选中
-    newArr.push(item.value)
-    const loop = (xx: TreeOptions) => {
-      if (!xx.children) return
-      xx.children.forEach((x) => {
-        newArr.push(x.value)
-        x.checked = true
-        loop(x)
+    newSelectArr.push(item.value)
+    const loop = (children: TreeOptions) => {
+      if (!children.children) return
+      children.children.forEach((child) => {
+        newSelectArr.push(child.value)
+        child.checked = true
+        loop(child)
       })
     }
     loop(item)
-    const str = newArr.join('/')
+    const str = newSelectArr.join('/')
     if (selectArrFn) selectArrFn(str)
   } else {
     // 将所有的儿子删除
-    newArr.splice(newArr.indexOf(item.value), 1)
-    const loop = (xx: TreeOptions) => {
-      if (!xx.children) return
-      xx.children.forEach((x) => {
-        const index = newArr.indexOf(x.value)
-        newArr.splice(index, 1)
-        x.checked = false
-        loop(x)
+    newSelectArr.splice(newSelectArr.indexOf(item.value), 1)
+    const loop = (children: TreeOptions) => {
+      if (!children.children) return
+      children.children.forEach((child) => {
+        const index = newSelectArr.indexOf(child.value)
+        newSelectArr.splice(index, 1)
+        child.checked = false
+        loop(child)
       })
     }
     loop(item)
-    const str = newArr.join('/')
+    const str = newSelectArr.join('/')
     if (selectArrFn) selectArrFn(str)
   }
   // 找到他的父亲判断父亲的儿子是否都选中了，如果都选中了自己页应当checked
-  const yy = item.parent!.split('/')
-  const fatherNode = yy.slice(0, yy.length - 1).reverse() || [item.value]
-  const loopAll = (xx: TreeOptions[] | undefined) => {
-    if (!xx) return
-    for (let t = 0; t < fatherNode.length; t++) {
-      const aa = fatherNode[t]
-      for (let j = 0; j < xx.length; j++) {
-        if (xx[j].children && xx[j].value === aa) {
+  // 思路:获取需要检测的所有父节点fatherNodes=>反转得到的父节点数组=>遍历父节点数组，找到value===父节点的哪一项，
+  // 判断子节点是否都被checked,如果是那么这个父节点也应该被checked
+  // 反转父节点的checked应该置为false
+  const parentArr = item.parent!.split('/')
+  // 这里把数组反转reverse()很关键,应该先检测后面的父节点是否被checked这样前面的父节点才能根据后面的父节点checked而checked
+  // 如果先检查前面的父节点checked那么后面的父节点checked变化时前面的父节点checked就没法改变了，因为已经检查过了
+  const fatherNodes = parentArr.slice(0, parentArr.length - 1).reverse() || [item.value]
+  const loopAll = (children: TreeOptions[] | undefined) => {
+    if (!children) return
+    for (let t = 0; t < fatherNodes.length; t++) {
+      const fatherNode = fatherNodes[t]
+      for (let j = 0; j < children.length; j++) {
+        if (children[j].children && children[j].value === fatherNode) {
           let mid = true
-          for (let i = 0; i < xx[j].children!.length; i++) {
-            if (xx[j].children![i].checked === false) {
+          for (let i = 0; i < children[j].children!.length; i++) {
+            if (children[j].children![i].checked === false) {
               mid = false
             }
           }
-          xx[j].checked = mid
+          children[j].checked = mid
         }
-        loopAll(xx[j].children)
+        loopAll(children[j].children)
       }
     }
   }
