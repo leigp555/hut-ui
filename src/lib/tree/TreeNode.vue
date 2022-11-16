@@ -10,6 +10,7 @@ export interface TreeOptions {
   show?: boolean
   children?: TreeOptions[]
   parent?: string
+  checked?: boolean
 }
 
 const props = withDefaults(defineProps<{ options: TreeOptions[] }>(), {
@@ -27,13 +28,16 @@ const originSource = inject<Ref<TreeOptions[]>>('ui-tree-origin-source')
 
 const onSelect = (item: TreeOptions) => {
   item.show = !item.show
-  if (!checkable?.value) {
-    position(item.parent)
-    selectArrFn(item.parent)
+  if (!checkable?.value && position && selectArrFn) {
+    position(item.parent!)
+    selectArrFn(item.parent!)
   }
 }
 const isSelect = (value: string): boolean => {
-  return selectArr?.value.indexOf(value) >= 0
+  if (selectArr) {
+    return selectArr?.value.indexOf(value) >= 0
+  }
+  return false
 }
 
 // 复选框模式下的逻辑
@@ -42,7 +46,7 @@ const checked = (check: boolean, item: TreeOptions) => {
   let newArr: string[]
   try {
     newArr = [...selectArr!.value]
-  } catch (err: Error) {
+  } catch (err: unknown) {
     newArr = []
   }
   if (check) {
@@ -58,27 +62,7 @@ const checked = (check: boolean, item: TreeOptions) => {
     }
     loop(item)
     const str = newArr.join('/')
-    selectArrFn(str)
-    // // 找到他的父亲判断父亲的儿子是否都选中了，如果都选中了自己页应当checked
-    // const yy = item.parent?.split('/')
-    // const fatherNode = yy[yy.length - 2] || yy[yy.length - 1]
-    // const loopAll = (xx: TreeOptions[]) => {
-    //   for (let j = 0; j < xx.length; j++) {
-    //     if (!xx[j].children) return
-    //     if (xx[j].value === fatherNode) {
-    //       let mid = true
-    //       for (let i = 0; i < xx[j].children.length; i++) {
-    //         if (xx[j].children[i].checked === false) {
-    //           mid = false
-    //         }
-    //       }
-    //       xx[j].checked = mid
-    //       return
-    //     }
-    //     loopAll(xx[j].children)
-    //   }
-    // }
-    // loopAll(originSource?.value)
+    if (selectArrFn) selectArrFn(str)
   } else {
     // 将所有的儿子删除
     newArr.splice(newArr.indexOf(item.value), 1)
@@ -93,28 +77,30 @@ const checked = (check: boolean, item: TreeOptions) => {
     }
     loop(item)
     const str = newArr.join('/')
-    selectArrFn(str)
+    if (selectArrFn) selectArrFn(str)
   }
   // 找到他的父亲判断父亲的儿子是否都选中了，如果都选中了自己页应当checked
-  const yy = item.parent?.split('/')
-  const fatherNode = yy[yy.length - 2] || yy[yy.length - 1]
-  const loopAll = (xx: TreeOptions[]) => {
-    for (let j = 0; j < xx.length; j++) {
-      if (!xx[j].children) return
-      if (xx[j].value === fatherNode) {
-        let mid = true
-        for (let i = 0; i < xx[j].children.length; i++) {
-          if (xx[j].children[i].checked === false) {
-            mid = false
+  const yy = item.parent!.split('/')
+  const fatherNode = yy.slice(0, yy.length - 1).reverse() || [item.value]
+  const loopAll = (xx: TreeOptions[] | undefined) => {
+    if (!xx) return
+    for (let t = 0; t < fatherNode.length; t++) {
+      const aa = fatherNode[t]
+      for (let j = 0; j < xx.length; j++) {
+        if (xx[j].children && xx[j].value === aa) {
+          let mid = true
+          for (let i = 0; i < xx[j].children!.length; i++) {
+            if (xx[j].children![i].checked === false) {
+              mid = false
+            }
           }
+          xx[j].checked = mid
         }
-        xx[j].checked = mid
-        return
+        loopAll(xx[j].children)
       }
-      loopAll(xx[j].children)
     }
   }
-  loopAll(originSource?.value)
+  if (originSource) loopAll(originSource.value)
 }
 </script>
 
@@ -139,6 +125,7 @@ const checked = (check: boolean, item: TreeOptions) => {
           v-if="checkable"
           @update:checked="checked($event, item)"
           :checked="item.checked"
+          :style="{ color: item.color }"
           >{{ item.title }}</Checkbox
         >
         <a

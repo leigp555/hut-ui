@@ -7,7 +7,7 @@ export interface TreeOptions {
   value: string
   show?: boolean
   color?: string
-  href?: boolean
+  href?: string
   children?: TreeOptions[]
   parent?: string
   checked?: boolean
