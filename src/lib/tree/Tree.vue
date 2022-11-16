@@ -19,7 +19,7 @@ const props = withDefaults(
   defineProps<{
     options: TreeOptions[]
     selectedValues?: string[]
-    checkable: boolean
+    checkable?: boolean
   }>(),
   {
     options: () => [],

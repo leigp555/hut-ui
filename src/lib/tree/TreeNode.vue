@@ -26,8 +26,10 @@ const selectArrFn = inject<(posStr: string) => void>('ui-tree-select-arrFn')
 const checkable = inject<Ref<boolean>>('ui-tree-select-checkable')
 const originSource = inject<Ref<TreeOptions[]>>('ui-tree-origin-source')
 
-const onSelect = (item: TreeOptions) => {
+const onOpen = (item: TreeOptions) => {
   item.show = !item.show
+}
+const onSelect = (item: TreeOptions) => {
   if (!checkable?.value && position && selectArrFn) {
     position(item.parent!)
     selectArrFn(item.parent!)
@@ -61,8 +63,6 @@ const checked = (check: boolean, item: TreeOptions) => {
       })
     }
     loop(item)
-    const str = newSelectArr.join('/')
-    if (selectArrFn) selectArrFn(str)
   } else {
     // 将所有的儿子删除
     newSelectArr.splice(newSelectArr.indexOf(item.value), 1)
@@ -76,8 +76,6 @@ const checked = (check: boolean, item: TreeOptions) => {
       })
     }
     loop(item)
-    const str = newSelectArr.join('/')
-    if (selectArrFn) selectArrFn(str)
   }
   // 找到他的父亲判断父亲的儿子是否都选中了，如果都选中了自己页应当checked
   // 思路:获取需要检测的所有父节点fatherNodes=>反转得到的父节点数组=>遍历父节点数组，找到value===父节点的哪一项，
@@ -100,12 +98,22 @@ const checked = (check: boolean, item: TreeOptions) => {
             }
           }
           children[j].checked = mid
+          if (mid) {
+            const index = newSelectArr.indexOf(children[j].value)
+            if (index < 0) newSelectArr.push(children[j].value)
+          } else {
+            const index = newSelectArr.indexOf(children[j].value)
+            if (index >= 0) newSelectArr.splice(index, 1)
+          }
         }
         loopAll(children[j].children)
       }
     }
   }
   if (originSource) loopAll(originSource.value)
+
+  const str = newSelectArr.join('/')
+  if (selectArrFn) selectArrFn(str)
 }
 </script>
 
@@ -116,7 +124,7 @@ const checked = (check: boolean, item: TreeOptions) => {
         <span
           class="ui-tree-icon"
           :class="{ 'icon-rotate': item.show }"
-          @click="onSelect(item)"
+          @click="onOpen(item)"
         >
           <SvgIcon
             v-if="item.children"
@@ -139,6 +147,7 @@ const checked = (check: boolean, item: TreeOptions) => {
           :href="item.href"
           :style="{ color: item.color }"
           :class="{ 'ui-value-selected': isSelect(item.value) }"
+          @click="onSelect(item)"
           >{{ item.title }}</a
         >
         <span
@@ -146,6 +155,7 @@ const checked = (check: boolean, item: TreeOptions) => {
           v-else
           :style="{ color: item.color }"
           :class="{ 'ui-value-selected': isSelect(item.value) }"
+          @click="onSelect(item)"
           >{{ item.title }}</span
         >
       </div>
