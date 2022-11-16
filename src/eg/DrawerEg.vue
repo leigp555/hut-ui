@@ -1,11 +1,24 @@
 <template>
   <div class="ui-template-wrap">
-    <div>
-      <Button type="primary" @click="showDrawer">Open</Button>
+    <div class="action">
+      <Button type="primary" @click="showDrawer1">Open</Button>
+      <Button type="primary" @click="showDrawer2">Open</Button>
+      <Button type="primary" @click="showDrawer3">Open</Button>
+      <Button type="primary" @click="showDrawer4">Open</Button>
     </div>
 
     <Drawer
-      v-model:visible="visible"
+      v-model:visible="visible1"
+      title="Basic Drawer"
+      placement="left"
+      @afterClose="afterClose"
+    >
+      <p>Some contents...</p>
+      <p>Some contents...</p>
+      <p>Some contents...</p>
+    </Drawer>
+    <Drawer
+      v-model:visible="visible2"
       title="Basic Drawer"
       placement="right"
       @afterClose="afterClose"
@@ -14,81 +27,26 @@
       <p>Some contents...</p>
       <p>Some contents...</p>
     </Drawer>
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias cum, dignissimos
-      dolores eaque eum eveniet facere, facilis ipsa nesciunt officia provident quam
-      quo, repellat sapiente sint ullam velit veritatis. Ex!
-    </p>
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias cum, dignissimos
-      dolores eaque eum eveniet facere, facilis ipsa nesciunt officia provident quam
-      quo, repellat sapiente sint ullam velit veritatis. Ex!
-    </p>
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias cum, dignissimos
-      dolores eaque eum eveniet facere, facilis ipsa nesciunt officia provident quam
-      quo, repellat sapiente sint ullam velit veritatis. Ex!
-    </p>
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias cum, dignissimos
-      dolores eaque eum eveniet facere, facilis ipsa nesciunt officia provident quam
-      quo, repellat sapiente sint ullam velit veritatis. Ex!
-    </p>
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias cum, dignissimos
-      dolores eaque eum eveniet facere, facilis ipsa nesciunt officia provident quam
-      quo, repellat sapiente sint ullam velit veritatis. Ex!
-    </p>
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias cum, dignissimos
-      dolores eaque eum eveniet facere, facilis ipsa nesciunt officia provident quam
-      quo, repellat sapiente sint ullam velit veritatis. Ex!
-    </p>
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias cum, dignissimos
-      dolores eaque eum eveniet facere, facilis ipsa nesciunt officia provident quam
-      quo, repellat sapiente sint ullam velit veritatis. Ex!
-    </p>
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias cum, dignissimos
-      dolores eaque eum eveniet facere, facilis ipsa nesciunt officia provident quam
-      quo, repellat sapiente sint ullam velit veritatis. Ex!
-    </p>
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias cum, dignissimos
-      dolores eaque eum eveniet facere, facilis ipsa nesciunt officia provident quam
-      quo, repellat sapiente sint ullam velit veritatis. Ex!
-    </p>
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias cum, dignissimos
-      dolores eaque eum eveniet facere, facilis ipsa nesciunt officia provident quam
-      quo, repellat sapiente sint ullam velit veritatis. Ex!
-    </p>
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias cum, dignissimos
-      dolores eaque eum eveniet facere, facilis ipsa nesciunt officia provident quam
-      quo, repellat sapiente sint ullam velit veritatis. Ex!
-    </p>
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias cum, dignissimos
-      dolores eaque eum eveniet facere, facilis ipsa nesciunt officia provident quam
-      quo, repellat sapiente sint ullam velit veritatis. Ex!
-    </p>
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias cum, dignissimos
-      dolores eaque eum eveniet facere, facilis ipsa nesciunt officia provident quam
-      quo, repellat sapiente sint ullam velit veritatis. Ex!
-    </p>
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias cum, dignissimos
-      dolores eaque eum eveniet facere, facilis ipsa nesciunt officia provident quam
-      quo, repellat sapiente sint ullam velit veritatis. Ex!
-    </p>
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias cum, dignissimos
-      dolores eaque eum eveniet facere, facilis ipsa nesciunt officia provident quam
-      quo, repellat sapiente sint ullam velit veritatis. Ex!
-    </p>
+    <Drawer
+      v-model:visible="visible3"
+      title="Basic Drawer"
+      placement="top"
+      @afterClose="afterClose"
+    >
+      <p>Some contents...</p>
+      <p>Some contents...</p>
+      <p>Some contents...</p>
+    </Drawer>
+    <Drawer
+      v-model:visible="visible4"
+      title="Basic Drawer"
+      placement="bottom"
+      @afterClose="afterClose"
+    >
+      <p>Some contents...</p>
+      <p>Some contents...</p>
+      <p>Some contents...</p>
+    </Drawer>
   </div>
 </template>
 
@@ -97,9 +55,21 @@ import { ref } from 'vue'
 import Drawer from '@/lib/drawer/Drawer.vue'
 import Button from '@/lib/button/Button.vue'
 
-const visible = ref<boolean>(false)
-const showDrawer = () => {
-  visible.value = true
+const visible1 = ref<boolean>(false)
+const visible2 = ref<boolean>(false)
+const visible3 = ref<boolean>(false)
+const visible4 = ref<boolean>(false)
+const showDrawer1 = () => {
+  visible1.value = true
+}
+const showDrawer2 = () => {
+  visible2.value = true
+}
+const showDrawer3 = () => {
+  visible3.value = true
+}
+const showDrawer4 = () => {
+  visible4.value = true
 }
 const afterClose = () => {
   console.log('close')
@@ -109,7 +79,10 @@ const afterClose = () => {
 <style lang="scss">
 .ui-template-wrap {
   display: flex;
-  flex-direction: column;
   gap: 50px;
+  > .action {
+    display: flex;
+    gap: 50px;
+  }
 }
 </style>

@@ -45,8 +45,12 @@ onMounted(() => {
           v-show="visible"
         ></div>
       </Transition>
-      <Transition name="content">
-        <div class="ui-drawer-body" v-show="visible">
+      <Transition :name="`content-${placement}`">
+        <div
+          class="ui-drawer-body"
+          :class="{ [`drawer-body-${placement}`]: true }"
+          v-show="visible"
+        >
           <div class="ui-drawer-title">
             {{ title }}
           </div>
@@ -84,38 +88,98 @@ body {
     width: 100%;
     height: 100%;
     z-index: 10;
-    opacity: 1;
   }
   > .ui-drawer-body {
-    border: 2px solid red;
-    height: 100vh;
     background-color: #ffffff;
     font-size: 14px;
     line-height: 1.5em;
-    width: 250px;
     position: absolute;
-    top: 0;
-    right: 0;
     z-index: 100;
+    &.drawer-body-left {
+      top: 0;
+      left: 0;
+      width: 300px;
+      box-shadow: -6px 0 16px -8px #00000014, -9px 0 28px #0000000d,
+        -12px 0 48px 16px #00000008;
+      height: 100vh;
+    }
+    &.drawer-body-right {
+      top: 0;
+      right: 0;
+      width: 300px;
+      box-shadow: -6px 0 16px -8px #00000014, -9px 0 28px #0000000d,
+        -12px 0 48px 16px #00000008;
+      height: 100vh;
+    }
+    &.drawer-body-top {
+      top: 0;
+      left: 0;
+      width: 100vw;
+      box-shadow: -6px 0 16px -8px #00000014, -9px 0 28px #0000000d,
+        -12px 0 48px 16px #00000008;
+      height: 200px;
+    }
+    &.drawer-body-bottom {
+      bottom: 0;
+      left: 0;
+      width: 100vw;
+      box-shadow: -6px 0 16px -8px #00000014, -9px 0 28px #0000000d,
+        -12px 0 48px 16px #00000008;
+      height: 200px;
+    }
+    > .ui-drawer-title {
+    }
+    > .ui-drawer-content {
+    }
   }
+
   .mask-enter-active,
   .mask-leave-active {
     transition: opacity 300ms;
   }
-
   .mask-enter-from,
   .mask-leave-to {
     opacity: 0;
   }
 }
-
-.content-enter-active,
-.content-leave-active {
+//right
+.content-right-enter-active,
+.content-right-leave-active {
   transition: all 300ms;
 }
 
-.content-enter-from,
-.content-leave-to {
+.content-right-enter-from,
+.content-right-leave-to {
   transform: translateX(100%);
+}
+//left
+.content-left-enter-active,
+.content-left-leave-active {
+  transition: all 300ms;
+}
+
+.content-left-enter-from,
+.content-left-leave-to {
+  transform: translateX(-100%);
+}
+//top
+.content-top-enter-active,
+.content-top-leave-active {
+  transition: all 300ms;
+}
+
+.content-top-enter-from,
+.content-top-leave-to {
+  transform: translateY(-100%);
+}
+//bottom
+.content-bottom-enter-active,
+.content-bottom-leave-active {
+  transition: all 300ms;
+}
+
+.content-bottom-enter-from,
+.content-bottom-leave-to {
+  transform: translateY(100%);
 }
 </style>
