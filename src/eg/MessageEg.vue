@@ -59,7 +59,6 @@ const onInfo8 = () => {
 const onInfo9 = () => {
   const xx = alert.loading({
     content: 'xxxxxxxxxxxxxx',
-    style: { color: 'red' },
     duration: 4000
   })
   setTimeout(xx, 3000)

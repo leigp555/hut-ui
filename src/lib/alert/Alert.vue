@@ -45,37 +45,37 @@ const onClose = () => {
     >
       <SvgIcon
         name="error"
-        width="14px"
-        height="14px"
+        width="16px"
+        height="16px"
         fill="#ff4d4f"
         v-if="type === 'error'"
       />
       <SvgIcon
         name="loading"
-        width="14px"
-        height="14px"
+        width="16px"
+        height="16px"
         fill="#1890ff"
         v-if="type === 'loading'"
         class="alert-icon-loading"
       />
       <SvgIcon
         name="info"
-        width="14px"
-        height="14px"
+        width="16px"
+        height="16px"
         fill="#1890ff"
         v-else-if="type === 'info'"
       />
       <SvgIcon
         name="warning"
-        width="14px"
-        height="14px"
+        width="16px"
+        height="16px"
         fill="#faad14"
         v-else-if="type === 'warning'"
       />
       <SvgIcon
         name="success"
-        width="14px"
-        height="14px"
+        width="16px"
+        height="16px"
         fill="#52c41a"
         v-else-if="type === 'success'"
       />
