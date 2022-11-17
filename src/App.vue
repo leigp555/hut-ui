@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import Example from '@/eg/ImageEg.vue'
+import Example from '@/eg/ModalEg.vue'
 </script>
 
 <style>
