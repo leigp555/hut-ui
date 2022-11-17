@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import { withDefaults, defineProps, ref } from 'vue'
+import { withDefaults, defineProps, ref, onMounted, watch } from 'vue'
 import SvgIcon from '@/lib/common/SvgIcon.vue'
+import { bodyAddClass } from '@/lib/common/bodyAddClass'
 
-withDefaults(defineProps<{ src: string; width: number }>(), {})
+withDefaults(defineProps<{ src: string; width?: number }>(), {})
 
 const imgOpen = ref<boolean>(false)
 const imgRef = ref<HTMLImageElement | null>(null)
@@ -33,6 +34,18 @@ const onClickBig = () => {
 const onClickClose = () => {
   imgOpen.value = false
 }
+
+onMounted(() => {
+  watch(imgOpen, () => {
+    if (imgOpen.value) {
+      bodyAddClass(imgOpen.value)
+    } else {
+      setTimeout(() => {
+        bodyAddClass(imgOpen.value)
+      }, 300)
+    }
+  })
+})
 </script>
 
 <template>
@@ -80,7 +93,7 @@ const onClickClose = () => {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: #00000073;
     opacity: 0;
     transition: opacity 250ms;
     > .ui-image-eye {
@@ -106,6 +119,7 @@ const onClickClose = () => {
   }
   img {
     max-width: 100%;
+    max-height: 100%;
     vertical-align: bottom;
   }
 }
@@ -114,7 +128,7 @@ const onClickClose = () => {
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-  position: absolute;
+  position: fixed;
   background-color: rgba(0, 0, 0, 0.2);
   user-select: none;
   top: 0;

@@ -1,6 +1,7 @@
 body {
   &.ui_pop {
     height: 100vh;
+    position: relative;
     overflow-x: hidden;
     overflow-y: hidden;
   }
