@@ -51,6 +51,14 @@ const onClose = () => {
         v-if="type === 'error'"
       />
       <SvgIcon
+        name="loading"
+        width="14px"
+        height="14px"
+        fill="#1890ff"
+        v-if="type === 'loading'"
+        class="alert-icon-loading"
+      />
+      <SvgIcon
         name="info"
         width="14px"
         height="14px"
@@ -64,7 +72,13 @@ const onClose = () => {
         fill="#faad14"
         v-else-if="type === 'warning'"
       />
-      <SvgIcon name="success" width="14px" height="14px" fill="#52c41a" v-else />
+      <SvgIcon
+        name="success"
+        width="14px"
+        height="14px"
+        fill="#52c41a"
+        v-else-if="type === 'success'"
+      />
     </div>
     <div
       class="ui-alert-icon"
@@ -107,6 +121,7 @@ const onClose = () => {
   border-radius: 2px;
   margin-bottom: 16px;
   display: flex;
+  //box-shadow: 0 3px 6px -4px #0000001f, 0 6px 16px #00000014, 0 9px 28px 8px #0000000d;
   > .ui-alert-icon {
     display: flex;
     margin-right: 8px;
@@ -119,6 +134,9 @@ const onClose = () => {
         width: 24px;
         height: 24px;
       }
+    }
+    > .alert-icon-loading {
+      animation: loading_icon infinite 1s linear;
     }
   }
   &.alert-wrap-hasDescription {
@@ -180,6 +198,15 @@ const onClose = () => {
       display: flex;
       align-items: center;
     }
+  }
+}
+
+@keyframes loading_icon {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
   }
 }
 </style>
