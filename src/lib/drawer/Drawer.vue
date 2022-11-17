@@ -6,7 +6,7 @@ export default {
 
 <script setup lang="ts">
 import { withDefaults, defineProps, toRefs, onMounted, watch, ref } from 'vue'
-import { addClass } from '@/lib/drawer/helper'
+import { bodyAddClass } from '../common/bodyAddClass'
 
 type PlacementType = 'top' | 'bottom' | 'left' | 'right'
 
@@ -38,11 +38,11 @@ const wrapShow = ref<boolean>(false)
 onMounted(() => {
   watch(visible, () => {
     if (visible.value) {
-      addClass(visible.value)
+      bodyAddClass(visible.value)
       wrapShow.value = true
     } else {
       setTimeout(() => {
-        addClass(visible.value)
+        bodyAddClass(visible.value)
         wrapShow.value = false
       }, 300)
     }
@@ -80,18 +80,11 @@ onMounted(() => {
   </Teleport>
 </template>
 <style lang="scss">
-body {
-  &.draw_pop {
-    height: 100vh;
-    overflow-x: hidden;
-    overflow-y: hidden;
-  }
-}
 .ui-drawer-wrap {
   width: 100vw;
   height: 100vh;
   background-color: transparent;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   z-index: 10;
