@@ -3,6 +3,7 @@ import { withDefaults, defineProps, ref } from 'vue'
 import SvgIcon from '@/lib/common/SvgIcon.vue'
 import { AlertType } from '@/lib/alert/type'
 
+const emits = defineEmits(['close'])
 withDefaults(
   defineProps<{
     message: string
@@ -24,6 +25,7 @@ withDefaults(
 const wrapRef = ref<HTMLElement | null>(null)
 const onClose = () => {
   wrapRef.value?.classList.add('alert-close')
+  emits('close')
 }
 </script>
 
@@ -109,7 +111,7 @@ const onClose = () => {
       :class="{ 'ui-alert-description-close': description || $slots.description }"
       @click="onClose"
     >
-      <SvgIcon name="cha" width="24px" height="24px" />
+      <SvgIcon name="cha" width="12px" height="12px" />
     </span>
   </div>
 </template>
@@ -190,26 +192,27 @@ const onClose = () => {
       }
       > .ui-alert-message {
       }
-      > .ui-alert-close {
-        display: flex;
-        align-items: center;
-        cursor: pointer;
-        margin-left: 8px;
-        font-size: 12px;
-        line-height: 12px;
-        &.ui-alert-description-close {
-          align-items: start;
-          > svg {
-            width: 24px;
-            height: 24px;
-          }
-        }
-      }
     }
     > .ui-alert-description {
       flex-grow: 1;
       display: flex;
       align-items: center;
+    }
+  }
+  > .ui-alert-close {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    margin-left: 8px;
+    font-size: 12px;
+    line-height: 12px;
+    &.ui-alert-description-close {
+      align-items: start;
+      cursor: pointer;
+      > svg {
+        width: 12px;
+        height: 12px;
+      }
     }
   }
 }
