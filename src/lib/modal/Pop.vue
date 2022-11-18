@@ -143,8 +143,8 @@ const transformOrigin = computed(() => {
               banner
               :style="{ backgroundColor: '#fff', marginBottom: 0 }"
             >
-              <template #title>
-                <Component :is="title" v-if="typeof title !== 'string'" />
+              <template #title v-if="typeof title !== 'string'">
+                <Component :is="title" />
               </template>
               <template #description>
                 <Component :is="content" v-if="typeof content !== 'string'" />
