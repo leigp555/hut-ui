@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import { withDefaults, defineProps, ref } from 'vue'
 import SvgIcon from '@/lib/common/SvgIcon.vue'
-
-type AlertType = 'success' | 'info' | 'warning' | 'error' | 'loading'
+import { AlertType } from '@/lib/alert/type'
 
 withDefaults(
   defineProps<{
@@ -107,7 +106,7 @@ const onClose = () => {
       :class="{ 'ui-alert-description-close': description || $slots.description }"
       @click="onClose"
     >
-      <SvgIcon name="cha" width="12px" height="12px" />
+      <SvgIcon name="cha" width="24px" height="24px" />
     </span>
   </div>
 </template>
@@ -197,6 +196,10 @@ const onClose = () => {
         line-height: 12px;
         &.ui-alert-description-close {
           align-items: start;
+          > svg {
+            width: 24px;
+            height: 24px;
+          }
         }
       }
     }
