@@ -28,9 +28,8 @@
       margin: 8px auto;
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      //gap: 10px;
       border-radius: 2px;
-      width: 500px;
       box-shadow: 0 3px 6px -4px #0000001f, 0 6px 16px #00000014,
       0 9px 28px 8px #0000000d;
       > .ui-modal-title {
@@ -47,7 +46,7 @@
         align-items: center;
         justify-content: end;
         gap: 8px;
-        padding: 10px 16px;
+        padding: 10px 24px;
         border-top: 1px solid #f0f0f0;
       }
     }

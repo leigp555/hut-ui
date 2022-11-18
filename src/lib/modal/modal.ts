@@ -7,10 +7,13 @@ type Options = {
   title: string
   content: VNode | string
   icon?: VNode
-  onOK?: () => void
+  onOk?: () => void
   onCancel?: () => void
   cancelText?: string
   okText?: string
+  width?: number
+  top?: number
+  maskClosable?: boolean
 }
 
 // 获取挂载点，没有就创建
@@ -31,7 +34,13 @@ const render = (options: Options, type: ModalType, mountEl: HTMLElement): VNode 
   const unMount = () => {
     mountEl.remove()
   }
-  return h(Pop, { ...options, type, unMount })
+  return h(Pop, {
+    ...options,
+    ok: !!options.onOk,
+    cancel: !!options.onCancel,
+    type,
+    unMount
+  })
 }
 
 const info = (option: Options) => {

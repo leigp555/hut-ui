@@ -12,37 +12,40 @@ import {
 } from 'vue'
 import Button from '@/lib/button/Button.vue'
 import { bodyAddClass } from '@/lib/common/bodyAddClass'
+import Alert from '../alert/Alert.vue'
 
+const emits = defineEmits(['ok', 'cancel'])
 const props = withDefaults(
   defineProps<{
     title: string
     content: VNode
     icon?: VNode
-    onOK?: () => void
-    onCancel?: () => void
     cancelText?: string
     okText?: string
     type: 'success' | 'error' | 'warning' | 'info'
     unMount: () => void
+    ok: boolean
+    cancel: boolean
     width?: number
     top?: number
     maskClosable?: boolean
   }>(),
   { width: 300, top: 100, maskClosable: false }
 )
-const { unMount, width, top, maskClosable, onOK, onCancel } = toRefs(props)
+const { unMount, width, top, maskClosable, ok, cancel } = toRefs(props)
 
 const visible = ref<boolean>(false)
 
 const handleOk = () => {
-  if (onOK.value) {
-    onOK?.value()
-  }
+  if (ok.value) emits('ok')
+  visible.value = false
+  const id = setTimeout(() => {
+    unMount.value()
+    window.clearTimeout(id)
+  }, 400)
 }
 const handleCancel = () => {
-  if (onCancel.value) {
-    onCancel?.value()
-  }
+  if (cancel.value) emits('cancel')
   visible.value = false
   const id = setTimeout(() => {
     unMount.value()
@@ -84,7 +87,6 @@ const initElHandle = (e: Event) => {
   contentShow.value = true
   // 获取完偏移量后立即取消对body的事件监听
   document.body.removeEventListener('click', initElHandle)
-  console.log('执行了')
 }
 
 onMounted(() => {
@@ -120,15 +122,10 @@ const transformOrigin = computed(() => {
 <template>
   <div class="ui-modal-pop-wrap ui-modal-wrap">
     <Transition name="modal-mask">
-      <div
-        class="ui-modal-mask"
-        @click="onClose"
-        v-show="contentShow"
-        :class="{ 'mask-open': visible }"
-      ></div>
+      <div class="ui-modal-mask" @click="onClose" v-show="contentShow"></div>
     </Transition>
     <!--        内容区-->
-    <div class="ui-modal-body-wrap" :style="{ top: `100px` }">
+    <div class="ui-modal-body-wrap" :style="{ top: `${top}px` }">
       <Transition name="modal">
         <div
           class="ui-modal-body"
@@ -138,16 +135,27 @@ const transformOrigin = computed(() => {
           }"
           v-show="contentShow"
         >
-          <div class="ui-modal-title">
-            {{ title }}
+          <div class="ui-modal-content" style="margin-top: 10px; padding: 0">
+            <Alert
+              :message="title"
+              :type="type"
+              showIcon
+              banner
+              :style="{ backgroundColor: '#fff', marginBottom: 0 }"
+            >
+              <template #description>
+                <Component :is="content" v-if="typeof content !== 'string'" />
+                <div v-else>{{ content }}</div>
+              </template>
+            </Alert>
           </div>
-          <div class="ui-modal-content">
-            <Component :is="content" v-if="typeof content !== 'string'" />
-            <div v-else>{{ content }}</div>
-          </div>
-          <div class="ui-modal-footer">
-            <Button type="default" @click="handleCancel">取消</Button>
-            <Button type="primary" @click="handleOk">确认</Button>
+          <div class="ui-modal-footer" style="padding: 10px 16px">
+            <Button type="primary" @click="handleCancel">{{
+              cancelText ? cancelText : '取消'
+            }}</Button>
+            <Button type="primary" @click="handleOk" v-if="ok">{{
+              okText ? okText : '确定'
+            }}</Button>
           </div>
         </div>
       </Transition>
@@ -157,4 +165,10 @@ const transformOrigin = computed(() => {
 
 <style lang="scss">
 @import './index.scss';
+.ui-modal-body {
+  .ui-modal-footer {
+    border-top: none !important;
+    margin-bottom: 4px;
+  }
+}
 </style>
