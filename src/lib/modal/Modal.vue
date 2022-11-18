@@ -33,6 +33,7 @@ const onClose = () => {
   }
 }
 const wrapShow = ref<boolean>(false)
+const xxxShow = ref<boolean>(false)
 
 const initElPosition = reactive<{ x: number; y: number }>({ x: 0, y: 0 })
 
@@ -40,6 +41,7 @@ const initElHandle = (e: Event) => {
   initElPosition.x = e.clientX - document.body.clientWidth / 2 + width.value / 2
   initElPosition.y = e.clientY - top.value
   console.log(initElPosition.x, initElPosition.y)
+  xxxShow.value = true
 }
 
 onMounted(() => {
@@ -54,6 +56,7 @@ onMounted(() => {
         bodyAddClass(visible.value)
         wrapShow.value = false
       }, 300)
+      xxxShow.value = false
     }
   })
 })
@@ -82,7 +85,7 @@ onMounted(() => {
               width: `${width}px`,
               transformOrigin: `${initElPosition.x}px ${initElPosition.y}px`
             }"
-            v-show="visible"
+            v-show="xxxShow"
           >
             <div class="ui-modal-title" v-if="$slots.title">
               <slot name="title" />
