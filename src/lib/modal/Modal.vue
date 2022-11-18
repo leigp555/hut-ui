@@ -76,10 +76,11 @@ onMounted(() => {
       document.body.addEventListener('click', initElHandle)
     } else {
       // wrap元素要等内容动画展示完才能关闭不然只有进的动画没有出的动画
-      setTimeout(() => {
+      const id = setTimeout(() => {
         bodyAddClass(visible.value)
         wrapShow.value = false
-      }, 300)
+        window.clearTimeout(id)
+      }, 400)
       contentShow.value = false
     }
   })
@@ -100,13 +101,8 @@ const transformOrigin = computed(() => {
   <Teleport to="body">
     <div class="ui-modal-wrap" v-show="wrapShow">
       <!--        遮罩层-->
-      <Transition name="ui-modal-mask">
-        <div
-          class="ui-modal-mask"
-          @click="onClose"
-          :class="{ 'mask-open': visible }"
-          v-show="visible"
-        ></div>
+      <Transition name="modal-mask">
+        <div class="ui-modal-mask" @click="onClose" v-show="contentShow"></div>
       </Transition>
       <!--        内容区-->
       <div class="ui-modal-body-wrap" :style="{ top: `${top}px` }">

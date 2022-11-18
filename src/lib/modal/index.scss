@@ -54,19 +54,19 @@
   }
 }
 //遮罩层动画
-.mask-enter-active,
-.mask-leave-active {
+.modal-mask-enter-active,
+.modal-mask-leave-active {
   transition: opacity 300ms;
 }
-.mask-enter-from,
-.mask-leave-to {
+.modal-mask-enter-from,
+.modal-mask-leave-to {
   opacity: 0;
 }
 
 //内容部分动画
 .modal-enter-active,
 .modal-leave-active {
-  transition: all 200ms linear;
+  transition: all 250ms linear;
 }
 
 .modal-enter-from,

@@ -119,11 +119,11 @@ const transformOrigin = computed(() => {
 
 <template>
   <div class="ui-modal-pop-wrap ui-modal-wrap">
-    <Transition name="ui-modal-mask">
+    <Transition name="modal-mask">
       <div
         class="ui-modal-mask"
         @click="onClose"
-        v-show="visible"
+        v-show="contentShow"
         :class="{ 'mask-open': visible }"
       ></div>
     </Transition>
