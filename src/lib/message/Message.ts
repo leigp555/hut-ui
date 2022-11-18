@@ -50,12 +50,14 @@ const alertFn = (option: string | Options, type: AlertType) => {
   const alertDom: VNode = render(option, type)
   createApp(alertDom).mount(mountEl)
   if (typeof option === 'string') {
-    setTimeout(() => {
+    const id = setTimeout(() => {
       mountEl.remove()
+      window.clearTimeout(id)
     }, 3000)
   } else {
-    setTimeout(() => {
+    const id = setTimeout(() => {
       mountEl.remove()
+      window.clearTimeout(id)
     }, option.duration || 3000)
   }
 }
