@@ -5,7 +5,16 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { withDefaults, defineProps, toRefs, onMounted, watch, ref, reactive } from 'vue'
+import {
+  withDefaults,
+  defineProps,
+  toRefs,
+  onMounted,
+  watch,
+  ref,
+  reactive,
+  computed
+} from 'vue'
 import { bodyAddClass } from '../common/bodyAddClass'
 
 const emits = defineEmits(['update:visible'])
@@ -22,26 +31,40 @@ const props = withDefaults(
     visible: false,
     classname: 'ui-custom',
     maskClosable: true,
-    width: 300,
+    width: 500,
     top: 100
   }
 )
 const { visible, maskClosable, width, top } = toRefs(props)
+// 遮罩层是否展示
 const onClose = () => {
   if (maskClosable.value) {
     emits('update:visible', false)
   }
 }
+// 整个组件是否展示
 const wrapShow = ref<boolean>(false)
-const xxxShow = ref<boolean>(false)
-
+// content内容是否展示
+const contentShow = ref<boolean>(false)
+// 页面宽度
+const pageWidth = ref<number>(0)
+// 缩放的x,y轴偏移量
 const initElPosition = reactive<{ x: number; y: number }>({ x: 0, y: 0 })
 
+// 监听body元素点击事件处理函数
 const initElHandle = (e: Event) => {
-  initElPosition.x = e.clientX - document.body.clientWidth / 2 + width.value / 2
-  initElPosition.y = e.clientY - top.value
-  console.log(initElPosition.x, initElPosition.y)
-  xxxShow.value = true
+  if (width.value + 32 > pageWidth.value) {
+    initElPosition.x =
+      e.clientX - document.body.clientWidth / 2 + (pageWidth.value - 32) / 2
+    initElPosition.y = e.clientY - top.value
+  } else {
+    initElPosition.x = e.clientX - document.body.clientWidth / 2 + width.value / 2
+    initElPosition.y = e.clientY - top.value
+  }
+  // 内容元素必须要在获得scale缩放的x,y轴偏移量之后才展示,不然首次展示编译位置不对，动画会很丑
+  contentShow.value = true
+  // 获取完偏移量后立即取消对body的事件监听
+  document.body.removeEventListener('click', initElHandle)
 }
 
 onMounted(() => {
@@ -49,16 +72,27 @@ onMounted(() => {
     if (visible.value) {
       bodyAddClass(visible.value)
       wrapShow.value = true
+      pageWidth.value = document.body.clientWidth
       document.body.addEventListener('click', initElHandle)
     } else {
-      document.body.removeEventListener('click', initElHandle)
+      // wrap元素要等内容动画展示完才能关闭不然只有进的动画没有出的动画
       setTimeout(() => {
         bodyAddClass(visible.value)
         wrapShow.value = false
       }, 300)
-      xxxShow.value = false
+      contentShow.value = false
     }
   })
+})
+
+const contentWidth = computed(() => {
+  if (width.value + 32 > pageWidth.value) {
+    return `${pageWidth.value - 32}px`
+  }
+  return `${width.value}px`
+})
+const transformOrigin = computed(() => {
+  return `${initElPosition.x}px ${initElPosition.y}px`
 })
 </script>
 
@@ -82,10 +116,10 @@ onMounted(() => {
             v-bind="$attrs"
             :class="{ [classname]: true }"
             :style="{
-              width: `${width}px`,
-              transformOrigin: `${initElPosition.x}px ${initElPosition.y}px`
+              width: contentWidth,
+              transformOrigin: transformOrigin
             }"
-            v-show="xxxShow"
+            v-show="contentShow"
           >
             <div class="ui-modal-title" v-if="$slots.title">
               <slot name="title" />
@@ -130,23 +164,29 @@ onMounted(() => {
       background-color: #ffffff;
       font-size: 14px;
       line-height: 1.5em;
-      height: 200px;
       margin: 8px auto;
       display: flex;
       flex-direction: column;
       gap: 10px;
       border-radius: 2px;
+      box-shadow: 0 3px 6px -4px #0000001f, 0 6px 16px #00000014,
+        0 9px 28px 8px #0000000d;
       > .ui-modal-title {
-        border-bottom: 1px solid red;
+        padding: 16px 24px;
+        border-bottom: 1px solid #f0f0f0;
       }
       > .ui-modal-content {
         flex-grow: 10;
+        padding: 12px 24px;
+        word-wrap: break-word;
       }
       > .ui-modal-footer {
         display: flex;
         align-items: center;
         justify-content: end;
         gap: 8px;
+        padding: 10px 16px;
+        border-top: 1px solid #f0f0f0;
       }
     }
   }
@@ -165,11 +205,11 @@ onMounted(() => {
 //内容部分动画
 .modal-enter-active,
 .modal-leave-active {
-  transition: all 300ms linear;
+  transition: all 200ms linear;
 }
 
 .modal-enter-from,
 .modal-leave-to {
-  transform: scale(0);
+  transform: scale(0.2);
 }
 </style>

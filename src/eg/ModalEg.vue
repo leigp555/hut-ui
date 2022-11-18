@@ -2,7 +2,7 @@
   <div class="ui-template-wrap">
     <div style="height: 800px"></div>
     <Button type="primary" @click="showModal">Open Modal</Button>
-    <Modal v-model:visible="visible">
+    <Modal v-model:visible="visible" :width="520" :top="100" :mask-closable="false">
       <template #title>
         <span>Basic Modal</span>
       </template>
