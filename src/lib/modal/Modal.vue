@@ -31,7 +31,7 @@ const props = withDefaults(
     visible: false,
     classname: 'ui-custom',
     maskClosable: true,
-    width: 500,
+    width: 300,
     top: 100
   }
 )
@@ -210,6 +210,7 @@ const transformOrigin = computed(() => {
 
 .modal-enter-from,
 .modal-leave-to {
-  transform: scale(0.2);
+  transform: scale(0);
+  opacity: 0;
 }
 </style>
