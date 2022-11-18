@@ -1,5 +1,6 @@
 <template>
   <div class="ui-template-wrap">
+    <div style="height: 800px"></div>
     <Button type="primary" @click="showModal">Open Modal</Button>
     <Modal v-model:visible="visible">
       <template #title>
@@ -15,6 +16,7 @@
         <Button type="primary" @click="handleOk">确认</Button>
       </template>
     </Modal>
+    <div style="height: 800px"></div>
   </div>
 </template>
 

@@ -5,46 +5,55 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { withDefaults, defineProps, toRefs, onMounted, watch, ref } from 'vue'
+import { withDefaults, defineProps, toRefs, onMounted, watch, ref, reactive } from 'vue'
 import { bodyAddClass } from '../common/bodyAddClass'
 
-type PlacementType = 'top' | 'bottom' | 'left' | 'right'
-
-const emits = defineEmits(['update:visible', 'afterClose'])
+const emits = defineEmits(['update:visible'])
 
 const props = withDefaults(
   defineProps<{
     visible?: boolean
-    placement?: PlacementType
     classname?: string
     maskClosable?: boolean
+    width?: number
+    top?: number
   }>(),
   {
     visible: false,
-    placement: 'left',
     classname: 'ui-custom',
-    maskClosable: true
+    maskClosable: true,
+    width: 300,
+    top: 100
   }
 )
-const { visible, maskClosable } = toRefs(props)
+const { visible, maskClosable, width, top } = toRefs(props)
 const onClose = () => {
   if (maskClosable.value) {
     emits('update:visible', false)
-    emits('afterClose')
   }
 }
-
 const wrapShow = ref<boolean>(false)
+
+const initElPosition = reactive<{ x: number; y: number }>({ x: 0, y: 0 })
+
+const initElHandle = (e: Event) => {
+  initElPosition.x = e.clientX - document.body.clientWidth / 2 + width.value / 2
+  initElPosition.y = e.clientY - top.value
+  console.log(initElPosition.x, initElPosition.y)
+}
+
 onMounted(() => {
   watch(visible, () => {
     if (visible.value) {
       bodyAddClass(visible.value)
       wrapShow.value = true
+      document.body.addEventListener('click', initElHandle)
     } else {
+      document.body.removeEventListener('click', initElHandle)
       setTimeout(() => {
         bodyAddClass(visible.value)
         wrapShow.value = false
-      }, 3000)
+      }, 300)
     }
   })
 })
@@ -52,28 +61,37 @@ onMounted(() => {
 
 <template>
   <Teleport to="body">
-    <div class="ui-drawer-wrap" v-show="wrapShow">
-      <Transition name="mask">
+    <div class="ui-modal-wrap" v-show="wrapShow">
+      <!--        遮罩层-->
+      <Transition name="ui-modal-mask">
         <div
-          class="ui-drawer-mask"
+          class="ui-modal-mask"
           @click="onClose"
           :class="{ 'mask-open': visible }"
           v-show="visible"
         ></div>
       </Transition>
-      <div class="body-wrap">
+      <!--        内容区-->
+      <div class="ui-modal-body-wrap" :style="{ top: `${top}px` }">
         <Transition name="modal">
           <div
-            class="ui-drawer-body"
+            class="ui-modal-body"
             v-bind="$attrs"
             :class="{ [classname]: true }"
+            :style="{
+              width: `${width}px`,
+              transformOrigin: `${initElPosition.x}px ${initElPosition.y}px`
+            }"
             v-show="visible"
           >
-            <div class="ui-drawer-title" v-if="$slots.title">
+            <div class="ui-modal-title" v-if="$slots.title">
               <slot name="title" />
             </div>
-            <div class="ui-drawer-content" v-if="$slots.content">
+            <div class="ui-modal-content" v-if="$slots.content">
               <slot name="content" />
+            </div>
+            <div class="ui-modal-footer" v-if="$slots.footer">
+              <slot name="footer" />
             </div>
           </div>
         </Transition>
@@ -82,17 +100,16 @@ onMounted(() => {
   </Teleport>
 </template>
 <style lang="scss">
-.ui-drawer-wrap {
+.ui-modal-wrap {
   width: 100vw;
   height: 100vh;
-  background-color: transparent;
   position: fixed;
   top: 0;
   left: 0;
   z-index: 10;
   overflow: hidden;
   color: #000000d9;
-  > .ui-drawer-mask {
+  > .ui-modal-mask {
     background-color: #00000073;
     position: absolute;
     top: 0;
@@ -101,23 +118,32 @@ onMounted(() => {
     height: 100%;
     z-index: 10;
   }
-  > .body-wrap {
+  > .ui-modal-body-wrap {
     position: absolute;
     z-index: 100;
-    top: 50%;
     left: 50%;
-    border: 1px solid red;
-    transform: translate(-50%, -60%);
-    > .ui-drawer-body {
+    transform: translate(-50%);
+    > .ui-modal-body {
       background-color: #ffffff;
       font-size: 14px;
       line-height: 1.5em;
-      width: 300px;
       height: 200px;
-      transform-origin: 500px 500px;
-      > .ui-drawer-title {
+      margin: 8px auto;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      border-radius: 2px;
+      > .ui-modal-title {
+        border-bottom: 1px solid red;
       }
-      > .ui-drawer-content {
+      > .ui-modal-content {
+        flex-grow: 10;
+      }
+      > .ui-modal-footer {
+        display: flex;
+        align-items: center;
+        justify-content: end;
+        gap: 8px;
       }
     }
   }
@@ -133,10 +159,10 @@ onMounted(() => {
   opacity: 0;
 }
 
-//left
+//内容部分动画
 .modal-enter-active,
 .modal-leave-active {
-  transition: all 3000ms linear;
+  transition: all 300ms linear;
 }
 
 .modal-enter-from,
