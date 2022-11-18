@@ -17,7 +17,7 @@ import Alert from '../alert/Alert.vue'
 const emits = defineEmits(['ok', 'cancel'])
 const props = withDefaults(
   defineProps<{
-    title: string
+    title: VNode
     content: VNode
     icon?: VNode
     cancelText?: string
@@ -137,20 +137,26 @@ const transformOrigin = computed(() => {
         >
           <div class="ui-modal-content" style="margin-top: 10px; padding: 0">
             <Alert
-              :message="title"
+              :message="typeof title === 'string' ? title : ''"
               :type="type"
               showIcon
               banner
               :style="{ backgroundColor: '#fff', marginBottom: 0 }"
             >
+              <template #title>
+                <Component :is="title" v-if="typeof title !== 'string'" />
+              </template>
               <template #description>
                 <Component :is="content" v-if="typeof content !== 'string'" />
                 <div v-else>{{ content }}</div>
               </template>
+              <template #icon v-if="icon">
+                <Component :is="icon" />
+              </template>
             </Alert>
           </div>
           <div class="ui-modal-footer" style="padding: 10px 16px">
-            <Button type="primary" @click="handleCancel">{{
+            <Button type="default" @click="handleCancel">{{
               cancelText ? cancelText : '取消'
             }}</Button>
             <Button type="primary" @click="handleOk" v-if="ok">{{

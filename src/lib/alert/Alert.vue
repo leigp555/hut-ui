@@ -92,7 +92,10 @@ const onClose = () => {
         :class="{ 'alert-content-hasDescription': description || $slots.description }"
       >
         <div class="ui-alert-message">
-          {{ message }}
+          <span v-if="$slots.title">
+            <slot name="title" />
+          </span>
+          <span v-else>{{ message }}</span>
         </div>
       </div>
       <div class="ui-alert-description" v-if="description || $slots.description">

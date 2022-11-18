@@ -22,6 +22,7 @@
       <Button @click="success">Success</Button>
       <Button @click="error">Error</Button>
       <Button @click="warning">Warning</Button>
+      <Button @click="custom">Custom</Button>
     </div>
   </div>
 </template>
@@ -31,6 +32,7 @@ import { ref, h } from 'vue'
 import Modal from '@/lib/modal/Modal.vue'
 import { modal } from '@/lib/modal/modal'
 import Button from '@/lib/button/Button.vue'
+import SvgIcon from '@/lib/common/SvgIcon.vue'
 
 const visible = ref<boolean>(false)
 
@@ -54,11 +56,11 @@ const info = () => {
     onOk: () => {
       console.log('ok')
     },
-    okText: '确认了',
+    okText: 'confirm',
     onCancel: () => {
       console.log('cancel')
     },
-    cancelText: '知道了',
+    cancelText: 'cancel',
     width: 500,
     top: 200,
     maskClosable: true
@@ -85,6 +87,14 @@ const warning = () => {
   modal.warning({
     title: 'This is a warning message',
     content: 'some messages...some messages...'
+  })
+}
+
+const custom = () => {
+  modal.custom({
+    title: h('p', { style: { color: 'red' } }, 'This is a warning message xxx'),
+    content: 'some messages...some messages...',
+    icon: h(SvgIcon, { name: 'weixin', width: '1em', height: '1em' })
   })
 }
 </script>

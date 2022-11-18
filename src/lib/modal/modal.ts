@@ -59,10 +59,15 @@ const warning = (option: Options) => {
   const mountEl = getRoot()
   createApp(render(option, 'warning', mountEl)).mount(mountEl)
 }
+const custom = (option: Options) => {
+  const mountEl = getRoot()
+  createApp(render(option, 'success', mountEl)).mount(mountEl)
+}
 
 export const modal = {
   info,
   success,
   error,
-  warning
+  warning,
+  custom
 }
