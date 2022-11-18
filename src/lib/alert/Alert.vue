@@ -122,6 +122,9 @@ const onClose = () => {
   margin-bottom: 16px;
   display: flex;
   //box-shadow: 0 3px 6px -4px #0000001f, 0 6px 16px #00000014, 0 9px 28px 8px #0000000d;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue,
+    Arial, Noto Sans, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', Segoe UI Symbol,
+    'Noto Color Emoji';
   > .ui-alert-icon {
     display: flex;
     margin-right: 8px;
@@ -178,6 +181,10 @@ const onClose = () => {
       align-items: center;
       &.alert-content-hasDescription {
         margin-bottom: 4px;
+        > .ui-alert-message {
+          font-weight: 500;
+          font-size: 16px;
+        }
       }
       > .ui-alert-message {
       }
