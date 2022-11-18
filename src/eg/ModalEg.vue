@@ -1,6 +1,6 @@
 <template>
   <div class="ui-template-wrap">
-    <!--    <div style="height: 800px"></div>-->
+    <div style="height: 800px"></div>
     <Button type="primary" @click="showModal">Open Modal</Button>
     <Modal v-model:visible="visible" :width="520" :top="100" :mask-closable="false">
       <template #title>
@@ -16,7 +16,7 @@
         <Button type="primary" @click="handleOk">确认</Button>
       </template>
     </Modal>
-    <div style="height: 100px"></div>
+    <div style="height: 800px"></div>
     <div class="actions">
       <Button @click="info">Info</Button>
       <Button @click="success">Success</Button>
@@ -61,7 +61,7 @@ const info = () => {
       console.log('cancel')
     },
     cancelText: 'cancel',
-    width: 500,
+    width: 400,
     top: 200,
     maskClosable: true
   })
@@ -69,6 +69,7 @@ const info = () => {
 const success = () => {
   modal.success({
     title: 'This is a success message',
+    width: 400,
     content: h('div', {}, [
       h('p', 'some messages...some messages...'),
       h('p', 'some messages...some messages...')
@@ -79,6 +80,7 @@ const success = () => {
 const error = () => {
   modal.error({
     title: 'This is an error message',
+    width: 400,
     content: 'some messages...some messages...'
   })
 }
@@ -86,12 +88,14 @@ const error = () => {
 const warning = () => {
   modal.warning({
     title: 'This is a warning message',
+    width: 400,
     content: 'some messages...some messages...'
   })
 }
 
 const custom = () => {
   modal.custom({
+    width: 400,
     title: h('p', { style: { color: 'red' } }, 'This is a Custom message '),
     content: 'some messages...some messages...',
     icon: h(SvgIcon, { name: 'weixin', width: '1em', height: '1em' })
