@@ -6,11 +6,11 @@ type ModalType = Omit<AlertType, 'loading'>
 type Options = {
   title: string
   content: VNode | string
-  icon: VNode
-  onOK: () => void
-  onCancel: () => void
-  cancelText: string
-  okText: string
+  icon?: VNode
+  onOK?: () => void
+  onCancel?: () => void
+  cancelText?: string
+  okText?: string
 }
 
 // 获取挂载点，没有就创建
@@ -27,37 +27,28 @@ const getRoot = () => {
 }
 
 // 渲染节点
-const render = (options: Options, type: ModalType): VNode => {
-  return h(Pop, { ...options, type })
+const render = (options: Options, type: ModalType, mountEl: HTMLElement): VNode => {
+  const unMount = () => {
+    mountEl.remove()
+  }
+  return h(Pop, { ...options, type, unMount })
 }
 
 const info = (option: Options) => {
   const mountEl = getRoot()
-  createApp(render(option, 'info')).mount(mountEl)
-  return () => {
-    mountEl.remove()
-  }
+  createApp(render(option, 'info', mountEl)).mount(mountEl)
 }
 const success = (option: Options) => {
   const mountEl = getRoot()
-  createApp(render(option, 'success')).mount(mountEl)
-  return () => {
-    mountEl.remove()
-  }
+  createApp(render(option, 'success', mountEl)).mount(mountEl)
 }
 const error = (option: Options) => {
   const mountEl = getRoot()
-  createApp(render(option, 'error')).mount(mountEl)
-  return () => {
-    mountEl.remove()
-  }
+  createApp(render(option, 'error', mountEl)).mount(mountEl)
 }
 const warning = (option: Options) => {
   const mountEl = getRoot()
-  createApp(render(option, 'warning')).mount(mountEl)
-  return () => {
-    mountEl.remove()
-  }
+  createApp(render(option, 'warning', mountEl)).mount(mountEl)
 }
 
 export const modal = {

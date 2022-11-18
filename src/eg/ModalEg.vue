@@ -19,9 +19,9 @@
     <div style="height: 100px"></div>
     <div class="actions">
       <Button @click="info">Info</Button>
-      <Button @click="success">Success</Button>
-      <Button @click="error">Error</Button>
-      <Button @click="warning">Warning</Button>
+      <!--      <Button @click="success">Success</Button>-->
+      <!--      <Button @click="error">Error</Button>-->
+      <!--      <Button @click="warning">Warning</Button>-->
     </div>
   </div>
 </template>
@@ -56,29 +56,29 @@ const info = () => {
     }
   })
 }
-const success = () => {
-  modal.success({
-    title: 'This is a success message',
-    content: h('div', {}, [
-      h('p', 'some messages...some messages...'),
-      h('p', 'some messages...some messages...')
-    ])
-  })
-}
-
-const error = () => {
-  modal.error({
-    title: 'This is an error message',
-    content: 'some messages...some messages...'
-  })
-}
-
-const warning = () => {
-  modal.warning({
-    title: 'This is a warning message',
-    content: 'some messages...some messages...'
-  })
-}
+// const success = () => {
+//   modal.success({
+//     title: 'This is a success message',
+//     content: h('div', {}, [
+//       h('p', 'some messages...some messages...'),
+//       h('p', 'some messages...some messages...')
+//     ])
+//   })
+// }
+//
+// const error = () => {
+//   modal.error({
+//     title: 'This is an error message',
+//     content: 'some messages...some messages...'
+//   })
+// }
+//
+// const warning = () => {
+//   modal.warning({
+//     title: 'This is a warning message',
+//     content: 'some messages...some messages...'
+//   })
+// }
 </script>
 
 <style lang="scss">
