@@ -4,7 +4,7 @@ import Button from '@/lib/button/Button.vue'
 
 import Alert from '../alert/Alert.vue'
 
-const emits = defineEmits(['ok', 'cancel'])
+const emits = defineEmits(['ok', 'close'])
 const props = withDefaults(
   defineProps<{
     message: VNode
@@ -21,14 +21,25 @@ const props = withDefaults(
   { width: 400, duration: 3000 }
 )
 const { unMount, duration } = toRefs(props)
+
+const visible = ref<boolean>(false)
 const handleOk = () => {
   emits('ok')
+  const id = setTimeout(() => {
+    visible.value = false
+    const x = setTimeout(() => {
+      unMount.value()
+      window.clearTimeout(x)
+    }, 300)
+    window.clearTimeout(id)
+  }, 400)
 }
+
 const handleCancel = () => {
-  emits('cancel')
+  emits('close')
+  visible.value = false
   unMount.value()
 }
-const visible = ref<boolean>(false)
 
 onMounted(() => {
   visible.value = true
@@ -50,7 +61,7 @@ onMounted(() => {
     <div
       class="ui-notification-content"
       v-if="visible"
-      :style="{ maxWidth: `${width}px` }"
+      :style="{ maxWidth: `${width}px`, width: '100%' }"
     >
       <Alert
         :message="typeof message === 'string' ? message : ''"
@@ -93,6 +104,10 @@ onMounted(() => {
   width: 384px;
   max-width: calc(100vw - 48px);
   margin-bottom: 16px;
+  .ui-notification-footer {
+    display: flex;
+    justify-content: end;
+  }
 }
 .notification-enter-from {
   transform: translateX(100%);

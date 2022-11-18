@@ -9,7 +9,7 @@ type Options = {
   description: VNode | string
   icon?: VNode
   onOk?: () => void
-  onCancel?: () => void
+  onClose?: () => void
   okText?: string
   width?: number
   duration?: number | 'infinite'
@@ -36,7 +36,7 @@ const render = (options: Options, type: ModalType, mountEl: HTMLElement): VNode 
   return h(Notification, {
     ...options,
     ok: !!options.onOk,
-    cancel: !!options.onCancel,
+    cancel: !!options.onClose,
     type,
     unMount
   })
@@ -72,7 +72,7 @@ const warning = (option: Options) => {
 }
 const custom = (option: Options) => {
   const mountEl = getRoot()
-  createApp(render(option, 'success', mountEl)).mount(mountEl)
+  createApp(render(option, 'open', mountEl)).mount(mountEl)
   return () => {
     mountEl.remove()
   }

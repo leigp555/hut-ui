@@ -98,7 +98,8 @@ const custom = () => {
     width: 400,
     title: h('p', { style: { color: 'red' } }, 'This is a Custom message '),
     content: 'some messages...some messages...',
-    icon: h(SvgIcon, { name: 'weixin', width: '1em', height: '1em' })
+    icon: h(SvgIcon, { name: 'weixin', width: '1em', height: '1em' }),
+    okText: 'custom'
   })
 }
 </script>
