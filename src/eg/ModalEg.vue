@@ -92,7 +92,7 @@ const warning = () => {
 
 const custom = () => {
   modal.custom({
-    title: h('p', { style: { color: 'red' } }, 'This is a warning message xxx'),
+    title: h('p', { style: { color: 'red' } }, 'This is a Custom message '),
     content: 'some messages...some messages...',
     icon: h(SvgIcon, { name: 'weixin', width: '1em', height: '1em' })
   })

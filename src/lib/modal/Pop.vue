@@ -131,7 +131,8 @@ const transformOrigin = computed(() => {
           class="ui-modal-body"
           :style="{
             width: contentWidth,
-            transformOrigin: transformOrigin
+            transformOrigin: transformOrigin,
+            gap: 0
           }"
           v-show="contentShow"
         >
@@ -155,7 +156,10 @@ const transformOrigin = computed(() => {
               </template>
             </Alert>
           </div>
-          <div class="ui-modal-footer" style="padding: 10px 16px">
+          <div
+            class="ui-modal-footer"
+            style="padding: 10px 16px; border-top: none; margin-bottom: 4px"
+          >
             <Button type="default" @click="handleCancel">{{
               cancelText ? cancelText : '取消'
             }}</Button>
@@ -171,10 +175,4 @@ const transformOrigin = computed(() => {
 
 <style lang="scss">
 @import './index.scss';
-.ui-modal-body {
-  .ui-modal-footer {
-    border-top: none !important;
-    margin-bottom: 4px;
-  }
-}
 </style>
