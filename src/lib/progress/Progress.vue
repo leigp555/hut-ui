@@ -113,6 +113,7 @@ onMounted(() => {
         ></circle>
         <circle
           class="progress-circle-outer progress-circle-item"
+          :class="{ 'progress-circle-finish': percent >= 100 }"
           cx="60"
           cy="60"
           r="50"
@@ -120,6 +121,15 @@ onMounted(() => {
           :stroke-dashoffset="314 - dashoffset"
         ></circle>
       </svg>
+      <div class="progress-circle-tip">
+        <span v-if="status === 'exception'">
+          <SvgIcon name="error" width="32px" height="32px" fill="#ff4d4f" />
+        </span>
+        <span v-else-if="percent >= 100">
+          <SvgIcon name="gouxuan" width="32px" height="32px" fill="#52c41a" />
+        </span>
+        <span v-else-if="showInfo">{{ format ? format(percent) : percent + '%' }}</span>
+      </div>
     </div>
   </div>
 </template>
@@ -208,10 +218,20 @@ onMounted(() => {
   > .ui-progress-circle {
     width: 120px;
     height: 120px;
-    font-size: 24px;
+    font-size: 18px;
     position: relative;
     line-height: 1;
     background-color: transparent;
+    > .progress-circle-tip {
+      display: flex;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100%;
+      justify-content: center;
+      align-items: center;
+    }
     .progress-circle-item {
       stroke-dasharray: 314;
       fill: transparent;
@@ -228,6 +248,9 @@ onMounted(() => {
     }
     .progress-circle-outer {
       stroke: #1890ff; /* 设置边框颜色 */
+      &.progress-circle-finish {
+        stroke: #52c41a;
+      }
     }
   }
 }

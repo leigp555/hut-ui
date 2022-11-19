@@ -33,6 +33,7 @@
       :percent="defaultPercent"
       :format="(percent) => `${percent} Days`"
     />
+    <Progress type="circle" :percent="defaultPercent" />
     <div>
       <Button @click="decline"> - </Button>
       <Button @click="increase" style="margin-left: 20px"> + </Button>
