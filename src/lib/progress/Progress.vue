@@ -10,7 +10,8 @@ const props = withDefaults(
     size?: 'small' | 'normal'
     // eslint-disable-next-line no-unused-vars
     format?: (percent: number) => string
-    type?: 'line' | 'circle'
+    type?: 'line' | 'circle' | 'step'
+    steps?: number
   }>(),
   {
     percent: 0,
@@ -130,6 +131,34 @@ onMounted(() => {
         </span>
         <span v-else-if="showInfo">{{ format ? format(percent) : percent + '%' }}</span>
       </div>
+    </div>
+    <div
+      class="ui-progress-step"
+      v-else-if="type === 'step'"
+      :class="{ 'progress-step-small': size === 'small' }"
+    >
+      <ol class="progress-step-wrap">
+        <li
+          class="progress-step-item"
+          v-for="item in steps"
+          :key="item"
+          :class="{
+            'step-item-finish':
+              percent >= Math.floor((Math.floor(100 / steps) * item) / 10) * 10,
+            'step-finished': percent >= 100,
+            'step-item-small': size === 'small'
+          }"
+        />
+      </ol>
+      <span v-if="status === 'exception'" class="progress-step-tip">
+        <SvgIcon name="error" width="14px" height="14px" fill="#ff4d4f" />
+      </span>
+      <span v-else-if="percent >= 100" class="progress-step-tip">
+        <SvgIcon name="success" width="14px" height="14px" fill="#52c41a" />
+      </span>
+      <span class="progress-step-tip" v-else-if="showInfo">{{
+        format ? format(percent) : percent + '%'
+      }}</span>
     </div>
   </div>
 </template>
@@ -251,6 +280,50 @@ onMounted(() => {
       &.progress-circle-finish {
         stroke: #52c41a;
       }
+    }
+  }
+  > .ui-progress-step {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    svg {
+      width: 14px;
+      height: 14px;
+    }
+    &.progress-step-small {
+      svg {
+        width: 12px;
+        height: 12px;
+      }
+    }
+    > .progress-step-wrap {
+      display: flex;
+      list-style: none;
+      > .progress-step-item {
+        width: 14px;
+        height: 8px;
+        margin-right: 2px;
+        background: #f3f3f3;
+        transition: all 250ms;
+        &.step-item-finish {
+          background-color: #1890ff;
+        }
+        &.step-finished {
+          background-color: #52c41a;
+        }
+        &.step-item-small {
+          width: 2px;
+        }
+      }
+    }
+    > .progress-step-tip {
+      font-size: 14px;
+      width: 2em;
+      margin-left: 8px;
+      line-height: 1;
+      white-space: nowrap;
+      text-align: left;
+      word-break: normal;
     }
   }
 }

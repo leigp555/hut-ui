@@ -38,6 +38,20 @@
       <Button @click="decline"> - </Button>
       <Button @click="increase" style="margin-left: 20px"> + </Button>
     </div>
+    <!--  步骤进度条-->
+    <div style="height: 50px"></div>
+    <Progress type="step" :percent="defaultPercent" :steps="3" />
+    <Progress type="step" :percent="60" :steps="3" />
+    <br />
+    <Progress type="step" :percent="30" :steps="5" />
+    <br />
+    <Progress
+      type="step"
+      :percent="100"
+      :steps="5"
+      size="small"
+      stroke-color="#52c41a"
+    />
   </div>
 </template>
 
