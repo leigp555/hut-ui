@@ -1,10 +1,16 @@
 <script setup lang="ts">
 import { withDefaults, defineProps, onMounted, toRefs, ref } from 'vue'
+import SvgIcon from '@/lib/common/SvgIcon.vue'
 
 const props = withDefaults(
-  defineProps<{ percent: number; status?: 'active' | 'exception' }>(),
+  defineProps<{
+    percent: number
+    status?: 'active' | 'exception'
+    showInfo?: boolean
+  }>(),
   {
-    percent: 0
+    percent: 0,
+    showInfo: true
   }
 )
 const { percent } = toRefs(props)
@@ -32,10 +38,22 @@ onMounted(() => {
         <div
           class="progress-line-block"
           ref="blockRef"
-          :class="{ 'line-block-active': status === 'active' }"
+          :class="{
+            'line-block-active': status === 'active',
+            'line-block-exception': status === 'exception',
+            'line-block-success': percent === 100
+          }"
         ></div>
       </div>
-      <span class="progress-line-tip">{{ percent + '%' }}</span>
+      <span class="progress-line-tip">
+        <span v-if="status === 'exception'">
+          <SvgIcon name="error" width="16px" height="16px" fill="#ff4d4f" />
+        </span>
+        <span v-else-if="percent === 100">
+          <SvgIcon name="success" width="16px" height="16px" fill="#52c41a" />
+        </span>
+        <span v-else-if="showInfo">{{ percent + '%' }}</span>
+      </span>
     </div>
   </div>
 </template>
@@ -64,6 +82,12 @@ onMounted(() => {
         border-radius: 100px;
         background-color: #1890ff;
         overflow: hidden;
+        &.line-block-success {
+          background-color: #52c41a;
+        }
+        &.line-block-exception {
+          background-color: #ff4d4f;
+        }
         &.line-block-active {
           &::after {
             position: absolute;
@@ -84,15 +108,20 @@ onMounted(() => {
     }
     > .progress-line-tip {
       display: inline-block;
+      align-items: center;
       width: 2em;
       margin-left: 8px;
       color: #000000d9;
-      font-size: 1em;
+      font-size: 14px;
       line-height: 1;
       white-space: nowrap;
       text-align: left;
       vertical-align: middle;
       word-break: normal;
+      > span {
+        display: flex;
+        align-items: center;
+      }
     }
   }
 }
