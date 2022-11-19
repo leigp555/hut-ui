@@ -164,8 +164,14 @@ onMounted(() => {
 </template>
 
 <style lang="scss">
+$normal: #f5f5f5;
+$complete_color: #1890ff;
+$success_color: #52c41a;
+$fail_color: #ff4d4f;
+$font_color: #000000d9;
 .ui-progress-wrap {
   font-size: 14px;
+  color: $font_color;
   > .ui-progress-line {
     display: flex;
     align-items: center;
@@ -176,7 +182,7 @@ onMounted(() => {
       flex-grow: 10;
       overflow: hidden;
       vertical-align: middle;
-      background-color: #f5f5f5;
+      background-color: $normal;
       border-radius: 100px;
       &.line-container-small {
         height: 6px;
@@ -188,14 +194,14 @@ onMounted(() => {
         width: 100%;
         height: 100%;
         border-radius: 100px;
-        background-color: #1890ff;
+        background-color: $complete_color;
         overflow: hidden;
         transition: all 250ms;
         &.line-block-success {
-          background-color: #52c41a;
+          background-color: $success_color;
         }
         &.line-block-exception {
-          background-color: #ff4d4f;
+          background-color: $fail_color;
         }
         &.line-block-active {
           &::after {
@@ -220,7 +226,7 @@ onMounted(() => {
       align-items: center;
       width: 2em;
       margin-left: 8px;
-      color: #000000d9;
+      color: $font_color;
       font-size: 14px;
       line-height: 1;
       white-space: nowrap;
@@ -272,13 +278,13 @@ onMounted(() => {
       transition: all 250ms;
     }
     .progress-circle-inner {
-      stroke: #f5f5f5; /* 设置边框颜色 */
+      stroke: $normal; /* 设置边框颜色 */
       stroke-dashoffset: 0;
     }
     .progress-circle-outer {
-      stroke: #1890ff; /* 设置边框颜色 */
+      stroke: $complete_color; /* 设置边框颜色 */
       &.progress-circle-finish {
-        stroke: #52c41a;
+        stroke: $success_color;
       }
     }
   }
@@ -303,13 +309,13 @@ onMounted(() => {
         width: 14px;
         height: 8px;
         margin-right: 2px;
-        background: #f3f3f3;
+        background: $normal;
         transition: all 250ms;
         &.step-item-finish {
-          background-color: #1890ff;
+          background-color: $complete_color;
         }
         &.step-finished {
-          background-color: #52c41a;
+          background-color: $success_color;
         }
         &.step-item-small {
           width: 2px;
