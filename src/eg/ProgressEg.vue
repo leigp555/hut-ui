@@ -28,7 +28,11 @@
 
     <!--  圆形进度条-->
     <div style="height: 50px"></div>
-    <Progress type="circle" :percent="75" :format="(percent) => `${percent} Days`" />
+    <Progress
+      type="circle"
+      :percent="defaultPercent"
+      :format="(percent) => `${percent} Days`"
+    />
     <div>
       <Button @click="decline"> - </Button>
       <Button @click="increase" style="margin-left: 20px"> + </Button>
@@ -41,7 +45,7 @@ import { ref } from 'vue'
 import Progress from '@/lib/progress/Progress.vue'
 import Button from '@/lib/button/Button.vue'
 
-const defaultPercent = ref<number>(0)
+const defaultPercent = ref<number>(30)
 const increase = () => {
   const percent = defaultPercent.value + 10
   defaultPercent.value = percent > 100 ? 100 : percent

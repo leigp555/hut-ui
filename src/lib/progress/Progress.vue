@@ -25,7 +25,7 @@ const dashoffset = ref<number>(0)
 const blockRef = ref<HTMLElement | null>(null)
 
 const justLinePosition = () => {
-  if (percent.value > left.value) {
+  if (percent.value > left.value + 2) {
     const id = setTimeout(() => {
       blockRef.value!.style.transform = `translate(${left.value}%)`
       left.value += 2
@@ -40,30 +40,38 @@ const justLinePosition = () => {
 }
 
 const justCirclePosition = () => {
-  console.log('percent.value')
-  console.log(percent.value)
-  console.log('dashoffset.value')
-  console.log(dashoffset.value)
-  if (percent.value / 100 > dashoffset.value / 314) {
-    const id = setTimeout(() => {
-      dashoffset.value += 10
-      justCirclePosition()
-      window.clearTimeout(id)
-    })
-  } else {
-    dashoffset.value = (percent.value * 314) / 100
+  if (percent.value / 100 === dashoffset.value / 314) {
     return
+  }
+  if (percent.value / 100 > dashoffset.value / 314) {
+    const id = setInterval(() => {
+      if (percent.value / 100 > (dashoffset.value + 10) / 314) {
+        dashoffset.value += 10
+      } else {
+        window.clearTimeout(id)
+        dashoffset.value = (percent.value * 314) / 100
+      }
+    })
+  } else if (percent.value / 100 < dashoffset.value / 314) {
+    const id = setInterval(() => {
+      if (percent.value / 100 < (dashoffset.value - 10) / 314) {
+        dashoffset.value -= 10
+      } else {
+        window.clearTimeout(id)
+        dashoffset.value = (percent.value * 314) / 100
+      }
+    })
   }
 }
 
 onMounted(() => {
-  if (type.value === 'line') {
-    watchEffect(() => {
+  watchEffect(() => {
+    if (type.value === 'line') {
       blockRef.value && justLinePosition()
-    })
-  } else if (type.value === 'circle') {
-    justCirclePosition()
-  }
+    } else if (type.value === 'circle') {
+      justCirclePosition()
+    }
+  })
 })
 </script>
 
@@ -97,18 +105,20 @@ onMounted(() => {
     <div class="ui-progress-circle" v-else-if="type === 'circle'">
       <svg style="width: 120px; height: 120px">
         <circle
-          r="50"
-          cx="60"
-          cy="60"
-          class="progress-circle-outer progress-circle-item"
-        />
-        <circle
-          r="50"
-          cx="60"
-          cy="60"
           class="progress-circle-inner progress-circle-item"
-          :stroke-dashoffset="-dashoffset"
-        />
+          cx="60"
+          cy="60"
+          r="50"
+          fill="none"
+        ></circle>
+        <circle
+          class="progress-circle-outer progress-circle-item"
+          cx="60"
+          cy="60"
+          r="50"
+          fill="none"
+          :stroke-dashoffset="314 - dashoffset"
+        ></circle>
       </svg>
     </div>
   </div>
@@ -214,7 +224,7 @@ onMounted(() => {
     }
     .progress-circle-inner {
       stroke: #f5f5f5; /* 设置边框颜色 */
-      stroke-width: 8px;
+      stroke-dashoffset: 0;
     }
     .progress-circle-outer {
       stroke: #1890ff; /* 设置边框颜色 */
