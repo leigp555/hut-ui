@@ -17,5 +17,6 @@ import Progress from '@/lib/progress/Progress.vue'
   display: flex;
   flex-direction: column;
   gap: 20px;
+  padding: 50px;
 }
 </style>

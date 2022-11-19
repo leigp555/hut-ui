@@ -1,9 +1,12 @@
 <script setup lang="ts">
 import { withDefaults, defineProps, onMounted, toRefs, ref } from 'vue'
 
-const props = withDefaults(defineProps<{ percent: number }>(), {
-  percent: 0
-})
+const props = withDefaults(
+  defineProps<{ percent: number; status?: 'active' | 'exception' }>(),
+  {
+    percent: 0
+  }
+)
 const { percent } = toRefs(props)
 const left = ref<number>(0)
 const blockRef = ref<HTMLElement | null>(null)
@@ -11,10 +14,10 @@ onMounted(() => {
   if (percent.value >= left.value) {
     const id = setInterval(() => {
       if (percent.value >= left.value) {
-        blockRef.value!.style.left = `${left.value - 100}%`
+        blockRef.value!.style.transform = `translate(${left.value}%)`
         left.value += 1
       } else {
-        blockRef.value!.style.left = `${percent.value - 100}%`
+        blockRef.value!.style.transform = `translate(${percent.value}%)`
         window.clearInterval(id)
       }
     })
@@ -26,9 +29,13 @@ onMounted(() => {
   <div class="ui-progress-wrap">
     <div class="ui-progress-line">
       <div class="progress-line-container">
-        <div class="progress-line-block" ref="blockRef"></div>
+        <div
+          class="progress-line-block"
+          ref="blockRef"
+          :class="{ 'line-block-active': status === 'active' }"
+        ></div>
       </div>
-      <span class="progress-line-tip">{{ percent }}</span>
+      <span class="progress-line-tip">{{ percent + '%' }}</span>
     </div>
   </div>
 </template>
@@ -51,11 +58,14 @@ onMounted(() => {
       > .progress-line-block {
         position: absolute;
         top: 0;
-        left: 100%;
+        left: -100%;
         width: 100%;
         height: 100%;
         border-radius: 100px;
         background-color: #1890ff;
+        > .line-block-active {
+          background-color: red;
+        }
       }
     }
     > .progress-line-tip {
