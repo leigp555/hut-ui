@@ -10,23 +10,26 @@ const props = withDefaults(
     size?: 'small' | 'normal'
     // eslint-disable-next-line no-unused-vars
     format?: (percent: number) => string
+    type?: 'line' | 'circle'
   }>(),
   {
     percent: 0,
     showInfo: true,
-    size: 'normal'
+    size: 'normal',
+    type: 'line'
   }
 )
-const { percent } = toRefs<number>(props)
+const { percent, type } = toRefs<number>(props)
 const left = ref<number>(0)
+const dashoffset = ref<number>(0)
 const blockRef = ref<HTMLElement | null>(null)
 
-const justPosition = () => {
+const justLinePosition = () => {
   if (percent.value > left.value) {
     const id = setTimeout(() => {
       blockRef.value!.style.transform = `translate(${left.value}%)`
       left.value += 2
-      justPosition()
+      justLinePosition()
       window.clearTimeout(id)
     })
   } else {
@@ -36,16 +39,37 @@ const justPosition = () => {
   }
 }
 
+const justCirclePosition = () => {
+  console.log('percent.value')
+  console.log(percent.value)
+  console.log('dashoffset.value')
+  console.log(dashoffset.value)
+  if (percent.value / 100 > dashoffset.value / 314) {
+    const id = setTimeout(() => {
+      dashoffset.value += 10
+      justCirclePosition()
+      window.clearTimeout(id)
+    })
+  } else {
+    dashoffset.value = (percent.value * 314) / 100
+    return
+  }
+}
+
 onMounted(() => {
-  watchEffect(() => {
-    blockRef.value && justPosition()
-  })
+  if (type.value === 'line') {
+    watchEffect(() => {
+      blockRef.value && justLinePosition()
+    })
+  } else if (type.value === 'circle') {
+    justCirclePosition()
+  }
 })
 </script>
 
 <template>
   <div class="ui-progress-wrap">
-    <div class="ui-progress-line">
+    <div class="ui-progress-line" v-if="type === 'line'">
       <div
         class="progress-line-container"
         :class="{ 'line-container-small': size === 'small' }"
@@ -69,6 +93,23 @@ onMounted(() => {
         </span>
         <span v-else-if="showInfo">{{ format ? format(percent) : percent + '%' }}</span>
       </span>
+    </div>
+    <div class="ui-progress-circle" v-else-if="type === 'circle'">
+      <svg style="width: 120px; height: 120px">
+        <circle
+          r="50"
+          cx="60"
+          cy="60"
+          class="progress-circle-outer progress-circle-item"
+        />
+        <circle
+          r="50"
+          cx="60"
+          cy="60"
+          class="progress-circle-inner progress-circle-item"
+          :stroke-dashoffset="-dashoffset"
+        />
+      </svg>
     </div>
   </div>
 </template>
@@ -152,6 +193,31 @@ onMounted(() => {
         display: flex;
         align-items: center;
       }
+    }
+  }
+  > .ui-progress-circle {
+    width: 120px;
+    height: 120px;
+    font-size: 24px;
+    position: relative;
+    line-height: 1;
+    background-color: transparent;
+    .progress-circle-item {
+      stroke-dasharray: 314;
+      fill: transparent;
+      stroke-width: 6px;
+      transform: rotate(-90deg);
+      transform-origin: center;
+      stroke-linecap: round;
+      fill-opacity: 0;
+      transition: all 250ms;
+    }
+    .progress-circle-inner {
+      stroke: #f5f5f5; /* 设置边框颜色 */
+      stroke-width: 8px;
+    }
+    .progress-circle-outer {
+      stroke: #1890ff; /* 设置边框颜色 */
     }
   }
 }

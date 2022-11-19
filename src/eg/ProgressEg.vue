@@ -25,6 +25,14 @@
       <Button @click="decline"> - </Button>
       <Button @click="increase" style="margin-left: 20px"> + </Button>
     </div>
+
+    <!--  圆形进度条-->
+    <div style="height: 50px"></div>
+    <Progress type="circle" :percent="75" :format="(percent) => `${percent} Days`" />
+    <div>
+      <Button @click="decline"> - </Button>
+      <Button @click="increase" style="margin-left: 20px"> + </Button>
+    </div>
   </div>
 </template>
 
