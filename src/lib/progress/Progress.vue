@@ -15,7 +15,7 @@ onMounted(() => {
     const id = setInterval(() => {
       if (percent.value >= left.value) {
         blockRef.value!.style.transform = `translate(${left.value}%)`
-        left.value += 1
+        left.value += 2
       } else {
         blockRef.value!.style.transform = `translate(${percent.value}%)`
         window.clearInterval(id)
@@ -63,8 +63,22 @@ onMounted(() => {
         height: 100%;
         border-radius: 100px;
         background-color: #1890ff;
-        > .line-block-active {
-          background-color: red;
+        overflow: hidden;
+        &.line-block-active {
+          &::after {
+            position: absolute;
+            content: '';
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background-color: #fff;
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+            opacity: 1;
+            animation: spin 1s infinite;
+          }
         }
       }
     }
@@ -80,6 +94,17 @@ onMounted(() => {
       vertical-align: middle;
       word-break: normal;
     }
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: translate(-100%);
+    opacity: 1;
+  }
+  to {
+    transform: translate(0);
+    opacity: 0;
   }
 }
 </style>
