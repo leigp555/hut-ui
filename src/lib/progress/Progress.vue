@@ -8,6 +8,8 @@ const props = withDefaults(
     status?: 'active' | 'exception'
     showInfo?: boolean
     size?: 'small' | 'normal'
+    // eslint-disable-next-line no-unused-vars
+    format?: (percent: number) => string
   }>(),
   {
     percent: 0,
@@ -65,7 +67,7 @@ onMounted(() => {
         <span v-else-if="percent >= 100">
           <SvgIcon name="success" width="14px" height="14px" fill="#52c41a" />
         </span>
-        <span v-else-if="showInfo">{{ percent + '%' }}</span>
+        <span v-else-if="showInfo">{{ format ? format(percent) : percent + '%' }}</span>
       </span>
     </div>
   </div>

@@ -12,7 +12,15 @@
     <Progress :percent="70" size="small" status="exception" />
     <Progress :percent="100" size="small" />
     <!--  可以调整percent-->
+    <div style="height: 50px"></div>
     <Progress :percent="defaultPercent" />
+    <div>
+      <Button @click="decline"> - </Button>
+      <Button @click="increase" style="margin-left: 20px"> + </Button>
+    </div>
+    <!--  格式化info-->
+    <div style="height: 50px"></div>
+    <Progress :percent="defaultPercent" :format="(percent) => `${percent}day`" />
     <div>
       <Button @click="decline"> - </Button>
       <Button @click="increase" style="margin-left: 20px"> + </Button>
