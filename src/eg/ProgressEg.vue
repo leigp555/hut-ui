@@ -5,6 +5,12 @@
     <Progress :percent="70" status="exception" />
     <Progress :percent="100" />
     <Progress :percent="50" :show-info="false" />
+    <!--    small-->
+    <div style="height: 50px"></div>
+    <Progress :percent="30" size="small" />
+    <Progress :percent="50" size="small" status="active" />
+    <Progress :percent="70" size="small" status="exception" />
+    <Progress :percent="100" size="small" />
   </div>
 </template>
 

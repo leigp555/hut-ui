@@ -1,16 +1,18 @@
 <script setup lang="ts">
 import { withDefaults, defineProps, onMounted, toRefs, ref } from 'vue'
-import SvgIcon from '@/lib/common/SvgIcon.vue'
+import SvgIcon from '../common/SvgIcon.vue'
 
 const props = withDefaults(
   defineProps<{
     percent: number
     status?: 'active' | 'exception'
     showInfo?: boolean
+    size?: 'small' | 'normal'
   }>(),
   {
     percent: 0,
-    showInfo: true
+    showInfo: true,
+    size: 'normal'
   }
 )
 const { percent } = toRefs(props)
@@ -34,7 +36,10 @@ onMounted(() => {
 <template>
   <div class="ui-progress-wrap">
     <div class="ui-progress-line">
-      <div class="progress-line-container">
+      <div
+        class="progress-line-container"
+        :class="{ 'line-container-small': size === 'small' }"
+      >
         <div
           class="progress-line-block"
           ref="blockRef"
@@ -45,7 +50,7 @@ onMounted(() => {
           }"
         ></div>
       </div>
-      <span class="progress-line-tip">
+      <span class="progress-line-tip" :class="{ 'line-tip-small': size === 'small' }">
         <span v-if="status === 'exception'">
           <SvgIcon name="error" width="16px" height="16px" fill="#ff4d4f" />
         </span>
@@ -73,6 +78,9 @@ onMounted(() => {
       vertical-align: middle;
       background-color: #f5f5f5;
       border-radius: 100px;
+      &.line-container-small {
+        height: 6px;
+      }
       > .progress-line-block {
         position: absolute;
         top: 0;
@@ -118,6 +126,17 @@ onMounted(() => {
       text-align: left;
       vertical-align: middle;
       word-break: normal;
+      svg {
+        width: 16px;
+        height: 16px;
+      }
+      &.line-tip-small {
+        font-size: 12px;
+        svg {
+          width: 14px;
+          height: 14px;
+        }
+      }
       > span {
         display: flex;
         align-items: center;
