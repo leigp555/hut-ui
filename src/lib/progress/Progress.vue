@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { withDefaults, defineProps, onMounted, toRefs, ref } from 'vue'
+import { withDefaults, defineProps, onMounted, ref, watchEffect, toRefs } from 'vue'
 import SvgIcon from '../common/SvgIcon.vue'
 
 const props = withDefaults(
@@ -15,21 +15,29 @@ const props = withDefaults(
     size: 'normal'
   }
 )
-const { percent } = toRefs(props)
+const { percent } = toRefs<number>(props)
 const left = ref<number>(0)
 const blockRef = ref<HTMLElement | null>(null)
-onMounted(() => {
-  if (percent.value >= left.value) {
-    const id = setInterval(() => {
-      if (percent.value >= left.value) {
-        blockRef.value!.style.transform = `translate(${left.value}%)`
-        left.value += 2
-      } else {
-        blockRef.value!.style.transform = `translate(${percent.value}%)`
-        window.clearInterval(id)
-      }
+
+const justPosition = () => {
+  if (percent.value > left.value) {
+    const id = setTimeout(() => {
+      blockRef.value!.style.transform = `translate(${left.value}%)`
+      left.value += 2
+      justPosition()
+      window.clearTimeout(id)
     })
+  } else {
+    left.value = percent.value
+    blockRef.value!.style.transform = `translate(${percent.value}%)`
+    return
   }
+}
+
+onMounted(() => {
+  watchEffect(() => {
+    blockRef.value && justPosition()
+  })
 })
 </script>
 
@@ -52,10 +60,10 @@ onMounted(() => {
       </div>
       <span class="progress-line-tip" :class="{ 'line-tip-small': size === 'small' }">
         <span v-if="status === 'exception'">
-          <SvgIcon name="error" width="16px" height="16px" fill="#ff4d4f" />
+          <SvgIcon name="error" width="14px" height="14px" fill="#ff4d4f" />
         </span>
-        <span v-else-if="percent === 100">
-          <SvgIcon name="success" width="16px" height="16px" fill="#52c41a" />
+        <span v-else-if="percent >= 100">
+          <SvgIcon name="success" width="14px" height="14px" fill="#52c41a" />
         </span>
         <span v-else-if="showInfo">{{ percent + '%' }}</span>
       </span>
@@ -90,6 +98,7 @@ onMounted(() => {
         border-radius: 100px;
         background-color: #1890ff;
         overflow: hidden;
+        transition: all 250ms;
         &.line-block-success {
           background-color: #52c41a;
         }
@@ -127,14 +136,14 @@ onMounted(() => {
       vertical-align: middle;
       word-break: normal;
       svg {
-        width: 16px;
-        height: 16px;
+        width: 14px;
+        height: 14px;
       }
       &.line-tip-small {
         font-size: 12px;
         svg {
-          width: 14px;
-          height: 14px;
+          width: 12px;
+          height: 12px;
         }
       }
       > span {
