@@ -24,7 +24,7 @@
     <div class="ui-result-actions" v-if="$slots.extra">
       <slot name="extra" />
     </div>
-    <div class="ui-result-desc" v-if="$slots.extra">
+    <div class="ui-result-desc" v-if="$slots.desc">
       <slot name="desc" />
     </div>
   </div>
