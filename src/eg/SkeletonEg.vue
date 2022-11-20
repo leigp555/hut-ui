@@ -1,8 +1,22 @@
 <template>
   <div class="ui-template-wrap">
-    <Skeleton />
-    <Skeleton :paragraph="{ rows: 4 }" />
-    <Skeleton avatar :paragraph="{ rows: 4 }" />
+    <div>
+      <h4>普通</h4>
+      <Skeleton />
+    </div>
+    <div>
+      <h4>paragraph</h4>
+      <Skeleton :paragraph="{ rows: 4 }" />
+    </div>
+    <div>
+      <h4>active</h4>
+      <Skeleton active />
+    </div>
+    <div>
+      <h4>active avatar</h4>
+      <Skeleton avatar :paragraph="{ rows: 4 }" />
+    </div>
+
     <SkeletonAvatar />
     <SkeletonButton />
     <SkeletonInput />
