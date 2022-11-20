@@ -1,24 +1,27 @@
 <template>
-  <div class="ui-skeletonInput-wrap">
-    <slot />
-  </div>
+  <div class="ui-skeletonInput-wrap" :class="{ 'ui-skeletonInput-active': active }" />
 </template>
 
 <script setup lang="ts">
 import { withDefaults, defineProps } from 'vue'
 
-withDefaults(defineProps<{}>(), {})
+withDefaults(defineProps<{ active?: boolean }>(), { active: false })
 </script>
 
 <style lang="scss">
-$backGround_color: rgba(190, 190, 190, 0.2);
+@import './index.scss';
 .ui-skeletonInput-wrap {
   width: 200px;
   display: inline-block;
   vertical-align: top;
-  background: $backGround_color;
+  background-color: $bac_color;
   height: 32px;
   line-height: 32px;
   border-radius: 2px;
+  &.ui-skeletonInput-active {
+    background: $active_bac_color;
+    background-size: 400% 100%;
+    animation: skeleton_active 1.4s ease infinite;
+  }
 }
 </style>

@@ -1,25 +1,28 @@
 <template>
-  <div class="ui-skeletonButton-wrap">
-    <slot />
-  </div>
+  <div class="ui-skeletonButton-wrap" :class="{ 'ui-skeletonButton-active': active }" />
 </template>
 
 <script setup lang="ts">
 import { withDefaults, defineProps } from 'vue'
 
-withDefaults(defineProps<{}>(), {})
+withDefaults(defineProps<{ active?: boolean }>(), { active: false })
 </script>
 
 <style lang="scss">
-$backGround_color: rgba(190, 190, 190, 0.2);
+@import './index.scss';
 .ui-skeletonButton-wrap {
   display: inline-block;
   vertical-align: top;
-  background: $backGround_color;
+  background-color: $bac_color;
   border-radius: 2px;
   width: 64px;
   min-width: 64px;
   height: 32px;
   line-height: 32px;
+  &.ui-skeletonButton-active {
+    background: $active_bac_color;
+    background-size: 400% 100%;
+    animation: skeleton_active 1.4s ease infinite;
+  }
 }
 </style>

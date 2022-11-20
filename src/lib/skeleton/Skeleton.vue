@@ -33,7 +33,7 @@ withDefaults(
 </script>
 
 <style lang="scss">
-$bac_color: rgba(190, 190, 190, 0.2);
+@import './index.scss';
 .ui-skeleton-wrap {
   width: 100%;
   display: flex;
@@ -54,13 +54,9 @@ $bac_color: rgba(190, 190, 190, 0.2);
       background: $bac_color;
       border-radius: 4px;
       &.skeleton-title-active {
-        background: linear-gradient(
-          90deg,
-          rgba(190, 190, 190, 0.2) 25%,
-          rgba(129, 129, 129, 0.24) 37%,
-          rgba(190, 190, 190, 0.2) 63%
-        );
+        background: $active_bac_color;
         background-size: 400% 100%;
+        animation: skeleton_active 1.4s ease infinite;
       }
     }
     .ui-skeleton-item {
@@ -70,12 +66,7 @@ $bac_color: rgba(190, 190, 190, 0.2);
       background: $bac_color;
       border-radius: 4px;
       &.skeleton-item-active {
-        background: linear-gradient(
-          90deg,
-          rgba(190, 190, 190, 0.2) 25%,
-          rgba(129, 129, 129, 0.24) 37%,
-          rgba(190, 190, 190, 0.2) 63%
-        );
+        background: $active_bac_color;
         background-size: 400% 100%;
         animation: skeleton_active 1.4s ease infinite;
       }
@@ -86,14 +77,6 @@ $bac_color: rgba(190, 190, 190, 0.2);
         width: 61%;
       }
     }
-  }
-}
-@keyframes skeleton_active {
-  0% {
-    background-position: 100% 50%;
-  }
-  to {
-    background-position: 0 50%;
   }
 }
 </style>

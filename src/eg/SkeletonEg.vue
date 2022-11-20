@@ -17,10 +17,10 @@
       <Skeleton avatar :paragraph="{ rows: 4 }" />
     </div>
 
-    <SkeletonAvatar />
-    <SkeletonButton />
-    <SkeletonInput />
-    <SkeletonImg />
+    <SkeletonAvatar active />
+    <SkeletonButton active />
+    <SkeletonInput active />
+    <SkeletonImg active />
   </div>
 </template>
 
