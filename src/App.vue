@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import Example from '@/eg/SpinEg.vue'
+import Example from '@/eg/BackTopEg.vue'
 </script>
 
 <style>
