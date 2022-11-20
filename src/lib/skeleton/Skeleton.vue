@@ -36,7 +36,7 @@ withDefaults(
     paragraph: () => ({ rows: 3 }),
     avatar: false,
     active: false,
-    loading: false
+    loading: true
   }
 )
 </script>

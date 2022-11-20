@@ -1,11 +1,21 @@
 <template>
-  <div class="ui-skeletonInput-wrap" :class="{ 'ui-skeletonInput-active': active }" />
+  <div v-if="!loading">
+    <slot />
+  </div>
+  <div
+    v-if="loading"
+    class="ui-skeletonInput-wrap"
+    :class="{ 'ui-skeletonInput-active': active }"
+  />
 </template>
 
 <script setup lang="ts">
 import { withDefaults, defineProps } from 'vue'
 
-withDefaults(defineProps<{ active?: boolean }>(), { active: false })
+withDefaults(defineProps<{ active?: boolean; loading?: boolean }>(), {
+  active: false,
+  loading: true
+})
 </script>
 
 <style lang="scss">

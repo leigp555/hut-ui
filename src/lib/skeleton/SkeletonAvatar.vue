@@ -1,5 +1,9 @@
 <template>
+  <div v-if="!loading">
+    <slot />
+  </div>
   <div
+    v-if="loading"
     class="ui-skeletonAvatar-wrap"
     :class="{ 'ui-skeletonAvatar-active': active }"
     :style="{ width: `${size}px`, height: `${size}px`, lineHeight: `${size}px` }"
@@ -9,9 +13,10 @@
 <script setup lang="ts">
 import { withDefaults, defineProps } from 'vue'
 
-withDefaults(defineProps<{ size?: number; active?: boolean }>(), {
+withDefaults(defineProps<{ size?: number; active?: boolean; loading?: boolean }>(), {
   size: 32,
-  active: false
+  active: false,
+  loading: true
 })
 </script>
 

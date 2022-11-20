@@ -1,5 +1,12 @@
 <template>
-  <div class="ui-skeletonImg-wrap" :class="{ 'ui-skeletonImg-active': active }">
+  <div v-if="!loading">
+    <slot />
+  </div>
+  <div
+    v-if="loading"
+    class="ui-skeletonImg-wrap"
+    :class="{ 'ui-skeletonImg-active': active }"
+  >
     <SvgIcon name="icon-img" width="48px" height="48px" fill="#bfbfbf" />
   </div>
 </template>
@@ -8,7 +15,10 @@
 import { withDefaults, defineProps } from 'vue'
 import SvgIcon from '@/lib/common/SvgIcon.vue'
 
-withDefaults(defineProps<{ active?: boolean }>(), { active: false })
+withDefaults(defineProps<{ active?: boolean; loading?: boolean }>(), {
+  active: false,
+  loading: true
+})
 </script>
 
 <style lang="scss">
