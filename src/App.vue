@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import Example from '@/eg/SkeletonEg.vue'
+import Example from '@/eg/SpinEg.vue'
 </script>
 
 <style>
