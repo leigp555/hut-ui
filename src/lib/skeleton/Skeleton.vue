@@ -2,7 +2,7 @@
   <div class="ui-skeleton-wrap">
     <h3 class="ui-skeleton-title" />
     <ol>
-      <li v-for="item in 3" :key="item" class="ui-skeleton-item"></li>
+      <li v-for="item in paragraph.rows" :key="item" class="ui-skeleton-item"></li>
     </ol>
   </div>
 </template>
@@ -10,7 +10,9 @@
 <script setup lang="ts">
 import { withDefaults, defineProps } from 'vue'
 
-withDefaults(defineProps<{}>(), {})
+withDefaults(defineProps<{ paragraph?: { rows: number } }>(), {
+  paragraph: () => ({ rows: 3 })
+})
 </script>
 
 <style lang="scss">
