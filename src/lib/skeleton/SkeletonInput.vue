@@ -6,16 +6,27 @@
     v-if="loading"
     class="ui-skeletonInput-wrap"
     :class="{ 'ui-skeletonInput-active': active }"
+    :style="{ width: `${width}px`, height: `${height}px`, lineHeight: `${height}px` }"
   />
 </template>
 
 <script setup lang="ts">
 import { withDefaults, defineProps } from 'vue'
 
-withDefaults(defineProps<{ active?: boolean; loading?: boolean }>(), {
-  active: false,
-  loading: true
-})
+withDefaults(
+  defineProps<{
+    active?: boolean
+    loading?: boolean
+    width?: number
+    height?: number
+  }>(),
+  {
+    active: false,
+    loading: true,
+    height: 32,
+    width: 200
+  }
+)
 </script>
 
 <style lang="scss">
