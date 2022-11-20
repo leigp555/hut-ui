@@ -1,5 +1,8 @@
 <template>
-  <div class="ui-skeletonAvatar-wrap">
+  <div
+    class="ui-skeletonAvatar-wrap"
+    :style="{ width: `${size}px`, height: `${size}px`, lineHeight: `${size}px` }"
+  >
     <slot />
   </div>
 </template>
@@ -7,7 +10,9 @@
 <script setup lang="ts">
 import { withDefaults, defineProps } from 'vue'
 
-withDefaults(defineProps<{}>(), {})
+withDefaults(defineProps<{ size?: number }>(), {
+  size: 32
+})
 </script>
 
 <style lang="scss">

@@ -2,6 +2,7 @@
   <div class="ui-template-wrap">
     <Skeleton />
     <Skeleton :paragraph="{ rows: 4 }" />
+    <Skeleton avatar :paragraph="{ rows: 4 }" />
     <SkeletonAvatar />
     <SkeletonButton />
     <SkeletonInput />
