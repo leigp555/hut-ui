@@ -1,5 +1,8 @@
 <template>
-  <div class="ui-skeleton-wrap">
+  <div v-if="!loading">
+    <slot />
+  </div>
+  <div class="ui-skeleton-wrap" v-else-if="loading">
     <div v-if="avatar" class="ui-skeleton-header">
       <SkeletonAvatar :size="40" :active="active" />
     </div>
@@ -23,11 +26,17 @@ import { withDefaults, defineProps } from 'vue'
 import SkeletonAvatar from './SkeletonAvatar.vue'
 
 withDefaults(
-  defineProps<{ paragraph?: { rows: number }; avatar?: boolean; active?: boolean }>(),
+  defineProps<{
+    paragraph?: { rows: number }
+    avatar?: boolean
+    active?: boolean
+    loading?: boolean
+  }>(),
   {
     paragraph: () => ({ rows: 3 }),
     avatar: false,
-    active: false
+    active: false,
+    loading: false
   }
 )
 </script>
