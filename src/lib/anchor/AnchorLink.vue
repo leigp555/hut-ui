@@ -38,7 +38,7 @@ onMounted(() => {
   watch(scrollDistance, () => {
     if (
       dom.offsetTop >= scrollDistance!.value - dom.clientHeight &&
-      dom.offsetTop <= scrollDistance!.value + 100
+      dom.offsetTop <= scrollDistance!.value + 80
     ) {
       selectedEl?.value.el.classList.remove('active')
       changeSelected({ el: titleRef.value, id: href.value })
@@ -50,9 +50,6 @@ onMounted(() => {
 <template>
   <div class="ui-anchorLink-wrap">
     <span ref="titleRef" @click="onClick" class="ui-anchorLink-title">{{ title }}</span>
-    <div class="ui-anchorLink-slot">
-      <slot />
-    </div>
   </div>
 </template>
 

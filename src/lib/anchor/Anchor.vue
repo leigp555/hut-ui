@@ -1,11 +1,6 @@
 <template>
   <div class="ui-anchor-wrap">
-    <div class="ui-anchor-nav">
-      <slot name="nav" />
-    </div>
-    <div class="ui-anchor-content">
-      <slot />
-    </div>
+    <slot />
   </div>
 </template>
 
@@ -64,16 +59,14 @@ onUnmounted(() => {
 
 <style lang="scss">
 .ui-anchor-wrap {
-  > .ui-anchor-nav {
-    display: inline-flex;
-    flex-direction: column;
-    gap: 10px;
-    position: fixed;
-    top: 50px;
-    left: 250px;
-    background-color: yellow;
-    width: 100px;
-    padding: 20px;
-  }
+  display: inline-flex;
+  flex-direction: column;
+  gap: 10px;
+  position: fixed;
+  top: 50px;
+  left: 250px;
+  background-color: yellow;
+  width: 100px;
+  padding: 20px;
 }
 </style>
