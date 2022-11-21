@@ -1,24 +1,36 @@
 <template>
   <div class="ui-anchor-wrap">
-    <slot />
+    <Component
+      v-for="item in elInfo"
+      :is="item.titleVNode"
+      :key="item.titleVNode"
+      :class="{ active: item.active }"
+    />
   </div>
 </template>
 
 <script setup lang="ts">
-import { onMounted, onUnmounted, provide, Ref, ref } from 'vue'
+import { onMounted, onUnmounted, ref, useSlots, VNode } from 'vue'
 
-const scrollDistance = ref<number>(0)
-const selectedEl = ref<{ el: HTMLElement | null; id: string }>({ el: null, id: '' })
-const changeSelected = (newEl) => {
-  selectedEl.value = newEl
-}
+const slots = useSlots().default()
 
-provide<Ref<number>>('ui-anchor-scrollDistance', scrollDistance)
-provide<Ref<{ el: HTMLElement | null; id: string }>>('ui-anchor-selectedEl', selectedEl)
-provide<Ref<{ el: HTMLElement | null; id: string }>>(
-  'ui-anchor-change-selectedEl',
-  changeSelected
-)
+const elInfo = ref<
+  {
+    titleVNode: VNode
+    targetOffsetTop: number
+    targetClientHeight: number
+    active: boolean
+  }[]
+>([])
+// 获取所有节点的信息
+elInfo.value = slots.map((item, index) => {
+  return {
+    titleVNode: item,
+    targetOffsetTop: null,
+    targetClientHeight: null,
+    active: index === 0
+  }
+})
 
 // 简单的节流函数
 function throttle(func, wait, mustRun) {
@@ -42,14 +54,32 @@ function throttle(func, wait, mustRun) {
 
 // 获取滑动的高度
 function handle() {
-  scrollDistance.value = document.documentElement.scrollTop || document.body.scrollTop
-  // console.log(document.documentElement.scrollTop)
-  // console.log(document.body.scrollTop)
+  // console.log(elInfo.value)
+  const scrollDistance = document.documentElement.scrollTop || document.body.scrollTop
+  elInfo.value.forEach((item) => {
+    item.active =
+      item.targetOffsetTop >= scrollDistance - item.targetClientHeight &&
+      item.targetOffsetTop <= scrollDistance + 80
+  })
 }
 
+// 绑定监听滚动事件
 const scrollHandle = throttle(handle, 10, 10)
-
 onMounted(() => {
+  elInfo.value.forEach((item) => {
+    let targetOffsetTop: number
+    let targetClientHeight: number
+    const target = document.querySelector(item.titleVNode.props.href) as HTMLElement
+    if (target) {
+      targetOffsetTop = target.offsetTop
+      targetClientHeight = target.clientHeight
+    } else {
+      targetOffsetTop = 0
+      targetClientHeight = 0
+    }
+    item.targetClientHeight = targetClientHeight
+    item.targetOffsetTop = targetOffsetTop
+  })
   window.addEventListener('scroll', scrollHandle)
 })
 onUnmounted(() => {
