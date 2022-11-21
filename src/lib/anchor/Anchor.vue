@@ -1,5 +1,17 @@
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref, useSlots, VNode } from 'vue'
+import {
+  defineProps,
+  onMounted,
+  onUnmounted,
+  ref,
+  useSlots,
+  VNode,
+  withDefaults
+} from 'vue'
+
+withDefaults(defineProps<{ customClass?: string }>(), {
+  customClass: 'custom-class'
+})
 
 const slots = useSlots().default()
 
@@ -96,7 +108,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="ui-anchor-wrap">
+  <div class="ui-anchor-wrap" :class="customClass">
     <div class="ui-anchor-indicator">
       <span
         class="anchor-indicator-radius"

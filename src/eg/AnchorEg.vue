@@ -1,13 +1,13 @@
 <template>
   <div class="ui-template-wrap">
-    <Anchor>
-      <AnchorLink href="#a" title="A" />
-      <AnchorLink href="#b" title="B" />
-      <AnchorLink href="#c" title="C" />
-      <AnchorLink href="#d" title="D" />
-      <AnchorLink href="#d_a" title="D_A" />
-      <AnchorLink href="#d_b" title="D_B" />
-      <AnchorLink href="#e" title="E" />
+    <Anchor customClass="customClass">
+      <AnchorLink href="#a" title="Lorem" />
+      <AnchorLink href="#b" title="Dolor" />
+      <AnchorLink href="#c" title="Voluptas" />
+      <AnchorLink href="#d" title="Sunt" />
+      <AnchorLink href="#d_a" title="Amet" />
+      <AnchorLink href="#d_b" title="Totam" />
+      <AnchorLink href="#e" title="Officia" />
     </Anchor>
     <section>
       <div class="xx" id="a">
