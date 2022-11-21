@@ -1,19 +1,9 @@
-<template>
-  <div class="ui-anchor-wrap">
-    <Component
-      v-for="item in elInfo"
-      :is="item.titleVNode"
-      :key="item.titleVNode"
-      :class="{ active: item.active }"
-    />
-  </div>
-</template>
-
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref, useSlots, VNode } from 'vue'
 
 const slots = useSlots().default()
 
+// 选中的节点
 const selectItem = ref<{
   titleVNode: VNode
   targetOffsetTop: number
@@ -21,21 +11,26 @@ const selectItem = ref<{
   active: boolean
 }>({})
 
+// 所有节点
 const elInfo = ref<
   {
     titleVNode: VNode
     targetOffsetTop: number
     targetClientHeight: number
     active: boolean
+    order: number
   }[]
 >([])
+
+const currentOrder = ref<number>(0)
 // 获取所有节点的信息
 elInfo.value = slots.map((item, index) => {
   return {
     titleVNode: item,
     targetOffsetTop: null,
     targetClientHeight: null,
-    active: index === 0
+    active: index === 0,
+    order: index
   }
 })
 
@@ -68,6 +63,7 @@ function handle() {
       item.targetOffsetTop <= scrollDistance + 80
     ) {
       selectItem.value = item
+      currentOrder.value = item.order
     }
     item.active = false
   })
@@ -99,16 +95,54 @@ onUnmounted(() => {
 })
 </script>
 
+<template>
+  <div class="ui-anchor-wrap">
+    <div class="ui-anchor-indicator">
+      <span
+        class="anchor-indicator-radius"
+        :style="{ top: `${4 + 23 * currentOrder}px` }"
+      >
+      </span>
+    </div>
+    <Component
+      v-for="item in elInfo"
+      :is="item.titleVNode"
+      :key="item.titleVNode"
+      :class="{ active: item.active }"
+    />
+  </div>
+</template>
+
 <style lang="scss">
 .ui-anchor-wrap {
   display: inline-flex;
   flex-direction: column;
-  gap: 10px;
   position: fixed;
   top: 50px;
-  left: 250px;
-  background-color: yellow;
+  right: 50px;
   width: 100px;
-  padding: 20px;
+  gap: 7px;
+  padding-left: 16px;
+  > .ui-anchor-indicator {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 2px;
+    background-color: #f0f0f0;
+    > .anchor-indicator-radius {
+      position: absolute;
+      left: 50%;
+      top: 4px;
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      background-color: #fff;
+      border: 2px solid #1890ff;
+      border-radius: 8px;
+      transform: translate(-50%);
+      transition: all 250ms;
+    }
+  }
 }
 </style>
