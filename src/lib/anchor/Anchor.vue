@@ -14,6 +14,13 @@ import { onMounted, onUnmounted, ref, useSlots, VNode } from 'vue'
 
 const slots = useSlots().default()
 
+const selectItem = ref<{
+  titleVNode: VNode
+  targetOffsetTop: number
+  targetClientHeight: number
+  active: boolean
+}>({})
+
 const elInfo = ref<
   {
     titleVNode: VNode
@@ -52,19 +59,23 @@ function throttle(func, wait, mustRun) {
   }
 }
 
-// 获取滑动的高度
+// 获取滑动的高度,并判断是否高亮
 function handle() {
-  // console.log(elInfo.value)
   const scrollDistance = document.documentElement.scrollTop || document.body.scrollTop
   elInfo.value.forEach((item) => {
-    item.active =
+    if (
       item.targetOffsetTop >= scrollDistance - item.targetClientHeight &&
       item.targetOffsetTop <= scrollDistance + 80
+    ) {
+      selectItem.value = item
+    }
+    item.active = false
   })
+  selectItem.value.active = true
 }
 
 // 绑定监听滚动事件
-const scrollHandle = throttle(handle, 10, 10)
+const scrollHandle = throttle(handle, 100, 100)
 onMounted(() => {
   elInfo.value.forEach((item) => {
     let targetOffsetTop: number
@@ -80,6 +91,7 @@ onMounted(() => {
     item.targetClientHeight = targetClientHeight
     item.targetOffsetTop = targetOffsetTop
   })
+  selectItem.value = elInfo.value[0]
   window.addEventListener('scroll', scrollHandle)
 })
 onUnmounted(() => {
