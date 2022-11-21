@@ -1,5 +1,5 @@
 <template>
-  <div class="ui-anchor-wrap" ref="wrapRef">
+  <div class="ui-anchor-wrap">
     <div class="ui-anchor-nav">
       <slot name="nav" />
     </div>
@@ -10,9 +10,21 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref } from 'vue'
+import { onMounted, onUnmounted, provide, Ref, ref } from 'vue'
 
-const wrapRef = ref<HTMLElement | null>(null)
+const scrollDistance = ref<number>(0)
+const selectedEl = ref<{ el: HTMLElement | null; id: string }>({ el: null, id: '' })
+const changeSelected = (newEl) => {
+  selectedEl.value = newEl
+}
+
+provide<Ref<number>>('ui-anchor-scrollDistance', scrollDistance)
+provide<Ref<{ el: HTMLElement | null; id: string }>>('ui-anchor-selectedEl', selectedEl)
+provide<Ref<{ el: HTMLElement | null; id: string }>>(
+  'ui-anchor-change-selectedEl',
+  changeSelected
+)
+
 // 简单的节流函数
 function throttle(func, wait, mustRun) {
   let timeout
@@ -33,14 +45,14 @@ function throttle(func, wait, mustRun) {
   }
 }
 
+// 获取滑动的高度
 function handle() {
-  console.log('执行了')
+  scrollDistance.value = document.documentElement.scrollTop || document.body.scrollTop
+  // console.log(document.documentElement.scrollTop)
+  // console.log(document.body.scrollTop)
 }
 
-const scrollHandle = () => {
-  throttle(handle, 300, 300)()
-  console.log(wrapRef.value.scrollTop)
-}
+const scrollHandle = throttle(handle, 10, 10)
 
 onMounted(() => {
   window.addEventListener('scroll', scrollHandle)
@@ -58,7 +70,7 @@ onUnmounted(() => {
     gap: 10px;
     position: fixed;
     top: 50px;
-    left: 50px;
+    left: 250px;
     background-color: yellow;
     width: 100px;
     padding: 20px;

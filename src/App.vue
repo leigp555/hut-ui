@@ -10,6 +10,6 @@ import Example from '@/eg/AnchorEg.vue'
 
 <style>
 .test {
-  padding: 20px 10px;
+  padding: 0 10px;
 }
 </style>
