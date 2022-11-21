@@ -1,37 +1,67 @@
 <template>
-  <div class="ui-anchor-wrap">
-    <slot />
+  <div class="ui-anchor-wrap" ref="wrapRef">
+    <div class="ui-anchor-nav">
+      <slot name="nav" />
+    </div>
+    <div class="ui-anchor-content">
+      <slot />
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { provide, Ref, ref } from 'vue'
+import { onMounted, onUnmounted, ref } from 'vue'
 
-const selectArr = ref<string[]>([])
-const changeSelect = ({ type, id }) => {
-  if (type === 'add') {
-    selectArr.value.push(id)
-    console.log(selectArr.value)
-  } else if (type === 'sub') {
-    // selectArr.value[0].classList.remove('active')
-    selectArr.value.shift()
+const wrapRef = ref<HTMLElement | null>(null)
+// 简单的节流函数
+function throttle(func, wait, mustRun) {
+  let timeout
+  let startTime = new Date()
+
+  return () => {
+    const curTime = new Date()
+
+    clearTimeout(timeout)
+    // 如果达到了规定的触发时间间隔，触发 handler
+    if (curTime - startTime >= mustRun) {
+      func()
+      startTime = curTime
+      // 没达到触发间隔，重新设定定时器
+    } else {
+      timeout = setTimeout(func, wait)
+    }
   }
 }
-provide<Ref<string[]>>('ui-anchor_selectArr', selectArr)
-// eslint-disable-next-line no-unused-vars
-provide<(option: { type: 'add' | 'sub'; id: string }) => void>(
-  'change_ui_anchor_selectArr',
-  changeSelect
-)
+
+function handle() {
+  console.log('执行了')
+}
+
+const scrollHandle = () => {
+  throttle(handle, 300, 300)()
+  console.log(wrapRef.value.scrollTop)
+}
+
+onMounted(() => {
+  window.addEventListener('scroll', scrollHandle)
+})
+onUnmounted(() => {
+  window.removeEventListener('scroll', scrollHandle)
+})
 </script>
 
 <style lang="scss">
 .ui-anchor-wrap {
-  display: inline-flex;
-  flex-direction: column;
-  gap: 20px;
-  position: fixed;
-  top: 100px;
-  left: 50px;
+  > .ui-anchor-nav {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 10px;
+    position: fixed;
+    top: 50px;
+    left: 50px;
+    background-color: yellow;
+    width: 100px;
+    padding: 20px;
+  }
 }
 </style>
