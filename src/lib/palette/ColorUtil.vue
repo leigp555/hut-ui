@@ -3,10 +3,10 @@
     <div
       class="ui-colorUtil-item"
       v-for="i in 15"
-      :key="`${i}${colors[i]}`"
-      :style="{ backgroundColor: colors[i] }"
+      :key="`${i}${colors[i - 1]}`"
+      :style="{ backgroundColor: colors[i - 1] }"
     >
-      {{ colors[i] }}
+      {{ colors[i - 1] }}
     </div>
   </div>
 </template>

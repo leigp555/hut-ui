@@ -13,6 +13,6 @@ withDefaults(defineProps<{}>(), {})
 
 <style lang="scss">
 .ui-template-wrap {
-  padding: 50px;
+  padding: 50px 100px;
 }
 </style>
