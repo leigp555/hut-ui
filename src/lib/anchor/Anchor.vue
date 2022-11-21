@@ -120,13 +120,13 @@ onUnmounted(() => {
   position: fixed;
   top: 50px;
   right: 50px;
-  width: 100px;
   gap: 7px;
-  padding-left: 16px;
+  padding: 0 15px 0 32px;
+  background-color: #ffffff;
   > .ui-anchor-indicator {
     position: absolute;
     top: 0;
-    left: 0;
+    left: 15px;
     height: 100%;
     width: 2px;
     background-color: #f0f0f0;
