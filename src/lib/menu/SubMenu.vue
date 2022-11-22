@@ -132,7 +132,11 @@ const shouldLight = (item: VNode) => {
         </span>
       </div>
 
-      <span v-if="mode === 'column'">
+      <span
+        v-if="mode === 'column'"
+        class="ui-subMenu-content-open-icon"
+        :class="{ 'subMenu-content-open': isActionStart }"
+      >
         <SvgIcon name="down" height="1em" width="1em" />
       </span>
     </div>
@@ -176,6 +180,14 @@ const shouldLight = (item: VNode) => {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    > .ui-subMenu-content-open-icon {
+      transform: rotate(-180deg);
+      transition: all 250ms linear;
+      &.subMenu-content-open {
+        transform: rotate(0);
+        fill: #1890ff;
+      }
+    }
     > .ui-subMenu-title-inner {
       display: flex;
       align-items: center;
