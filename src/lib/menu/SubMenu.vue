@@ -1,15 +1,18 @@
 <script setup lang="ts">
-import { withDefaults, defineProps, ref, useSlots } from 'vue'
+import { withDefaults, defineProps, ref, useSlots, Ref, inject } from 'vue'
+import SvgIcon from '../common/SvgIcon.vue'
 
 withDefaults(defineProps<{ keyValue: string }>(), {})
-const shouldShow = ref<boolean>(false)
-const isActionStart = ref<boolean>(false)
-const underSelected = ref<boolean>(false)
+const shouldShow = ref<boolean>(true)
+const isActionStart = ref<boolean>(true)
+const underSelected = ref<boolean>(true)
 
 const timeId = ref<number | null>(null)
 const timeId2 = ref<number | null>(null)
 
 const slots = useSlots().default()
+
+const mode = inject<Ref<'column' | 'horizontal'>>('ui_menu_mode')
 
 // title的hover事件
 const onMouseEnter = () => {
@@ -59,17 +62,31 @@ const innerOnMouseLeave = () => {
 </script>
 
 <template>
-  <div class="ui-subMenu-wrap" @mouseenter="onMouseEnter" @mouseleave="onMouseLeave">
-    <span v-if="$slots.icon" class="ui-subMenu-icon">
-      <slot name="icon" />
-    </span>
-    <span
-      v-if="$slots.title"
-      class="ui-subMenu-title"
-      :class="{ 'subMenu-no-icon': !$slots.icon }"
-    >
-      <slot name="title" />
-    </span>
+  <div
+    class="ui-subMenu-wrap"
+    @mouseenter="onMouseEnter"
+    @mouseleave="onMouseLeave"
+    :class="{ 'ui-subMenu-wrap-column': mode === 'column' }"
+  >
+    <div class="ui-subMenu-title-wrap">
+      <div class="ui-subMenu-title-inner">
+        <span v-if="$slots.icon" class="ui-subMenu-icon">
+          <slot name="icon" />
+        </span>
+        <span
+          v-if="$slots.title"
+          class="ui-subMenu-title"
+          :class="{ 'subMenu-no-icon': !$slots.icon }"
+        >
+          <slot name="title" />
+        </span>
+      </div>
+
+      <span>
+        <SvgIcon name="down" height="1em" width="1em" />
+      </span>
+    </div>
+
     <div class="ui-subMenu-content" v-show="shouldShow">
       <Transition name="subMenu">
         <div
@@ -95,19 +112,31 @@ const innerOnMouseLeave = () => {
   text-align: left;
   background: #fff;
   position: relative;
-  > .ui-subMenu-icon {
-    min-width: 14px;
-    font-size: 14px;
-  }
-  > .ui-subMenu-title {
-    margin-left: 10px;
-    white-space: nowrap;
-    cursor: pointer;
-    user-select: none;
-    &.subMenu-no-icon {
-      margin-left: 0;
+  > .ui-subMenu-title-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    > .ui-subMenu-title-inner {
+      display: flex;
+      align-items: center;
+      > .ui-subMenu-icon {
+        min-width: 14px;
+        font-size: 14px;
+      }
+      > .ui-subMenu-title {
+        margin-left: 10px;
+        white-space: nowrap;
+        cursor: pointer;
+        user-select: none;
+        display: flex;
+        align-items: center;
+        &.subMenu-no-icon {
+          margin-left: 0;
+        }
+      }
     }
   }
+
   > .ui-subMenu-content {
     position: absolute;
     bottom: 0;
@@ -136,6 +165,16 @@ const innerOnMouseLeave = () => {
   opacity: 0;
   transform: scale(1, 0.6);
 }
+.ui-subMenu-wrap {
+  &.ui-subMenu-wrap-column {
+    .ui-subMenu-title-wrap {
+      width: 100%;
+      border: 1px solid red;
+      padding: 0 34px 0 24px;
+    }
+  }
+}
+
 .subMenu-enter-active,
 .subMenu-leave-active {
   transition: all 250ms;

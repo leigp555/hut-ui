@@ -40,7 +40,7 @@
       v-model:openKeys="openKeys"
       v-model:selectedKeys="selectedKeys"
       style="width: 256px"
-      mode="inline"
+      mode="column"
       @click="handleClick"
     >
       <SubMenu keyValue="sub1">
@@ -64,7 +64,8 @@
         <template #title>Navigation Two</template>
         <MenuItem keyValue="5">Option 5</MenuItem>
         <MenuItem keyValue="6">Option 6</MenuItem>
-        <SubMenu keyValue="sub3" title="Submenu">
+        <SubMenu keyValue="sub3">
+          <template #title>Submenu</template>
           <MenuItem keyValue="7">Option 7</MenuItem>
           <MenuItem keyValue="8">Option 8</MenuItem>
         </SubMenu>

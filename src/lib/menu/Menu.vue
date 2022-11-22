@@ -10,7 +10,7 @@ const props = withDefaults(
   }
 )
 const slots = useSlots().default()
-const { selectedKeys } = toRefs(props)
+const { selectedKeys, mode } = toRefs(props)
 
 const isSelected = (item: VNode): boolean => {
   const keyWorld = item.props.keyValue
@@ -24,6 +24,7 @@ const changeSelectedArr = (newArr: string[]) => {
   emits('update:selectedKeys', newArr)
 }
 provide<Ref<string[]>>('ui_menu_selectedArr', selectedKeys)
+provide<Ref<'column' | 'horizontal'>>('ui_menu_mode', mode)
 // eslint-disable-next-line no-unused-vars
 provide<(newArr: string[]) => void>('change_ui_menu_selectedArr', changeSelectedArr)
 </script>
@@ -125,6 +126,21 @@ $font_color: #000000d9;
       &:after {
         background-color: $selected_color;
       }
+    }
+  }
+}
+
+.ui-menu-wrap {
+  &.ui-menu-column {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    border: none;
+    border-right: 1px solid #f0f0f0;
+    > .ui-menu-item {
+      padding-bottom: 0.02px;
+      width: 100%;
+      padding: 0;
     }
   }
 }
