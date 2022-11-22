@@ -2,10 +2,14 @@
 import { withDefaults, defineProps, ref, useSlots, Ref, inject, toRefs } from 'vue'
 import SvgIcon from '../common/SvgIcon.vue'
 
-const props = withDefaults(defineProps<{ keyValue: string; paddingLeft: number }>(), {
-  paddingLeft: 24
-})
-const { paddingLeft } = toRefs(props)
+const props = withDefaults(
+  defineProps<{ keyValue: string; paddingLeft?: number; totalTitle?: string[] }>(),
+  {
+    paddingLeft: 24,
+    totalTitle: () => []
+  }
+)
+const { paddingLeft, totalTitle } = toRefs(props)
 const shouldShow = ref<boolean>(false)
 const isActionStart = ref<boolean>(false)
 const underSelected = ref<boolean>(false)
@@ -129,6 +133,7 @@ const onClick = () => {
               :is="item"
               :subKeyValue="keyValue"
               :paddingLeft="paddingLeft + 24"
+              :totalTitle="[...totalTitle, keyValue]"
             />
           </div>
         </div>

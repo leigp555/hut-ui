@@ -2,7 +2,13 @@
 import { withDefaults, defineProps, useSlots, inject, toRefs, Ref, VNode } from 'vue'
 
 const props = withDefaults(
-  defineProps<{ title: string; subKeyValue?: string; paddingLeft: number }>(),
+  defineProps<{
+    title: string
+    subKeyValue?: string
+    paddingLeft?: number
+    keyValue: string
+    totalTitle?: string[]
+  }>(),
   {}
 )
 
@@ -58,7 +64,12 @@ const shouldLight = (item: VNode) => {
           'ui-menuGroup-item-selected': shouldLight(item)
         }"
       >
-        <Component :is="item" :isNested="true" :paddingLeft="paddingLeft" />
+        <Component
+          :is="item"
+          :isNested="true"
+          :paddingLeft="paddingLeft"
+          :totalTitle="[...totalTitle, keyValue]"
+        />
       </li>
     </ul>
   </div>

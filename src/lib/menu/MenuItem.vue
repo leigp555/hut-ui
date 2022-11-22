@@ -6,7 +6,8 @@ const props = withDefaults(
     keyValue: string
     disabled?: boolean
     isNested?: boolean
-    paddingLeft: number
+    paddingLeft?: number
+    totalTitle: string[]
   }>(),
   {
     disabled: false,
