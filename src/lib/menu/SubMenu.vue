@@ -4,12 +4,49 @@ import { withDefaults, defineProps, ref } from 'vue'
 withDefaults(defineProps<{ keyValue: string }>(), {})
 const shouldShow = ref<boolean>(false)
 const isActionStart = ref<boolean>(false)
+const underSelected = ref<boolean>(false)
 
+const timeId = ref<number | null>(null)
+const timeId2 = ref<number | null>(null)
+// title的hover事件
 const onMouseEnter = () => {
+  // 先清除定时器这一步很重要不然可能会出现打开弹出层后又自动关闭
+  timeId2.value && window.clearTimeout(timeId2.value)
+  timeId.value && window.clearTimeout(timeId.value)
+  timeId.value = null
+  timeId2.value = null
+  timeId.value = null
   shouldShow.value = true
   isActionStart.value = true
 }
+// title的离开事件
 const onMouseLeave = () => {
+  timeId.value = setTimeout(() => {
+    if (!underSelected.value) {
+      isActionStart.value = false
+      timeId2.value = setTimeout(() => {
+        shouldShow.value = false
+        timeId2.value && window.clearTimeout(timeId2.value)
+      }, 250)
+    }
+    timeId.value && window.clearTimeout(timeId.value)
+  }, 250)
+}
+
+// content-inner的hover事件
+const innerOnMouseEnter = () => {
+  // 先清除定时器这一步很重要不然可能会出现打开弹出层后又自动关闭
+  timeId2.value && window.clearTimeout(timeId2.value)
+  timeId.value && window.clearTimeout(timeId.value)
+  timeId.value = null
+  timeId2.value = null
+  underSelected.value = true
+  shouldShow.value = true
+  isActionStart.value = true
+}
+// content-inner的离开事件
+const innerOnMouseLeave = () => {
+  underSelected.value = false
   isActionStart.value = false
   const id = setTimeout(() => {
     shouldShow.value = false
@@ -32,7 +69,12 @@ const onMouseLeave = () => {
     </span>
     <div class="ui-subMenu-content" v-show="shouldShow">
       <Transition name="subMenu">
-        <div class="ui-subMenu-content-inner" v-show="isActionStart">
+        <div
+          class="ui-subMenu-content-inner"
+          v-show="isActionStart"
+          @mouseenter="innerOnMouseEnter"
+          @mouseleave="innerOnMouseLeave"
+        >
           <slot />
         </div>
       </Transition>
@@ -56,6 +98,7 @@ const onMouseLeave = () => {
     margin-left: 10px;
     white-space: nowrap;
     cursor: pointer;
+    user-select: none;
     &.subMenu-no-icon {
       margin-left: 0;
     }
@@ -65,18 +108,15 @@ const onMouseLeave = () => {
     bottom: 0;
     left: 0;
     color: #000000d9;
-
     background-color: #fff;
-    border-radius: 2px;
     min-width: 160px;
     width: 100%;
     max-height: calc(100vh - 100px);
-    padding: 0;
-    border-right: 0;
-
-    transform: translateY(calc(100% + 7px));
+    padding-top: 7px;
+    transform: translateY(100%);
     transform-origin: top;
     > .ui-subMenu-content-inner {
+      border-radius: 2px;
       overflow-x: hidden;
       overflow-y: auto;
       box-shadow: 0 3px 6px -4px #0000001f, 0 6px 16px #00000014,

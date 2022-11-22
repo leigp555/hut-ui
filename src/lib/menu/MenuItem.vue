@@ -1,10 +1,14 @@
 <script setup lang="ts">
 import { withDefaults, defineProps, toRefs, inject } from 'vue'
 
-const props = withDefaults(defineProps<{ keyValue: string; disabled?: boolean }>(), {
-  disabled: false
-})
-const { keyValue, disabled } = toRefs(props)
+const props = withDefaults(
+  defineProps<{ keyValue: string; disabled?: boolean; isNested?: boolean }>(),
+  {
+    disabled: false,
+    isNested: false
+  }
+)
+const { keyValue, disabled, isNested } = toRefs(props)
 
 // eslint-disable-next-line no-unused-vars
 const changeSelectedArr = inject<(newArr: string[]) => void>(
@@ -17,7 +21,7 @@ const onClick = (e: Event) => {
     e.preventDefault()
     return
   }
-  changeSelectedArr([keyValue.value])
+  if (!isNested.value) changeSelectedArr([keyValue.value])
 }
 </script>
 
