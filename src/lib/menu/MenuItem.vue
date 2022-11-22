@@ -5,16 +5,15 @@ const props = withDefaults(
   defineProps<{
     keyValue: string
     disabled?: boolean
-    isNested?: boolean
     paddingLeft?: number
-    totalTitle: string[]
+    totalTitle?: string[]
   }>(),
   {
     disabled: false,
-    isNested: false
+    totalTitle: () => []
   }
 )
-const { keyValue, disabled, isNested } = toRefs(props)
+const { keyValue, disabled, totalTitle } = toRefs(props)
 
 // eslint-disable-next-line no-unused-vars
 const changeSelectedArr = inject<(newArr: string[]) => void>(
@@ -28,7 +27,7 @@ const onClick = (e: Event) => {
     e.preventDefault()
     return
   }
-  if (!isNested.value) changeSelectedArr([keyValue.value])
+  changeSelectedArr([...totalTitle.value, keyValue.value])
 }
 </script>
 

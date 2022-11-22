@@ -19,11 +19,11 @@
           <SvgIcon name="setting" width="1em" height="1em" />
         </template>
         <template #title>Navigation Three - Submenu</template>
-        <MenuItemGroup title="Item 1">
+        <MenuItemGroup title="Item 1" keyValue="Item 1">
           <MenuItem keyValue="setting:1">Option 1</MenuItem>
           <MenuItem keyValue="setting:2">Option 2</MenuItem>
         </MenuItemGroup>
-        <MenuItemGroup title="Item 2">
+        <MenuItemGroup title="Item 2" keyValue="Item 2">
           <MenuItem keyValue="setting:3">Option 3</MenuItem>
           <MenuItem keyValue="setting:4">Option 4</MenuItem>
         </MenuItemGroup>
@@ -36,13 +36,7 @@
     </Menu>
 
     <!-- 纵向menu-->
-    <Menu
-      v-model:openKeys="openKeys"
-      v-model:selectedKeys="selectedKeys"
-      style="width: 256px"
-      mode="column"
-      @click="handleClick"
-    >
+    <Menu v-model:selectedKeys="selectedKeys" style="width: 256px" mode="column">
       <SubMenu keyValue="sub1">
         <template #icon>
           <SvgIcon name="mail" width="1em" height="1em" />
@@ -85,7 +79,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, watchEffect } from 'vue'
 import Menu from '@/lib/menu/Menu.vue'
 import MenuItem from '@/lib/menu/MenuItem.vue'
 import MenuItemGroup from '@/lib/menu/MenuItemGroup.vue'
@@ -95,10 +89,10 @@ import SvgIcon from '@/lib/common/SvgIcon.vue'
 const current = ref<string[]>(['mail'])
 
 const selectedKeys = ref<string[]>(['1'])
-const openKeys = ref<string[]>(['sub1'])
-const handleClick = (e) => {
-  console.log('click', e)
-}
+
+watchEffect(() => {
+  console.log(selectedKeys.value)
+})
 </script>
 
 <style lang="scss">

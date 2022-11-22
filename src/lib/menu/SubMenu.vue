@@ -1,5 +1,14 @@
 <script setup lang="ts">
-import { withDefaults, defineProps, ref, useSlots, Ref, inject, toRefs } from 'vue'
+import {
+  withDefaults,
+  defineProps,
+  ref,
+  useSlots,
+  Ref,
+  inject,
+  toRefs,
+  VNode
+} from 'vue'
 import SvgIcon from '../common/SvgIcon.vue'
 
 const props = withDefaults(
@@ -20,6 +29,7 @@ const timeId2 = ref<number | null>(null)
 const slots = useSlots().default()
 
 const mode = inject<Ref<'column' | 'horizontal'>>('ui_menu_mode')
+const selectedKeys = inject<Ref<string[]>>('ui_menu_selectedArr')
 
 // title的hover事件
 const onMouseEnter = () => {
@@ -76,7 +86,7 @@ const innerOnMouseLeave = () => {
 }
 
 const onClick = () => {
-  console.log('执行了')
+  if (mode?.value !== 'column') return
   if (shouldShow.value) {
     isActionStart.value = false
     const id = setTimeout(() => {
@@ -87,6 +97,10 @@ const onClick = () => {
     shouldShow.value = true
     isActionStart.value = true
   }
+}
+
+const shouldLight = (item: VNode) => {
+  return selectedKeys?.value.indexOf(item.props.keyValue) >= 0
 }
 </script>
 
@@ -128,10 +142,15 @@ const onClick = () => {
           @mouseenter="innerOnMouseEnter"
           @mouseleave="innerOnMouseLeave"
         >
-          <div v-for="item in slots" :key="item">
+          <div
+            v-for="item in slots"
+            :key="item"
+            :class="{
+              'ui-subMenu-item-selected': shouldLight(item)
+            }"
+          >
             <Component
               :is="item"
-              :subKeyValue="keyValue"
               :paddingLeft="paddingLeft + 24"
               :totalTitle="[...totalTitle, keyValue]"
             />
@@ -194,6 +213,9 @@ const onClick = () => {
       box-shadow: 0 3px 6px -4px #0000001f, 0 6px 16px #00000014,
         0 9px 28px 8px #0000000d;
       transform-origin: top;
+      > .ui-subMenu-item-selected {
+        background-color: #e6f7ff;
+      }
     }
   }
 }

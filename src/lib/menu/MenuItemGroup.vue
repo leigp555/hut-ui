@@ -1,10 +1,9 @@
 <script setup lang="ts">
-import { withDefaults, defineProps, useSlots, inject, toRefs, Ref, VNode } from 'vue'
+import { withDefaults, defineProps, useSlots, inject, Ref, VNode } from 'vue'
 
-const props = withDefaults(
+withDefaults(
   defineProps<{
     title: string
-    subKeyValue?: string
     paddingLeft?: number
     keyValue: string
     totalTitle?: string[]
@@ -12,7 +11,6 @@ const props = withDefaults(
   {}
 )
 
-const { subKeyValue } = toRefs(props)
 const slots = useSlots().default()
 
 // eslint-disable-next-line no-unused-vars
@@ -21,22 +19,6 @@ const changeSelectedArr = inject<(newArr: string[]) => void>(
 )
 const selectedKeys = inject<Ref<string[]>>('ui_menu_selectedArr')
 const mode = inject<Ref<'column' | 'horizontal'>>('ui_menu_mode')
-
-const onClick = (e: Event) => {
-  let el = (e.target as HTMLElement) || null
-  while (el.tagName.toLowerCase() !== 'li') {
-    if (el.tagName.toLowerCase() === 'ul') {
-      el = null
-      break
-    } else {
-      el = el.parentNode
-    }
-  }
-  if (el) {
-    const keyValue = el.getAttribute('data-setKey')
-    changeSelectedArr([subKeyValue.value, keyValue])
-  }
-}
 
 const shouldLight = (item: VNode) => {
   return selectedKeys?.value.indexOf(item.props.keyValue) >= 0
@@ -54,7 +36,7 @@ const shouldLight = (item: VNode) => {
     >
       {{ title }}
     </div>
-    <ul class="ui-menuGroup-content" @click="onClick">
+    <ul class="ui-menuGroup-content">
       <li
         v-for="item in slots"
         :key="item"
@@ -101,6 +83,7 @@ const shouldLight = (item: VNode) => {
 }
 .ui-menuGroup-wrap {
   &.ui-menuGroup-wrap-column {
+    background: #fafafa;
     .ui-menuGroup-title {
       padding-left: 32px;
     }
