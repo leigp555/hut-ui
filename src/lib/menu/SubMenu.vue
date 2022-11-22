@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { withDefaults, defineProps, ref } from 'vue'
+import { withDefaults, defineProps, ref, useSlots } from 'vue'
 
 withDefaults(defineProps<{ keyValue: string }>(), {})
 const shouldShow = ref<boolean>(false)
@@ -8,6 +8,9 @@ const underSelected = ref<boolean>(false)
 
 const timeId = ref<number | null>(null)
 const timeId2 = ref<number | null>(null)
+
+const slots = useSlots().default()
+
 // title的hover事件
 const onMouseEnter = () => {
   // 先清除定时器这一步很重要不然可能会出现打开弹出层后又自动关闭
@@ -75,7 +78,9 @@ const innerOnMouseLeave = () => {
           @mouseenter="innerOnMouseEnter"
           @mouseleave="innerOnMouseLeave"
         >
-          <slot />
+          <div v-for="item in slots" :key="item">
+            <Component :is="item" :subKeyValue="keyValue" />
+          </div>
         </div>
       </Transition>
     </div>

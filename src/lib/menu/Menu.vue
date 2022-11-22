@@ -76,6 +76,18 @@ $selected_color: #1890ff;
       background-color: #fff;
       transition: all 0.3s;
     }
+    &:hover {
+      color: $selected_color;
+      .ui-menuItem-icon {
+        fill: $selected_color;
+      }
+      .ui-subMenu-icon {
+        fill: $selected_color;
+      }
+      &:after {
+        background-color: $selected_color;
+      }
+    }
     &.ui-menu-item-selected {
       color: $selected_color;
       .ui-menuItem-icon {

@@ -65,11 +65,16 @@ $disabled_color: #00000040;
     font-size: 14px;
     color: inherit;
     cursor: pointer;
+    transition: all 250ms;
   }
   > .ui-menuItem-content {
     margin-left: 10px;
     white-space: nowrap;
     cursor: pointer;
+    transition: color 250ms;
+    &:hover {
+      color: #1890ff;
+    }
     &.menuItem-no-icon {
       margin-left: 0;
     }

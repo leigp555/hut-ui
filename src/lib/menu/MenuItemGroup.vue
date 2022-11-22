@@ -1,23 +1,58 @@
+<script setup lang="ts">
+import { withDefaults, defineProps, useSlots, inject, toRefs, Ref, VNode } from 'vue'
+
+const props = withDefaults(defineProps<{ title: string; subKeyValue?: string }>(), {})
+
+const { subKeyValue } = toRefs(props)
+const slots = useSlots().default()
+
+// eslint-disable-next-line no-unused-vars
+const changeSelectedArr = inject<(newArr: string[]) => void>(
+  'change_ui_menu_selectedArr'
+)
+const selectedKeys = inject<Ref<string[]>>('ui_menu_selectedArr')
+
+const onClick = (e: Event) => {
+  let el = (e.target as HTMLElement) || null
+  while (el.tagName.toLowerCase() !== 'li') {
+    if (el.tagName.toLowerCase() === 'ul') {
+      el = null
+      break
+    } else {
+      el = el.parentNode
+    }
+  }
+  if (el) {
+    const keyValue = el.getAttribute('data-setKey')
+    changeSelectedArr([subKeyValue.value, keyValue])
+  }
+}
+
+const shouldLight = (item: VNode) => {
+  return selectedKeys?.value.indexOf(item.props.keyValue) >= 0
+}
+</script>
+
 <template>
   <div class="ui-menuGroup-wrap">
     <div class="ui-menuGroup-title">
       {{ title }}
     </div>
-    <ul class="ui-menuGroup-content">
-      <li v-for="item in slots" :key="item" class="ui-menuGroup-item">
-        <Component :is="item" />
+    <ul class="ui-menuGroup-content" @click="onClick">
+      <li
+        v-for="item in slots"
+        :key="item"
+        class="ui-menuGroup-item"
+        :data-setKey="item.props.keyValue"
+        :class="{
+          'ui-menuGroup-item-selected': shouldLight(item)
+        }"
+      >
+        <Component :is="item" :isNested="true" />
       </li>
     </ul>
   </div>
 </template>
-
-<script setup lang="ts">
-import { withDefaults, defineProps, useSlots } from 'vue'
-
-withDefaults(defineProps<{ title: string }>(), {})
-
-const slots = useSlots().default()
-</script>
 
 <style lang="scss">
 .ui-menuGroup-wrap {
@@ -37,7 +72,9 @@ const slots = useSlots().default()
       overflow: hidden;
       line-height: 40px;
       text-overflow: ellipsis;
-      //background-color: red;
+      &.ui-menuGroup-item-selected {
+        background-color: #e6f7ff;
+      }
     }
   }
 }
