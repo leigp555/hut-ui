@@ -1,17 +1,23 @@
 <script setup lang="ts">
-import { withDefaults, defineProps, toRefs } from 'vue'
+import { withDefaults, defineProps, toRefs, inject } from 'vue'
 
 const props = withDefaults(defineProps<{ keyValue: string; disabled?: boolean }>(), {
   disabled: false
 })
 const { keyValue, disabled } = toRefs(props)
+
+// eslint-disable-next-line no-unused-vars
+const changeSelectedArr = inject<(newArr: string[]) => void>(
+  'change_ui_menu_selectedArr'
+)
+
 const onClick = (e: Event) => {
   if (disabled.value) {
     e.stopPropagation()
     e.preventDefault()
     return
   }
-  console.log(keyValue.value)
+  changeSelectedArr([keyValue.value])
 }
 </script>
 

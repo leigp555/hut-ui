@@ -15,8 +15,9 @@
 </template>
 
 <script setup lang="ts">
-import { withDefaults, defineProps, useSlots, VNode, toRefs } from 'vue'
+import { withDefaults, defineProps, useSlots, VNode, toRefs, provide, Ref } from 'vue'
 
+const emits = defineEmits(['update:selectedKeys'])
 const props = withDefaults(
   defineProps<{ selectedKeys?: string[]; mode?: 'horizontal' | 'column' }>(),
   {
@@ -26,6 +27,7 @@ const props = withDefaults(
 )
 const slots = useSlots().default()
 const { selectedKeys } = toRefs(props)
+
 const isSelected = (item: VNode): boolean => {
   const keyWorld = item.props.keyValue
   let isExist = false
@@ -34,6 +36,12 @@ const isSelected = (item: VNode): boolean => {
   }
   return isExist
 }
+const changeSelectedArr = (newArr: string[]) => {
+  emits('update:selectedKeys', newArr)
+}
+provide<Ref<string[]>>('ui_menu_selectedArr', selectedKeys)
+// eslint-disable-next-line no-unused-vars
+provide<(newArr: string[]) => void>('change_ui_menu_selectedArr', changeSelectedArr)
 </script>
 
 <style lang="scss">
@@ -61,9 +69,9 @@ $selected_color: #1890ff;
     &:after {
       content: '';
       position: absolute;
-      right: 20px;
+      right: 19px;
       bottom: 0;
-      left: 20px;
+      left: 21px;
       height: 2px;
       background-color: #fff;
       transition: all 0.3s;

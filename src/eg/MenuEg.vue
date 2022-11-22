@@ -27,6 +27,7 @@
           <MenuItem keyValue="setting:4">Option 4</MenuItem>
         </MenuItemGroup>
       </SubMenu>
+      <MenuItem keyValue="test">Test</MenuItem>
       <MenuItem keyValue="alipay">
         <a href="https://antdv.com" target="_blank" rel="noopener noreferrer">
           Navigation Four - Link
@@ -49,6 +50,6 @@ const current = ref<string[]>(['mail'])
 
 <style lang="scss">
 .ui-template-wrap {
-  padding: 200px;
+  padding: 200px 50px;
 }
 </style>
