@@ -1,8 +1,11 @@
 <script setup lang="ts">
-import { withDefaults, defineProps, ref, useSlots, Ref, inject } from 'vue'
+import { withDefaults, defineProps, ref, useSlots, Ref, inject, toRefs } from 'vue'
 import SvgIcon from '../common/SvgIcon.vue'
 
-withDefaults(defineProps<{ keyValue: string }>(), {})
+const props = withDefaults(defineProps<{ keyValue: string; paddingLeft: number }>(), {
+  paddingLeft: 24
+})
+const { paddingLeft } = toRefs(props)
 const shouldShow = ref<boolean>(false)
 const isActionStart = ref<boolean>(false)
 const underSelected = ref<boolean>(false)
@@ -90,7 +93,11 @@ const onClick = () => {
     @mouseleave="onMouseLeave"
     :class="{ 'ui-subMenu-wrap-column': mode === 'column' }"
   >
-    <div class="ui-subMenu-title-wrap" @click="onClick">
+    <div
+      class="ui-subMenu-title-wrap"
+      @click="onClick"
+      :style="{ paddingLeft: mode === 'column' ? `${paddingLeft}px` : 0 }"
+    >
       <div class="ui-subMenu-title-inner">
         <span v-if="$slots.icon" class="ui-subMenu-icon">
           <slot name="icon" />
@@ -118,7 +125,11 @@ const onClick = () => {
           @mouseleave="innerOnMouseLeave"
         >
           <div v-for="item in slots" :key="item">
-            <Component :is="item" :subKeyValue="keyValue" />
+            <Component
+              :is="item"
+              :subKeyValue="keyValue"
+              :paddingLeft="paddingLeft + 24"
+            />
           </div>
         </div>
       </Transition>

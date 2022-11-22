@@ -2,7 +2,12 @@
 import { withDefaults, defineProps, toRefs, inject, Ref } from 'vue'
 
 const props = withDefaults(
-  defineProps<{ keyValue: string; disabled?: boolean; isNested?: boolean }>(),
+  defineProps<{
+    keyValue: string
+    disabled?: boolean
+    isNested?: boolean
+    paddingLeft: number
+  }>(),
   {
     disabled: false,
     isNested: false
@@ -33,6 +38,7 @@ const onClick = (e: Event) => {
       'ui-menuItem-disabled': disabled,
       'ui-menuItem-wrap-column': mode === 'column'
     }"
+    :style="{ paddingLeft: mode === 'column' ? `${paddingLeft}px` : 0 }"
     @click="onClick"
   >
     <span v-if="$slots.icon" class="ui-menuItem-icon">
