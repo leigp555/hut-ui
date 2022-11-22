@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { withDefaults, defineProps, toRefs, inject } from 'vue'
+import { withDefaults, defineProps, toRefs, inject, Ref } from 'vue'
 
 const props = withDefaults(
   defineProps<{ keyValue: string; disabled?: boolean; isNested?: boolean }>(),
@@ -14,6 +14,7 @@ const { keyValue, disabled, isNested } = toRefs(props)
 const changeSelectedArr = inject<(newArr: string[]) => void>(
   'change_ui_menu_selectedArr'
 )
+const mode = inject<Ref<'column' | 'horizontal'>>('ui_menu_mode')
 
 const onClick = (e: Event) => {
   if (disabled.value) {
@@ -28,7 +29,10 @@ const onClick = (e: Event) => {
 <template>
   <div
     class="ui-menuItem-wrap"
-    :class="{ 'ui-menuItem-disabled': disabled }"
+    :class="{
+      'ui-menuItem-disabled': disabled,
+      'ui-menuItem-wrap-column': mode === 'column'
+    }"
     @click="onClick"
   >
     <span v-if="$slots.icon" class="ui-menuItem-icon">
@@ -49,6 +53,9 @@ $disabled_color: #00000040;
   color: inherit;
   user-select: none;
   cursor: pointer;
+  &.ui-menuItem-wrap-column {
+    padding-left: 48px;
+  }
   &.ui-menuItem-disabled {
     color: $disabled_color;
     cursor: not-allowed;

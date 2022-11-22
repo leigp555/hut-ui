@@ -11,6 +11,7 @@ const changeSelectedArr = inject<(newArr: string[]) => void>(
   'change_ui_menu_selectedArr'
 )
 const selectedKeys = inject<Ref<string[]>>('ui_menu_selectedArr')
+const mode = inject<Ref<'column' | 'horizontal'>>('ui_menu_mode')
 
 const onClick = (e: Event) => {
   let el = (e.target as HTMLElement) || null
@@ -34,7 +35,10 @@ const shouldLight = (item: VNode) => {
 </script>
 
 <template>
-  <div class="ui-menuGroup-wrap">
+  <div
+    class="ui-menuGroup-wrap"
+    :class="{ 'ui-menuGroup-wrap-column': mode === 'column' }"
+  >
     <div class="ui-menuGroup-title">
       {{ title }}
     </div>
@@ -75,6 +79,16 @@ const shouldLight = (item: VNode) => {
       &.ui-menuGroup-item-selected {
         background-color: #e6f7ff;
       }
+    }
+  }
+}
+.ui-menuGroup-wrap {
+  &.ui-menuGroup-wrap-column {
+    .ui-menuGroup-title {
+      padding-left: 32px;
+    }
+    .ui-menuGroup-item {
+      padding: 0;
     }
   }
 }

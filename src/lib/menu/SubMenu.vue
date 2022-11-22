@@ -3,9 +3,9 @@ import { withDefaults, defineProps, ref, useSlots, Ref, inject } from 'vue'
 import SvgIcon from '../common/SvgIcon.vue'
 
 withDefaults(defineProps<{ keyValue: string }>(), {})
-const shouldShow = ref<boolean>(true)
-const isActionStart = ref<boolean>(true)
-const underSelected = ref<boolean>(true)
+const shouldShow = ref<boolean>(false)
+const isActionStart = ref<boolean>(false)
+const underSelected = ref<boolean>(false)
 
 const timeId = ref<number | null>(null)
 const timeId2 = ref<number | null>(null)
@@ -165,18 +165,29 @@ const innerOnMouseLeave = () => {
   opacity: 0;
   transform: scale(1, 0.6);
 }
-.ui-subMenu-wrap {
-  &.ui-subMenu-wrap-column {
-    .ui-subMenu-title-wrap {
-      width: 100%;
-      border: 1px solid red;
-      padding: 0 34px 0 24px;
-    }
-  }
-}
-
 .subMenu-enter-active,
 .subMenu-leave-active {
   transition: all 250ms;
+}
+
+//垂直菜单样式
+.ui-subMenu-wrap {
+  &.ui-subMenu-wrap-column {
+    flex-direction: column;
+    .ui-subMenu-title-wrap {
+      width: 100%;
+      padding: 0 24px 0 24px;
+    }
+    .ui-subMenu-content {
+      position: relative;
+      top: 0;
+      left: 0;
+      transform: none;
+      > .ui-subMenu-content-inner {
+        box-shadow: none;
+        background: #fafafa;
+      }
+    }
+  }
 }
 </style>

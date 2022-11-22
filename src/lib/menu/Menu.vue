@@ -138,9 +138,11 @@ $font_color: #000000d9;
     border: none;
     border-right: 1px solid #f0f0f0;
     > .ui-menu-item {
-      padding-bottom: 0.02px;
       width: 100%;
-      padding: 0;
+      padding: 0 0 0.02px 0;
+      &:after {
+        display: none;
+      }
     }
   }
 }
