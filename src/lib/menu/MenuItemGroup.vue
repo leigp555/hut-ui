@@ -1,7 +1,10 @@
 <script setup lang="ts">
 import { withDefaults, defineProps, useSlots, inject, toRefs, Ref, VNode } from 'vue'
 
-const props = withDefaults(defineProps<{ title: string; subKeyValue?: string }>(), {})
+const props = withDefaults(
+  defineProps<{ title: string; subKeyValue?: string; paddingLeft: number }>(),
+  {}
+)
 
 const { subKeyValue } = toRefs(props)
 const slots = useSlots().default()
@@ -39,7 +42,10 @@ const shouldLight = (item: VNode) => {
     class="ui-menuGroup-wrap"
     :class="{ 'ui-menuGroup-wrap-column': mode === 'column' }"
   >
-    <div class="ui-menuGroup-title">
+    <div
+      class="ui-menuGroup-title"
+      :style="{ paddingLeft: mode === 'column' ? `${paddingLeft - 16}px` : '8px 16px' }"
+    >
       {{ title }}
     </div>
     <ul class="ui-menuGroup-content" @click="onClick">
@@ -52,7 +58,7 @@ const shouldLight = (item: VNode) => {
           'ui-menuGroup-item-selected': shouldLight(item)
         }"
       >
-        <Component :is="item" :isNested="true" />
+        <Component :is="item" :isNested="true" :paddingLeft="paddingLeft" />
       </li>
     </ul>
   </div>
