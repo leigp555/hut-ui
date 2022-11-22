@@ -123,7 +123,10 @@ const shouldLight = (item: VNode) => {
         <span
           v-if="$slots.title"
           class="ui-subMenu-title"
-          :class="{ 'subMenu-no-icon': !$slots.icon }"
+          :class="{
+            'subMenu-no-icon': !$slots.icon,
+            'ui-subMenu-title-selected': selectedKeys.indexOf(keyValue) >= 0
+          }"
         >
           <slot name="title" />
         </span>
@@ -187,6 +190,9 @@ const shouldLight = (item: VNode) => {
         user-select: none;
         display: flex;
         align-items: center;
+        &.ui-subMenu-title-selected {
+          color: #1890ff;
+        }
         &.subMenu-no-icon {
           margin-left: 0;
         }

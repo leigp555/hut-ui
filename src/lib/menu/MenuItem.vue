@@ -15,6 +15,7 @@ const props = withDefaults(
 )
 const { keyValue, disabled, totalTitle } = toRefs(props)
 
+const selectedKeys = inject<Ref<string[]>>('ui_menu_selectedArr')
 // eslint-disable-next-line no-unused-vars
 const changeSelectedArr = inject<(newArr: string[]) => void>(
   'change_ui_menu_selectedArr'
@@ -44,7 +45,13 @@ const onClick = (e: Event) => {
     <span v-if="$slots.icon" class="ui-menuItem-icon">
       <slot name="icon" />
     </span>
-    <span class="ui-menuItem-content" :class="{ 'menuItem-no-icon': !$slots.icon }">
+    <span
+      class="ui-menuItem-content"
+      :class="{
+        'menuItem-no-icon': !$slots.icon,
+        'ui-menuItem-content-selected': selectedKeys.indexOf(keyValue) >= 0
+      }"
+    >
       <slot />
     </span>
   </div>
@@ -85,6 +92,9 @@ $disabled_color: #00000040;
     white-space: nowrap;
     cursor: pointer;
     transition: color 250ms;
+    &.ui-menuItem-content-selected {
+      color: #1890ff;
+    }
     &:hover {
       color: #1890ff;
     }

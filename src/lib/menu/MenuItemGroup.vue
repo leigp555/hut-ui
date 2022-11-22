@@ -33,6 +33,7 @@ const shouldLight = (item: VNode) => {
     <div
       class="ui-menuGroup-title"
       :style="{ paddingLeft: mode === 'column' ? `${paddingLeft - 16}px` : '8px 16px' }"
+      :class="{ 'ui-menuGroup-title-selected': selectedKeys.indexOf(keyValue) >= 0 }"
     >
       {{ title }}
     </div>
@@ -59,11 +60,15 @@ const shouldLight = (item: VNode) => {
 
 <style lang="scss">
 .ui-menuGroup-wrap {
+  background-color: #ffffff;
   > .ui-menuGroup-title {
     padding: 8px 16px;
     color: #00000073;
     font-size: 14px;
     line-height: 1.5715;
+    &.ui-menuGroup-title-selected {
+      color: #1890ff;
+    }
   }
   > .ui-menuGroup-content {
     list-style: none;
