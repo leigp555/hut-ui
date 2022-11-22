@@ -3,11 +3,11 @@
     <div class="ui-menuGroup-title">
       {{ title }}
     </div>
-    <ui class="ui-menuGroup-content">
+    <ul class="ui-menuGroup-content">
       <li v-for="item in slots" :key="item" class="ui-menuGroup-item">
         <Component :is="item" />
       </li>
-    </ui>
+    </ul>
   </div>
 </template>
 

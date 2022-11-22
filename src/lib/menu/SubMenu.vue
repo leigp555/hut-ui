@@ -46,7 +46,6 @@ withDefaults(defineProps<{ keyValue: string }>(), {})
     position: absolute;
     bottom: 0;
     left: 0;
-    transform: translateY(calc(100% + 7px));
     overflow-x: hidden;
     overflow-y: auto;
     background-color: #fff;
@@ -57,6 +56,12 @@ withDefaults(defineProps<{ keyValue: string }>(), {})
     padding: 0;
     border-right: 0;
     box-shadow: 0 3px 6px -4px #0000001f, 0 6px 16px #00000014, 0 9px 28px 8px #0000000d;
+    transition: all 1s;
+    transform: translateY(calc(100% + 7px)) scale(1, 0.8);
+    transform-origin: top;
+    &:hover {
+      transform: translateY(calc(100% + 7px)) scale(1, 1);
+    }
   }
 }
 </style>
