@@ -4,13 +4,14 @@ import { withDefaults, defineProps, toRefs } from 'vue'
 const props = withDefaults(defineProps<{ keyValue: string; disabled?: boolean }>(), {
   disabled: false
 })
-const { disabled } = toRefs(props)
+const { keyValue, disabled } = toRefs(props)
 const onClick = (e: Event) => {
   if (disabled.value) {
     e.stopPropagation()
     e.preventDefault()
     return
   }
+  console.log(keyValue.value)
 }
 </script>
 
@@ -36,6 +37,8 @@ $disabled_color: #00000040;
   align-items: center;
   font-size: 14px;
   color: inherit;
+  user-select: none;
+  cursor: pointer;
   &.ui-menuItem-disabled {
     color: $disabled_color;
     cursor: not-allowed;
@@ -50,9 +53,8 @@ $disabled_color: #00000040;
   > .ui-menuItem-icon {
     min-width: 14px;
     font-size: 14px;
-    //fill: #1890ff;
-    //fill: inherit;
     color: inherit;
+    cursor: pointer;
   }
   > .ui-menuItem-content {
     margin-left: 10px;
