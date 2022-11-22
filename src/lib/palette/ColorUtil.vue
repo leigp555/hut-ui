@@ -40,6 +40,8 @@ const copyColor = async (e: Event) => {
     color: #222222;
     min-width: 80px;
     min-height: 40px;
+    cursor: pointer;
+    user-select: none;
   }
 }
 </style>
