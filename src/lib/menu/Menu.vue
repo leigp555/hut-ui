@@ -36,7 +36,8 @@ provide<(newArr: string[]) => void>('change_ui_menu_selectedArr', changeSelected
       class="ui-menu-item"
       :class="{
         [`ui-menu-item-${mode}`]: true,
-        'ui-menu-item-selected': isSelected(item)
+        'ui-menu-item-selected': isSelected(item),
+        'ui-menu-item-disabled': item.props.disabled
       }"
     >
       <Component :is="item" />
@@ -46,13 +47,15 @@ provide<(newArr: string[]) => void>('change_ui_menu_selectedArr', changeSelected
 
 <style lang="scss">
 $selected_color: #1890ff;
+$disabled_color: #00000040;
+$font_color: #000000d9;
 .ui-menu-wrap {
   display: flex;
   list-style: none;
   align-items: center;
   line-height: 46px;
   border-bottom: 1px solid #f0f0f0;
-  color: #000000d9;
+  color: $font_color;
   font-size: 14px;
   text-align: left;
   background: #fff;
@@ -86,6 +89,29 @@ $selected_color: #1890ff;
       }
       &:after {
         background-color: $selected_color;
+      }
+    }
+    &.ui-menu-item-disabled {
+      &:hover {
+        color: $disabled_color;
+        cursor: not-allowed;
+        .ui-menuItem-icon {
+          fill: $disabled_color;
+          cursor: not-allowed;
+        }
+        .ui-menuItem-content {
+          cursor: not-allowed;
+          &:hover {
+            color: $disabled_color;
+          }
+        }
+        .ui-subMenu-icon {
+          fill: $disabled_color;
+          cursor: not-allowed;
+        }
+        &:after {
+          background-color: #fff;
+        }
       }
     }
     &.ui-menu-item-selected {

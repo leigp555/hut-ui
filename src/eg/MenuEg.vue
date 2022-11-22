@@ -7,7 +7,7 @@
         </template>
         Navigation One
       </MenuItem>
-      <MenuItem keyValue="app" disabled>
+      <MenuItem keyValue="app" :disabled="true">
         <template #icon>
           <SvgIcon name="apps" width="1em" height="1em" />
         </template>
