@@ -1,5 +1,25 @@
+<script setup lang="ts">
+import { withDefaults, defineProps, toRefs } from 'vue'
+
+const props = withDefaults(defineProps<{ keyValue: string; disabled?: boolean }>(), {
+  disabled: false
+})
+const { disabled } = toRefs(props)
+const onClick = (e: Event) => {
+  if (disabled.value) {
+    e.stopPropagation()
+    e.preventDefault()
+    return
+  }
+}
+</script>
+
 <template>
-  <div class="ui-menuItem-wrap">
+  <div
+    class="ui-menuItem-wrap"
+    :class="{ 'ui-menuItem-disabled': disabled }"
+    @click="onClick"
+  >
     <span v-if="$slots.icon" class="ui-menuItem-icon">
       <slot name="icon" />
     </span>
@@ -9,20 +29,24 @@
   </div>
 </template>
 
-<script setup lang="ts">
-import { withDefaults, defineProps } from 'vue'
-
-withDefaults(defineProps<{ keyValue: string; disabled?: boolean }>(), {
-  disabled: false
-})
-</script>
-
 <style lang="scss">
+$disabled_color: #00000040;
 .ui-menuItem-wrap {
   display: flex;
   align-items: center;
   font-size: 14px;
   color: inherit;
+  &.ui-menuItem-disabled {
+    color: $disabled_color;
+    cursor: not-allowed;
+    > .ui-menuItem-icon {
+      fill: $disabled_color;
+      cursor: not-allowed;
+    }
+    > .ui-menuItem-content {
+      cursor: not-allowed;
+    }
+  }
   > .ui-menuItem-icon {
     min-width: 14px;
     font-size: 14px;
