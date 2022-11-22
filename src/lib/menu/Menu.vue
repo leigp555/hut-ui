@@ -6,7 +6,7 @@ const props = withDefaults(
   defineProps<{ selectedKeys?: string[]; mode?: 'horizontal' | 'column' }>(),
   {
     selectedKeys: () => [],
-    mode: 'column'
+    mode: 'horizontal'
   }
 )
 const slots = useSlots().default()

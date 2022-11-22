@@ -16,48 +16,70 @@ const mode = inject<Ref<'column' | 'horizontal'>>('ui_menu_mode')
 
 // title的hover事件
 const onMouseEnter = () => {
-  // 先清除定时器这一步很重要不然可能会出现打开弹出层后又自动关闭
-  timeId2.value && window.clearTimeout(timeId2.value)
-  timeId.value && window.clearTimeout(timeId.value)
-  timeId.value = null
-  timeId2.value = null
-  timeId.value = null
-  shouldShow.value = true
-  isActionStart.value = true
+  if (mode?.value === 'horizontal') {
+    // 先清除定时器这一步很重要不然可能会出现打开弹出层后又自动关闭
+    timeId2.value && window.clearTimeout(timeId2.value)
+    timeId.value && window.clearTimeout(timeId.value)
+    timeId.value = null
+    timeId2.value = null
+    timeId.value = null
+    shouldShow.value = true
+    isActionStart.value = true
+  }
 }
 // title的离开事件
 const onMouseLeave = () => {
-  timeId.value = setTimeout(() => {
-    if (!underSelected.value) {
-      isActionStart.value = false
-      timeId2.value = setTimeout(() => {
-        shouldShow.value = false
-        timeId2.value && window.clearTimeout(timeId2.value)
-      }, 250)
-    }
-    timeId.value && window.clearTimeout(timeId.value)
-  }, 250)
+  if (mode?.value === 'horizontal') {
+    timeId.value = setTimeout(() => {
+      if (!underSelected.value) {
+        isActionStart.value = false
+        timeId2.value = setTimeout(() => {
+          shouldShow.value = false
+          timeId2.value && window.clearTimeout(timeId2.value)
+        }, 250)
+      }
+      timeId.value && window.clearTimeout(timeId.value)
+    }, 250)
+  }
 }
 
 // content-inner的hover事件
 const innerOnMouseEnter = () => {
-  // 先清除定时器这一步很重要不然可能会出现打开弹出层后又自动关闭
-  timeId2.value && window.clearTimeout(timeId2.value)
-  timeId.value && window.clearTimeout(timeId.value)
-  timeId.value = null
-  timeId2.value = null
-  underSelected.value = true
-  shouldShow.value = true
-  isActionStart.value = true
+  if (mode?.value === 'horizontal') {
+    // 先清除定时器这一步很重要不然可能会出现打开弹出层后又自动关闭
+    timeId2.value && window.clearTimeout(timeId2.value)
+    timeId.value && window.clearTimeout(timeId.value)
+    timeId.value = null
+    timeId2.value = null
+    underSelected.value = true
+    shouldShow.value = true
+    isActionStart.value = true
+  }
 }
 // content-inner的离开事件
 const innerOnMouseLeave = () => {
-  underSelected.value = false
-  isActionStart.value = false
-  const id = setTimeout(() => {
-    shouldShow.value = false
-    window.clearTimeout(id)
-  }, 250)
+  if (mode?.value === 'horizontal') {
+    underSelected.value = false
+    isActionStart.value = false
+    const id = setTimeout(() => {
+      shouldShow.value = false
+      window.clearTimeout(id)
+    }, 250)
+  }
+}
+
+const onClick = () => {
+  console.log('执行了')
+  if (shouldShow.value) {
+    isActionStart.value = false
+    const id = setTimeout(() => {
+      shouldShow.value = false
+      window.clearTimeout(id)
+    }, 250)
+  } else {
+    shouldShow.value = true
+    isActionStart.value = true
+  }
 }
 </script>
 
@@ -68,7 +90,7 @@ const innerOnMouseLeave = () => {
     @mouseleave="onMouseLeave"
     :class="{ 'ui-subMenu-wrap-column': mode === 'column' }"
   >
-    <div class="ui-subMenu-title-wrap">
+    <div class="ui-subMenu-title-wrap" @click="onClick">
       <div class="ui-subMenu-title-inner">
         <span v-if="$slots.icon" class="ui-subMenu-icon">
           <slot name="icon" />
@@ -82,7 +104,7 @@ const innerOnMouseLeave = () => {
         </span>
       </div>
 
-      <span>
+      <span v-if="mode === 'column'">
         <SvgIcon name="down" height="1em" width="1em" />
       </span>
     </div>
@@ -139,7 +161,7 @@ const innerOnMouseLeave = () => {
 
   > .ui-subMenu-content {
     position: absolute;
-    bottom: 0;
+    bottom: -7px;
     left: 0;
     z-index: 100;
     color: #000000d9;
@@ -147,7 +169,6 @@ const innerOnMouseLeave = () => {
     min-width: 160px;
     width: 100%;
     max-height: calc(100vh - 100px);
-    padding-top: 7px;
     transform: translateY(100%);
     transform-origin: top;
     > .ui-subMenu-content-inner {
