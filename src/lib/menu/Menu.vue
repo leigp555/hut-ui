@@ -1,19 +1,3 @@
-<template>
-  <ul class="ui-menu-wrap" :class="{ [`ui-menu-${mode}`]: true }">
-    <li
-      v-for="item in slots"
-      :key="item"
-      class="ui-menu-item"
-      :class="{
-        [`ui-menu-item-${mode}`]: true,
-        'ui-menu-item-selected': isSelected(item)
-      }"
-    >
-      <Component :is="item" />
-    </li>
-  </ul>
-</template>
-
 <script setup lang="ts">
 import { withDefaults, defineProps, useSlots, VNode, toRefs, provide, Ref } from 'vue'
 
@@ -43,6 +27,22 @@ provide<Ref<string[]>>('ui_menu_selectedArr', selectedKeys)
 // eslint-disable-next-line no-unused-vars
 provide<(newArr: string[]) => void>('change_ui_menu_selectedArr', changeSelectedArr)
 </script>
+
+<template>
+  <ul class="ui-menu-wrap" :class="{ [`ui-menu-${mode}`]: true }">
+    <li
+      v-for="item in slots"
+      :key="item"
+      class="ui-menu-item"
+      :class="{
+        [`ui-menu-item-${mode}`]: true,
+        'ui-menu-item-selected': isSelected(item)
+      }"
+    >
+      <Component :is="item" />
+    </li>
+  </ul>
+</template>
 
 <style lang="scss">
 $selected_color: #1890ff;
@@ -79,6 +79,9 @@ $selected_color: #1890ff;
     &.ui-menu-item-selected {
       color: $selected_color;
       .ui-menuItem-icon {
+        fill: $selected_color;
+      }
+      .ui-subMenu-icon {
         fill: $selected_color;
       }
       &:after {

@@ -37,7 +37,7 @@ const slots = useSlots().default()
       overflow: hidden;
       line-height: 40px;
       text-overflow: ellipsis;
-      background-color: red;
+      //background-color: red;
     }
   }
 }

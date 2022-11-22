@@ -45,7 +45,7 @@ import MenuItemGroup from '@/lib/menu/MenuItemGroup.vue'
 import SubMenu from '@/lib/menu/SubMenu.vue'
 import SvgIcon from '@/lib/common/SvgIcon.vue'
 
-const current = ref<string[]>(['mail'])
+const current = ref<string[]>(['sub1'])
 </script>
 
 <style lang="scss">
