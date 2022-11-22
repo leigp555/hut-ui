@@ -37,6 +37,7 @@ const isSelected = (item: VNode): boolean => {
 </script>
 
 <style lang="scss">
+$selected_color: #1890ff;
 .ui-menu-wrap {
   display: flex;
   list-style: none;
@@ -68,9 +69,12 @@ const isSelected = (item: VNode): boolean => {
       transition: all 0.3s;
     }
     &.ui-menu-item-selected {
-      color: #1890ff;
+      color: $selected_color;
+      .ui-menuItem-icon {
+        fill: $selected_color;
+      }
       &:after {
-        background-color: #1890ff;
+        background-color: $selected_color;
       }
     }
   }

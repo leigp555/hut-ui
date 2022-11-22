@@ -22,14 +22,13 @@ withDefaults(defineProps<{ keyValue: string; disabled?: boolean }>(), {
   display: flex;
   align-items: center;
   font-size: 14px;
-  //color: #1890ff;
-  color: #000000d9;
-
+  color: inherit;
   > .ui-menuItem-icon {
     min-width: 14px;
     font-size: 14px;
     //fill: #1890ff;
-    fill: #000000d9;
+    //fill: inherit;
+    color: inherit;
   }
   > .ui-menuItem-content {
     margin-left: 10px;
