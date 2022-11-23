@@ -4,7 +4,7 @@
     <Menu v-model:selectedKeys="current" mode="horizontal">
       <MenuItem keyValue="mail">
         <template #icon>
-          <SvgIcon name="mail" width="1em" height="1em" />
+          <SvgIcon name="email" width="1em" height="1em" />
         </template>
         Navigation One
       </MenuItem>
@@ -39,7 +39,7 @@
     <Menu v-model:selectedKeys="selectedKeys" style="width: 256px" mode="column">
       <SubMenu keyValue="sub1">
         <template #icon>
-          <SvgIcon name="mail" width="1em" height="1em" />
+          <SvgIcon name="email" width="1em" height="1em" />
         </template>
         <template #title>Navigation One</template>
         <MenuItemGroup keyValue="g1" title="Item 1">

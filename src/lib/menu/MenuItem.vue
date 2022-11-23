@@ -86,6 +86,8 @@ $disabled_color: #00000040;
     color: inherit;
     cursor: pointer;
     transition: all 250ms;
+    display: flex;
+    align-items: center;
   }
   > .ui-menuItem-content {
     margin-left: 10px;

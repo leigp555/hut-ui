@@ -7,7 +7,8 @@ import {
   Ref,
   inject,
   toRefs,
-  VNode
+  VNode,
+  computed
 } from 'vue'
 import SvgIcon from '../common/SvgIcon.vue'
 
@@ -18,7 +19,7 @@ const props = withDefaults(
     totalTitle: () => []
   }
 )
-const { paddingLeft, totalTitle } = toRefs(props)
+const { keyValue } = toRefs(props)
 const shouldShow = ref<boolean>(false)
 const isActionStart = ref<boolean>(false)
 const underSelected = ref<boolean>(false)
@@ -26,7 +27,10 @@ const underSelected = ref<boolean>(false)
 const timeId = ref<number | null>(null)
 const timeId2 = ref<number | null>(null)
 
-const slots = useSlots().default()
+let slots: VNode[] | []
+if (useSlots().default) {
+  slots = useSlots().default!()
+}
 
 const mode = inject<Ref<'column' | 'horizontal'>>('ui_menu_mode')
 const selectedKeys = inject<Ref<string[]>>('ui_menu_selectedArr')
@@ -100,8 +104,17 @@ const onClick = () => {
 }
 
 const shouldLight = (item: VNode) => {
-  return selectedKeys?.value.indexOf(item.props.keyValue) >= 0
+  if (selectedKeys?.value && item.props) {
+    return selectedKeys?.value.indexOf(item.props.keyValue) >= 0
+  }
+  return false
 }
+const shouldTileLight = computed<boolean>(() => {
+  if (selectedKeys?.value) {
+    return selectedKeys.value.indexOf(keyValue.value) >= 0
+  }
+  return false
+})
 </script>
 
 <template>
@@ -125,7 +138,7 @@ const shouldLight = (item: VNode) => {
           class="ui-subMenu-title"
           :class="{
             'subMenu-no-icon': !$slots.icon,
-            'ui-subMenu-title-selected': selectedKeys.indexOf(keyValue) >= 0
+            'ui-subMenu-title-selected': shouldTileLight
           }"
         >
           <slot name="title" />
@@ -194,6 +207,8 @@ const shouldLight = (item: VNode) => {
       > .ui-subMenu-icon {
         min-width: 14px;
         font-size: 14px;
+        display: flex;
+        align-items: center;
       }
       > .ui-subMenu-title {
         margin-left: 10px;
