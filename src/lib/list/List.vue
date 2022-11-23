@@ -1,6 +1,6 @@
 <template>
   <div class="ui-list-wrap">
-    <Spin :loading="loading && mode === 'pagination'">
+    <Spin :loading="spinShow">
       <ol class="ui-list-content">
         <li class="ui-list-item" v-for="item in dataSource" :key="item">
           <Component :is="slots[0]" :data="item" />
@@ -10,6 +10,16 @@
             :avatar="skeletonAvatar"
             active
             :paragraph="{ rows: 3 }"
+            :loading="loading"
+          />
+        </li>
+        <li class="ui-list-skeleton" v-show="skeletonShow">
+          <Skeleton
+            v-for="i in 3"
+            :key="i"
+            :avatar="skeletonAvatar"
+            active
+            :paragraph="{ rows: 2 }"
             :loading="loading"
           />
         </li>
@@ -25,7 +35,7 @@
 </template>
 
 <script setup lang="ts">
-import { withDefaults, defineProps, useSlots } from 'vue'
+import { withDefaults, defineProps, useSlots, computed, toRefs } from 'vue'
 import Skeleton from '../skeleton/Skeleton.vue'
 import Spin from '../spin/Spin.vue'
 
@@ -35,7 +45,7 @@ export interface DataItem {
   description: string
 }
 
-withDefaults(
+const props = withDefaults(
   defineProps<{
     dataSource: DataItem[]
     loading?: boolean
@@ -48,8 +58,15 @@ withDefaults(
     skeletonAvatar: true
   }
 )
-
+const { mode, dataSource, loading } = toRefs(props)
 const slots = useSlots().default()
+
+const skeletonShow = computed<boolean>(() => {
+  return mode.value === 'pagination' && !dataSource.value[0]
+})
+const spinShow = computed<boolean>(() => {
+  return loading.value && mode.value === 'pagination' && !!dataSource.value[0]
+})
 </script>
 
 <style lang="scss">
