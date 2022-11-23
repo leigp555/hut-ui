@@ -1,4 +1,4 @@
-import { TableDataType } from '@/lib/table/Table.vue'
+import { TableDataType } from '@/lib/list/Type'
 
 let num: number = 0
 const totalDate: {

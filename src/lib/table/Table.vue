@@ -1,12 +1,14 @@
+<script lang="ts">
+export default {
+  inheritAttrs: false
+}
+</script>
+
 <script setup lang="ts">
 import { withDefaults, defineProps, computed, toRefs } from 'vue'
 import Spin from '../spin/Spin.vue'
 import Skeleton from '../skeleton/Skeleton.vue'
-
-export type TableDataType = {
-  key: string
-  label: string
-}
+import { TableDataType } from '@/lib/list/Type'
 
 const props = withDefaults(
   defineProps<{
@@ -38,7 +40,7 @@ const skeletonShow = computed<boolean>(() => {
       <div class="ui-table-head" v-if="$slots.head">
         <slot name="head" />
       </div>
-      <table class="ui-table-content">
+      <table v-bind="$attrs" class="ui-table-content">
         <thead class="ui-table-thead">
           <tr>
             <th v-for="item in headSource" :key="item.key">

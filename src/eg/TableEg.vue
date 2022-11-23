@@ -44,11 +44,12 @@
 
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
-import Table, { TableDataType } from '@/lib/table/Table.vue'
+import Table from '@/lib/table/Table.vue'
 import Tag from '@/lib/tag/Tag.vue'
 import Pagination from '@/lib/pagination/Pagination.vue'
 import SvgIcon from '@/lib/common/SvgIcon.vue'
 import { ajax } from '@/eg/ajax'
+import { TableDataType } from '@/lib/list/Type'
 
 const current = ref<number>(1)
 const pageSize = ref<number>(5)
