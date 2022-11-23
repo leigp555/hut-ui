@@ -56,7 +56,7 @@
       </template>
     </List>
 
-    <List mode="pagination" :dataSource="data4" :loading="loading3">
+    <List mode="pagination" :dataSource="data3" :loading="loading3">
       <ListItem>
         <template #avatar="item">
           <Avatar
@@ -86,7 +86,7 @@
         <div style="display: flex; justify-content: center; margin-top: 50px">
           <Pagination
             v-model:current="current"
-            :total="data3.length"
+            :total="dataNum"
             v-model:pageSize="pageSize"
             @pageSizeChange="pageSize = $event"
             :disabled="false"
@@ -107,7 +107,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, Ref, ref } from 'vue'
+import { onMounted, Ref, ref, watch } from 'vue'
 import List from '@/lib/list/List.vue'
 import ListItem from '@/lib/list/ListItem.vue'
 import Avatar from '@/lib/avatar/Avatar.vue'
@@ -131,23 +131,48 @@ const loading3 = ref<boolean>(false)
 const current = ref<number>(1)
 const pageSize = ref<number>(10)
 const pageSizeOptions = ref<string[]>(['10', '20', '30', '40', '50'])
+const dataNum = ref<number>(0)
 
-const fetch = (dataArr: Ref<DataItem[]>, loading: Ref<boolean>, count: number = 3) => {
-  loading.value = true
-  ;(ajax('/mock', count) as Promise<DataItem[]>)
-    .then((res) => {
-      dataArr.value = [...dataArr.value, ...res]
-      loading.value = false
-    })
-    .catch((err) => {
-      console.log(err)
-      loading.value = false
-    })
+const fetch = (
+  url: string,
+  dataArr: Ref<DataItem[]>,
+  loading: Ref<boolean>,
+  count: number = 3
+) => {
+  if (url === '/mock') {
+    loading.value = true
+    ;(ajax(url, count) as Promise<DataItem[]>)
+      .then((res) => {
+        dataArr.value = [...dataArr.value, ...res]
+        loading.value = false
+      })
+      .catch((err) => {
+        console.log(err)
+        loading.value = false
+      })
+  } else if (url === '/pagination') {
+    loading.value = true
+    ;(
+      ajax(url, count, current.value, pageSize.value) as Promise<{
+        data: DataItem[]
+        totalDateNum: number
+      }>
+    )
+      .then((res) => {
+        dataArr.value = [...res.data]
+        dataNum.value = res.totalDateNum
+        loading.value = false
+      })
+      .catch((err) => {
+        console.log(err)
+        loading.value = false
+      })
+  }
 }
 onMounted(() => {
-  fetch(data1, loading1)
-  fetch(data2, loading2)
-  fetch(data3, loading3, 1000)
+  fetch('/mock', data1, loading1)
+  fetch('/mock', data2, loading2)
+  fetch('/pagination', data3, loading3, 0)
 })
 
 const onEdit = (item: DataItem) => {
@@ -160,9 +185,8 @@ const onMore = (item: DataItem) => {
 const onLoadMore = () => {
   fetch(data2, loading2)
 }
-const data4 = computed(() => {
-  const end = current.value * pageSize.value
-  return data3.value.slice(end - pageSize.value, end)
+watch(current, () => {
+  fetch('/pagination', data3, loading3, 0)
 })
 </script>
 
