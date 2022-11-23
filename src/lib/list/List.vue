@@ -8,10 +8,10 @@
         <Skeleton avatar active :paragraph="{ rows: 3 }" :loading="loading" />
       </li>
     </ol>
-    <div class="ui-list-loadMore">
+    <div class="ui-list-loadMore" v-if="mode === 'loadMore'">
       <slot name="loadMore" />
     </div>
-    <div class="ui-list-pagination">
+    <div class="ui-list-pagination" v-if="mode === 'pagination'">
       <slot name="pagination" />
     </div>
   </div>
@@ -21,9 +21,17 @@
 import { withDefaults, defineProps, useSlots } from 'vue'
 import Skeleton from '../skeleton/Skeleton.vue'
 
-withDefaults(defineProps<{ dataSource: []; loading?: boolean }>(), {
-  loading: false
-})
+withDefaults(
+  defineProps<{
+    dataSource: []
+    loading?: boolean
+    mode?: 'loadMore' | 'normal' | 'pagination'
+  }>(),
+  {
+    loading: false,
+    mode: 'normal'
+  }
+)
 
 const slots = useSlots().default()
 </script>
@@ -47,7 +55,8 @@ const slots = useSlots().default()
       padding: 12px 0;
     }
   }
-  > .ui-list-loadMore {
+  > .ui-list-loadMore,
+  .ui-list-pagination {
     display: flex;
     justify-content: center;
     text-align: center;

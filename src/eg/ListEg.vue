@@ -23,7 +23,7 @@
         </template>
       </ListItem>
     </List>
-    <List :dataSource="data2" :loading="loading2">
+    <List mode="loadMore" :dataSource="data2" :loading="loading2">
       <ListItem>
         <template #avatar="item">
           <Avatar
@@ -56,7 +56,7 @@
       </template>
     </List>
 
-    <List :dataSource="data4" :loading="loading3">
+    <List mode="pagination" :dataSource="data4" :loading="loading3">
       <ListItem>
         <template #avatar="item">
           <Avatar
