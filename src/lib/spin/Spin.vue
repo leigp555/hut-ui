@@ -1,3 +1,9 @@
+<script lang="ts">
+export default {
+  inheritAttrs: false
+}
+</script>
+
 <script setup lang="ts">
 import { withDefaults, defineProps, ref, onMounted, watchEffect, toRefs } from 'vue'
 import SvgIcon from '@/lib/common/SvgIcon.vue'
@@ -35,7 +41,7 @@ onMounted(() => {
     <div v-if="$slots.default" :class="{ 'ui-spin-slot': isLoading }">
       <slot />
     </div>
-    <div class="ui-spin-icon-wrap" v-if="isLoading">
+    <div class="ui-spin-icon-wrap" v-if="isLoading" v-bind="$attrs">
       <div class="ui-spin-icon">
         <span v-if="!$slots.icon">
           <SvgIcon

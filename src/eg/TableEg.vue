@@ -16,14 +16,42 @@
         </span>
         <span v-else style="color: #1890ff">{{ item.data }}</span>
       </template>
+      <template #pagination>
+        <div style="display: flex; justify-content: center; margin-top: 50px">
+          <Pagination
+            v-model:current="current"
+            :total="dataNum"
+            v-model:pageSize="pageSize"
+            @pageSizeChange="pageSize = $event"
+            :disabled="loading"
+            :pageSizeOptions="pageSizeOptions"
+            showQuickJumper
+            showSizeChanger
+            showTotal
+            @change="current = $event"
+          >
+            <template #buildOptionText="props">
+              <span>{{ props.value }}条/页</span>
+            </template>
+          </Pagination>
+        </div>
+      </template>
     </Table>
   </div>
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue'
 import Table, { TableDataType } from '@/lib/table/Table.vue'
 import Tag from '@/lib/tag/Tag.vue'
+import Pagination from '@/lib/pagination/Pagination.vue'
 import SvgIcon from '@/lib/common/SvgIcon.vue'
+
+const current = ref<number>(1)
+const pageSize = ref<number>(5)
+const pageSizeOptions = ref<string[]>(['5', '10', '20', '30', '40'])
+const dataNum = ref<number>(100)
+const loading = ref<boolean>(false)
 
 const columns: TableDataType[] = [
   {

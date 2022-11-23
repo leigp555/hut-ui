@@ -60,7 +60,7 @@ const props = withDefaults(
   }
 )
 const { mode, dataSource, loading } = toRefs(props)
-const slots = useSlots().default()
+const slots = useSlots().default!()
 
 const skeletonShow = computed<boolean>(() => {
   return mode.value === 'pagination' && !dataSource.value[0]
