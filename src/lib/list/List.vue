@@ -6,7 +6,12 @@
           <Component :is="slots[0]" :data="item" />
         </li>
         <li class="ui-list-skeleton" v-show="loading && mode !== 'pagination'">
-          <Skeleton avatar active :paragraph="{ rows: 3 }" :loading="loading" />
+          <Skeleton
+            :avatar="skeletonAvatar"
+            active
+            :paragraph="{ rows: 3 }"
+            :loading="loading"
+          />
         </li>
       </ol>
       <div class="ui-list-loadMore" v-if="mode === 'loadMore'">
@@ -24,15 +29,23 @@ import { withDefaults, defineProps, useSlots } from 'vue'
 import Skeleton from '../skeleton/Skeleton.vue'
 import Spin from '../spin/Spin.vue'
 
+export interface DataItem {
+  title: string
+  avatar?: string
+  description: string
+}
+
 withDefaults(
   defineProps<{
-    dataSource: []
+    dataSource: DataItem[]
     loading?: boolean
     mode?: 'loadMore' | 'normal' | 'pagination'
+    skeletonAvatar?: boolean
   }>(),
   {
     loading: false,
-    mode: 'normal'
+    mode: 'normal',
+    skeletonAvatar: true
   }
 )
 
@@ -59,7 +72,7 @@ const slots = useSlots().default()
       padding: 12px 0;
     }
   }
-  > .ui-list-loadMore,
+  .ui-list-loadMore,
   .ui-list-pagination {
     display: flex;
     justify-content: center;
