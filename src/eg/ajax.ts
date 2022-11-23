@@ -1,3 +1,5 @@
+import { TableDataType } from '@/lib/table/Table.vue'
+
 let num: number = 0
 const totalDate: {
   title: string
@@ -13,6 +15,22 @@ while (j < 1000) {
       'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab aliquam asperiores, autem blanditiis cumque debitis dolorem est illo odit optio praesentium quasi recusandae rem sint tempora veritatis vitae voluptates voluptatibus.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab aliquam asperiores, autem blanditiis cumque debitis dolorem est illo odit optio praesentium quasi recusandae rem sint tempora veritatis vitae voluptates voluptatibus.'
   })
   j++
+}
+
+const tableDate: (
+  | TableDataType
+  | { name: string; age: number; address: string; tags: string[] }
+)[] = []
+let x = 0
+while (x < 1000) {
+  tableDate.push({
+    key: `${x + 1}`,
+    name: `John Brown ${x + 1}`,
+    age: 32,
+    address: 'New York No. 1 Lake Park',
+    tags: ['nice', 'developer']
+  })
+  x++
 }
 
 export const ajax = (url: string, count: number, page: number, per_page: number) => {
@@ -44,6 +62,15 @@ export const ajax = (url: string, count: number, page: number, per_page: number)
         resolve({
           data: totalDate.slice(end - per_page, end),
           totalDateNum: totalDate.length
+        })
+        window.clearTimeout(id)
+      }, 2000)
+    } else if (url === '/table') {
+      const end = page * per_page
+      const id = setTimeout(() => {
+        resolve({
+          data: tableDate.slice(end - per_page, end),
+          totalDateNum: tableDate.length
         })
         window.clearTimeout(id)
       }, 2000)

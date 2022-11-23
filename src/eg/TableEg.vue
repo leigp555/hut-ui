@@ -28,7 +28,7 @@
             showQuickJumper
             showSizeChanger
             showTotal
-            @change="current = $event"
+            @change="pageChange"
           >
             <template #buildOptionText="props">
               <span>{{ props.value }}条/页</span>
@@ -41,16 +41,17 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import Table, { TableDataType } from '@/lib/table/Table.vue'
 import Tag from '@/lib/tag/Tag.vue'
 import Pagination from '@/lib/pagination/Pagination.vue'
 import SvgIcon from '@/lib/common/SvgIcon.vue'
+import { ajax } from '@/eg/ajax'
 
 const current = ref<number>(1)
 const pageSize = ref<number>(5)
 const pageSizeOptions = ref<string[]>(['5', '10', '20', '30', '40'])
-const dataNum = ref<number>(100)
+const dataNum = ref<number>(0)
 const loading = ref<boolean>(false)
 
 const columns: TableDataType[] = [
@@ -71,33 +72,36 @@ const columns: TableDataType[] = [
     key: 'tags'
   }
 ]
+const data = ref<TableDataType[]>([])
 
-const data: (
-  | TableDataType
-  | { name: string; age: number; address: string; tags: string[] }
-)[] = [
-  {
-    key: '1',
-    name: 'John Brown',
-    age: 32,
-    address: 'New York No. 1 Lake Park',
-    tags: ['nice', 'developer']
-  },
-  {
-    key: '2',
-    name: 'Jim Green',
-    age: 42,
-    address: 'London No. 1 Lake Park',
-    tags: ['loser']
-  },
-  {
-    key: '3',
-    name: 'Joe Black',
-    age: 32,
-    address: 'Sidney No. 1 Lake Park',
-    tags: ['cool', 'teacher']
+const fetch = (url: string) => {
+  if (url === '/table') {
+    loading.value = true
+    ;(
+      ajax(url, 0, current.value, pageSize.value) as Promise<{
+        data: TableDataType[]
+        totalDateNum: number
+      }>
+    )
+      .then((res) => {
+        data.value = [...res.data]
+        dataNum.value = res.totalDateNum
+        loading.value = false
+        console.log(res)
+      })
+      .catch((err) => {
+        console.log(err)
+        loading.value = false
+      })
   }
-]
+}
+onMounted(() => {
+  fetch('/table')
+})
+const pageChange = (newPage: number) => {
+  current.value = newPage
+  fetch('/table')
+}
 </script>
 
 <style lang="scss">
