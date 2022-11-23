@@ -11,17 +11,16 @@ withDefaults(
   {}
 )
 
-const slots = useSlots().default()
+const slots = useSlots().default!()
 
-// eslint-disable-next-line no-unused-vars
-const changeSelectedArr = inject<(newArr: string[]) => void>(
-  'change_ui_menu_selectedArr'
-)
 const selectedKeys = inject<Ref<string[]>>('ui_menu_selectedArr')
 const mode = inject<Ref<'column' | 'horizontal'>>('ui_menu_mode')
 
 const shouldLight = (item: VNode) => {
-  return selectedKeys?.value.indexOf(item.props.keyValue) >= 0
+  if (selectedKeys?.value) {
+    return selectedKeys?.value.indexOf(item.props!.keyValue) >= 0
+  }
+  return false
 }
 </script>
 

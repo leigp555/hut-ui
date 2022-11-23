@@ -28,7 +28,7 @@ const onClick = (e: Event) => {
     e.preventDefault()
     return
   }
-  changeSelectedArr([...totalTitle.value, keyValue.value])
+  if (changeSelectedArr) changeSelectedArr([...totalTitle.value, keyValue.value])
 }
 </script>
 

@@ -9,11 +9,11 @@ const props = withDefaults(
     mode: 'horizontal'
   }
 )
-const slots = useSlots().default()
+const slots = useSlots().default!()
 const { selectedKeys, mode } = toRefs(props)
 
 const isSelected = (item: VNode): boolean => {
-  const keyWorld = item.props.keyValue
+  const keyWorld = item.props!.keyValue
   let isExist = false
   if (keyWorld) {
     isExist = selectedKeys.value.indexOf(keyWorld) >= 0
