@@ -1,14 +1,14 @@
 <template>
   <div class="ui-listItem-wrap">
-    <div class="ui-listItem-avatar">
+    <div class="ui-listItem-avatar" v-if="$slots.avatar">
       <slot name="avatar" :data="data" />
     </div>
     <div class="ui-listItem-content-wrap">
-      <h4 class="ui-listItem-title">
+      <h4 class="ui-listItem-title" v-if="$slots.title">
         <slot name="title" :data="data" />
       </h4>
       <div class="ui-listItem-content">
-        <div class="ui-listItem-description">
+        <div class="ui-listItem-description" v-if="$slots.description">
           <slot name="description" :data="data" />
         </div>
         <div class="ui-listItem-actions" v-if="$slots.actions">
