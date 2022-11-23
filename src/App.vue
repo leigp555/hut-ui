@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import Example from '@/eg/MenuEg.vue'
+import Example from '@/eg/ListEg.vue'
 </script>
 
 <style>
