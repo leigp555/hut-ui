@@ -2,10 +2,19 @@
   <div class="ui-template-wrap">
     <Table :headSource="columns" :bodySource="data">
       <template #tableHead="item">
-        <span style="color: red">{{ item.data }}</span>
+        <span v-if="item.keyValue === 'name'" style="color: red">
+          <SvgIcon name="weixin" width="1em " height="1em" style="margin-right: 4px" />
+          {{ item.data }}
+        </span>
+        <span v-else>{{ item.data }}</span>
       </template>
       <template #tableBody="item">
-        <span style="color: #1890ff">{{ item.data }}</span>
+        <span v-if="item.keyValue === 'tags'">
+          <Tag color="blue" v-for="i in item.data" :key="i">
+            {{ i.toUpperCase() }}
+          </Tag>
+        </span>
+        <span v-else style="color: #1890ff">{{ item.data }}</span>
       </template>
     </Table>
   </div>
@@ -13,6 +22,8 @@
 
 <script setup lang="ts">
 import Table, { TableDataType } from '@/lib/table/Table.vue'
+import Tag from '@/lib/tag/Tag.vue'
+import SvgIcon from '@/lib/common/SvgIcon.vue'
 
 const columns: TableDataType[] = [
   {

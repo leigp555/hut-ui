@@ -27,14 +27,14 @@ const headArr = computed<string[]>(() => {
     <thead class="ui-table-thead">
       <tr>
         <th v-for="item in headSource" :key="item.key">
-          <slot name="tableHead" :data="item.label" />
+          <slot name="tableHead" :data="item.label" :keyValue="item.key" />
         </th>
       </tr>
     </thead>
     <tbody class="ui-table-tbody">
       <tr v-for="item in bodySource" :key="item.key">
         <td v-for="data in headArr" :key="data">
-          <slot name="tableBody" :data="item[data]" />
+          <slot name="tableBody" :data="item[data]" :keyValue="data" />
         </td>
       </tr>
     </tbody>
