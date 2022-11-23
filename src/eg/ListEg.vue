@@ -21,6 +21,10 @@
             {{ item.data.description }}
           </span>
         </template>
+        <template #actions="item">
+          <Button type="link" @click="onEdit(item.data)">edit</Button>
+          <Button type="link" @click="onMore(item.data)">more</Button>
+        </template>
       </ListItem>
     </List>
   </div>
@@ -32,6 +36,7 @@ import List from '@/lib/list/List.vue'
 import ListItem from '@/lib/list/ListItem.vue'
 import Avatar from '@/lib/avatar/Avatar.vue'
 import SvgIcon from '@/lib/common/SvgIcon.vue'
+import Button from '@/lib/button/Button.vue'
 
 interface DataItem {
   title: string
@@ -49,6 +54,13 @@ while (i < 10) {
       'Ant Design, a design language for background applications, is refined by Ant UED Team'
   })
   i++
+}
+
+const onEdit = (item: DataItem) => {
+  console.log(item)
+}
+const onMore = (item: DataItem) => {
+  console.log(item)
 }
 </script>
 
