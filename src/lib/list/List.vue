@@ -13,6 +13,7 @@
             :loading="loading"
           />
         </li>
+        <!--        pagination首次加载骨架图占位，之后spin组件做加载动画-->
         <li class="ui-list-skeleton" v-show="skeletonShow">
           <Skeleton
             v-for="i in 3"
