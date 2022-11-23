@@ -1,6 +1,6 @@
 <template>
   <div class="ui-list-wrap">
-    <Spin :loading="spinShow">
+    <Spin :loading="spinShow" style="top: 40%">
       <ol class="ui-list-content">
         <li class="ui-list-item" v-for="item in dataSource" :key="item">
           <Component :is="slots[0]" :data="item" />

@@ -85,7 +85,7 @@
             showQuickJumper
             showSizeChanger
             showTotal
-            @change="current = $event"
+            @change="onChange"
           >
             <template #buildOptionText="props">
               <span>{{ props.value }}条/页</span>
@@ -98,7 +98,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, Ref, ref, watch } from 'vue'
+import { onMounted, Ref, ref } from 'vue'
 import List, { DataItem } from '@/lib/list/List.vue'
 import ListItem from '@/lib/list/ListItem.vue'
 import Avatar from '@/lib/avatar/Avatar.vue'
@@ -127,7 +127,7 @@ const fetch = (
 ) => {
   if (url === '/mock') {
     loading.value = true
-    ;(ajax(url, count) as Promise<DataItem[]>)
+    ;(ajax(url, count, 0, 0) as Promise<DataItem[]>)
       .then((res) => {
         dataArr.value = [...dataArr.value, ...res]
         loading.value = false
@@ -172,9 +172,10 @@ const onLoadMore = () => {
   fetch('/mock', data2, loading2)
 }
 // 页码变动时发一次请求
-watch(current, () => {
+const onChange = (newPageNum: number) => {
+  current.value = newPageNum
   fetch('/pagination', data3, loading3, 0)
-})
+}
 </script>
 
 <style lang="scss">

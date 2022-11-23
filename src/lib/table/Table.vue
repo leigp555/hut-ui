@@ -8,10 +8,15 @@ export type TableDataType = {
 }
 
 const props = withDefaults(
-  defineProps<{ headSource?: TableDataType[]; bodySource?: TableDataType[] }>(),
+  defineProps<{
+    headSource?: TableDataType[]
+    bodySource?: TableDataType[]
+    loading: boolean
+  }>(),
   {
     headSource: () => [],
-    bodySource: () => []
+    bodySource: () => [],
+    loading: false
   }
 )
 const { headSource } = toRefs(props)
@@ -23,7 +28,7 @@ const headArr = computed<string[]>(() => {
 </script>
 
 <template>
-  <Spin :loading="true" style="top: 30%">
+  <Spin :loading="loading" style="top: 30%">
     <div class="ui-table-wrap">
       <table class="ui-table-content">
         <thead class="ui-table-thead">

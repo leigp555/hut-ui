@@ -1,6 +1,6 @@
 <template>
   <div class="ui-template-wrap">
-    <Table :headSource="columns" :bodySource="data">
+    <Table :headSource="columns" :bodySource="data" :loading="loading">
       <template #tableHead="item">
         <span v-if="item.keyValue === 'name'" style="color: red">
           <SvgIcon name="weixin" width="1em " height="1em" style="margin-right: 4px" />
