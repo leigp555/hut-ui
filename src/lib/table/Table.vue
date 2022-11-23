@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { withDefaults, defineProps, computed, toRefs } from 'vue'
 import Spin from '../spin/Spin.vue'
+import Skeleton from '../skeleton/Skeleton.vue'
 
 export type TableDataType = {
   key: string
@@ -11,7 +12,7 @@ const props = withDefaults(
   defineProps<{
     headSource?: TableDataType[]
     bodySource?: TableDataType[]
-    loading: boolean
+    loading?: boolean
   }>(),
   {
     headSource: () => [],
@@ -19,16 +20,20 @@ const props = withDefaults(
     loading: false
   }
 )
-const { headSource } = toRefs(props)
+const { headSource, bodySource } = toRefs(props)
 const headArr = computed<string[]>(() => {
   return headSource.value.map((item) => {
     return item.key
   })
 })
+
+const skeletonShow = computed<boolean>(() => {
+  return !bodySource.value[0]
+})
 </script>
 
 <template>
-  <Spin :loading="loading" style="top: 30%">
+  <Spin :loading="loading && !skeletonShow" style="top: 40%">
     <div class="ui-table-wrap">
       <table class="ui-table-content">
         <thead class="ui-table-thead">
@@ -46,6 +51,16 @@ const headArr = computed<string[]>(() => {
           </tr>
         </tbody>
       </table>
+
+      <!--        pagination首次加载骨架图占位，之后spin组件做加载动画-->
+      <div class="ui-list-skeleton" v-show="skeletonShow">
+        <Skeleton
+          active
+          :paragraph="{ rows: 8 }"
+          :loading="loading"
+          :title-appear="false"
+        />
+      </div>
       <div class="ui-table-pagination" v-if="$slots.pagination">
         <slot name="pagination" />
       </div>

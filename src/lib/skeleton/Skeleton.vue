@@ -8,7 +8,11 @@
     </div>
 
     <div class="ui-skeleton-content">
-      <h3 class="ui-skeleton-title" :class="{ 'skeleton-title-active': active }" />
+      <h3
+        class="ui-skeleton-title"
+        :class="{ 'skeleton-title-active': active }"
+        v-if="titleAppear"
+      />
       <ol>
         <li
           v-for="item in paragraph.rows"
@@ -31,12 +35,14 @@ withDefaults(
     avatar?: boolean
     active?: boolean
     loading?: boolean
+    titleAppear?: boolean
   }>(),
   {
     paragraph: () => ({ rows: 3 }),
     avatar: false,
     active: false,
-    loading: true
+    loading: true,
+    titleAppear: true
   }
 )
 </script>

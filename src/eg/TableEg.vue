@@ -87,7 +87,6 @@ const fetch = (url: string) => {
         data.value = [...res.data]
         dataNum.value = res.totalDateNum
         loading.value = false
-        console.log(res)
       })
       .catch((err) => {
         console.log(err)
