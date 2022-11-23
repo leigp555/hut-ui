@@ -11,6 +11,9 @@
     <div class="ui-list-loadMore">
       <slot name="loadMore" />
     </div>
+    <div class="ui-list-pagination">
+      <slot name="pagination" />
+    </div>
   </div>
 </template>
 
