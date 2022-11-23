@@ -4,7 +4,7 @@
       <li class="ui-list-item" v-for="item in dataSource" :key="item">
         <Component :is="slots[0]" :data="item" />
       </li>
-      <li class="ui-list-skeleton">
+      <li class="ui-list-skeleton" v-show="loading">
         <Skeleton avatar active :paragraph="{ rows: 3 }" :loading="loading" />
       </li>
     </ol>
@@ -18,7 +18,9 @@
 import { withDefaults, defineProps, useSlots } from 'vue'
 import Skeleton from '../skeleton/Skeleton.vue'
 
-withDefaults(defineProps<{ dataSource: []; loading: boolean }>(), {})
+withDefaults(defineProps<{ dataSource: []; loading?: boolean }>(), {
+  loading: false
+})
 
 const slots = useSlots().default()
 </script>

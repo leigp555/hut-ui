@@ -21,13 +21,38 @@
             {{ item.data.description }}
           </span>
         </template>
+      </ListItem>
+    </List>
+    <List :dataSource="data" :loading="loading">
+      <ListItem>
+        <template #avatar="item">
+          <Avatar
+            :size="32"
+            :src="item.data.avatar"
+            style="background-color: #ffffff; padding: 0"
+          >
+            <template #icon>
+              <SvgIcon name="user" width="2em" height="2em" />
+            </template>
+          </Avatar>
+        </template>
+        <template #title="item">
+          <span>{{ item.data.title }}</span>
+        </template>
+        <template #description="item">
+          <span>
+            {{ item.data.description }}
+          </span>
+        </template>
         <template #actions="item">
           <Button type="link" @click="onEdit(item.data)">edit</Button>
           <Button type="link" @click="onMore(item.data)">more</Button>
         </template>
       </ListItem>
       <template #loadMore>
-        <Button type="default" @click="onLoadMore">loading more</Button>
+        <Button type="default" @click="onLoadMore" v-show="!loading"
+          >loading more</Button
+        >
       </template>
     </List>
   </div>
@@ -52,7 +77,7 @@ const loading = ref<boolean>(false)
 
 const fetch = () => {
   loading.value = true
-  ;(ajax('/mock', 5) as Promise<DataItem[]>)
+  ;(ajax('/mock', 3) as Promise<DataItem[]>)
     .then((res) => {
       data.value = [...data.value, ...res]
       loading.value = false
@@ -80,5 +105,8 @@ const onLoadMore = () => {
 <style lang="scss">
 .ui-template-wrap {
   padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 100px;
 }
 </style>
