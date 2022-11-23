@@ -89,7 +89,7 @@
             :total="dataNum"
             v-model:pageSize="pageSize"
             @pageSizeChange="pageSize = $event"
-            :disabled="false"
+            :disabled="loading3"
             :pageSizeOptions="pageSizeOptions"
             showQuickJumper
             showSizeChanger
@@ -185,6 +185,7 @@ const onMore = (item: DataItem) => {
 const onLoadMore = () => {
   fetch(data2, loading2)
 }
+// 页码变动时发一次请求
 watch(current, () => {
   fetch('/pagination', data3, loading3, 0)
 })

@@ -57,7 +57,6 @@ onMounted(() => {
 <style lang="scss">
 .ui-spin-wrap {
   position: relative;
-  display: inline-block;
   > .ui-spin-slot {
     opacity: 0.4;
   }
