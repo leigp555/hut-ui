@@ -1,6 +1,11 @@
 <template>
   <div class="ui-template-wrap">
-    <Table :headSource="columns" :bodySource="data" :loading="loading">
+    <Table
+      :headSource="columns"
+      :bodySource="data"
+      :loading="loading"
+      style-mode="fixed"
+    >
       <template #head>Header</template>
       <template #footer>Footer</template>
       <template #tableHead="item">

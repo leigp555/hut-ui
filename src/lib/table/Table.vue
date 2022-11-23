@@ -15,11 +15,13 @@ const props = withDefaults(
     headSource?: TableDataType[]
     bodySource?: TableDataType[]
     loading?: boolean
+    styleMode?: 'auto' | 'fixed'
   }>(),
   {
     headSource: () => [],
     bodySource: () => [],
-    loading: false
+    loading: false,
+    styleMode: 'auto'
   }
 )
 const { headSource, bodySource } = toRefs(props)
@@ -40,17 +42,21 @@ const skeletonShow = computed<boolean>(() => {
       <div class="ui-table-head" v-if="$slots.head">
         <slot name="head" />
       </div>
-      <table v-bind="$attrs" class="ui-table-content">
+      <table
+        v-bind="$attrs"
+        class="ui-table-content"
+        :class="{ 'ui-table-fixed': styleMode === 'fixed' }"
+      >
         <thead class="ui-table-thead">
           <tr>
-            <th v-for="item in headSource" :key="item.key">
+            <th v-for="item in headSource" :key="item.key" :title="item.label">
               <slot name="tableHead" :data="item.label" :keyValue="item.key" />
             </th>
           </tr>
         </thead>
         <tbody class="ui-table-tbody">
           <tr v-for="item in bodySource" :key="item.key">
-            <td v-for="data in headArr" :key="data">
+            <td v-for="data in headArr" :key="data" :title="item[data]">
               <slot name="tableBody" :data="item[data]" :keyValue="data" />
             </td>
           </tr>
@@ -110,6 +116,16 @@ $border_color: #f0f0f0;
     font-size: 14px;
     background: #fff;
     border-radius: 2px;
+    &.ui-table-fixed {
+      table-layout: fixed;
+      td,
+      th {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        word-break: keep-all;
+      }
+    }
     > .ui-table-thead {
       th {
         font-weight: 500;

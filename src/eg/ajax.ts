@@ -27,7 +27,8 @@ while (x < 1000) {
     key: `${x + 1}`,
     name: `John Brown ${x + 1}`,
     age: 32,
-    address: 'New York No. 1 Lake Park',
+    address:
+      'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab aliquam asperiores, autem blanditiis cumque',
     tags: ['nice', 'developer']
   })
   x++
