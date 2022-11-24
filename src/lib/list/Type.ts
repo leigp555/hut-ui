@@ -1,7 +1,8 @@
 // rowIndex为行数
 export type TableDataType = {
   key: string
-  label: string
+  label?: string
   rowIndex?: number
-  colSpan?: number
+  colspan?: number
+  customCell?: (index: number) => { colspan?: number; rowspan?: number }
 }

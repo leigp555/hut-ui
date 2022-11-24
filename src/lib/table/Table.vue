@@ -26,11 +26,21 @@ const props = withDefaults(
     bordered: false
   }
 )
-const { headSource, bodySource } = toRefs(props)
+const { bodySource } = toRefs(props)
 
 const skeletonShow = computed<boolean>(() => {
   return !bodySource.value[0]
 })
+
+const getX = (
+  customCellFn: (index: number) => { colspan?: number; rowspan?: number },
+  rowIndex
+): { colspan?: number; rowspan?: number } => {
+  if (customCellFn) {
+    return customCellFn(rowIndex)
+  }
+  return {}
+}
 </script>
 
 <template>
@@ -54,8 +64,7 @@ const skeletonShow = computed<boolean>(() => {
               :key="item.key"
               :title="item.label"
               class="ui-table-thead-cell"
-              :colspan="item.colSpan"
-              :class="{ 'ui-table-thead-hide': item.colSpan === 0 }"
+              :colspan="item.colspan"
             >
               <slot name="tableHead" :data="item.label" :keyValue="item.key" />
             </th>
@@ -68,6 +77,8 @@ const skeletonShow = computed<boolean>(() => {
               :key="data"
               :title="item[data.key]"
               class="ui-table-tbody-cell"
+              :colspan="getX(data.customCell, item.rowIndex).colspan"
+              :rowspan="getX(data.customCell, item.rowIndex).rowspan"
             >
               <slot name="tableBody" :data="item[data.key]" :keyValue="data.key" />
             </td>
@@ -161,7 +172,10 @@ $border_color: #f0f0f0;
         &:not([colspan='1']) {
           text-align: center;
         }
-        &.ui-table-thead-hide {
+        &[colspan='0'] {
+          display: none;
+        }
+        &[rowspan='0'] {
           display: none;
         }
       }
@@ -177,6 +191,12 @@ $border_color: #f0f0f0;
           border-bottom: 1px solid $border_color;
           padding: 16px;
           overflow-wrap: break-word;
+          &[rowspan='0'] {
+            display: none;
+          }
+          &[colspan='0'] {
+            display: none;
+          }
         }
       }
     }

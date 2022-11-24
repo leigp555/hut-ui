@@ -18,7 +18,7 @@
       </template>
       <template #tableBody="item">
         <span v-if="item.keyValue === 'tags'">
-          <Tag color="blue" v-for="i in item.data" :key="i">
+          <Tag color="green" v-for="i in item.data" :key="i">
             {{ i.toUpperCase() }}
           </Tag>
         </span>
@@ -64,10 +64,10 @@ const dataNum = ref<number>(0)
 const loading = ref<boolean>(false)
 
 const sharedOnCell = (index): { colSpan: number } => {
-  if (index === 4) {
-    return { colSpan: 0 }
+  if (index === 5) {
+    return { colspan: 0 }
   }
-  return { colSpan: 1 }
+  return { colspan: 1 }
 }
 
 const columns: TableDataType[] = [
@@ -76,7 +76,7 @@ const columns: TableDataType[] = [
     label: 'Name',
     key: 'name',
     customCell: (index) => ({
-      colSpan: index < 4 ? 1 : 6
+      colspan: index === 5 ? 6 : 1
     })
   },
   {
@@ -88,26 +88,26 @@ const columns: TableDataType[] = [
   {
     rowIndex: 0,
     label: 'Home phone',
-    colSpan: 2,
+    colspan: 2,
     key: 'tel',
     // eslint-disable-next-line consistent-return
     customCell: (index) => {
       if (index === 2) {
-        return { rowSpan: 2 }
+        return { rowspan: 2 }
       }
       if (index === 3) {
-        return { rowSpan: 0 }
+        return { rowspan: 0 }
       }
-      if (index === 4) {
-        return { colSpan: 0 }
+      if (index === 5) {
+        return { colspan: 0 }
       }
-      return { colSpan: 1 }
+      return { colspan: 1 }
     }
   },
   {
     rowIndex: 0,
     label: 'Phone',
-    colSpan: 0,
+    colspan: 0,
     key: 'phone',
     customCell: sharedOnCell
   },
