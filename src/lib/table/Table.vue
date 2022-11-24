@@ -65,6 +65,7 @@ const getX = (
               :title="item.label"
               class="ui-table-thead-cell"
               :colspan="item.colspan"
+              :rowspan="item.rowspan"
             >
               <slot name="tableHead" :data="item.label" :keyValue="item.key" />
             </th>

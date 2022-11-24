@@ -4,5 +4,6 @@ export type TableDataType = {
   label?: string
   rowIndex?: number
   colspan?: number
+  rowspan?: number
   customCell?: (index: number) => { colspan?: number; rowspan?: number }
 }
