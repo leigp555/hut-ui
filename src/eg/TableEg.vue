@@ -8,6 +8,7 @@ import Popconfirm from '@/lib/popconfirm/Popconfirm.vue'
 import SvgIcon from '@/lib/common/SvgIcon.vue'
 import { ajax } from '@/eg/ajax'
 import { TableDataType } from '@/lib/list/Type'
+import { randomColor } from '@/eg/helper'
 
 const current = ref<number>(1)
 const pageSize = ref<number>(5)
@@ -185,7 +186,7 @@ const confirm = (item: TableDataType) => {
       </template>
       <template #tableBody="item">
         <div v-if="item.keyValue === 'tags'" class="tags">
-          <Tag color="green" v-for="i in item.dataValue" :key="i">
+          <Tag :color="randomColor()" v-for="i in item.dataValue" :key="i">
             {{ i.toUpperCase() }}
           </Tag>
         </div>
