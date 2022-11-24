@@ -1,57 +1,3 @@
-<template>
-  <div class="ui-template-wrap">
-    <Table
-      :headSource="columns"
-      :bodySource="data"
-      :loading="loading"
-      style-mode="auto"
-      bordered
-    >
-      <template #head>Header</template>
-      <template #footer>Footer</template>
-      <template #tableHead="item">
-        <span v-if="item.keyValue === 'name'" style="color: red">
-          <SvgIcon name="weixin" width="1em " height="1em" style="margin-right: 4px" />
-          {{ item.data }}
-        </span>
-        <span v-else>{{ item.data }}</span>
-      </template>
-      <template #tableBody="item">
-        <div v-if="item.keyValue === 'tags'">
-          <Tag color="green" v-for="i in item.data" :key="i">
-            {{ i.toUpperCase() }}
-          </Tag>
-        </div>
-        <div v-else-if="item.keyValue === 'actions'">
-          <Button>modify</Button>
-          <Button>delete</Button>
-        </div>
-        <span v-else style="color: #1890ff">{{ item.data }}</span>
-      </template>
-      <template #pagination>
-        <div style="display: flex; justify-content: center; margin-top: 50px">
-          <Pagination
-            v-model:current="current"
-            :total="dataNum"
-            v-model:pageSize="pageSize"
-            @pageSizeChange="pageSize = $event"
-            :disabled="loading"
-            :pageSizeOptions="pageSizeOptions"
-            showQuickJumper
-            showSizeChanger
-            showTotal
-            @change="pageChange"
-          >
-            <template #buildOptionText="props">
-              <span>{{ props.value }}条/页</span>
-            </template>
-          </Pagination>
-        </div>
-      </template>
-    </Table>
-  </div>
-</template>
-
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
 import Table from '@/lib/table/Table.vue'
@@ -166,10 +112,92 @@ const pageChange = (newPage: number) => {
   current.value = newPage
   fetch('/table')
 }
+
+const text = 'Sure to delete?'
+
+const confirm = () => {
+  console.log('confirm')
+}
+const cancel = () => {
+  console.log('cancel')
+}
 </script>
+
+<template>
+  <div class="ui-template-wrap">
+    <Table
+      :headSource="columns"
+      :bodySource="data"
+      :loading="loading"
+      style-mode="auto"
+      bordered
+    >
+      <template #head>Header</template>
+      <template #footer>Footer</template>
+      <template #tableHead="item">
+        <span v-if="item.keyValue === 'name'" style="color: red">
+          <SvgIcon name="weixin" width="1em " height="1em" style="margin-right: 4px" />
+          {{ item.data }}
+        </span>
+        <span v-else>{{ item.data }}</span>
+      </template>
+      <template #tableBody="item">
+        <div v-if="item.keyValue === 'tags'" class="tags">
+          <Tag color="green" v-for="i in item.data" :key="i">
+            {{ i.toUpperCase() }}
+          </Tag>
+        </div>
+        <div v-else-if="item.keyValue === 'actions'" class="actions">
+          <Button type="link">modify</Button>
+          <div>
+            <Popconfirm
+              placement="topCenter"
+              okText="Yes"
+              cancelText="No"
+              @confirm="confirm"
+              @cancel="cancel"
+            >
+              <template #title>
+                <p>{{ text }}</p>
+              </template>
+              <Button type="link">delete</Button>
+            </Popconfirm>
+          </div>
+        </div>
+        <span v-else style="color: #1890ff">{{ item.data }}</span>
+      </template>
+      <template #pagination>
+        <div style="display: flex; justify-content: center; margin-top: 50px">
+          <Pagination
+            v-model:current="current"
+            :total="dataNum"
+            v-model:pageSize="pageSize"
+            @pageSizeChange="pageSize = $event"
+            :disabled="loading"
+            :pageSizeOptions="pageSizeOptions"
+            showQuickJumper
+            showSizeChanger
+            showTotal
+            @change="pageChange"
+          >
+            <template #buildOptionText="props">
+              <span>{{ props.value }}条/页</span>
+            </template>
+          </Pagination>
+        </div>
+      </template>
+    </Table>
+  </div>
+</template>
 
 <style lang="scss">
 .ui-template-wrap {
   padding: 50px;
+  .actions,
+  .tags {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
 }
 </style>

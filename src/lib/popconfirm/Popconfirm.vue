@@ -50,9 +50,9 @@ const cancelClick = () => {
             <slot name="icon" v-if="$slots.icon" />
             <SvgIcon name="warning" width="1em" height="1em" fill="#faad14" v-else />
           </div>
-          <p class="ui-popconfirm-title">
+          <div class="ui-popconfirm-title">
             <slot name="title" />
-          </p>
+          </div>
         </div>
         <div class="ui-popconfirm-actions">
           <Button @click="okClick">{{ okText }}</Button>
