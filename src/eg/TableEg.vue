@@ -148,7 +148,7 @@ const cancel = () => {
           </Tag>
         </div>
         <div v-else-if="item.keyValue === 'actions'" class="actions">
-          <Button type="link">modify</Button>
+          <Button type="link" style="padding: 4px 8px">modify</Button>
           <div>
             <Popconfirm
               placement="topCenter"
@@ -160,7 +160,7 @@ const cancel = () => {
               <template #title>
                 <p>{{ text }}</p>
               </template>
-              <Button type="link">delete</Button>
+              <Button type="link" style="padding: 4px 8px">delete</Button>
             </Popconfirm>
           </div>
         </div>
