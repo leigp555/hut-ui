@@ -160,6 +160,7 @@ const confirm = (item: TableDataType) => {
       return { colspan: 1 }
     }
   }
+  // 发送删除请求
   fetch.delete('/table', JSON.stringify(item))
 }
 </script>
