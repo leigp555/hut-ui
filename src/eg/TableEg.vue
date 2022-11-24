@@ -4,7 +4,8 @@
       :headSource="columns"
       :bodySource="data"
       :loading="loading"
-      style-mode="fixed"
+      style-mode="auto"
+      bordered
     >
       <template #head>Header</template>
       <template #footer>Footer</template>
