@@ -20,6 +20,7 @@ while (j < 1000) {
 const tableDate: (
   | TableDataType
   | {
+      key: string
       name: string
       age: number
       address: string
@@ -43,7 +44,14 @@ while (x < 1000) {
   x++
 }
 
-export const ajax = (url: string, count: number, page: number, per_page: number) => {
+export const ajax = (
+  url: string,
+  count: number,
+  page: number,
+  per_page: number,
+  payload: string,
+  method = 'get'
+) => {
   const data: {
     title: string
     avatar: string
@@ -75,7 +83,19 @@ export const ajax = (url: string, count: number, page: number, per_page: number)
         })
         window.clearTimeout(id)
       }, 2000)
-    } else if (url === '/table') {
+    } else if (url === '/table' && method === 'get') {
+      const end = page * per_page
+      const id = setTimeout(() => {
+        resolve({
+          data: tableDate.slice(end - per_page, end),
+          totalDateNum: tableDate.length
+        })
+        window.clearTimeout(id)
+      }, 2000)
+    } else if (url === '/table' && method === 'delete') {
+      const t = JSON.parse(payload)
+      const index = tableDate.findIndex((item) => item.key === t.key)
+      tableDate.splice(index, 1)
       const end = page * per_page
       const id = setTimeout(() => {
         resolve({

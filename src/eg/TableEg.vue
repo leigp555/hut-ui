@@ -21,14 +21,13 @@ const sharedOnCell = (rowIndex): { colSpan: number } => {
   }
   return { colspan: 1 }
 }
-
-const columns: TableDataType[] = [
+const columns = ref<TableDataType[]>([
   {
     rowIndex: 0,
     label: 'Name',
     key: 'name',
     customCell: (rowIndex) => ({
-      colspan: rowIndex === 5 ? 7 : 1
+      colspan: rowIndex === 5 ? 6 : 1
     })
   },
   {
@@ -79,44 +78,89 @@ const columns: TableDataType[] = [
     rowIndex: 0,
     label: 'Actions',
     key: 'actions',
-    customCell: sharedOnCell
+    customCell: () => ({ colspan: 1 })
   }
-]
+])
 
 const data = ref<TableDataType[]>([])
 
-const fetch = (url: string) => {
-  if (url === '/table') {
-    loading.value = true
-    ;(
-      ajax(url, 0, current.value, pageSize.value) as Promise<{
-        data: TableDataType[]
-        totalDateNum: number
-      }>
-    )
-      .then((res) => {
-        data.value = [...res.data]
-        dataNum.value = res.totalDateNum
-        loading.value = false
-      })
-      .catch((err) => {
-        console.log(err)
-        loading.value = false
-      })
+const fetch = {
+  get(url: string) {
+    if (url === '/table') {
+      loading.value = true
+      ;(
+        ajax(url, 0, current.value, pageSize.value) as Promise<{
+          data: TableDataType[]
+          totalDateNum: number
+        }>
+      )
+        .then((res) => {
+          data.value = [...res.data]
+          dataNum.value = res.totalDateNum
+          loading.value = false
+        })
+        .catch((err) => {
+          console.log(err)
+          loading.value = false
+        })
+    }
+  },
+  delete(url: string, payload: TableDataType) {
+    if (url === '/table') {
+      loading.value = true
+      ;(
+        ajax(url, 0, current.value, pageSize.value, payload, 'delete') as Promise<{
+          data: TableDataType[]
+          totalDateNum: number
+        }>
+      )
+        .then((res) => {
+          data.value = [...res.data]
+          dataNum.value = res.totalDateNum
+          loading.value = false
+        })
+        .catch((err) => {
+          console.log(err)
+          loading.value = false
+        })
+    }
   }
 }
 onMounted(() => {
-  fetch('/table')
+  fetch.get('/table')
 })
 const pageChange = (newPage: number) => {
   current.value = newPage
-  fetch('/table')
+  fetch.get('/table')
 }
 
 const text = 'Sure to delete?'
 
 const confirm = (item: TableDataType) => {
-  fetch('/table')
+  // 删除操作前应把原先的表格合并操作先复原，不然后续的表格格式会错乱
+  if (item.rowIndex === 2) {
+    columns.value[2].customCell = (rowIndex) => {
+      if (rowIndex === 3) {
+        return { colspan: 1, rowspan: 1 }
+      }
+      if (rowIndex === 5) {
+        return { colspan: 0 }
+      }
+      return { colspan: 1 }
+    }
+  } else if (item.rowIndex === 3) {
+    columns.value[2].customCell = (rowIndex) => {
+      if (rowIndex === 2) {
+        return { rowspan: 1 }
+      }
+
+      if (rowIndex === 5) {
+        return { colspan: 0 }
+      }
+      return { colspan: 1 }
+    }
+  }
+  fetch.delete('/table', JSON.stringify(item))
 }
 </script>
 
@@ -145,7 +189,6 @@ const confirm = (item: TableDataType) => {
           </Tag>
         </div>
         <div v-else-if="item.keyValue === 'actions'" class="actions">
-          <Button type="link" style="padding: 4px 8px">modify</Button>
           <div>
             <Popconfirm
               placement="topCenter"
