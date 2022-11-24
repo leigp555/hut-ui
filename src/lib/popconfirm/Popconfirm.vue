@@ -89,7 +89,7 @@ const cancelClick = () => {
         </div>
       </div>
     </transition>
-    <div tabindex="-1" @click="onClick" @blur="onBlur">
+    <div tabindex="-1" @click="onClick" @blur="onBlur" style="cursor: pointer">
       <div style="pointer-events: none">
         <slot />
       </div>
