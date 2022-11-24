@@ -67,7 +67,12 @@ const getX = (
               :colspan="item.colspan"
               :rowspan="item.rowspan"
             >
-              <slot name="tableHead" :data="item.label" :keyValue="item.key" />
+              <slot
+                name="tableHead"
+                :data="item"
+                :dataValue="item.label"
+                :keyValue="item.key"
+              />
             </th>
           </tr>
         </thead>
@@ -81,7 +86,12 @@ const getX = (
               :colspan="getX(data.customCell, item.rowIndex).colspan"
               :rowspan="getX(data.customCell, item.rowIndex).rowspan"
             >
-              <slot name="tableBody" :data="item[data.key]" :keyValue="data.key" />
+              <slot
+                name="tableBody"
+                :dataValue="item[data.key]"
+                :keyValue="data.key"
+                :data="item"
+              />
             </td>
           </tr>
         </tbody>

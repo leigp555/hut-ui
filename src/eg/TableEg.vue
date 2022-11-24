@@ -115,11 +115,8 @@ const pageChange = (newPage: number) => {
 
 const text = 'Sure to delete?'
 
-const confirm = () => {
-  console.log('confirm')
-}
-const cancel = () => {
-  console.log('cancel')
+const confirm = (item: TableDataType) => {
+  fetch('/table')
 }
 </script>
 
@@ -137,13 +134,13 @@ const cancel = () => {
       <template #tableHead="item">
         <span v-if="item.keyValue === 'name'" style="color: red">
           <SvgIcon name="weixin" width="1em " height="1em" style="margin-right: 4px" />
-          {{ item.data }}
+          {{ item.dataValue }}
         </span>
-        <span v-else>{{ item.data }}</span>
+        <span v-else>{{ item.dataValue }}</span>
       </template>
       <template #tableBody="item">
         <div v-if="item.keyValue === 'tags'" class="tags">
-          <Tag color="green" v-for="i in item.data" :key="i">
+          <Tag color="green" v-for="i in item.dataValue" :key="i">
             {{ i.toUpperCase() }}
           </Tag>
         </div>
@@ -154,8 +151,7 @@ const cancel = () => {
               placement="topCenter"
               okText="Yes"
               cancelText="No"
-              @confirm="confirm"
-              @cancel="cancel"
+              @confirm="confirm(item.data)"
             >
               <template #title>
                 <p>{{ text }}</p>
@@ -164,7 +160,7 @@ const cancel = () => {
             </Popconfirm>
           </div>
         </div>
-        <span v-else style="color: #1890ff">{{ item.data }}</span>
+        <span v-else style="color: #1890ff">{{ item.dataValue }}</span>
       </template>
       <template #pagination>
         <div style="display: flex; justify-content: center; margin-top: 50px">
