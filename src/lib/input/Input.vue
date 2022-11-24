@@ -58,25 +58,30 @@ const eyeClose = () => {
         @blur="onBlur"
         @input="onInput"
       />
-      <span class="input-icon" v-if="type === 'password'">
-        <SvgIcon
-          class="input-icon-password"
-          name="eye_open"
-          width="1em"
-          height="1em"
-          fill="#000000d9"
-          v-if="!shouldEyeOpen"
-          @click="eyeOpen"
-        />
-        <SvgIcon
-          class="input-icon-password"
-          name="eye_close"
-          width="1em"
-          height="1em"
-          fill="#000000d9"
-          v-if="shouldEyeOpen"
-          @click="eyeClose"
-        />
+
+      <span class="input-icon" v-if="type === 'password'" style="position: relative">
+        <TransitionGroup name="password">
+          <SvgIcon
+            class="input-icon-password"
+            name="eye_open"
+            width="1em"
+            height="1em"
+            fill="#000000d9"
+            v-show="!shouldEyeOpen"
+            @click="eyeOpen"
+            key="open"
+          />
+          <SvgIcon
+            class="input-icon-password"
+            name="eye_close"
+            width="1em"
+            height="1em"
+            fill="#000000d9"
+            v-show="shouldEyeOpen"
+            @click="eyeClose"
+            key="close"
+          />
+        </TransitionGroup>
       </span>
       <span class="input-icon" v-if="$.slots.suffix">
         <slot name="suffix" />
@@ -105,7 +110,7 @@ $main_color: #1890ff;
     background-color: #ffffff;
     display: flex;
     align-items: center;
-    gap: 4px;
+    gap: 12px;
     border-radius: 2px;
     border: 1px solid $border_color;
     transition: all 0.3s;
@@ -122,6 +127,10 @@ $main_color: #1890ff;
       font-size: 14px;
       > .input-icon-password {
         cursor: pointer;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
       }
     }
     > .ui-input {
@@ -147,5 +156,14 @@ $main_color: #1890ff;
       }
     }
   }
+}
+
+.password-enter-from,
+.password-leave-to {
+  opacity: 0;
+}
+.password-enter-active,
+.password-leave-active {
+  transition: all 200ms;
 }
 </style>

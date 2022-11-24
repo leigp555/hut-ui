@@ -2,7 +2,8 @@
   <div class="ui-formItem-wrap">
     <Row alignItems="center" justify="center" style="gap: 10px">
       <Col
-        :span="20"
+        :span="labelCol.span"
+        :offset="labelCol.offset"
         style="
           flex-shrink: 0;
           justify-content: end;
@@ -14,7 +15,11 @@
           {{ label }}
         </div>
       </Col>
-      <Col :span="80" style="flex-shrink: 10; min-height: 32px">
+      <Col
+        :span="wrapperCol.span"
+        :offset="wrapperCol.offset"
+        style="flex-shrink: 10; min-height: 32px"
+      >
         <div class="ui-formItem-content">
           <slot />
         </div>
@@ -33,11 +38,21 @@ type Rule = {
   message: string
 }
 
-withDefaults(defineProps<{ label?: string; name?: string; rule?: Rule[] }>(), {
-  label: '',
-  name: '',
-  rule: () => []
-})
+withDefaults(
+  defineProps<{
+    label?: string
+    name?: string
+    rule?: Rule[]
+    layout?: 'horizontal' | 'vertical' | 'inline'
+    labelCol?: { span?: number; offset?: number }
+    wrapperCol?: { span?: number; offset?: number }
+  }>(),
+  {
+    label: '',
+    name: '',
+    rule: () => []
+  }
+)
 </script>
 
 <style lang="scss">

@@ -24,15 +24,15 @@ withDefaults(
   defineProps<{
     data?: User
     layout?: 'horizontal' | 'vertical' | 'inline'
-    labelCol?: { span: number }
-    wrapperCol?: { span: number }
+    labelCol?: { span?: number; offset?: number }
+    wrapperCol?: { span?: number; offset?: number }
     autocomplete?: 'off' | 'on'
   }>(),
   {
     mode: () => {},
     layout: 'vertical',
-    labelCol: () => ({ span: 4 }),
-    wrapperCol: () => ({ span: 100 }),
+    labelCol: () => ({ span: 10, offset: 0 }),
+    wrapperCol: () => ({ span: 100, offset: 0 }),
     autocomplete: 'off'
   }
 )
