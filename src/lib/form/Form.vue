@@ -1,11 +1,19 @@
 <template>
-  <div class="ui-from-wrap">
-    <slot />
-  </div>
+  <form class="ui-form-wrap" :autocomplete="autocomplete">
+    <div class="ui-from-item" v-for="item in slots" :key="item">
+      <Component
+        :is="item"
+        :layout="layout"
+        :labelCol="labelCol"
+        :wrapperCol="wrapperCol"
+        :data="data"
+      />
+    </div>
+  </form>
 </template>
 
 <script setup lang="ts">
-import { withDefaults, defineProps } from 'vue'
+import { withDefaults, defineProps, useSlots } from 'vue'
 
 type User = {
   username: string
@@ -14,7 +22,7 @@ type User = {
 const emits = defineEmits(['finish', 'finishFailed'])
 withDefaults(
   defineProps<{
-    mode?: User
+    data?: User
     layout?: 'horizontal' | 'vertical' | 'inline'
     labelCol?: { span: number }
     wrapperCol?: { span: number }
@@ -28,12 +36,22 @@ withDefaults(
     autocomplete: 'off'
   }
 )
+
+const slots = useSlots().default()
 </script>
 
 <style lang="scss">
-.ui-from-wrap {
+.ui-form-wrap {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  font-size: 14px;
+  color: #000000d9;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue,
+    Arial, Noto Sans, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', Segoe UI Symbol,
+    'Noto Color Emoji';
+  > .ui-from-item {
+    flex-grow: 1;
+  }
 }
 </style>

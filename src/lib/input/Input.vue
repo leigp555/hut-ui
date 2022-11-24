@@ -23,11 +23,11 @@ const onInput = () => {
 
 <template>
   <div class="ui-input-wrap">
-    <div class="prefix-outer">
+    <div class="prefix-outer" v-if="$.slots.prefix_outer">
       <slot name="prefix_outer" />
     </div>
     <label class="ui-label-wrap" tabindex="-1" ref="wrapRef">
-      <span class="input-icon">
+      <span class="input-icon" v-if="$.slots.prefix">
         <slot name="prefix" />
       </span>
       <input
@@ -40,11 +40,11 @@ const onInput = () => {
         @blur="onBlur"
         @input="onInput"
       />
-      <span class="input-icon">
+      <span class="input-icon" v-if="$.slots.suffix">
         <slot name="suffix" />
       </span>
     </label>
-    <div class="suffix-outer">
+    <div class="suffix-outer" v-if="$.slots.suffix_outer">
       <slot name="suffix_outer" />
     </div>
   </div>
@@ -56,6 +56,7 @@ $border_color: #d9d9d9;
 $main_color: #1890ff;
 .ui-input-wrap {
   display: flex;
+  height: 100%;
   > .prefix-outer,
   .suffix-outer {
     display: flex;

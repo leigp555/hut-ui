@@ -25,7 +25,7 @@ const onFinishFailed = (errorInfo: any) => {
 <template>
   <div class="ui-template-wrap">
     <Form
-      :model="formState"
+      :data="formState"
       layout="vertical"
       :labelCol="{ span: 8 }"
       :wrapperCol="{ span: 16 }"
@@ -60,6 +60,6 @@ const onFinishFailed = (errorInfo: any) => {
 .ui-template-wrap {
   padding-top: 200px;
   margin: 0 auto;
-  width: 500px;
+  //width: 400px;
 }
 </style>
