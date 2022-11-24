@@ -63,24 +63,68 @@ const pageSizeOptions = ref<string[]>(['5', '10', '20', '30', '40'])
 const dataNum = ref<number>(0)
 const loading = ref<boolean>(false)
 
+const sharedOnCell = (index): { colSpan: number } => {
+  if (index === 4) {
+    return { colSpan: 0 }
+  }
+  return { colSpan: 1 }
+}
+
 const columns: TableDataType[] = [
   {
+    rowIndex: 0,
     label: 'Name',
-    key: 'name'
+    key: 'name',
+    customCell: (index) => ({
+      colSpan: index < 4 ? 1 : 6
+    })
   },
   {
+    rowIndex: 0,
     label: 'Age',
-    key: 'age'
+    key: 'age',
+    customCell: sharedOnCell
   },
   {
+    rowIndex: 0,
+    label: 'Home phone',
+    colSpan: 2,
+    key: 'tel',
+    // eslint-disable-next-line consistent-return
+    customCell: (index) => {
+      if (index === 2) {
+        return { rowSpan: 2 }
+      }
+      if (index === 3) {
+        return { rowSpan: 0 }
+      }
+      if (index === 4) {
+        return { colSpan: 0 }
+      }
+      return { colSpan: 1 }
+    }
+  },
+  {
+    rowIndex: 0,
+    label: 'Phone',
+    colSpan: 0,
+    key: 'phone',
+    customCell: sharedOnCell
+  },
+  {
+    rowIndex: 0,
     label: 'Address',
-    key: 'address'
+    key: 'address',
+    customCell: sharedOnCell
   },
   {
-    label: 'Tags',
-    key: 'tags'
+    rowIndex: 0,
+    label: 'tags',
+    key: 'tags',
+    customCell: sharedOnCell
   }
 ]
+
 const data = ref<TableDataType[]>([])
 
 const fetch = (url: string) => {

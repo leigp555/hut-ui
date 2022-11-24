@@ -19,16 +19,25 @@ while (j < 1000) {
 
 const tableDate: (
   | TableDataType
-  | { name: string; age: number; address: string; tags: string[] }
+  | {
+      name: string
+      age: number
+      address: string
+      tags: string[]
+      tel: string
+      phone: string
+    }
 )[] = []
 let x = 0
 while (x < 1000) {
   tableDate.push({
+    rowIndex: x + 1,
     key: `${x + 1}`,
     name: `John Brown ${x + 1}`,
     age: 32,
-    address:
-      'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab aliquam asperiores, autem blanditiis cumque',
+    tel: '0571-22098909',
+    phone: '18889898989',
+    address: 'New York No. 1 Lake Park',
     tags: ['nice', 'developer']
   })
   x++

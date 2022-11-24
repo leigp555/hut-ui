@@ -27,11 +27,6 @@ const props = withDefaults(
   }
 )
 const { headSource, bodySource } = toRefs(props)
-const headArr = computed<string[]>(() => {
-  return headSource.value.map((item) => {
-    return item.key
-  })
-})
 
 const skeletonShow = computed<boolean>(() => {
   return !bodySource.value[0]
@@ -59,6 +54,8 @@ const skeletonShow = computed<boolean>(() => {
               :key="item.key"
               :title="item.label"
               class="ui-table-thead-cell"
+              :colspan="item.colSpan"
+              :class="{ 'ui-table-thead-hide': item.colSpan === 0 }"
             >
               <slot name="tableHead" :data="item.label" :keyValue="item.key" />
             </th>
@@ -67,12 +64,12 @@ const skeletonShow = computed<boolean>(() => {
         <tbody class="ui-table-tbody">
           <tr v-for="item in bodySource" :key="item.key">
             <td
-              v-for="data in headArr"
+              v-for="data in headSource"
               :key="data"
-              :title="item[data]"
+              :title="item[data.key]"
               class="ui-table-tbody-cell"
             >
-              <slot name="tableBody" :data="item[data]" :keyValue="data" />
+              <slot name="tableBody" :data="item[data.key]" :keyValue="data.key" />
             </td>
           </tr>
         </tbody>
@@ -160,6 +157,13 @@ $border_color: #f0f0f0;
         transition: background 0.3s;
         padding: 16px;
         overflow-wrap: break-word;
+        //[colspan='1']不为1的元素居中
+        &:not([colspan='1']) {
+          text-align: center;
+        }
+        &.ui-table-thead-hide {
+          display: none;
+        }
       }
     }
     > .ui-table-tbody {
