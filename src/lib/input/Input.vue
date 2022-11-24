@@ -125,6 +125,8 @@ $main_color: #1890ff;
       display: flex;
       align-items: center;
       font-size: 14px;
+      width: 1em;
+      height: 1em;
       > .input-icon-password {
         cursor: pointer;
         position: absolute;
@@ -164,6 +166,6 @@ $main_color: #1890ff;
 }
 .password-enter-active,
 .password-leave-active {
-  transition: all 200ms;
+  transition: all 100ms;
 }
 </style>
