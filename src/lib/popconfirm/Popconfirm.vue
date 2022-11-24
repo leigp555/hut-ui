@@ -1,3 +1,9 @@
+<script lang="ts">
+export default {
+  inheritAttrs: false
+}
+</script>
+
 <script setup lang="ts">
 import { withDefaults, defineProps, ref } from 'vue'
 import Button from '../button/Button.vue'
@@ -28,23 +34,46 @@ withDefaults(
 )
 
 const shouldShow = ref<boolean>(false)
+const popHasClick = ref<boolean>(false)
 const onClick = () => {
   shouldShow.value = true
 }
+const onBlur = () => {
+  if (!popHasClick.value) {
+    shouldShow.value = false
+  }
+}
+const onPopMouseDown = () => {
+  popHasClick.value = true
+}
+const onPopBlur = () => {
+  popHasClick.value = false
+  shouldShow.value = false
+}
 const okClick = () => {
   shouldShow.value = false
+  popHasClick.value = false
   emits('confirm')
 }
 const cancelClick = () => {
   shouldShow.value = false
+  popHasClick.value = false
   emits('cancel')
 }
 </script>
 
 <template>
-  <div class="ui-popconfirm-wrap" tabindex="-1">
+  <div class="ui-popconfirm-wrap">
     <transition name="fade">
-      <div class="ui-popconfirm-tip" :class="{ [placement]: true }" v-show="shouldShow">
+      <div
+        class="ui-popconfirm-tip"
+        :class="{ [placement]: true }"
+        v-show="shouldShow"
+        v-bind="$attrs"
+        tabindex="-1"
+        @mousedown="onPopMouseDown"
+        @blur="onPopBlur"
+      >
         <div class="ui-popconfirm-content">
           <div class="ui-popconfirm-icon">
             <slot name="icon" v-if="$slots.icon" />
@@ -60,8 +89,10 @@ const cancelClick = () => {
         </div>
       </div>
     </transition>
-    <div @click="onClick">
-      <slot />
+    <div tabindex="-1" @click="onClick" @blur="onBlur">
+      <div style="pointer-events: none">
+        <slot />
+      </div>
     </div>
   </div>
 </template>
