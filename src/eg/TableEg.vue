@@ -17,11 +17,15 @@
         <span v-else>{{ item.data }}</span>
       </template>
       <template #tableBody="item">
-        <span v-if="item.keyValue === 'tags'">
+        <div v-if="item.keyValue === 'tags'">
           <Tag color="green" v-for="i in item.data" :key="i">
             {{ i.toUpperCase() }}
           </Tag>
-        </span>
+        </div>
+        <div v-else-if="item.keyValue === 'actions'">
+          <Button>modify</Button>
+          <Button>delete</Button>
+        </div>
         <span v-else style="color: #1890ff">{{ item.data }}</span>
       </template>
       <template #pagination>
@@ -53,6 +57,8 @@ import { onMounted, ref } from 'vue'
 import Table from '@/lib/table/Table.vue'
 import Tag from '@/lib/tag/Tag.vue'
 import Pagination from '@/lib/pagination/Pagination.vue'
+import Button from '@/lib/button/Button.vue'
+import Popconfirm from '@/lib/popconfirm/Popconfirm.vue'
 import SvgIcon from '@/lib/common/SvgIcon.vue'
 import { ajax } from '@/eg/ajax'
 import { TableDataType } from '@/lib/list/Type'
@@ -63,8 +69,8 @@ const pageSizeOptions = ref<string[]>(['5', '10', '20', '30', '40'])
 const dataNum = ref<number>(0)
 const loading = ref<boolean>(false)
 
-const sharedOnCell = (index): { colSpan: number } => {
-  if (index === 5) {
+const sharedOnCell = (rowIndex): { colSpan: number } => {
+  if (rowIndex === 5) {
     return { colspan: 0 }
   }
   return { colspan: 1 }
@@ -75,8 +81,8 @@ const columns: TableDataType[] = [
     rowIndex: 0,
     label: 'Name',
     key: 'name',
-    customCell: (index) => ({
-      colspan: index === 5 ? 6 : 1
+    customCell: (rowIndex) => ({
+      colspan: rowIndex === 5 ? 7 : 1
     })
   },
   {
@@ -91,14 +97,14 @@ const columns: TableDataType[] = [
     colspan: 2,
     key: 'tel',
     // eslint-disable-next-line consistent-return
-    customCell: (index) => {
-      if (index === 2) {
+    customCell: (rowIndex) => {
+      if (rowIndex === 2) {
         return { rowspan: 2 }
       }
-      if (index === 3) {
+      if (rowIndex === 3) {
         return { rowspan: 0 }
       }
-      if (index === 5) {
+      if (rowIndex === 5) {
         return { colspan: 0 }
       }
       return { colspan: 1 }
@@ -121,6 +127,12 @@ const columns: TableDataType[] = [
     rowIndex: 0,
     label: 'tags',
     key: 'tags',
+    customCell: sharedOnCell
+  },
+  {
+    rowIndex: 0,
+    label: 'Actions',
+    key: 'actions',
     customCell: sharedOnCell
   }
 ]
