@@ -37,14 +37,14 @@ withDefaults(
   }
 )
 
-const slots = useSlots().default()
+const slots = useSlots().default!()
 </script>
 
 <style lang="scss">
 .ui-form-wrap {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 24px;
   font-size: 14px;
   color: #000000d9;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue,

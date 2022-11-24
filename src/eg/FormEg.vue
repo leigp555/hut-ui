@@ -46,7 +46,7 @@ const onFinishFailed = (errorInfo: any) => {
         name="password"
         :rules="[{ required: true, message: 'Please input your password!' }]"
       >
-        <Input v-model:value="formState.password" />
+        <Input v-model:value="formState.password" type="password" />
       </FormItem>
 
       <FormItem :wrapper-col="{ offset: 8, span: 16 }">

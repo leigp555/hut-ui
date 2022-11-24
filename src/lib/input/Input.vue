@@ -1,13 +1,18 @@
 <script setup lang="ts">
-import { withDefaults, defineProps, toRefs, ref } from 'vue'
+import { withDefaults, defineProps, toRefs, ref, computed } from 'vue'
+import SvgIcon from '@/lib/common/SvgIcon.vue'
 
 const emits = defineEmits(['update:value'])
-const props = withDefaults(defineProps<{ value: string; placeholder?: string }>(), {
-  value: '',
-  placeholder: ''
-})
+const props = withDefaults(
+  defineProps<{ value: string; placeholder?: string; type?: 'password' | 'text' }>(),
+  {
+    value: '',
+    placeholder: '',
+    type: 'text'
+  }
+)
 
-const { value, placeholder } = toRefs(props)
+const { value, placeholder, type } = toRefs(props)
 const wrapRef = ref<HTMLDivElement | null>(null)
 const inputRef = ref<HTMLInputElement | null>(null)
 const onFocus = () => {
@@ -18,6 +23,19 @@ const onBlur = () => {
 }
 const onInput = () => {
   emits('update:value', inputRef.value?.value)
+}
+const shouldEyeOpen = ref<boolean>(true)
+const getType = computed<'text' | 'password'>(() => {
+  if (type.value === 'password' && shouldEyeOpen.value) {
+    return 'password'
+  }
+  return 'text'
+})
+const eyeOpen = () => {
+  shouldEyeOpen.value = true
+}
+const eyeClose = () => {
+  shouldEyeOpen.value = false
 }
 </script>
 
@@ -32,7 +50,7 @@ const onInput = () => {
       </span>
       <input
         class="ui-input"
-        type="text"
+        :type="getType"
         :placeholder="placeholder"
         :value="value"
         ref="inputRef"
@@ -40,6 +58,26 @@ const onInput = () => {
         @blur="onBlur"
         @input="onInput"
       />
+      <span class="input-icon" v-if="type === 'password'">
+        <SvgIcon
+          class="input-icon-password"
+          name="eye_open"
+          width="1em"
+          height="1em"
+          fill="#000000d9"
+          v-if="!shouldEyeOpen"
+          @click="eyeOpen"
+        />
+        <SvgIcon
+          class="input-icon-password"
+          name="eye_close"
+          width="1em"
+          height="1em"
+          fill="#000000d9"
+          v-if="shouldEyeOpen"
+          @click="eyeClose"
+        />
+      </span>
       <span class="input-icon" v-if="$.slots.suffix">
         <slot name="suffix" />
       </span>
@@ -82,6 +120,9 @@ $main_color: #1890ff;
       display: flex;
       align-items: center;
       font-size: 14px;
+      > .input-icon-password {
+        cursor: pointer;
+      }
     }
     > .ui-input {
       width: 100%;
