@@ -1,7 +1,13 @@
 <template>
   <div class="ui-formItem-wrap">
     <Row alignItems="center" justify="center">
-      <Col :span="wrapperCol.span" :offset="wrapperCol.offset" style="min-height: 32px">
+      <!--      有input输入框的-->
+      <Col
+        v-if="label"
+        :span="wrapperCol.span"
+        :offset="wrapperCol.offset"
+        style="min-height: 32px"
+      >
         <Col
           :span="labelCol.span"
           :offset="labelCol.offset"
@@ -17,9 +23,21 @@
             {{ label + ' :' }}
           </div>
         </Col>
-        <div class="ui-formItem-content">
+        <div class="ui-formItem-content" v-if="label">
           <slot />
         </div>
+      </Col>
+      <!--      没input输入框的-->
+      <Col :span="wrapperCol.span" v-else>
+        <Col
+          :offset="wrapperCol.offset"
+          :span="100"
+          style="min-height: 32px; align-items: center"
+        >
+          <div class="ui-formItem-content" style="margin-left: 10px">
+            <slot />
+          </div>
+        </Col>
       </Col>
     </Row>
   </div>
