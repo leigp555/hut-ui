@@ -34,18 +34,18 @@ const onFinishFailed = (errorInfo: any) => {
       @finishFailed="onFinishFailed"
     >
       <FormItem
-        label="Username"
         name="username"
         :rules="[{ required: true, message: 'Please input your username!' }]"
       >
+        <template #label><span>Username</span></template>
         <Input v-model:value="formState.username" />
       </FormItem>
 
       <FormItem
-        label="Password"
         name="password"
         :rules="[{ required: true, message: 'Please input your password!' }]"
       >
+        <template #label><span>Password</span></template>
         <Input v-model:value="formState.password" type="password" />
       </FormItem>
       <FormItem :wrapperCol="{ offset: 10, span: 60 }">

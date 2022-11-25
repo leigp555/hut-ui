@@ -3,7 +3,7 @@
     <Row alignItems="center" justify="center">
       <!--      有input输入框的-->
       <Col
-        v-if="label"
+        v-if="$slots.label"
         :span="wrapperCol.span"
         :offset="wrapperCol.offset"
         style="min-height: 32px"
@@ -11,20 +11,14 @@
         <Col
           :span="labelCol.span"
           :offset="labelCol.offset"
-          v-if="label"
-          style="
-            flex-shrink: 0;
-            justify-content: end;
-            min-height: 32px;
-            align-items: center;
-          "
+          style="justify-content: end; min-height: 32px; align-items: center"
         >
           <div class="ui-formItem-label">
-            {{ label + ' :' }}
+            <slot name="label" />
           </div>
         </Col>
-        <div class="ui-formItem-content" v-if="label">
-          <slot />
+        <div class="ui-formItem-content">
+          <Component :is="slots[0]" />
         </div>
       </Col>
       <!--      没input输入框的-->
@@ -34,8 +28,8 @@
           :span="100"
           style="min-height: 32px; align-items: center"
         >
-          <div class="ui-formItem-content" style="margin-left: 10px">
-            <slot />
+          <div class="ui-formItem-content">
+            <Component :is="slots[0]" />
           </div>
         </Col>
       </Col>
@@ -44,7 +38,7 @@
 </template>
 
 <script setup lang="ts">
-import { withDefaults, defineProps } from 'vue'
+import { withDefaults, defineProps, useSlots } from 'vue'
 import Col from '../grid/Col.vue'
 import Row from '../grid/row.vue'
 
@@ -52,6 +46,7 @@ type Rule = {
   required: boolean
   message: string
 }
+const slots = useSlots().default!()
 
 withDefaults(
   defineProps<{
@@ -78,7 +73,6 @@ withDefaults(
   .ui-formItem-content {
     flex-grow: 10;
     margin-left: 10px;
-    //border: 1px solid blue;
   }
 }
 </style>

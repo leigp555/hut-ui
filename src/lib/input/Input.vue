@@ -4,11 +4,17 @@ import SvgIcon from '@/lib/common/SvgIcon.vue'
 
 const emits = defineEmits(['update:value'])
 const props = withDefaults(
-  defineProps<{ value: string; placeholder?: string; type?: 'password' | 'text' }>(),
+  defineProps<{
+    value: string
+    placeholder?: string
+    type?: 'password' | 'text'
+    status?: 'normal' | 'error'
+  }>(),
   {
     value: '',
     placeholder: '',
-    type: 'text'
+    type: 'text',
+    status: 'normal'
   }
 )
 
@@ -44,7 +50,12 @@ const eyeClose = () => {
     <div class="prefix-outer" v-if="$.slots.prefix_outer">
       <slot name="prefix_outer" />
     </div>
-    <label class="ui-label-wrap" tabindex="-1" ref="wrapRef">
+    <label
+      class="ui-label-wrap"
+      tabindex="-1"
+      ref="wrapRef"
+      :class="{ 'ui-label-error': status === 'error' }"
+    >
       <span class="input-icon" v-if="$.slots.prefix">
         <slot name="prefix" />
       </span>
@@ -66,7 +77,6 @@ const eyeClose = () => {
             name="eye_open"
             width="1em"
             height="1em"
-            fill="#000000d9"
             v-show="!shouldEyeOpen"
             @click="eyeOpen"
             key="open"
@@ -76,7 +86,6 @@ const eyeClose = () => {
             name="eye_close"
             width="1em"
             height="1em"
-            fill="#000000d9"
             v-show="shouldEyeOpen"
             @click="eyeClose"
             key="close"
@@ -97,9 +106,14 @@ const eyeClose = () => {
 $font_color: #000000d9;
 $border_color: #d9d9d9;
 $main_color: #1890ff;
+$error_color: #ff4d4f;
+$error_shadow: rgba(255, 77, 79, 0.2);
 .ui-input-wrap {
   display: flex;
   height: 100%;
+  svg {
+    fill: #00000073;
+  }
   > .prefix-outer,
   .suffix-outer {
     display: flex;
@@ -120,6 +134,19 @@ $main_color: #1890ff;
     }
     &:hover {
       border: 1px solid $main_color;
+    }
+    &.ui-label-error {
+      border: 1px solid $error_color;
+      svg {
+        fill: $error_color;
+      }
+      &.wrap-focus {
+        border: 1px solid $error_color;
+        box-shadow: 0 0 0 2px $error_shadow;
+      }
+      &:hover {
+        border: 1px solid $error_color;
+      }
     }
     > .input-icon {
       display: flex;
