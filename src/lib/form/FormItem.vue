@@ -1,16 +1,7 @@
 <script setup lang="ts">
-import {
-  withDefaults,
-  defineProps,
-  useSlots,
-  toRefs,
-  ref,
-  provide,
-  Ref,
-  inject
-} from 'vue'
+import { withDefaults, defineProps, useSlots, toRefs, ref, Ref, inject } from 'vue'
 import Col from '../grid/Col.vue'
-import Row from '../grid/row.vue'
+import Row from '../grid/Row.vue'
 import { ErrorType, User } from '@/lib/form/Form.vue'
 
 type Rule = {
