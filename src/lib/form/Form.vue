@@ -1,11 +1,12 @@
 <template>
-  <form class="ui-form-wrap" :autocomplete="autocomplete">
+  <form class="ui-form-wrap" :autocomplete="autocomplete" @submit="onSubmit">
     <div class="ui-from-item" v-for="item in slots" :key="item">
       <Component
         :is="item"
         :layout="layout"
         :labelCol="labelCol"
         :wrapperCol="item.props.wrapperCol ? item.props.wrapperCol : wrapperCol"
+        :data="data"
       />
     </div>
   </form>
@@ -38,6 +39,12 @@ const props = withDefaults(
 
 const slots = useSlots().default!()
 const { data } = toRefs(props)
+
+const onSubmit = (e: Event) => {
+  e.stopPropagation()
+  e.preventDefault()
+  console.log('表当提交')
+}
 </script>
 
 <style lang="scss">

@@ -5,7 +5,7 @@ import Row from '../grid/row.vue'
 import { User } from '@/lib/form/Form.vue'
 
 type Rule = {
-  required: boolean
+  pattern: RegExp
   message: string
 }
 const slots = useSlots().default!()
@@ -14,23 +14,44 @@ const props = withDefaults(
   defineProps<{
     label?: string
     name?: string
-    rule?: Rule[]
+    rules?: Rule[]
     layout?: 'horizontal' | 'vertical' | 'inline'
     labelCol?: { span?: number; offset?: number }
     wrapperCol?: { span?: number; offset?: number }
+    data?: { username: string; password: string }
   }>(),
   {
     label: '',
     name: '',
-    rule: () => []
+    rules: () => []
   }
 )
-const { name } = toRefs(props)
+const { name, data, rules } = toRefs(props)
 const errorExit = ref<boolean>(false)
-const xxx = (e: Event) => {
-  e.stopPropagation()
-  e.preventDefault()
-  errorExit.value = !errorExit.value
+const errorMessage = ref<string>('')
+
+const validate = (options: { pattern: RegExp; message: string }, value: string) => {
+  return new Promise((resolve, reject) => {
+    if (options.pattern.test(value)) {
+      resolve(true)
+    } else {
+      reject(options.message)
+    }
+  })
+}
+
+const changeValue = (value: string) => {
+  const validateArr = rules.value.map((item: Rule) => {
+    return validate(item, value)
+  })
+  Promise.all(validateArr)
+    .then(() => {
+      errorExit.value = false
+    })
+    .catch((err: string) => {
+      errorExit.value = true
+      errorMessage.value = err
+    })
 }
 </script>
 
@@ -55,12 +76,12 @@ const xxx = (e: Event) => {
         </Col>
         <div class="ui-formItem-content">
           <div>
-            <Component :is="slots[0]" />
+            <Component :is="slots[0]" @update:value="changeValue" />
           </div>
           <div class="formItem-content-error-wrap">
             <transition name="error-action">
               <div class="formItem-content-error" v-show="errorExit">
-                xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                {{ errorMessage }}
               </div>
             </transition>
           </div>
@@ -75,12 +96,12 @@ const xxx = (e: Event) => {
         >
           <div class="ui-formItem-content">
             <div>
-              <Component :is="slots[0]" />
+              <Component :is="slots[0]" @update:value="changeValue" />
             </div>
             <div class="formItem-content-error-wrap" v-if="name">
               <transition name="error-action">
                 <div class="formItem-content-error" v-show="errorExit">
-                  xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                  {{ errorMessage }}
                 </div>
               </transition>
             </div>

@@ -21,10 +21,12 @@ const onFinish = (values: any) => {
 const onFinishFailed = (errorInfo: any) => {
   console.log('Failed:', errorInfo)
 }
-watchEffect(() => {
-  console.log(formState.password)
-  console.log(formState.username)
-})
+// watchEffect(() => {
+//   console.log('watch-start')
+//   console.log(formState.password)
+//   console.log(formState.username)
+//   console.log('watch-end')
+// })
 </script>
 
 <template>
@@ -40,7 +42,7 @@ watchEffect(() => {
     >
       <FormItem
         name="username"
-        :rules="[{ required: true, message: 'Please input your username!' }]"
+        :rules="[{ pattern: /^\d{0,5}\d$/, message: 'Please input your username!' }]"
       >
         <template #label><span>Username</span></template>
         <Input v-model:value="formState.username" />
@@ -48,7 +50,7 @@ watchEffect(() => {
 
       <FormItem
         name="password"
-        :rules="[{ required: true, message: 'Please input your password!' }]"
+        :rules="[{ pattern: /^\d{0,5}\d$/, message: 'Please input your password!' }]"
       >
         <template #label><span>Password</span></template>
         <Input v-model:value="formState.password" type="password" />
