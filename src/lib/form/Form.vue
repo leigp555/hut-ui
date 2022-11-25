@@ -5,7 +5,7 @@
         :is="item"
         :layout="layout"
         :labelCol="labelCol"
-        :wrapperCol="wrapperCol"
+        :wrapperCol="item.props.wrapperCol ? item.props.wrapperCol : wrapperCol"
         :data="data"
       />
     </div>

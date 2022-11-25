@@ -1,25 +1,22 @@
 <template>
   <div class="ui-formItem-wrap">
-    <Row alignItems="center" justify="center" style="gap: 10px">
-      <Col
-        :span="labelCol.span"
-        :offset="labelCol.offset"
-        style="
-          flex-shrink: 0;
-          justify-content: end;
-          min-height: 32px;
-          align-items: center;
-        "
-      >
-        <div class="ui-formItem-label">
-          {{ label }}
-        </div>
-      </Col>
-      <Col
-        :span="wrapperCol.span"
-        :offset="wrapperCol.offset"
-        style="flex-shrink: 10; min-height: 32px"
-      >
+    <Row alignItems="center" justify="center">
+      <Col :span="wrapperCol.span" :offset="wrapperCol.offset" style="min-height: 32px">
+        <Col
+          :span="labelCol.span"
+          :offset="labelCol.offset"
+          v-if="label"
+          style="
+            flex-shrink: 0;
+            justify-content: end;
+            min-height: 32px;
+            align-items: center;
+          "
+        >
+          <div class="ui-formItem-label">
+            {{ label + ' :' }}
+          </div>
+        </Col>
         <div class="ui-formItem-content">
           <slot />
         </div>
@@ -62,7 +59,7 @@ withDefaults(
   }
   .ui-formItem-content {
     flex-grow: 10;
-    //border: 1px solid red;
+    margin-left: 10px;
   }
 }
 </style>
