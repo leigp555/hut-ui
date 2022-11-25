@@ -19,7 +19,7 @@
         </Col>
         <div class="ui-formItem-content">
           <div>
-            <Component :is="slots[0]" @update:value="change" status="error" />
+            <Component :is="slots[0]" />
           </div>
           <div class="formItem-content-error">
             xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
@@ -35,7 +35,7 @@
         >
           <div class="ui-formItem-content">
             <div>
-              <Component :is="slots[0]" @update:value="change" />
+              <Component :is="slots[0]" />
             </div>
             <div class="formItem-content-error" v-if="name">
               xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
@@ -48,7 +48,7 @@
 </template>
 
 <script setup lang="ts">
-import { withDefaults, defineProps, useSlots, provide, inject, Ref, toRefs } from 'vue'
+import { withDefaults, defineProps, useSlots, toRefs } from 'vue'
 import Col from '../grid/Col.vue'
 import Row from '../grid/row.vue'
 import { User } from '@/lib/form/Form.vue'
@@ -75,20 +75,6 @@ const props = withDefaults(
   }
 )
 const { name } = toRefs(props)
-
-const changeData =
-  inject<(newData: { username: string; password: string }) => void>('change_form_data')
-const data = inject<Ref<User | undefined> | undefined>('ui_form_data')
-
-const change = (newValue: string) => {
-  if (data?.value && name.value && changeData) {
-    const newData = { ...data.value, [name.value]: newValue } as {
-      username: string
-      password: string
-    }
-    changeData(newData)
-  }
-}
 </script>
 
 <style lang="scss">

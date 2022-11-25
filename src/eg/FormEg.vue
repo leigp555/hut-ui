@@ -29,7 +29,7 @@ watchEffect(() => {
 <template>
   <div class="ui-template-wrap">
     <Form
-      v-model:data="formState"
+      :data="formState"
       layout="vertical"
       :labelCol="{ span: 10 }"
       :wrapperCol="{ span: 60 }"

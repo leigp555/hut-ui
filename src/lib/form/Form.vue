@@ -12,7 +12,7 @@
 </template>
 
 <script setup lang="ts">
-import { withDefaults, defineProps, useSlots, provide, Ref, toRefs } from 'vue'
+import { withDefaults, defineProps, useSlots, toRefs } from 'vue'
 
 export type User = {
   username: string
@@ -38,16 +38,6 @@ const props = withDefaults(
 
 const slots = useSlots().default!()
 const { data } = toRefs(props)
-
-const changeData = (newData: { username: string; password: string }) => {
-  emits('update:data', newData)
-  // console.log(newData)
-}
-provide<Ref<User | undefined> | undefined>('ui_form_data', data)
-provide<(newData: { username: string; password: string }) => void>(
-  'change_form_data',
-  changeData
-)
 </script>
 
 <style lang="scss">
