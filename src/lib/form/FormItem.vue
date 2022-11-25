@@ -1,8 +1,17 @@
 <script setup lang="ts">
-import { withDefaults, defineProps, useSlots, toRefs, ref } from 'vue'
+import {
+  withDefaults,
+  defineProps,
+  useSlots,
+  toRefs,
+  ref,
+  provide,
+  Ref,
+  inject
+} from 'vue'
 import Col from '../grid/Col.vue'
 import Row from '../grid/row.vue'
-import { User } from '@/lib/form/Form.vue'
+import { ErrorType, User } from '@/lib/form/Form.vue'
 
 type Rule = {
   pattern: RegExp
@@ -30,6 +39,11 @@ const { name, data, rules } = toRefs(props)
 const errorExit = ref<boolean>(false)
 const errorMessage = ref<string>('')
 
+const errorArr = inject<Ref<ErrorType[]>>('ui_form_errorArr')
+const changeErrorArr = inject<(newErrorArr: ErrorType[]) => void>(
+  'ui_form_changeErrorArr'
+)
+
 const validate = (options: { pattern: RegExp; message: string }, value: string) => {
   return new Promise((resolve, reject) => {
     if (options.pattern.test(value)) {
@@ -47,10 +61,25 @@ const changeValue = (value: string) => {
   Promise.all(validateArr)
     .then(() => {
       errorExit.value = false
+      const index = errorArr?.value.findIndex(
+        (item) => item.name === name.value
+      ) as number
+      if (index >= 0 && errorArr?.value && changeErrorArr) {
+        changeErrorArr([
+          ...errorArr.value.slice(0, index),
+          ...errorArr.value.slice(index + 1)
+        ])
+      }
     })
     .catch((err: string) => {
       errorExit.value = true
       errorMessage.value = err
+      const index = errorArr?.value.findIndex(
+        (item) => item.name === name.value
+      ) as number
+      if (index < 0 && errorArr?.value && changeErrorArr) {
+        changeErrorArr([...errorArr.value, { name: name.value, reason: [err] }])
+      }
     })
 }
 </script>

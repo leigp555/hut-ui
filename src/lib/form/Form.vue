@@ -13,13 +13,17 @@
 </template>
 
 <script setup lang="ts">
-import { withDefaults, defineProps, useSlots, toRefs } from 'vue'
+import { withDefaults, defineProps, useSlots, toRefs, ref, provide, Ref } from 'vue'
 
 export type User = {
   username: string
   password: string
 }
-const emits = defineEmits(['finish', 'finishFailed', 'update:data'])
+export type ErrorType = {
+  reason: string[]
+  name: string
+}
+const emits = defineEmits(['finish', 'finishFailed'])
 const props = withDefaults(
   defineProps<{
     data?: User
@@ -40,10 +44,21 @@ const props = withDefaults(
 const slots = useSlots().default!()
 const { data } = toRefs(props)
 
+const errorArr = ref<ErrorType[]>([])
+const changeErrorArr = (newErrorArr: ErrorType[]) => {
+  errorArr.value = newErrorArr
+}
+provide<Ref<ErrorType[]>>('ui_form_errorArr', errorArr)
+provide<(newErrorArr: ErrorType[]) => void>('ui_form_changeErrorArr', changeErrorArr)
+
 const onSubmit = (e: Event) => {
   e.stopPropagation()
   e.preventDefault()
-  console.log('表当提交')
+  if (errorArr.value[0]) {
+    emits('finishFailed', { values: data?.value, errorFields: errorArr.value })
+  } else {
+    emits('finish', data?.value)
+  }
 }
 </script>
 
