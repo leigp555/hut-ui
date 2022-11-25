@@ -54,12 +54,13 @@ withDefaults(
 
 <style lang="scss">
 .ui-formItem-wrap {
-  flex-grow: 10;
   .ui-formItem-label {
+    //border: 1px solid red;
   }
   .ui-formItem-content {
     flex-grow: 10;
     margin-left: 10px;
+    //border: 1px solid blue;
   }
 }
 </style>

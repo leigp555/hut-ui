@@ -27,5 +27,7 @@ withDefaults(
 <style lang="scss">
 .ui-grid-row {
   display: flex;
+  width: 100%;
+  flex-grow: 100;
 }
 </style>

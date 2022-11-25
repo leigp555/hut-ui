@@ -19,10 +19,10 @@ const props = withDefaults(
 )
 
 const style = computed(() => {
-  if (typeof props.offset === 'string') {
-    return { width: `${props.span}vw`, marginLeft: 'auto' }
+  if (props.offset === 'auto') {
+    return { width: `${props.span}%`, marginLeft: 'auto' }
   }
-  return { width: `${props.span}vw`, marginLeft: `${props.offset}vw` }
+  return { width: `${props.span}%`, marginLeft: `${props.offset}%` }
 })
 </script>
 
