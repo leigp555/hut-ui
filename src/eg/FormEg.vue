@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, watchEffect } from 'vue'
+import { reactive, watchEffect } from 'vue'
 import Form from '@/lib/form/Form.vue'
 import FormItem from '@/lib/form/FormItem.vue'
 import Button from '@/lib/button/Button.vue'
@@ -9,10 +9,11 @@ interface FormState {
   username: string
   password: string
 }
-const formState = ref<FormState>({
+const formState = reactive<FormState>({
   username: '',
   password: 'xxxx'
 })
+
 const onFinish = (values: any) => {
   console.log('Success:', values)
 }
@@ -21,8 +22,8 @@ const onFinishFailed = (errorInfo: any) => {
   console.log('Failed:', errorInfo)
 }
 watchEffect(() => {
-  console.log('watch')
-  console.log(formState.value)
+  console.log(formState.password)
+  console.log(formState.username)
 })
 </script>
 
