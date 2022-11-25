@@ -22,7 +22,6 @@ const onFinishFailed = (errorInfo: any) => {
 }
 watchEffect(() => {
   console.log('watch')
-
   console.log(formState.value)
 })
 </script>

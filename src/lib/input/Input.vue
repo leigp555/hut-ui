@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { withDefaults, defineProps, toRefs, ref, computed } from 'vue'
+import { withDefaults, defineProps, toRefs, ref } from 'vue'
 import SvgIcon from '@/lib/common/SvgIcon.vue'
 
 const emits = defineEmits(['update:value'])
@@ -22,7 +22,7 @@ const { value, placeholder, type } = toRefs(props)
 
 const wrapRef = ref<HTMLDivElement | null>(null)
 const inputRef = ref<HTMLInputElement | null>(null)
-
+const shouldEyeClose = ref<boolean>(false)
 const onFocus = () => {
   wrapRef.value?.classList.add('wrap-focus')
 }
@@ -32,18 +32,14 @@ const onBlur = () => {
 const onInput = () => {
   emits('update:value', inputRef.value?.value)
 }
-const shouldEyeOpen = ref<boolean>(true)
-const getType = computed<'text' | 'password'>(() => {
-  if (type.value === 'password' && shouldEyeOpen.value) {
-    return 'password'
-  }
-  return 'text'
-})
+
 const eyeOpen = () => {
-  shouldEyeOpen.value = true
+  inputRef.value!.setAttribute('type', 'password')
+  shouldEyeClose.value = false
 }
 const eyeClose = () => {
-  shouldEyeOpen.value = false
+  inputRef.value!.setAttribute('type', 'text')
+  shouldEyeClose.value = true
 }
 </script>
 
@@ -63,7 +59,7 @@ const eyeClose = () => {
       </span>
       <input
         class="ui-input"
-        :type="getType"
+        :type="type"
         :placeholder="placeholder"
         :value="value"
         ref="inputRef"
@@ -79,7 +75,7 @@ const eyeClose = () => {
             name="eye_open"
             width="1em"
             height="1em"
-            v-show="!shouldEyeOpen"
+            v-show="shouldEyeClose"
             @click="eyeOpen"
             key="open"
           />
@@ -88,7 +84,7 @@ const eyeClose = () => {
             name="eye_close"
             width="1em"
             height="1em"
-            v-show="shouldEyeOpen"
+            v-show="!shouldEyeClose"
             @click="eyeClose"
             key="close"
           />
