@@ -19,8 +19,10 @@ const props = withDefaults(
 )
 
 const { value, placeholder, type } = toRefs(props)
+
 const wrapRef = ref<HTMLDivElement | null>(null)
 const inputRef = ref<HTMLInputElement | null>(null)
+
 const onFocus = () => {
   wrapRef.value?.classList.add('wrap-focus')
 }
