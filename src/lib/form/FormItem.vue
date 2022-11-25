@@ -18,7 +18,12 @@
           </div>
         </Col>
         <div class="ui-formItem-content">
-          <Component :is="slots[0]" />
+          <div>
+            <Component :is="slots[0]" />
+          </div>
+          <div class="formItem-content-error">
+            xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+          </div>
         </div>
       </Col>
       <!--      没input输入框的-->
@@ -29,7 +34,12 @@
           style="min-height: 32px; align-items: center"
         >
           <div class="ui-formItem-content">
-            <Component :is="slots[0]" />
+            <div>
+              <Component :is="slots[0]" />
+            </div>
+            <div class="formItem-content-error" v-if="name">
+              xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+            </div>
           </div>
         </Col>
       </Col>
@@ -66,13 +76,29 @@ withDefaults(
 </script>
 
 <style lang="scss">
+$error_color: #ff4d4f;
 .ui-formItem-wrap {
   .ui-formItem-label {
-    //border: 1px solid red;
   }
   .ui-formItem-content {
     flex-grow: 10;
     margin-left: 10px;
+    position: relative;
+    > .formItem-content-error {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      transform: translateY(100%);
+      color: $error_color;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      font-size: 14px;
+      height: 22px;
+      line-height: 22px;
+      text-align: center;
+    }
   }
 }
 </style>
