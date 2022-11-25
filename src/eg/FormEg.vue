@@ -44,7 +44,7 @@ const onFinishFailed = (errorInfo: any) => {
         name="username"
         :rules="[{ pattern: /^\d{0,5}\d$/, message: 'Please input your username!' }]"
       >
-        <template #label><span>Username</span></template>
+        <template #label><span>USERNAME :</span></template>
         <Input v-model:value="formState.username" />
       </FormItem>
 
@@ -52,10 +52,36 @@ const onFinishFailed = (errorInfo: any) => {
         name="password"
         :rules="[{ pattern: /^\d{0,5}\d$/, message: 'Please input your password!' }]"
       >
-        <template #label><span>Password</span></template>
+        <template #label><span>PASSWORD :</span></template>
         <Input v-model:value="formState.password" type="password" />
       </FormItem>
-      <FormItem :wrapperCol="{ offset: 10, span: 60 }">
+      <FormItem :wrapperCol="{ span: 60 }">
+        <Button type="primary">Submit</Button>
+      </FormItem>
+    </Form>
+
+    <Form
+      :data="formState"
+      layout="line"
+      :wrapperCol="{ span: 60 }"
+      autocomplete="off"
+      @finish="onFinish"
+      @finishFailed="onFinishFailed"
+    >
+      <FormItem
+        name="username"
+        :rules="[{ pattern: /^\d{0,5}\d$/, message: 'Please input your username!' }]"
+      >
+        <Input v-model:value="formState.username" />
+      </FormItem>
+
+      <FormItem
+        name="password"
+        :rules="[{ pattern: /^\d{0,5}\d$/, message: 'Please input your password!' }]"
+      >
+        <Input v-model:value="formState.password" type="password" />
+      </FormItem>
+      <FormItem :wrapperCol="{ span: 60 }">
         <Button type="primary">Submit</Button>
       </FormItem>
     </Form>
@@ -66,5 +92,8 @@ const onFinishFailed = (errorInfo: any) => {
 .ui-template-wrap {
   padding-top: 200px;
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
 }
 </style>

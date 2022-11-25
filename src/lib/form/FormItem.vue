@@ -15,7 +15,7 @@ const props = withDefaults(
     label?: string
     name?: string
     rules?: Rule[]
-    layout?: 'horizontal' | 'vertical' | 'inline'
+    layout?: 'horizontal' | 'vertical'
     labelCol?: { span?: number; offset?: number }
     wrapperCol?: { span?: number; offset?: number }
     data?: { username: string; password: string }
@@ -63,12 +63,14 @@ const changeValue = (value: string) => {
         v-if="$slots.label"
         :span="wrapperCol.span"
         :offset="wrapperCol.offset"
-        style="min-height: 32px"
+        class="formItem-content-wrap"
+        :class="{ 'formItem-content-vertical-wrap': layout === 'vertical' }"
       >
         <Col
           :span="labelCol.span"
           :offset="labelCol.offset"
-          style="justify-content: end; min-height: 32px; align-items: center"
+          class="formItem-content-label-wrap"
+          :class="{ 'formItem-content-label-vertical-wrap': layout === 'vertical' }"
         >
           <div class="ui-formItem-label">
             <slot name="label" />
@@ -87,12 +89,19 @@ const changeValue = (value: string) => {
           </div>
         </div>
       </Col>
+
       <!--      没input输入框的-->
-      <Col :span="wrapperCol.span" v-else>
+      <Col
+        :span="wrapperCol.span"
+        v-else
+        class="formItem-content-wrap"
+        :class="{ 'formItem-content-vertical-wrap': layout === 'vertical' }"
+      >
         <Col
           :offset="wrapperCol.offset"
           :span="100"
-          style="min-height: 32px; align-items: center"
+          class="formItem-content-No-label-wrap"
+          :class="{ 'formItem-content-No-label-vertical-wrap': layout === 'vertical' }"
         >
           <div class="ui-formItem-content">
             <div>
@@ -115,7 +124,25 @@ const changeValue = (value: string) => {
 <style lang="scss">
 $error_color: #ff4d4f;
 .ui-formItem-wrap {
-  .ui-formItem-label {
+  .formItem-content-wrap {
+    &.formItem-content-vertical-wrap {
+      flex-direction: column;
+    }
+    > .formItem-content-label-wrap {
+      justify-content: end;
+      align-items: center;
+      min-height: 32px;
+      &.formItem-content-label-vertical-wrap {
+        justify-content: start;
+        margin-left: 10px !important;
+        margin-bottom: 8px;
+        min-height: 1.5em;
+      }
+    }
+    > .formItem-content-No-label-wrap {
+      align-items: center;
+      min-height: 32px;
+    }
   }
   .ui-formItem-content {
     flex-grow: 10;

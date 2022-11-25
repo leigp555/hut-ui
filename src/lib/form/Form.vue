@@ -23,7 +23,7 @@ const emits = defineEmits(['finish', 'finishFailed', 'update:data'])
 const props = withDefaults(
   defineProps<{
     data?: User
-    layout?: 'horizontal' | 'vertical' | 'inline'
+    layout?: 'horizontal' | 'vertical'
     labelCol?: { span?: number; offset?: number }
     wrapperCol?: { span?: number; offset?: number }
     autocomplete?: 'off' | 'on'
