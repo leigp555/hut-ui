@@ -6,11 +6,11 @@
 
 <script setup lang="ts">
 import { withDefaults, defineProps, toRefs, ref } from 'vue'
-import dayjs, { Dayjs } from 'dayjs'
+import dayjs from 'dayjs'
 
 const props = withDefaults(
   defineProps<{
-    value: Dayjs
+    value: string
   }>(),
   {
     value: dayjs().format('YYYY-MM-DD')

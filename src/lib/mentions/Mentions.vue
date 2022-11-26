@@ -21,11 +21,13 @@ const inputEvent = (e: Event) => {
 }
 watch(value, () => {
   const el = inputRef.value as HTMLInputElement
-  const lastStr = value.value.substring(el.selectionStart - 1, el.selectionStart)
-  if (lastStr === '@') {
-    popRef.value?.classList.add('mentions-pop-show')
-  } else {
-    popRef.value?.classList.remove('mentions-pop-show')
+  if (el) {
+    const lastStr = value.value.substring(el.selectionStart! - 1, el.selectionStart!)
+    if (lastStr === '@') {
+      popRef.value?.classList.add('mentions-pop-show')
+    } else {
+      popRef.value?.classList.remove('mentions-pop-show')
+    }
   }
 })
 
@@ -34,7 +36,10 @@ const userSelect = (e: Event) => {
   const spec = el.getAttribute('data-value')
   if (el.tagName.toLowerCase() === 'p' && spec === 'list') {
     const inputDom = inputRef.value as HTMLInputElement
-    const startIndex = inputDom.selectionStart
+    let startIndex: number = 0
+    if (inputDom) {
+      startIndex = inputDom.selectionStart!
+    }
     const newContent =
       value.value.substring(0, startIndex) +
       el.innerText +

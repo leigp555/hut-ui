@@ -11,9 +11,12 @@
 </template>
 
 <script setup lang="ts">
-import { withDefaults, defineProps, useSlots } from 'vue'
+import { withDefaults, defineProps, useSlots, VNode } from 'vue'
 
-const slots = useSlots().default()
+let slots: VNode[] = []
+if (useSlots().default) {
+  slots = useSlots().default!()
+}
 
 const emits = defineEmits(['update:activeKey'])
 const props = withDefaults(

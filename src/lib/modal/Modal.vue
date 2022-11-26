@@ -1,10 +1,4 @@
 <script lang="ts">
-export default {
-  inheritAttrs: false
-}
-</script>
-
-<script setup lang="ts">
 import {
   withDefaults,
   defineProps,
@@ -17,6 +11,12 @@ import {
 } from 'vue'
 import { bodyAddClass } from '../common/bodyAddClass'
 
+export default {
+  inheritAttrs: false
+}
+</script>
+
+<script setup lang="ts">
 const emits = defineEmits(['update:visible'])
 
 const props = withDefaults(
@@ -52,7 +52,7 @@ const pageWidth = ref<number>(0)
 const initElPosition = reactive<{ x: number; y: number }>({ x: 0, y: 0 })
 
 // 监听body元素点击事件处理函数
-const initElHandle = (e: Event) => {
+const initElHandle = (e: MouseEvent) => {
   if (width.value + 32 > pageWidth.value) {
     initElPosition.x =
       e.clientX - document.body.clientWidth / 2 + (pageWidth.value - 32) / 2

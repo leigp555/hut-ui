@@ -18,7 +18,6 @@ watch(checked, () => {
   console.log('checked.value')
   console.log(checked.value)
 })
-
 // 复选组示例
 const value = ref<{ label: string; value: string }[]>([])
 const options = [

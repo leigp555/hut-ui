@@ -6,7 +6,7 @@ import { AlertType } from '@/lib/alert/type'
 
 type Options = {
   content?: string
-  style?: CSSStyleRule
+  style?: Partial<CSSStyleDeclaration>
   duration?: number
 }
 

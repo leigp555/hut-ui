@@ -29,7 +29,7 @@ const openNotification = () => {
   setTimeout(x, 3000)
 }
 
-const openNotificationWithIcon = (type: string) => {
+const openNotificationWithIcon = (type: 'success' | 'info' | 'warning' | 'error') => {
   notification[type]({
     message: 'Notification Title',
     description:

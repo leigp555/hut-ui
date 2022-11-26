@@ -1,12 +1,15 @@
 <script lang="ts">
+import { withDefaults, defineProps, toRefs, onMounted, watch, ref } from 'vue'
+import { bodyAddClass } from '../common/bodyAddClass'
+
 export default {
   inheritAttrs: false
 }
 </script>
 
 <script setup lang="ts">
-import { withDefaults, defineProps, toRefs, onMounted, watch, ref } from 'vue'
-import { bodyAddClass } from '../common/bodyAddClass'
+// import { withDefaults, defineProps, toRefs, onMounted, watch, ref } from 'vue'
+// import { bodyAddClass } from '../common/bodyAddClass'
 
 type PlacementType = 'top' | 'bottom' | 'left' | 'right'
 

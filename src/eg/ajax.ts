@@ -49,7 +49,7 @@ export const ajax = (
   count: number,
   page: number,
   per_page: number,
-  payload: string,
+  payload?: string,
   method = 'get'
 ) => {
   const data: {
@@ -93,7 +93,7 @@ export const ajax = (
         window.clearTimeout(id)
       }, 2000)
     } else if (url === '/table' && method === 'delete') {
-      const t = JSON.parse(payload)
+      const t = JSON.parse(payload!)
       const index = tableDate.findIndex((item) => item.key === t.key)
       tableDate.splice(index, 1)
       const end = page * per_page

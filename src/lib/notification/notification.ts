@@ -10,6 +10,7 @@ type Options = {
   icon?: VNode
   onOk?: () => void
   onClose?: () => void
+  onClick?: () => void
   okText?: string
   width?: number
   duration?: number | 'infinite'
