@@ -4,10 +4,7 @@
     <Checkbox v-model:checked="checked" disabled>Checkbox</Checkbox>
     <CheckboxGroup v-model:value="value" :options="options" />
     <CheckboxGroup v-model:value="value" :options="options" disabled />
-    <CheckboxGroup v-model:value="value2" :options="options2" disabled />
-    <CheckboxGroup v-model:value="value2" :options="options2" direction="column" />
-
-    <CheckboxGroup v-model:value="value" :options="options" />
+    <CheckboxGroup v-model:value="value" :options="options" direction="column" />
   </div>
 </template>
 
@@ -33,14 +30,6 @@ const options = [
 watch(value, () => {
   console.log('value.value')
   console.log(value.value)
-})
-
-// 支持option可以为字符串数组
-const options2 = ['apple', 'pear', 'orange']
-const value2 = ref<string[]>([])
-watch(value2, () => {
-  console.log('value2.value')
-  console.log(value2.value)
 })
 </script>
 

@@ -8,8 +8,8 @@ type Option = {
 
 const props = withDefaults(
   defineProps<{
-    value?: string[] | { label: string; value: string }[]
-    options?: Option[] | string[]
+    value?: { label: string; value: string }[]
+    options?: Option[]
     disabled?: boolean
     direction?: 'row' | 'column'
   }>(),
@@ -24,17 +24,8 @@ const props = withDefaults(
 const emits = defineEmits(['update:value'])
 const { options, value } = toRefs(props)
 
-const onInput = (item: string | Option) => {
-  if (typeof item === 'string') {
-    if (value.value.indexOf(item) < 0) {
-      emits('update:value', [...value.value, item])
-    } else {
-      const index = value.value.indexOf(item)
-      const newArr = [...value.value]
-      newArr.splice(index, 1)
-      emits('update:value', newArr)
-    }
-  } else if (value.value.length > 0) {
+const onInput = (item: Option) => {
+  if (value.value.length > 0) {
     for (let i = 0; i < value.value.length; i++) {
       if (value.value[i].value === item.value) {
         const newArr = [...value.value]
@@ -49,11 +40,8 @@ const onInput = (item: string | Option) => {
   }
 }
 
-const checked = (item: string | Option): boolean => {
-  if (typeof item === 'string') {
-    return value.value.indexOf(item) >= 0
-  }
-  let x: boolean
+const checked = (item: Option): boolean => {
+  let x: boolean = false
   for (let i = 0; i < value.value.length; i++) {
     if (value.value[i].value === item.value) {
       x = true

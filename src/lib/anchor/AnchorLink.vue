@@ -6,7 +6,9 @@ const { href } = toRefs(props)
 
 // 滑动元素
 const onClick = () => {
-  document.querySelector(href.value).scrollIntoView({ behavior: 'smooth' })
+  if (href.value && document.querySelector(href.value)) {
+    document.querySelector(href.value)!.scrollIntoView({ behavior: 'smooth' })
+  }
 }
 </script>
 <template>

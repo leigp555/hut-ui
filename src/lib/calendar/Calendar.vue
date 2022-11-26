@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { withDefaults, defineProps, ref, toRefs, computed } from 'vue'
-import dayjs, { Dayjs } from 'dayjs'
+import dayjs from 'dayjs'
 import Select, { OptionType } from '../select/Select.vue'
 import SvgIcon from '../common/SvgIcon.vue'
 
 const emits = defineEmits(['update:value', 'change'])
-const props = withDefaults(defineProps<{ value: Dayjs }>(), {
+const props = withDefaults(defineProps<{ value: string }>(), {
   value: dayjs().format('YYYY-MM-DD')
 })
 const { value } = toRefs(props)
@@ -43,11 +43,11 @@ const week = ['一', '二', '三', '四', '五', '六', '日']
 
 // ===============================
 // 获取一个月总天数  //31
-const getTotalMonthDay = (time: Dayjs) => {
+const getTotalMonthDay = (time: string) => {
   return dayjs(time).daysInMonth()
 }
 // 获取星期  // 从1(星期一)到7(星期日)
-const getWeekday = (time: Dayjs) => {
+const getWeekday = (time: string) => {
   let weekday: number
   if (dayjs(time).day() !== 0) {
     weekday = dayjs(time).day()
@@ -57,12 +57,12 @@ const getWeekday = (time: Dayjs) => {
   return weekday
 }
 // 获取当月首日  //2022-11-12
-const getFirstMonthDay = (time: Dayjs) => {
+const getFirstMonthDay = (time: string) => {
   const timeArr = time.split('-')
   return [...timeArr.slice(0, 2), '01'].join('-')
 }
 // 获取上个月总天数
-const getPreviousMonthTotalDay = (time: Dayjs) => {
+const getPreviousMonthTotalDay = (time: string) => {
   const timeArr = time.split('-')
   const lastMonth = parseInt(timeArr[1], 10) - 1
   const newDate = [timeArr[0], lastMonth, timeArr[2]].join('-')
@@ -71,7 +71,7 @@ const getPreviousMonthTotalDay = (time: Dayjs) => {
 
 // 展示数据
 const dateShow = (row: number, column: number) => {
-  let day: number | string
+  let day: number | string = 0
   // eslint-disable-next-line no-shadow
   let month = parseInt(dateArr.value[1], 10)
   // eslint-disable-next-line no-shadow
@@ -119,10 +119,10 @@ const onClick = (e: Event) => {
   const el = e.target as HTMLElement
   const spec = el.getAttribute('data-list')
   if (el.tagName.toLowerCase() === 'div' && spec === 'day') {
-    const newDay = el.getAttribute('title')
+    const newDay = el.getAttribute('title') || ''
     const newDayArr = newDay.split('-')
     const dP1 = /^\d{4}(-)\d{1,2}\1\d{1,2}$/
-    if (dP1.test(newDay)) {
+    if (newDay && dP1.test(newDay)) {
       emits('update:value', newDay)
       emits('change', newDay)
       year.value = newDayArr[0]

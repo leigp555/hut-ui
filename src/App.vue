@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import Example from '@/eg/AnchorEg.vue'
+import Example from '@/eg/CheckboxEg.vue'
 </script>
 
 <style>

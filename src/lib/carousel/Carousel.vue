@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { withDefaults, defineProps, useSlots, toRefs, onMounted, ref } from 'vue'
+import { withDefaults, defineProps, useSlots, toRefs, onMounted, ref, VNode } from 'vue'
 import SvgIcon from '../common/SvgIcon.vue'
 
 const emits = defineEmits(['change', 'update:init'])
@@ -22,9 +22,12 @@ const props = withDefaults(
   }
 )
 
-const slots = useSlots().default()
+let slots: VNode[] = []
+if (useSlots().default) {
+  slots = useSlots().default!()
+}
 
-const { init, direction, duration, autoPlay, quickJump } = toRefs(props)
+const { init, direction, duration, autoPlay } = toRefs(props)
 
 const olRef = ref<HTMLOListElement | null>(null)
 const contentRef = ref<HTMLDivElement | null>(null)
@@ -52,13 +55,17 @@ onMounted(() => {
     }, duration.value)
   }
   const el = olRef.value as HTMLOListElement
-  contentRef.value.style.height = `${el.children[0].getBoundingClientRect().height}px`
+  if (contentRef.value)
+    contentRef.value.style.height = `${el.children[0].getBoundingClientRect().height}px`
 })
 const indicatorClick = (e: Event) => {
   const el = e.target as HTMLElement
   const spec = el.getAttribute('data-list')
   if (el.tagName.toLowerCase() === 'button' && spec === 'indicator') {
-    const order = parseInt(el.getAttribute('data-order'), 10)
+    let order = 0
+    if (el && el.getAttribute('data-order')) {
+      order = parseInt(el.getAttribute('data-order')!, 10)
+    }
     emits('update:init', order)
     emits('change', order)
   }

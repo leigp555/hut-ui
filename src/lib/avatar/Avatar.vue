@@ -9,14 +9,16 @@ withDefaults(
     src: null
   }
 )
-const imgRef = ref<HTMLImageElement>(null)
+const imgRef = ref<HTMLImageElement | null>(null)
 const imgShow = ref<boolean>(false)
 onMounted(() => {
-  imgRef.value.onload = () => {
-    imgShow.value = true
-  }
-  imgRef.value.onerror = () => {
-    imgShow.value = false
+  if (imgRef.value) {
+    imgRef.value.onload = () => {
+      imgShow.value = true
+    }
+    imgRef.value.onerror = () => {
+      imgShow.value = false
+    }
   }
 })
 </script>

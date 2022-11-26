@@ -10,7 +10,7 @@
 <script setup lang="ts">
 import { withDefaults, defineProps, useSlots, VNode } from 'vue'
 
-const slots = useSlots().default() as VNode[]
+const slots = useSlots().default!() as VNode[]
 withDefaults(defineProps<{ separator?: string }>(), { separator: '/' })
 </script>
 
