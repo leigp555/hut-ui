@@ -1,5 +1,8 @@
 <script lang="ts">
 import { withDefaults, defineProps, computed, toRefs } from 'vue'
+import Spin from '../spin/Spin.vue'
+import Skeleton from '../skeleton/Skeleton.vue'
+import { TableDataType } from '@/lib/list/Type'
 
 export default {
   inheritAttrs: false
@@ -7,10 +10,6 @@ export default {
 </script>
 
 <script setup lang="ts">
-import Spin from '../spin/Spin.vue'
-import Skeleton from '../skeleton/Skeleton.vue'
-import { TableDataType } from '@/lib/list/Type'
-
 const props = withDefaults(
   defineProps<{
     headSource?: TableDataType[]
