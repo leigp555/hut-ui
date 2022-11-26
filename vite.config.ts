@@ -6,10 +6,12 @@ import path, { resolve } from 'path'
 import { viteMockServe } from 'vite-plugin-mock'
 import viteCompression from 'vite-plugin-compression'
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
+import vitePluginGetSourceCode from './vite-plugins/getSourceCode'
 
 export default defineConfig({
   plugins: [
     vue(),
+    vitePluginGetSourceCode(),
     viteMockServe({
       // default
       mockPath: 'mock'
