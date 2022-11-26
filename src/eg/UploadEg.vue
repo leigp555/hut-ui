@@ -19,9 +19,9 @@
 import Upload from '@/lib/upload/Upload.vue'
 import SvgIcon from '@/lib/common/SvgIcon.vue'
 
-const onChange = ({ blobs, urlPromises }) => {
-  console.log(blobs)
-  console.log(urlPromises)
+const onChange = (data: { blobs: File[]; urlPromises: string[] }) => {
+  console.log(data.blobs)
+  console.log(data.urlPromises)
 }
 </script>
 

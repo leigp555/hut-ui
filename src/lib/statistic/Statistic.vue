@@ -10,7 +10,7 @@ const props = withDefaults(
     suffix?: string
     valueStyle?: CSSStyleRule
   }>(),
-  { precision: 0, suffix: '' }
+  { precision: 0, suffix: '', value: 0 }
 )
 const { value, precision, suffix } = toRefs(props)
 const showValue = computed(() => {

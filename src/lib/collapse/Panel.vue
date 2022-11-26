@@ -16,8 +16,8 @@ const props = withDefaults(
 )
 const { keyValue, currentKey, disabled } = toRefs(props)
 
-const divRef = ref<HTMLDivElement>(null)
-const divRef2 = ref<HTMLDivElement>(null)
+const divRef = ref<HTMLDivElement | null>(null)
+const divRef2 = ref<HTMLDivElement | null>(null)
 
 const headerClick = (e: Event) => {
   if (disabled.value) {
@@ -29,11 +29,14 @@ const headerClick = (e: Event) => {
 }
 onMounted(() => {
   watchEffect(() => {
-    if (currentKey?.value?.indexOf(keyValue.value) >= 0) {
+    if (
+      divRef.value &&
+      divRef2.value &&
+      currentKey?.value &&
+      currentKey?.value?.indexOf(keyValue.value) >= 0
+    ) {
       divRef2.value.style.height = `${divRef.value.getBoundingClientRect().height}px`
-    } else {
-      divRef2.value.style.height = `${0}px`
-    }
+    } else if (divRef2.value) divRef2.value.style.height = `${0}px`
   })
 })
 </script>

@@ -1,11 +1,12 @@
 <script lang="ts">
+import { withDefaults, defineProps, computed, toRefs } from 'vue'
+
 export default {
   inheritAttrs: false
 }
 </script>
 
 <script setup lang="ts">
-import { withDefaults, defineProps, computed, toRefs } from 'vue'
 import Spin from '../spin/Spin.vue'
 import Skeleton from '../skeleton/Skeleton.vue'
 import { TableDataType } from '@/lib/list/Type'
@@ -34,7 +35,7 @@ const skeletonShow = computed<boolean>(() => {
 
 const getX = (
   customCellFn: (index: number) => { colspan?: number; rowspan?: number },
-  rowIndex
+  rowIndex: number
 ): { colspan?: number; rowspan?: number } => {
   if (customCellFn) {
     return customCellFn(rowIndex)

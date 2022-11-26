@@ -1,11 +1,12 @@
 <script lang="ts">
+import { withDefaults, defineProps, ref } from 'vue'
+
 export default {
   inheritAttrs: false
 }
 </script>
 
 <script setup lang="ts">
-import { withDefaults, defineProps, ref } from 'vue'
 import Button from '../button/Button.vue'
 import SvgIcon from '@/lib/common/SvgIcon.vue'
 

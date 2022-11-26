@@ -74,7 +74,7 @@ const initElPosition = reactive<{ x: number; y: number }>({ x: 0, y: 0 })
 
 // 监听body元素点击事件处理函数
 // 用户设置的width如果比页面还宽那么页面的宽度就等于页面宽度减去32像素css设定padding 0 16px
-const initElHandle = (e: Event) => {
+const initElHandle = (e: MouseEvent) => {
   if (width.value + 32 > pageWidth.value) {
     initElPosition.x =
       e.clientX - document.body.clientWidth / 2 + (pageWidth.value - 32) / 2

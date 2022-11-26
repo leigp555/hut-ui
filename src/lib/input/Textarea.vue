@@ -1,12 +1,12 @@
 <script lang="ts">
+import { withDefaults, defineProps, toRefs, ref, computed } from 'vue'
+
 export default {
   inheritAttrs: false
 }
 </script>
 
 <script setup lang="ts">
-import { withDefaults, defineProps, toRefs, ref, computed } from 'vue'
-
 const emits = defineEmits(['update:value'])
 const props = withDefaults(
   defineProps<{
@@ -27,27 +27,28 @@ const props = withDefaults(
 )
 
 const { value, autoSize, resize, maxlength } = toRefs(props)
-const textareaRef = ref<HTMLInputElement | null>(null)
+const textareaRef = ref<HTMLTextAreaElement | null>(null)
 
 const onInput = () => {
-  const el = textareaRef.value as HTMLTextAreaElement
-  if (autoSize.value && typeof autoSize.value === 'boolean') {
-    const scrollHeight = textareaRef.value?.scrollHeight
-    el.style.height = `${scrollHeight + 2}px`
-  } else if (autoSize.value) {
-    const { height } = el.getBoundingClientRect()
-    const scrollHeight = textareaRef.value?.scrollHeight
-    if (
-      scrollHeight > height - 2 &&
-      scrollHeight < autoSize.value.maxRows * 1.5 * 14 + 10
-    ) {
+  const el = textareaRef.value! as HTMLTextAreaElement
+  if (el) {
+    if (autoSize.value && typeof autoSize.value === 'boolean') {
+      const scrollHeight = el.scrollHeight as number
       el.style.height = `${scrollHeight + 2}px`
-    } else if (scrollHeight > autoSize.value.maxRows * 1.5 * 14 + 10) {
-      el.style.height = `${autoSize.value.maxRows * 1.5 * 14 + 10}px`
+    } else if (autoSize.value) {
+      const { height } = el.getBoundingClientRect()
+      const scrollHeight = el.scrollHeight
+      if (
+        scrollHeight > height - 2 &&
+        scrollHeight < autoSize.value.maxRows * 1.5 * 14 + 10
+      ) {
+        el.style.height = `${scrollHeight + 2}px`
+      } else if (scrollHeight > autoSize.value.maxRows * 1.5 * 14 + 10) {
+        el.style.height = `${autoSize.value.maxRows * 1.5 * 14 + 10}px`
+      }
     }
+    emits('update:value', el.value)
   }
-
-  emits('update:value', textareaRef.value?.value)
 }
 const style = computed(() => {
   if (autoSize && typeof autoSize.value !== 'boolean') {

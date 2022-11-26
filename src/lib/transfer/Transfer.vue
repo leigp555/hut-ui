@@ -20,19 +20,20 @@ const props = withDefaults(
   }>(),
   {
     source: () => [],
-    selected: () => []
+    selected: () => [],
+    titles: () => []
   }
 )
 
 const checkedSource = ref<boolean>(false)
 const checkedSelect = ref<boolean>(false)
 // source数据
-const value2 = ref<string[]>([])
+const value2 = ref<MockData[]>([])
 const title2 = computed(() => {
   return `${value2.value.length} / ${props.source.length} 项 ${props.titles[0]}`
 })
 // target数据
-const value3 = ref<string[]>([])
+const value3 = ref<MockData[]>([])
 const title3 = computed(() => {
   return `${value3.value.length} / ${props.selected.length} 项 ${props.titles[1]}`
 })

@@ -19,7 +19,7 @@ withDefaults(
     title: 'Title',
     subtitle: 'Subtitle',
     // eslint-disable-next-line vue/require-valid-default-prop
-    breadcrumb: []
+    breadcrumb: () => []
   }
 )
 const emitBack = () => {

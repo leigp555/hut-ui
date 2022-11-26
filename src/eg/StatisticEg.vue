@@ -26,15 +26,15 @@ import { ref } from 'vue'
 import Statistic from '@/lib/statistic/Statistic.vue'
 import SvgIcon from '@/lib/common/SvgIcon.vue'
 
-function fn(num) {
+function fn(num: number) {
   if (num < 10) {
     return `0${num}`
   }
   return num
 }
 function go() {
-  const now = new Date()
-  const future = new Date(2023, 1, 22)
+  const now = Date.parse(new Date().toString())
+  const future = Date.parse(new Date(2023, 1, 22).toString())
   const myt = (future - now) / 1000
   const myd = Math.floor(myt / (24 * 60 * 60))
   const myh = Math.floor((myt % (24 * 60 * 60)) / (60 * 60))

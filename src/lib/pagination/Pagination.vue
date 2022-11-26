@@ -140,7 +140,7 @@ const jump = (e: Event) => {
     } else {
       el.value = ''
     }
-  } catch (err: Error) {
+  } catch (err: unknown) {
     el.value = ''
   }
 }

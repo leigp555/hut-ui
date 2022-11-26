@@ -12,11 +12,15 @@
 </template>
 
 <script setup lang="ts">
-import { withDefaults, defineProps, toRefs, useSlots } from 'vue'
+import { withDefaults, defineProps, toRefs, useSlots, VNode } from 'vue'
 
 const emits = defineEmits(['update:value', 'change'])
 const props = withDefaults(defineProps<{ value: any; name: any }>(), {})
-const slots = useSlots().default()
+let slots: VNode[] = []
+if (useSlots().default) {
+  slots = useSlots().default!()
+}
+
 const { value, name } = toRefs(props)
 
 const onSelected = (currentValue: number | string) => {

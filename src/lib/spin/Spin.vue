@@ -1,13 +1,13 @@
 <script lang="ts">
+import { withDefaults, defineProps, ref, onMounted, watchEffect, toRefs } from 'vue'
+import SvgIcon from '@/lib/common/SvgIcon.vue'
+
 export default {
   inheritAttrs: false
 }
 </script>
 
 <script setup lang="ts">
-import { withDefaults, defineProps, ref, onMounted, watchEffect, toRefs } from 'vue'
-import SvgIcon from '@/lib/common/SvgIcon.vue'
-
 const props = withDefaults(
   defineProps<{ size?: number; loading?: boolean; tip?: string; delay?: number }>(),
   {

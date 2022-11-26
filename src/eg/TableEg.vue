@@ -16,7 +16,7 @@ const pageSizeOptions = ref<string[]>(['5', '10', '20', '30', '40'])
 const dataNum = ref<number>(0)
 const loading = ref<boolean>(false)
 
-const sharedOnCell = (rowIndex): { colSpan: number } => {
+const sharedOnCell = (rowIndex: number): { colspan: number } => {
   if (rowIndex === 5) {
     return { colspan: 0 }
   }
@@ -106,7 +106,7 @@ const fetch = {
         })
     }
   },
-  delete(url: string, payload: TableDataType) {
+  delete(url: string, payload: string) {
     if (url === '/table') {
       loading.value = true
       ;(

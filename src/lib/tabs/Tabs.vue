@@ -6,7 +6,8 @@ import {
   computed,
   ref,
   onMounted,
-  watchEffect
+  watchEffect,
+  VNode
 } from 'vue'
 
 const emits = defineEmits(['update:activeKey'])
@@ -14,18 +15,24 @@ const props = withDefaults(defineProps<{ activeKey?: string; centered: boolean }
   activeKey: '1',
   centered: false
 })
-const slots = useSlots().default()
+let slots: VNode[] = []
+if (useSlots().default) {
+  slots = useSlots().default!()
+}
+
 const titleRef = ref<HTMLElement | null>(null)
 const indicatorRef = ref<HTMLElement | null>(null)
 
 const titleArr = computed(() => {
   const arr: { title: string; key: string; disabled: boolean }[] = []
   slots.forEach((item) => {
-    arr.push({
-      title: item.props.tab,
-      key: item.props.keyValue,
-      disabled: item.props.disabled !== undefined
-    })
+    if (item.props) {
+      arr.push({
+        title: item.props.tab,
+        key: item.props.keyValue,
+        disabled: item.props.disabled !== undefined
+      })
+    }
   })
   return arr
 })

@@ -28,8 +28,8 @@ const { value } = toRefs(props)
 
 const onClick = (e: Event) => {
   const el = e.target as HTMLLIElement
-  if (el.tagName.toLowerCase() === 'li') {
-    const count = parseInt(el.getAttribute('data-star'), 10)
+  if (el.tagName.toLowerCase() === 'li' && el.getAttribute('data-star')) {
+    const count = parseInt(el.getAttribute('data-star')!, 10)
     emits('update:value', count)
   }
 }

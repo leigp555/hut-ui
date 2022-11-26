@@ -30,13 +30,15 @@ const onChange = (e: Event) => {
   isDrop.value = false
 }
 
-const onDrop = (e: Event) => {
-  isDrop.value = true
-  const fileBlobs = Array.from(e.dataTransfer.files) as File[]
-  const queue = fileBlobs.map((item) => {
-    return fileToUrl(item)
-  })
-  emits('change', { blobs: fileBlobs, urlPromises: queue })
+const onDrop = (e: InputEvent) => {
+  if (e.dataTransfer) {
+    isDrop.value = true
+    const fileBlobs = Array.from(e.dataTransfer.files) as File[]
+    const queue = fileBlobs.map((item) => {
+      return fileToUrl(item)
+    })
+    emits('change', { blobs: fileBlobs, urlPromises: queue })
+  }
 }
 </script>
 

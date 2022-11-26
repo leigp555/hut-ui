@@ -23,22 +23,24 @@ const lastDistance = ref<number>(0)
 const distance = ref<number>(0)
 
 onMounted(() => {
-  // 容器宽度
-  wrapWidth.value = sliderWrapRef.value.getBoundingClientRect().width - 16
-  // 初始移动
-  initDistance.value = (value.value / 100) * wrapWidth.value
-  lastDistance.value = initDistance.value
-  sliderBlockRef.value.style.transform = `translate3d(${initDistance.value}px,-50%,0)`
-  sliderLineRef.value.style.transform = `translate3d(${initDistance.value}px,0,0)`
+  if (sliderWrapRef.value && sliderBlockRef.value && sliderLineRef.value) {
+    // 容器宽度
+    wrapWidth.value = sliderWrapRef.value.getBoundingClientRect().width - 16
+    // 初始移动
+    initDistance.value = (value.value / 100) * wrapWidth.value
+    lastDistance.value = initDistance.value
+    sliderBlockRef.value.style.transform = `translate3d(${initDistance.value}px,-50%,0)`
+    sliderLineRef.value.style.transform = `translate3d(${initDistance.value}px,0,0)`
+  }
 })
 
-const onMousemove = (e: Event) => {
+const onMousemove = (e: MouseEvent) => {
   // 这是组件核心重点，必须阻止默认事件不然mouseup事件会监听失败
   // 这是组件核心重点，必须阻止默认事件不然mouseup事件会监听失败
   // 这是组件核心重点，必须阻止默认事件不然mouseup事件会监听失败
   e.stopPropagation()
   e.preventDefault()
-  if (isMove.value) {
+  if (isMove.value && sliderBlockRef.value && sliderLineRef.value) {
     // 必须加上上一次的滑动距离不然会回弹
     distance.value = lastDistance.value + e.clientX - initClickX.value
     // 记录滑动到的位置
@@ -68,7 +70,7 @@ const onMouseup = () => {
   sliderBlockRef.value!.classList.remove('ui-slider-drag')
 }
 
-const onMouseDown = (e: Event) => {
+const onMouseDown = (e: MouseEvent) => {
   isMove.value = true
   initClickX.value = e.clientX
   // 初始化点击时的位置

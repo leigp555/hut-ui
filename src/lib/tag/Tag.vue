@@ -21,7 +21,9 @@ import { withDefaults, defineProps, computed, ref } from 'vue'
 import { justColor, nameToHex, rgbToRgba } from './color_trans'
 import SvgIcon from '../common/SvgIcon.vue'
 
-const props = withDefaults(defineProps<{ color?: string; closable?: boolean }>(), {})
+const props = withDefaults(defineProps<{ color?: string; closable?: boolean }>(), {
+  color: '#fff'
+})
 const emits = defineEmits(['close'])
 const tagHide = ref<boolean>(false)
 const contentRef = ref<HTMLSpanElement | null>(null)

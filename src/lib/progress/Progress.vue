@@ -20,7 +20,7 @@ const props = withDefaults(
     type: 'line'
   }
 )
-const { percent, type } = toRefs<number>(props)
+const { percent, type } = toRefs(props)
 const left = ref<number>(0)
 const dashoffset = ref<number>(0)
 const blockRef = ref<HTMLElement | null>(null)
