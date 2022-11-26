@@ -13,20 +13,20 @@ withDefaults(defineProps<{ customClass?: string }>(), {
   customClass: 'custom-class'
 })
 
-const slots = useSlots().default()
+const slots = useSlots().default!()
 
 // 选中的节点
 const selectItem = ref<{
-  titleVNode: VNode
-  targetOffsetTop: number
-  targetClientHeight: number
-  active: boolean
+  titleVNode?: VNode | null
+  targetOffsetTop?: number
+  targetClientHeight?: number
+  active?: boolean
 }>({})
 
 // 所有节点
 const elInfo = ref<
   {
-    titleVNode: VNode
+    titleVNode: VNode | null
     targetOffsetTop: number
     targetClientHeight: number
     active: boolean
@@ -39,20 +39,20 @@ const currentOrder = ref<number>(0)
 elInfo.value = slots.map((item, index) => {
   return {
     titleVNode: item,
-    targetOffsetTop: null,
-    targetClientHeight: null,
+    targetOffsetTop: 0,
+    targetClientHeight: 0,
     active: index === 0,
     order: index
   }
 })
 
 // 简单的节流函数
-function throttle(func, wait, mustRun) {
-  let timeout
-  let startTime = new Date()
+function throttle(func: () => void, wait: number, mustRun: number) {
+  let timeout: number
+  let startTime = (Date.parse(new Date().toString()) / 1000) as number
 
   return () => {
-    const curTime = new Date()
+    const curTime = (Date.parse(new Date().toString()) / 1000) as number
 
     clearTimeout(timeout)
     // 如果达到了规定的触发时间间隔，触发 handler
@@ -88,16 +88,19 @@ onMounted(() => {
   elInfo.value.forEach((item) => {
     let targetOffsetTop: number
     let targetClientHeight: number
-    const target = document.querySelector(item.titleVNode.props.href) as HTMLElement
-    if (target) {
-      targetOffsetTop = target.offsetTop
-      targetClientHeight = target.clientHeight
-    } else {
-      targetOffsetTop = 0
-      targetClientHeight = 0
+    let target: HTMLElement
+    if (item.titleVNode && item.titleVNode.props) {
+      target = document.querySelector(item.titleVNode.props.href) as HTMLElement
+      if (target) {
+        targetOffsetTop = target.offsetTop
+        targetClientHeight = target.clientHeight
+      } else {
+        targetOffsetTop = 0
+        targetClientHeight = 0
+      }
+      item.targetClientHeight = targetClientHeight
+      item.targetOffsetTop = targetOffsetTop
     }
-    item.targetClientHeight = targetClientHeight
-    item.targetOffsetTop = targetOffsetTop
   })
   selectItem.value = elInfo.value[0]
   window.addEventListener('scroll', scrollHandle)

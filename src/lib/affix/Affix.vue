@@ -42,7 +42,8 @@ const containerScroll = () => {
   }
 }
 onMounted(() => {
-  containerRef.value!.parentNode.addEventListener('scroll', containerScroll)
+  if (containerRef.value!.parentNode)
+    containerRef.value!.parentNode.addEventListener('scroll', containerScroll)
 })
 onUnmounted(() => {
   window.removeEventListener('scroll', containerScroll)
