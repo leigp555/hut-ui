@@ -1,15 +1,18 @@
 <template>
   <div class="test">
     <Example />
-    <pre>{{ sourceCode }}</pre>
+    <pre class="language-html" v-html="html" />
   </div>
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue'
 import Example from '@/eg/UploadEg.vue'
 
-// eslint-disable-next-line no-underscore-dangle
-const sourceCode = Example.__sourceCode
+const Prism = (window as any).Prism
+const html = computed(() => {
+  return Prism.highlight(Example.__sourceCode, Prism.languages.html, 'html')
+})
 </script>
 
 <style>

@@ -7,6 +7,9 @@ import App from './App.vue'
 import router from '@/router/index'
 import '@/style/reset.scss'
 import 'virtual:svg-icons-register'
+// 代码高亮
+import 'prismjs'
+import 'prismjs/themes/prism-tomorrow.css'
 
 const app = createApp(App)
 app.use(router).use(createPinia()).mount('#app')

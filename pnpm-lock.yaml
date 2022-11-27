@@ -32,6 +32,7 @@ specifiers:
   nprogress: ^0.2.0
   pinia: ^2.0.14
   prettier: ^2.6.2
+  prismjs: ^1.29.0
   qs: ^6.10.3
   sass: ^1.51.0
   ts-jest: ^26.5.4
@@ -84,6 +85,7 @@ devDependencies:
   lint-staged: 12.4.1
   mockjs: 1.1.0
   prettier: 2.6.2
+  prismjs: 1.29.0
   sass: 1.51.0
   ts-jest: 26.5.6_ip4jai7pxkumsngma2fb7ud2tm
   typescript: 4.6.4
@@ -5901,6 +5903,11 @@ packages:
       ansi-regex: 5.0.1
       ansi-styles: 4.3.0
       react-is: 17.0.2
+    dev: true
+
+  /prismjs/1.29.0:
+    resolution: {integrity: sha512-Kx/1w86q/epKcmte75LNrEoT+lX8pBpavuAbvJWRXar7Hz8jrtF+e3vY751p0R8H9HdArwaCTNDDzHg/ScJK1Q==}
+    engines: {node: '>=6'}
     dev: true
 
   /progress/2.0.3:

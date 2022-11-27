@@ -21,6 +21,7 @@ module.exports = {
     "vue/no-v-model-argument": "off",
     'no-useless-return':'off',
     'no-unused-vars':'off',
+    'no-underscore-dangle':0,
     'prefer-destructuring':'off',
     'camelcase':'off',
     'no-unused-expressions':'off',
