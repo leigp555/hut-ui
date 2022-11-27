@@ -8,10 +8,10 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import Example from '@/eg/UploadEg.vue'
+import { getSourceCode } from '@/eg/helper'
 
-const Prism = (window as any).Prism
 const html = computed(() => {
-  return Prism.highlight(Example.__sourceCode, Prism.languages.html, 'html')
+  return getSourceCode(Example.__sourceCode)
 })
 </script>
 
