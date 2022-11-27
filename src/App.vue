@@ -10,7 +10,6 @@ import Example from '@/eg/UploadEg.vue'
 
 // eslint-disable-next-line no-underscore-dangle
 const sourceCode = Example.__sourceCode
-console.log()
 </script>
 
 <style>

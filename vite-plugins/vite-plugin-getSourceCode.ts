@@ -1,7 +1,7 @@
 import type { PluginOption } from 'vite'
 import * as path from 'path'
 import * as fs from 'fs'
-import { baseParse } from '@vue/compiler-core'
+import { baseParse, TemplateChildNode } from '@vue/compiler-core'
 
 export const getSourceCode = (): PluginOption => {
   return {
@@ -16,17 +16,21 @@ export const getSourceCode = (): PluginOption => {
       let filePath: string = ''
       try {
         filePath = id.match(/src\/.*\.vue/)![0]
+        const fileAbsolutePath = path.resolve(__dirname, '../', filePath)
+        const file = fs.readFileSync(fileAbsolutePath).toString()
+        const parsed = baseParse(file).children.find(
+          (n: TemplateChildNode | { tag: string }) => {
+            return !!('tag' in n && n.tag)
+          }
+        )
+        if (parsed) {
+          // @ts-ignore
+          titleCode = parsed.children[0].content
+          bodyCode = file.split(parsed.loc.source).join('').trim()
+        }
       } catch (e) {
         filePath = ''
       }
-      if (filePath) {
-        const fileAbsolutePath = path.resolve(__dirname, '../', filePath)
-        const file = fs.readFileSync(fileAbsolutePath).toString()
-        const parsed = baseParse(file).children.find((n) => n.tag === 'demo')
-        titleCode = parsed.children[0].content
-        bodyCode = file.split(parsed.loc.source).join('').trim()
-      }
-
       return `export default Component => {
       Component.__sourceCode = ${JSON.stringify(bodyCode)}
       Component.__sourceCodeTitle = ${JSON.stringify(titleCode)}
