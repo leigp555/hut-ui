@@ -14,5 +14,8 @@ export function randomColor() {
 
 // 获取Prism转译过的代码
 export const getSourceCode = (sourceCode: string) => {
-  return Prism.highlight(sourceCode, Prism.languages.html, 'html')
+  if (sourceCode) {
+    return Prism.highlight(sourceCode, Prism.languages.html, 'html')
+  }
+  return ''
 }
