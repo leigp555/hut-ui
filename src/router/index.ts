@@ -3,6 +3,7 @@ import Home from '@/views/Home.vue'
 
 const Guide = () => import('@/views/Guide.vue')
 const Components = () => import('@/views/Components.vue')
+const NotFound = () => import('@/views/NotFound.vue')
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -20,7 +21,8 @@ const routes: Array<RouteRecordRaw> = [
     path: '/Components',
     name: 'Components',
     component: Components
-  }
+  },
+  { path: '/:pathMatch(.*)*', name: 'NotFound', component: NotFound }
 ]
 
 const router: Router = createRouter({

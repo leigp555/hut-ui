@@ -6,6 +6,7 @@ import { createPinia } from 'pinia'
 import App from './App.vue'
 import router from '@/router/index'
 import '@/style/reset.scss'
+import '@/style/global.scss'
 import 'virtual:svg-icons-register'
 
 const app = createApp(App)
