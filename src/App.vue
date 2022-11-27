@@ -6,6 +6,8 @@
 
 <script setup lang="ts">
 import Example from '@/eg/UploadEg.vue'
+
+console.log(Example)
 </script>
 
 <style>

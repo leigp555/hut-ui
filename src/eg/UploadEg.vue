@@ -1,3 +1,6 @@
+<demo>
+"xxx"
+</demo>
 <template>
   <div class="ui-template-wrap">
     <Upload @change="onChange($event)" :style="{ height: '220px' }">
