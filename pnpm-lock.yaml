@@ -10,6 +10,7 @@ specifiers:
   '@typescript-eslint/eslint-plugin': ^5.23.0
   '@typescript-eslint/parser': ^5.23.0
   '@vitejs/plugin-vue': ^2.3.3
+  '@vue/compiler-core': ^3.2.45
   '@vue/compiler-sfc': ^3.2.33
   '@vue/test-utils': ^2.0.0-rc.4
   axios: ^0.27.2
@@ -65,6 +66,7 @@ devDependencies:
   '@typescript-eslint/eslint-plugin': 5.23.0_mb64btdtw33wm6tnwldrxlgg2m
   '@typescript-eslint/parser': 5.23.0_e4zyhrvfnqudwdx5bevnvkluy4
   '@vitejs/plugin-vue': 2.3.3_vite@2.9.9+vue@3.2.33
+  '@vue/compiler-core': 3.2.45
   '@vue/compiler-sfc': 3.2.33
   '@vue/test-utils': 2.0.0-rc.21_vue@3.2.33
   commitizen: 4.2.4
@@ -1251,9 +1253,9 @@ packages:
     dependencies:
       '@volar/code-gen': 0.34.12
       '@volar/source-map': 0.34.12
-      '@vue/compiler-core': 3.2.33
+      '@vue/compiler-core': 3.2.45
       '@vue/compiler-dom': 3.2.33
-      '@vue/shared': 3.2.33
+      '@vue/shared': 3.2.45
     dev: true
 
   /@volar/vue-typescript/0.34.12:
@@ -1273,6 +1275,15 @@ packages:
       '@vue/shared': 3.2.33
       estree-walker: 2.0.2
       source-map: 0.6.1
+
+  /@vue/compiler-core/3.2.45:
+    resolution: {integrity: sha512-rcMj7H+PYe5wBV3iYeUgbCglC+pbpN8hBLTJvRiK2eKQiWqu+fG9F+8sW99JdL4LQi7Re178UOxn09puSXvn4A==}
+    dependencies:
+      '@babel/parser': 7.17.10
+      '@vue/shared': 3.2.45
+      estree-walker: 2.0.2
+      source-map: 0.6.1
+    dev: true
 
   /@vue/compiler-dom/3.2.33:
     resolution: {integrity: sha512-GhiG1C8X98Xz9QUX/RlA6/kgPBWJkjq0Rq6//5XTAGSYrTMBgcLpP9+CnlUg1TFxnnCVughAG+KZl28XJqw8uQ==}
@@ -1349,6 +1360,10 @@ packages:
 
   /@vue/shared/3.2.33:
     resolution: {integrity: sha512-UBc1Pg1T3yZ97vsA2ueER0F6GbJebLHYlEi4ou1H5YL4KWvMOOWwpYo9/QpWq93wxKG6Wo13IY74Hcn/f7c7Bg==}
+
+  /@vue/shared/3.2.45:
+    resolution: {integrity: sha512-Ewzq5Yhimg7pSztDV+RH1UDKBzmtqieXQlpTVm2AwraoRL/Rks96mvd8Vgi7Lj+h+TH8dv7mXD3FRZR3TUvbSg==}
+    dev: true
 
   /@vue/test-utils/2.0.0-rc.21_vue@3.2.33:
     resolution: {integrity: sha512-wIJR4e/jISBKVKfiod3DV32BlDsoD744WVCuCaGtaSKvhvTL9gI5vl2AYSy00V51YaM8dCOFi3zcpCON8G1WqA==}

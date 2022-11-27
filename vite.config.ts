@@ -48,6 +48,6 @@ export default defineConfig({
   },
   server: {
     port: 4500, // 设置服务启动端口号
-    open: true // 设置服务启动时是否自动打开浏览器
+    open: false // 设置服务启动时是否自动打开浏览器
   }
 })
