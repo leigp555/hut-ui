@@ -171,6 +171,7 @@ const shouldTileLight = computed<boolean>(() => {
           <div
             v-for="item in slots"
             :key="item"
+            class="ui-subMenu-item-show"
             :class="{
               'ui-subMenu-item-selected': shouldLight(item)
             }"
@@ -252,8 +253,11 @@ const shouldTileLight = computed<boolean>(() => {
       box-shadow: 0 3px 6px -4px #0000001f, 0 6px 16px #00000014,
         0 9px 28px 8px #0000000d;
       transform-origin: top;
-      > .ui-subMenu-item-selected {
-        background-color: #e6f7ff;
+      > .ui-subMenu-item-show {
+        transition: background-color 250ms;
+        &.ui-subMenu-item-selected {
+          background-color: #e6f7ff;
+        }
       }
     }
   }
