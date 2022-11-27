@@ -1,15 +1,13 @@
 <template>
-  <div class="test">
-    <Example />
+  <div class="ui-app">
+    <RouterView />
   </div>
 </template>
 
-<script setup lang="ts">
-import Example from '@/eg/UploadEg.vue'
-</script>
+<script setup lang="ts"></script>
 
-<style>
-.test {
-  padding: 0 10px;
+<style lang="scss" scoped>
+.ui-app {
+  height: 100vh;
 }
 </style>

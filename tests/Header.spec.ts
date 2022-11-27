@@ -1,7 +1,7 @@
 import { mount } from '@vue/test-utils'
-import Home from '@/views/Home.vue'
+import Test from '@/views/Test.vue'
 
-test('Home.vue', async () => {
-  const wrapper = mount(Home)
-  expect(wrapper.html()).toContain('Home')
+test('Test.vue', async () => {
+  const wrapper = mount(Test)
+  expect(wrapper.html()).toContain('Test')
 })
