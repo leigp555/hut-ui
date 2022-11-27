@@ -192,10 +192,11 @@ const shouldTileLight = computed<boolean>(() => {
 .ui-subMenu-wrap {
   display: flex;
   align-items: center;
-  line-height: 46px;
+  line-height: 42px;
   text-align: left;
   background: #fff;
   position: relative;
+
   > .ui-subMenu-title-wrap {
     display: flex;
     align-items: center;
@@ -210,6 +211,7 @@ const shouldTileLight = computed<boolean>(() => {
     }
     > .ui-subMenu-title-inner {
       display: flex;
+
       align-items: center;
       > .ui-subMenu-icon {
         min-width: 14px;
@@ -285,6 +287,7 @@ const shouldTileLight = computed<boolean>(() => {
       top: 0;
       left: 0;
       transform: none;
+      max-height: 100%;
       > .ui-subMenu-content-inner {
         box-shadow: none;
         background: #fafafa;

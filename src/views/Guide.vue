@@ -6,109 +6,385 @@
     <section class="guideBody">
       <section class="guideMenu scroll-container">
         <h4 class="guideMenu-title">组件概览</h4>
-        <Menu v-model:selectedKeys="selectedKeys" style="width: 250px" mode="column">
+        <Menu v-model:selectedKeys="selectedKeys" style="width: 240px" mode="column">
           <SubMenu keyValue="sub1" :collapsible="false">
-            <template #title>通用</template>
-            <MenuItem keyValue="button">Button按钮 </MenuItem>
-            <MenuItem keyValue="typography">Typography排版</MenuItem>
-            <MenuItem keyValue="palette">Palette 调色板</MenuItem>
+            <template #title><span style="font-weight: 600">通用</span></template>
+            <MenuItem
+              v-for="item in sub1"
+              :keyValue="item.keyValue"
+              :key="item.keyValue"
+              class="menuItem"
+            >
+              <router-link :to="`/components/${item.keyValue}`" class="router-link">
+                {{ item.title }}
+              </router-link>
+            </MenuItem>
           </SubMenu>
           <SubMenu keyValue="sub2" :collapsible="false">
-            <template #title>布局</template>
-            <MenuItem keyValue="divider">Divider分割线</MenuItem>
-            <MenuItem keyValue="grid">Grid栅格</MenuItem>
-            <MenuItem keyValue="layout">Layout布局</MenuItem>
-            <MenuItem keyValue="space">Space间距</MenuItem>
+            <template #title><span style="font-weight: 600">布局</span></template>
+            <MenuItem
+              v-for="item in sub2"
+              :keyValue="item.keyValue"
+              :key="item.keyValue"
+              class="menuItem"
+            >
+              <router-link :to="`/components/${item.keyValue}`" class="router-link">
+                {{ item.title }}
+              </router-link>
+            </MenuItem>
           </SubMenu>
           <SubMenu keyValue="sub3" :collapsible="false">
-            <template #title>导航</template>
-            <MenuItem keyValue="affix">Affix 固钉 </MenuItem>
-            <MenuItem keyValue="anchor">Anchor锚点 </MenuItem>
-            <MenuItem keyValue="breadcrumb">Breadcrumb面包屑 </MenuItem>
-            <MenuItem keyValue="dropdown">Dropdown下拉菜单 </MenuItem>
-            <MenuItem keyValue="menu">Menu导航菜单 </MenuItem>
-            <MenuItem keyValue="pageHeader">PageHeader 页头 </MenuItem>
-            <MenuItem keyValue="pagination">Pagination分页 </MenuItem>
-            <MenuItem keyValue="steps">Steps步骤条 </MenuItem>
+            <template #title><span style="font-weight: 600">导航</span></template>
+            <MenuItem
+              v-for="item in sub3"
+              :keyValue="item.keyValue"
+              :key="item.keyValue"
+              class="menuItem"
+            >
+              <router-link :to="`/components/${item.keyValue}`" class="router-link">
+                {{ item.title }}
+              </router-link>
+            </MenuItem>
           </SubMenu>
           <SubMenu keyValue="sub4" :collapsible="false">
-            <template #title>数据录入</template>
-            <MenuItem keyValue="autoComplete">AutoComplete自动完成 </MenuItem>
-            <MenuItem keyValue="cascader">Cascader级联选择 </MenuItem>
-            <MenuItem keyValue="checkbox">Checkbox多选框 </MenuItem>
-            <MenuItem keyValue="datePicker">DatePicker日期选择框 </MenuItem>
-            <MenuItem keyValue="form">Form表单 </MenuItem>
-            <MenuItem keyValue="input">Input输入框 </MenuItem>
-            <MenuItem keyValue="inputNumber">InputNumber数字输入框 </MenuItem>
-            <MenuItem keyValue="mentions">Mentions提及 </MenuItem>
-            <MenuItem keyValue="radio">Radio单选框 </MenuItem>
-            <MenuItem keyValue="rate">Rate评分 </MenuItem>
-            <MenuItem keyValue="select">Select选择器 </MenuItem>
-            <MenuItem keyValue="slider">Slider滑动输入条 </MenuItem>
-            <MenuItem keyValue="switch">Switch开关 </MenuItem>
-            <MenuItem keyValue="timePicker">TimePicker时间选择框 </MenuItem>
-            <MenuItem keyValue="transfer">Transfer穿梭框 </MenuItem>
-            <MenuItem keyValue="treeSelect">TreeSelect树选择 </MenuItem>
-            <MenuItem keyValue="upload">Upload上传 </MenuItem>
+            <template #title><span style="font-weight: 600">数据录入</span></template>
+            <MenuItem
+              v-for="item in sub4"
+              :keyValue="item.keyValue"
+              :key="item.keyValue"
+              class="menuItem"
+            >
+              <router-link :to="`/components/${item.keyValue}`" class="router-link">
+                {{ item.title }}
+              </router-link>
+            </MenuItem>
           </SubMenu>
           <SubMenu keyValue="sub5" :collapsible="false">
-            <template #title>数据展示</template>
-            <MenuItem keyValue="avatar">Avatar头像 </MenuItem>
-            <MenuItem keyValue="badge">Badge徽标数 </MenuItem>
-            <MenuItem keyValue="calendar">Calendar日历 </MenuItem>
-            <MenuItem keyValue="card">Card卡片 </MenuItem>
-            <MenuItem keyValue="carousel">Carousel走马灯 </MenuItem>
-            <MenuItem keyValue="collapse">Collapse折叠面板 </MenuItem>
-            <MenuItem keyValue="comment">Comment 评论 </MenuItem>
-            <MenuItem keyValue="descriptions">Descriptions描述列表 </MenuItem>
-            <MenuItem keyValue="empty">Empty空状态 </MenuItem>
-            <MenuItem keyValue="image">Image图片 </MenuItem>
-            <MenuItem keyValue="list">List列表 </MenuItem>
-            <MenuItem keyValue="popover">Popover气泡卡片 </MenuItem>
-            <MenuItem keyValue="statistic">Statistic 统计数值 </MenuItem>
-            <MenuItem keyValue="table">Table 表格 </MenuItem>
-            <MenuItem keyValue="tabs">Tabs 标签页 </MenuItem>
-            <MenuItem keyValue="tag">Tag 标签 </MenuItem>
-            <MenuItem keyValue="timeline">Timeline 时间轴 </MenuItem>
-            <MenuItem keyValue="tooltip">Tooltip 文字提示 </MenuItem>
-            <MenuItem keyValue="tree">Tree 树形控件 </MenuItem>
+            <template #title><span style="font-weight: 600">数据展示</span></template>
+            <MenuItem
+              v-for="item in sub5"
+              :keyValue="item.keyValue"
+              :key="item.keyValue"
+              class="menuItem"
+            >
+              <router-link :to="`/components/${item.keyValue}`" class="router-link">
+                {{ item.title }}
+              </router-link>
+            </MenuItem>
           </SubMenu>
           <SubMenu keyValue="sub6" :collapsible="false">
-            <template #title>反馈</template>
-            <MenuItem keyValue="alert">Alert 警告提示 </MenuItem>
-            <MenuItem keyValue="drawer">Drawer 抽屉 </MenuItem>
-            <MenuItem keyValue="message">Message 全局提示 </MenuItem>
-            <MenuItem keyValue="modal">Modal 对话框 </MenuItem>
-            <MenuItem keyValue="notification">Notification 通知提醒框 </MenuItem>
-            <MenuItem keyValue="popconfirm">Popconfirm 气泡确认框 </MenuItem>
-            <MenuItem keyValue="progress">Progress 进度条 </MenuItem>
-            <MenuItem keyValue="result">Result 结果 </MenuItem>
-            <MenuItem keyValue="skeleton">Skeleton 骨架屏 </MenuItem>
-            <MenuItem keyValue="spin">Spin 加载中 </MenuItem>
+            <template #title><span style="font-weight: 600">反馈</span></template>
+            <MenuItem
+              v-for="item in sub6"
+              :keyValue="item.keyValue"
+              :key="item.keyValue"
+              class="menuItem"
+            >
+              <router-link :to="`/components/${item.keyValue}`" class="router-link">
+                {{ item.title }}
+              </router-link>
+            </MenuItem>
           </SubMenu>
           <SubMenu keyValue="sub7" :collapsible="false">
-            <template #title>其他</template>
-            <MenuItem keyValue="backTop" style="margin-bottom: 50px"
-              >BackTop 回到顶部
+            <template #title><span style="font-weight: 600">其他</span></template>
+            <MenuItem
+              v-for="item in sub7"
+              :keyValue="item.keyValue"
+              :key="item.keyValue"
+              class="menuItem"
+              style="margin-bottom: 80px"
+            >
+              <router-link :to="`/components/${item.keyValue}`" class="router-link">
+                {{ item.title }}
+              </router-link>
             </MenuItem>
           </SubMenu>
         </Menu>
       </section>
-      <section class="guideContent scroll-container">xxx</section>
+      <section class="guideContent scroll-container">
+        <p>xxx</p>
+      </section>
     </section>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { reactive, ref } from 'vue'
 import Menu from '@/lib/menu/Menu.vue'
 import MenuItem from '@/lib/menu/MenuItem.vue'
 import SubMenu from '@/lib/menu/SubMenu.vue'
 import Head from '@/views/Head.vue'
 
-const current = ref<string[]>(['mail'])
+const current = ref<string[]>(['sub1', 'button'])
 
-const selectedKeys = ref<string[]>(['sub1', '1'])
+const selectedKeys = ref<string[]>(['sub1', 'button'])
+
+const sub1 = reactive<{ keyValue: string; title: string }[]>([
+  {
+    keyValue: 'button',
+    title: ' Button按钮'
+  },
+  {
+    keyValue: 'typography',
+    title: ' Typography排版'
+  },
+  {
+    keyValue: 'palette',
+    title: ' Palette调色板'
+  }
+])
+const sub2 = reactive<{ keyValue: string; title: string }[]>([
+  {
+    keyValue: 'divider',
+    title: ' Divider分割线'
+  },
+  {
+    keyValue: 'grid',
+    title: ' Grid栅格'
+  },
+  {
+    keyValue: 'layout',
+    title: ' Layout布局'
+  },
+  {
+    keyValue: 'space',
+    title: ' Space间距'
+  }
+])
+const sub3 = reactive<{ keyValue: string; title: string }[]>([
+  {
+    keyValue: 'affix',
+    title: ' Affix固钉'
+  },
+  {
+    keyValue: 'anchor',
+    title: ' Anchor锚点'
+  },
+  {
+    keyValue: 'breadcrumb',
+    title: ' Breadcrumb面包屑'
+  },
+  {
+    keyValue: 'dropdown',
+    title: ' Dropdown下拉菜单'
+  },
+  {
+    keyValue: 'menu',
+    title: ' Menu导航菜单'
+  },
+  {
+    keyValue: 'pageHeader',
+    title: ' PageHeader页头'
+  },
+  {
+    keyValue: 'pagination',
+    title: ' Pagination分页'
+  },
+  {
+    keyValue: 'steps',
+    title: ' Steps步骤条'
+  }
+])
+
+const sub4 = reactive<{ keyValue: string; title: string }[]>([
+  {
+    keyValue: 'autoComplete',
+    title: ' AutoComplete自动完成'
+  },
+  {
+    keyValue: 'cascader',
+    title: ' Cascader级联选择'
+  },
+  {
+    keyValue: 'checkbox',
+    title: ' Checkbox多选框'
+  },
+  {
+    keyValue: 'datePicker',
+    title: ' DatePicker日期选择框'
+  },
+  {
+    keyValue: 'form',
+    title: ' Form表单'
+  },
+  {
+    keyValue: 'input',
+    title: ' Input输入框'
+  },
+  {
+    keyValue: 'inputNumber',
+    title: ' InputNumber数字输入框'
+  },
+  {
+    keyValue: 'mentions',
+    title: ' Mentions提及'
+  },
+  {
+    keyValue: 'radio',
+    title: ' Radio单选框'
+  },
+  {
+    keyValue: 'rate',
+    title: ' Rate评分'
+  },
+  {
+    keyValue: 'select',
+    title: ' Select选择器'
+  },
+  {
+    keyValue: 'slider',
+    title: ' Slider滑动输入条'
+  },
+  {
+    keyValue: 'switch',
+    title: ' Switch开关'
+  },
+  {
+    keyValue: 'timePicker',
+    title: ' TimePicker时间选择框'
+  },
+  {
+    keyValue: 'transfer',
+    title: ' Transfer穿梭框'
+  },
+  {
+    keyValue: 'treeSelect',
+    title: ' TreeSelect树选择'
+  },
+  {
+    keyValue: 'upload',
+    title: ' Upload上传'
+  }
+])
+
+const sub5 = reactive<{ keyValue: string; title: string }[]>([
+  {
+    keyValue: 'avatar',
+    title: ' Avatar头像'
+  },
+  {
+    keyValue: 'badge',
+    title: ' Badge徽标数'
+  },
+  {
+    keyValue: 'calendar',
+    title: ' Calendar日历'
+  },
+  {
+    keyValue: 'card',
+    title: ' Card卡片'
+  },
+  {
+    keyValue: 'carousel',
+    title: ' Carousel走马灯'
+  },
+  {
+    keyValue: 'collapse',
+    title: ' Collapse折叠面板'
+  },
+  {
+    keyValue: 'comment',
+    title: 'Comment评论'
+  },
+  {
+    keyValue: 'descriptions',
+    title: ' Descriptions描述列表'
+  },
+  {
+    keyValue: 'empty',
+    title: ' Empty空状态'
+  },
+  {
+    keyValue: 'image',
+    title: ' Image图片'
+  },
+  {
+    keyValue: 'list',
+    title: ' List列表'
+  },
+  {
+    keyValue: 'popover',
+    title: ' Popover气泡卡片'
+  },
+  {
+    keyValue: 'statistic',
+    title: ' Statistic统计数值'
+  },
+  {
+    keyValue: 'table',
+    title: ' Table表格'
+  },
+  {
+    keyValue: 'tabs',
+    title: ' Tabs标签页'
+  },
+  {
+    keyValue: 'tag',
+    title: ' Tag标签'
+  },
+  {
+    keyValue: 'timeline',
+    title: ' Timeline时间轴'
+  },
+  {
+    keyValue: 'tooltip',
+    title: ' Tooltip文字提示'
+  },
+  {
+    keyValue: 'tree',
+    title: ' Tree树形控件'
+  }
+])
+
+const sub6 = reactive<{ keyValue: string; title: string }[]>([
+  {
+    keyValue: 'alert',
+    title: ' Alert警告提示'
+  },
+  {
+    keyValue: 'drawer',
+    title: ' Drawer抽屉'
+  },
+  {
+    keyValue: 'message',
+    title: ' Message全局提示'
+  },
+  {
+    keyValue: 'modal',
+    title: ' Modal对话框'
+  },
+  {
+    keyValue: 'notification',
+    title: ' Notification通知提醒框'
+  },
+  {
+    keyValue: 'popconfirm',
+    title: ' Popconfirm气泡确认框'
+  },
+  {
+    keyValue: 'progress',
+    title: ' Progress进度条'
+  },
+  {
+    keyValue: 'result',
+    title: ' Result结果'
+  },
+  {
+    keyValue: 'skeleton',
+    title: ' Skeleton骨架屏'
+  },
+  {
+    keyValue: 'spin',
+    title: ' Spin加载中'
+  }
+])
+
+const sub7 = reactive<{ keyValue: string; title: string }[]>([
+  {
+    keyValue: 'backTop',
+    title: ' BackTop回到顶部'
+  }
+])
 </script>
 
 <style scoped lang="scss">
@@ -124,24 +400,36 @@ const selectedKeys = ref<string[]>(['sub1', '1'])
 
   > .guideBody {
     flex-grow: 10;
-    overflow: hidden;
+    overflow-y: auto;
     display: flex;
     > .guideMenu {
       display: inline-flex;
       flex-direction: column;
       overflow-y: auto;
+      scroll-behavior: smooth;
+      .menuItem {
+        padding: 0 !important;
+      }
+      .router-link {
+        display: block;
+        padding-left: 48px;
+        height: 100%;
+        width: 100%;
+      }
       > .guideMenu-title {
         font-weight: 600;
         display: flex;
         justify-content: center;
-        padding: 20px 0 40px 0;
+        padding: 20px 0 20px 0;
         background: #fafafa;
       }
     }
     > .guideContent {
       background: #ffffff;
       flex-grow: 10;
+      padding: 20px;
       overflow-y: auto;
+      scroll-behavior: smooth;
     }
   }
 }

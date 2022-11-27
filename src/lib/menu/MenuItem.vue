@@ -45,7 +45,7 @@ const onClick = (e: Event) => {
     <span v-if="$slots.icon" class="ui-menuItem-icon">
       <slot name="icon" />
     </span>
-    <span
+    <div
       class="ui-menuItem-content"
       :class="{
         'menuItem-no-icon': !$slots.icon,
@@ -53,7 +53,7 @@ const onClick = (e: Event) => {
       }"
     >
       <slot />
-    </span>
+    </div>
   </div>
 </template>
 
@@ -94,6 +94,7 @@ $disabled_color: #00000040;
     white-space: nowrap;
     cursor: pointer;
     transition: color 250ms;
+    width: 100%;
     &.ui-menuItem-content-selected {
       color: #1890ff;
     }
