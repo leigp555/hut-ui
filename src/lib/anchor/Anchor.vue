@@ -66,8 +66,29 @@ function throttle(func: () => void, wait: number) {
   }
 }
 
+const getElInfo = () => {
+  elInfo.value.forEach((item) => {
+    let targetOffsetTop: number
+    let targetClientHeight: number
+    let target: HTMLElement
+    if (item.titleVNode && item.titleVNode.props) {
+      target = document.querySelector(item.titleVNode.props.href) as HTMLElement
+      if (target) {
+        targetOffsetTop = target.offsetTop
+        targetClientHeight = target.clientHeight
+      } else {
+        targetOffsetTop = 0
+        targetClientHeight = 0
+      }
+      item.targetClientHeight = targetClientHeight
+      item.targetOffsetTop = targetOffsetTop
+    }
+  })
+}
+
 // 获取滑动的高度,并判断是否高亮
 function handle() {
+  getElInfo()
   let scrollDistance: number = 0
   if (scrollContainer.value && scrollContainer.value()) {
     scrollDistance = scrollContainer.value().scrollTop
@@ -90,23 +111,7 @@ function handle() {
 // 绑定监听滚动事件
 const scrollHandle = throttle(handle, 50)
 onMounted(() => {
-  elInfo.value.forEach((item) => {
-    let targetOffsetTop: number
-    let targetClientHeight: number
-    let target: HTMLElement
-    if (item.titleVNode && item.titleVNode.props) {
-      target = document.querySelector(item.titleVNode.props.href) as HTMLElement
-      if (target) {
-        targetOffsetTop = target.offsetTop
-        targetClientHeight = target.clientHeight
-      } else {
-        targetOffsetTop = 0
-        targetClientHeight = 0
-      }
-      item.targetClientHeight = targetClientHeight
-      item.targetOffsetTop = targetOffsetTop
-    }
-  })
+  getElInfo()
   selectItem.value = elInfo.value[0]
   scrollContainer.value && scrollContainer.value()
     ? scrollContainer.value().addEventListener('scroll', scrollHandle)
