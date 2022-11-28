@@ -54,21 +54,14 @@ elInfo.value = slots.map((item, index) => {
 })
 
 // 简单的节流函数
-function throttle(func: () => void, wait: number, mustRun: number) {
-  let timeout: number
-  let startTime = (Date.parse(new Date().toString()) / 1000) as number
 
+function throttle(func: () => void, wait: number) {
+  let startTime = new Date().getTime() as number
   return () => {
-    const curTime = (Date.parse(new Date().toString()) / 1000) as number
-
-    clearTimeout(timeout)
-    // 如果达到了规定的触发时间间隔，触发 handler
-    if (curTime - startTime >= mustRun) {
+    const curTime = new Date().getTime() as number
+    if (curTime - startTime >= wait) {
       func()
       startTime = curTime
-      // 没达到触发间隔，重新设定定时器
-    } else {
-      timeout = setTimeout(func, wait)
     }
   }
 }
@@ -95,7 +88,7 @@ function handle() {
 }
 
 // 绑定监听滚动事件
-const scrollHandle = throttle(handle, 100, 100)
+const scrollHandle = throttle(handle, 50)
 onMounted(() => {
   elInfo.value.forEach((item) => {
     let targetOffsetTop: number

@@ -404,9 +404,10 @@ const sub7 = reactive<{ keyValue: string; title: string }[]>([
     display: flex;
     > .guideMenu {
       display: inline-flex;
-      flex-shrink: 0;
+      min-width: 220px;
       flex-direction: column;
       overflow-y: auto;
+      overflow-x: hidden;
       scroll-behavior: smooth;
       .menuItem {
         padding: 0 !important;
