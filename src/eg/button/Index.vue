@@ -29,11 +29,12 @@
     </section>
 
     <!--    api介绍部分-->
-    <section class="api"></section>
-    <Title :level="4" id="ex-template-api">接口</Title>
-    <div class="apiIntro">
-      <Api />
-    </div>
+    <section class="api">
+      <Title :level="4" id="ex-template-api">接口</Title>
+      <div class="apiIntro">
+        <Api />
+      </div>
+    </section>
   </div>
 </template>
 
@@ -53,20 +54,25 @@ const wrap = ref<HTMLElement | null>(null)
   overflow-y: auto;
   max-height: 100%;
   scroll-behavior: smooth;
-  padding: 40px 100px 80px 32px;
-  @media (max-width: 500px) {
-    padding: 40px 20px 80px 20px;
+  padding: 0 100px 80px 32px;
+  @media (max-width: 1000px) {
+    padding: 0 20px 80px 20px;
   }
   > .title {
+    margin-top: 40px;
     > .title-description {
     }
   }
   > .example {
+    padding: 10px;
+    margin-top: 40px;
     > .example-wrap {
     }
-    > .api {
-      > .apiIntro {
-      }
+  }
+  > .api {
+    padding: 10px;
+    margin-top: 40px;
+    > .apiIntro {
     }
   }
 }

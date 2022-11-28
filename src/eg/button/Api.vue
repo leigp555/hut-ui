@@ -1,5 +1,10 @@
 <template>
-  <Table :headSource="titleData" :bodySource="dataBody" style-mode="auto">
+  <Table
+    :headSource="titleData"
+    :bodySource="dataBody"
+    style-mode="auto"
+    custom-class="table-display"
+  >
     <template #tableHead="item">
       <span>{{ item.dataValue }}</span>
     </template>
@@ -54,3 +59,13 @@ const titleData = [
   }
 ]
 </script>
+
+<style lang="scss">
+.table-display {
+  border: 1px solid #f0f0f0;
+  border-radius: 2px;
+  td {
+    text-align: center;
+  }
+}
+</style>

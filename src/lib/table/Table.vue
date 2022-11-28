@@ -17,13 +17,15 @@ const props = withDefaults(
     loading?: boolean
     styleMode?: 'auto' | 'fixed'
     bordered?: boolean
+    customClass?: string
   }>(),
   {
     headSource: () => [],
     bodySource: () => [],
     loading: false,
     styleMode: 'auto',
-    bordered: false
+    bordered: false,
+    customClass: 'custom-class-table'
   }
 )
 const { bodySource } = toRefs(props)
@@ -54,7 +56,8 @@ const getX = (
         class="ui-table-content"
         :class="{
           'ui-table-fixed': styleMode === 'fixed',
-          'ui-table-bordered': bordered
+          'ui-table-bordered': bordered,
+          [customClass]: true
         }"
       >
         <thead class="ui-table-thead">
