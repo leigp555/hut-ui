@@ -3,9 +3,10 @@
     <transition name="button" mode="out-in">
       <Component :is="getCode.vNode" :key="getCode.key" @click="onClick" />
     </transition>
-    <transition name="code">
-      <pre class="language-html" v-html="html" v-if="html" v-show="show" />
-    </transition>
+
+    <div class="html-show" ref="codeWrapRef">
+      <pre class="language-html" v-html="html" v-if="html" ref="codeRef" />
+    </div>
   </div>
 </template>
 
@@ -19,6 +20,8 @@ withDefaults(defineProps<{ html: string | null }>(), {
 })
 
 const show = ref<boolean>(false)
+const codeWrapRef = ref<HTMLElement | null>(null)
+const codeRef = ref<HTMLElement | null>(null)
 const getCode = computed<{ vNode: VNode; key: string }>(() => {
   return show.value
     ? { vNode: HideCode, key: 'hide' }
@@ -27,6 +30,11 @@ const getCode = computed<{ vNode: VNode; key: string }>(() => {
 
 const onClick = () => {
   show.value = !show.value
+  if (show.value && codeRef.value && codeWrapRef.value) {
+    codeWrapRef.value.style.height = `${codeRef.value.clientHeight}px`
+  } else {
+    codeWrapRef.value.style.height = `${0}px`
+  }
 }
 </script>
 
@@ -35,8 +43,13 @@ const onClick = () => {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  > .language-html {
-    border-radius: 2px;
+  > .html-show {
+    height: 0;
+    overflow: hidden;
+    transition: height 250ms;
+    > .language-html {
+      border-radius: 2px;
+    }
   }
 }
 
@@ -47,12 +60,5 @@ const onClick = () => {
 .button-enter-active,
 .button-leave-active {
   transition: opacity 250ms;
-}
-
-.code-enter-from,
-.code-leave-to {
-}
-.code-enter-active,
-.code-leave-active {
 }
 </style>
