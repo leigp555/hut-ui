@@ -52,6 +52,7 @@ const wrap = ref<HTMLElement | null>(null)
 <style lang="scss">
 .ui-template-wrap {
   overflow-y: auto;
+  overflow-x: auto;
   max-height: 100%;
   scroll-behavior: smooth;
   padding: 0 100px 80px 32px;

@@ -5,7 +5,12 @@
     </transition>
 
     <div class="html-show" ref="codeWrapRef">
-      <pre class="language-html" v-html="html" v-if="html" ref="codeRef" />
+      <pre
+        class="language-html scroll-container"
+        v-html="html"
+        v-if="html"
+        ref="codeRef"
+      ></pre>
     </div>
   </div>
 </template>
@@ -31,7 +36,7 @@ const getCode = computed<{ vNode: VNode; key: string }>(() => {
 const onClick = () => {
   show.value = !show.value
   if (show.value && codeRef.value && codeWrapRef.value) {
-    codeWrapRef.value.style.height = `${codeRef.value.clientHeight}px`
+    codeWrapRef.value.style.height = `${codeRef.value.clientHeight + 30}px`
   } else {
     codeWrapRef.value.style.height = `${0}px`
   }
@@ -46,9 +51,16 @@ const onClick = () => {
   > .html-show {
     height: 0;
     overflow: hidden;
-    transition: height 250ms;
+    transition: height 300ms;
+
     > .language-html {
       border-radius: 2px;
+      white-space: pre;
+      overflow: auto;
+
+      span {
+        white-space: pre;
+      }
     }
   }
 }

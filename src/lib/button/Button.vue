@@ -23,7 +23,7 @@ type Props = {
   loading?: boolean
 }
 const props = withDefaults(defineProps<Props>(), {
-  radius: true,
+  radius: false,
   disabled: false,
   size: 'normal',
   type: 'primary',

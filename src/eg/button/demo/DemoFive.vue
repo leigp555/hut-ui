@@ -1,14 +1,9 @@
 <demo>
-按钮类型
+禁用按钮
 </demo>
-
 <template>
   <div class="wrap">
-    <Button type="primary">toggle</Button>
-    <Button type="text">toggle</Button>
-    <Button type="link">toggle</Button>
-    <Button type="dashed">toggle</Button>
-    <Button type="default">toggle</Button>
+    <Button disabled>toggle</Button>
   </div>
 </template>
 

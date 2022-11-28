@@ -47,7 +47,7 @@ withDefaults(
     display: flex;
     align-items: center;
     padding: 0 14px;
-    font-weight: 700;
+    font-weight: 500;
     font-size: 14px;
   }
 }

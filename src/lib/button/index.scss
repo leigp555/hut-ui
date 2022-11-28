@@ -4,6 +4,9 @@ $white: #ffffff;
 $font_color: #f5f5f5;
 $disable_color: #b8b8cb;
 .ui-button {
+  border-radius: 2px;
+  text-align: center;
+  font-size: 14px;
   &:hover {
     border: none;
     outline: none;
@@ -87,7 +90,6 @@ $disable_color: #b8b8cb;
   gap: 8px;
   padding: 4px 15px;
   transition: all 250ms;
-  border-radius: 2px;
   & > .ui-button-icon {
     display: flex;
     align-items: center;
@@ -114,7 +116,10 @@ $disable_color: #b8b8cb;
   }
   cursor: pointer;
   &.radius {
-    border-radius: 3px;
+    min-width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    padding: 0;
   }
   white-space: nowrap;
 }

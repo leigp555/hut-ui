@@ -33,7 +33,7 @@ export const getSourceCode = (): PluginOption => {
       }
       return `export default Component => {
       Component.__sourceCode = ${JSON.stringify(bodyCode)}
-      Component.__sourceCodeTitle = ${JSON.stringify(titleCode)}
+      Component.__sourceTitle = ${JSON.stringify(titleCode)}
     }`.trim()
     }
   }

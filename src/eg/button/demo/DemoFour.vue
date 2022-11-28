@@ -1,14 +1,11 @@
 <demo>
-按钮类型
+大小可选
 </demo>
-
 <template>
   <div class="wrap">
-    <Button type="primary">toggle</Button>
-    <Button type="text">toggle</Button>
-    <Button type="link">toggle</Button>
-    <Button type="dashed">toggle</Button>
-    <Button type="default">toggle</Button>
+    <Button size="big">toggle</Button>
+    <Button size="normal">toggle</Button>
+    <Button size="small">toggle</Button>
   </div>
 </template>
 
