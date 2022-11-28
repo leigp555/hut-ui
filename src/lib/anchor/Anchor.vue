@@ -4,15 +4,22 @@ import {
   onMounted,
   onUnmounted,
   ref,
+  toRefs,
   useSlots,
   VNode,
   withDefaults
 } from 'vue'
 
-withDefaults(defineProps<{ customClass?: string }>(), {
-  customClass: 'custom-class'
-})
+type ContainerType = () => HTMLElement | null
 
+const props = withDefaults(
+  defineProps<{ customClass?: string; scrollContainer: ContainerType | null }>(),
+  {
+    customClass: 'custom-class',
+    scrollContainer: null
+  }
+)
+const { scrollContainer } = toRefs(props)
 const slots = useSlots().default!()
 
 // 选中的节点
@@ -68,7 +75,12 @@ function throttle(func: () => void, wait: number, mustRun: number) {
 
 // 获取滑动的高度,并判断是否高亮
 function handle() {
-  const scrollDistance = document.documentElement.scrollTop || document.body.scrollTop
+  let scrollDistance: number = 0
+  if (scrollContainer.value && scrollContainer.value()) {
+    scrollDistance = scrollContainer.value().scrollTop
+  } else {
+    scrollDistance = document.documentElement.scrollTop || document.body.scrollTop
+  }
   elInfo.value.forEach((item) => {
     if (
       item.targetOffsetTop >= scrollDistance - item.targetClientHeight &&
@@ -103,10 +115,14 @@ onMounted(() => {
     }
   })
   selectItem.value = elInfo.value[0]
-  window.addEventListener('scroll', scrollHandle)
+  scrollContainer.value && scrollContainer.value()
+    ? scrollContainer.value().addEventListener('scroll', scrollHandle)
+    : window.addEventListener('scroll', scrollHandle)
 })
 onUnmounted(() => {
-  window.removeEventListener('scroll', scrollHandle)
+  scrollContainer.value && scrollContainer.value()
+    ? scrollContainer.value().removeEventListener('scroll', scrollHandle)
+    : window.removeEventListener('scroll', scrollHandle)
 })
 </script>
 

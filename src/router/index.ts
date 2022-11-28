@@ -4,6 +4,7 @@ import Home from '@/views/Home.vue'
 const Guide = () => import('@/views/Guide.vue')
 const Components = () => import('@/views/Components.vue')
 const NotFound = () => import('@/views/NotFound.vue')
+const ButtonEg = () => import('@/eg/button/index.vue')
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -18,9 +19,17 @@ const routes: Array<RouteRecordRaw> = [
     component: Guide
   },
   {
-    path: '/Components',
+    path: '/components',
     name: 'Components',
-    component: Components
+    component: Components,
+    children: [
+      {
+        path: '',
+        alias: 'button',
+        name: 'ButtonEg',
+        component: ButtonEg
+      }
+    ]
   },
   { path: '/:pathMatch(.*)*', name: 'NotFound', component: NotFound }
 ]
