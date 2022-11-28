@@ -146,7 +146,8 @@ onUnmounted(() => {
   right: 50px;
   gap: 7px;
   padding: 0 15px 0 32px;
-  background-color: #ffffff;
+  background-color: transparent;
+  z-index: 1000;
   > .ui-anchor-indicator {
     position: absolute;
     top: 0;

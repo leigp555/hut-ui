@@ -56,7 +56,7 @@ const wrap = ref<HTMLElement | null>(null)
   scroll-behavior: smooth;
   padding: 0 100px 80px 32px;
   @media (max-width: 1000px) {
-    padding: 0 20px 80px 20px;
+    padding: 0 10px 80px 10px;
   }
   > .title {
     margin-top: 40px;
