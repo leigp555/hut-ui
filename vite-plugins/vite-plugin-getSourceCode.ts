@@ -26,7 +26,11 @@ export const getSourceCode = (): PluginOption => {
         if (parsed) {
           // @ts-ignore
           titleCode = parsed.children[0].content
-          bodyCode = file.split(parsed.loc.source).join('').trim()
+          bodyCode = file
+            .split(parsed.loc.source)
+            .join('')
+            .trim()
+            .replace(/@\/lib/, 'ant')
         }
       } catch (e) {
         filePath = ''

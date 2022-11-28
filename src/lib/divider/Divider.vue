@@ -1,10 +1,18 @@
 <template>
   <div class="ui-divider-wrap">
-    <div class="left" :class="{ positionLeft: position === 'left' }"></div>
+    <div
+      class="left"
+      :class="{ positionLeft: position === 'left' }"
+      :style="{ width: leftDistance }"
+    ></div>
     <div class="inner">
       <slot />
     </div>
-    <div class="right" :class="{ positionRight: position === 'right' }"></div>
+    <div
+      class="right"
+      :class="{ positionRight: position === 'right' }"
+      :style="{ width: rightDistance }"
+    ></div>
   </div>
 </template>
 
@@ -13,9 +21,11 @@ import { withDefaults, defineProps } from 'vue'
 
 withDefaults(
   defineProps<{
-    position?: 'left' | 'right' | 'center'
+    position?: 'left' | 'right' | 'center' | 'normal'
+    leftDistance?: string
+    rightDistance?: string
   }>(),
-  { position: 'center' }
+  { position: 'normal', leftDistance: '100%', rightDistance: '100%' }
 )
 </script>
 
@@ -25,18 +35,14 @@ withDefaults(
   display: flex;
   align-items: center;
   .left {
-    height: 1px;
-    background-color: rgba(0, 0, 0, 0.1);
-    flex-grow: 10;
+    border-top: 1px solid #f0f0f0;
     &.positionLeft {
       flex-grow: 0;
       width: 10%;
     }
   }
   .right {
-    height: 1px;
-    background-color: rgba(0, 0, 0, 0.1);
-    flex-grow: 10;
+    border-top: 1px solid #f0f0f0;
     &.positionRight {
       flex-grow: 0;
       width: 10%;
@@ -49,6 +55,7 @@ withDefaults(
     padding: 0 14px;
     font-weight: 500;
     font-size: 14px;
+    white-space: nowrap;
   }
 }
 </style>

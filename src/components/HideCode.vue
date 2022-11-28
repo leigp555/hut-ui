@@ -1,7 +1,9 @@
 <template>
-  <Button type="default">隐藏代码</Button>
+  <Button type="link">
+    <SvgIcon name="code_hide" height="1em" width="1em" fill="#00000073"
+  /></Button>
 </template>
 
 <script lang="ts" setup>
-import { Button } from '@/lib'
+import { Button, SvgIcon } from '@/lib'
 </script>

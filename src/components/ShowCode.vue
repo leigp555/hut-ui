@@ -1,7 +1,9 @@
 <template>
-  <Button>查看代码</Button>
+  <Button type="link">
+    <SvgIcon name="display" height="1em" width="1em" fill="#00000073" />
+  </Button>
 </template>
 
 <script lang="ts" setup>
-import { Button } from '@/lib'
+import { Button, SvgIcon } from '@/lib'
 </script>
