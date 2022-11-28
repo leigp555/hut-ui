@@ -102,7 +102,7 @@
         </Menu>
       </section>
       <section class="guideContent scroll-container">
-        <p>xxx</p>
+        <router-view />
       </section>
     </section>
   </div>
