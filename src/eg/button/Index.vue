@@ -14,7 +14,7 @@
 
     <!--    介绍部分-->
     <section class="title">
-      <Title :level="2" id="ex-template-title">Affix 固钉</Title>
+      <Title :level="2" id="ex-template-title">Button 按钮</Title>
       <div class="title-description">
         <Intro />
       </div>
@@ -57,6 +57,9 @@ const wrap = ref<HTMLElement | null>(null)
   padding: 0 100px 80px 32px;
   @media (max-width: 1000px) {
     padding: 0 10px 80px 10px;
+  }
+  p {
+    line-height: 2em;
   }
   > .title {
     margin-top: 40px;

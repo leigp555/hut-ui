@@ -1,12 +1,13 @@
+<demo>
+"demo1"
+</demo>
 <template>
   <Button @click="toggle">toggle</Button>
 
-  <hr />
   <div>圆角</div>
   <Button :radius="false">toggle</Button>
   <Button radius>toggle</Button>
 
-  <hr />
   <div>类型</div>
 
   <Button type="primary">toggle</Button>
@@ -15,24 +16,16 @@
   <Button type="dashed">toggle</Button>
   <Button type="default">toggle</Button>
 
-  <hr />
-
   <div>加载中</div>
   <Button loading>toggle</Button>
-
-  <hr />
 
   <div>大小</div>
   <Button size="big">toggle</Button>
   <Button size="normal">toggle</Button>
   <Button size="small">toggle</Button>
 
-  <hr />
-
   <div>禁止点击</div>
   <Button disabled>toggle</Button>
-
-  <hr />
 
   <div>支持icon</div>
   <Button>

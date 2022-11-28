@@ -2,22 +2,27 @@
   <Typography>
     <Title :level="4">简介</Title>
     <Paragraph>
-      <p>将页面元素钉在可视范围。</p>
-    </Paragraph>
-    <Title :level="5">组件概览</Title>
-    <Paragraph>
+      <p>
+        主要用于即时操作，表示交互时发生的动作，响应用户点击行为触发相应的业务逻辑，比如添加、保存、删除和注册等。
+      </p>
+      <p>我们提供了五种按钮。</p>
       <ul>
-        <li>Affix: 主要组件</li>
+        <li>主按钮：用于主行动点，一个操作区域只能有一个主按钮。</li>
+        <li>默认按钮：用于没有主次之分的一组行动点。</li>
+        <li>虚线按钮：常用于添加操作。</li>
+        <li>文本按钮：用于最次级的行动点。</li>
+        <li>链接按钮：一般用于链接，即导航至某位置。</li>
       </ul>
     </Paragraph>
-    <Title :level="5">使用场景</Title>
+    <Title :level="4">组件概览</Title>
     <Paragraph>
       <ul>
-        <li>
-          当内容区域比较长，需要滚动页面时，这部分内容对应的操作或者导航需要在滚动范围内始终展现。常用于侧边菜单和按钮组合。
-        </li>
-        <li>页面可视范围过小时，慎用此功能以免遮挡页面内容。</li>
+        <li>Button: 主要组件</li>
       </ul>
+    </Paragraph>
+    <Title :level="4">使用场景</Title>
+    <Paragraph>
+      <p>用于启动即时操作，如提交表单。</p>
     </Paragraph>
   </Typography>
 </template>

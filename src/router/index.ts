@@ -4,7 +4,7 @@ import Home from '@/views/Home.vue'
 const Guide = () => import('@/views/Guide.vue')
 const Components = () => import('@/views/Components.vue')
 const NotFound = () => import('@/views/NotFound.vue')
-const ButtonEg = () => import('@/eg/button/index.vue')
+const Button = () => import('@/eg/button/index.vue')
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -27,7 +27,7 @@ const routes: Array<RouteRecordRaw> = [
         path: '',
         alias: 'button',
         name: 'ButtonEg',
-        component: ButtonEg
+        component: Button
       }
     ]
   },

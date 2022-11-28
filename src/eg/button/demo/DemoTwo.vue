@@ -1,3 +1,6 @@
+<demo>
+"demo2"
+</demo>
 <template>
   <Button @click="toggle">toggle</Button>
 

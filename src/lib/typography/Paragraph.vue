@@ -7,6 +7,6 @@
 <style lang="scss">
 .ui-typography-paragraph {
   margin-bottom: 14px;
-  line-height: 1.5em;
+  line-height: 2em;
 }
 </style>
