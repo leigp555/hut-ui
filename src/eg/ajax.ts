@@ -20,7 +20,7 @@ while (j < 1000) {
 const tableDate: (
   | TableDataType
   | {
-      key: string
+      rowIndex: number
       name: string
       age: number
       address: string
@@ -33,7 +33,6 @@ let x = 0
 while (x < 1000) {
   tableDate.push({
     rowIndex: x + 1,
-    key: `${x + 1}`,
     name: `John Brown ${x + 1}`,
     age: 32,
     tel: '0571-22098909',
@@ -94,7 +93,7 @@ export const ajax = (
       }, 2000)
     } else if (url === '/table' && method === 'delete') {
       const t = JSON.parse(payload!)
-      const index = tableDate.findIndex((item) => item.key === t.key)
+      const index = tableDate.findIndex((item) => item.rowIndex === t.rowIndex)
       tableDate.splice(index, 1)
       const end = page * per_page
       const id = setTimeout(() => {

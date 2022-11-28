@@ -77,7 +77,7 @@ const getX = (
           </tr>
         </thead>
         <tbody class="ui-table-tbody">
-          <tr v-for="item in bodySource" :key="item.key">
+          <tr v-for="item in bodySource" :key="item.rowIndex">
             <td
               v-for="data in headSource"
               :key="data"

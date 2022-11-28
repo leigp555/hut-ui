@@ -51,7 +51,7 @@ $dot_width: 18px;
     background-color: #ffffff;
     width: $dot_width;
     height: $dot_width;
-    border-radius: $dot_width/2;
+    border-radius: 9px;
     position: absolute;
     cursor: pointer;
     left: 3px;
