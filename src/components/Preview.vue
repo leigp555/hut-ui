@@ -27,8 +27,8 @@ import ShowCode from '@/components/ShowCode.vue'
 import { alert, Button, SvgIcon } from '@/lib'
 import { getSourceCode } from '@/eg/helper'
 
-const props = withDefaults(defineProps<{ html: string | null }>(), {
-  html: null
+const props = withDefaults(defineProps<{ html: string }>(), {
+  html: ''
 })
 const { html } = toRefs(props)
 const displayHtml = computed<string>(() => {
