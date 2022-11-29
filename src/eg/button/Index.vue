@@ -72,7 +72,7 @@ const wrap = ref<HTMLElement | null>(null)
     font-size: 12px;
   }
   > .title {
-    margin-top: 40px;
+    margin-top: 50px;
     > .title-description {
     }
   }
@@ -80,12 +80,14 @@ const wrap = ref<HTMLElement | null>(null)
     padding: 10px;
     margin-top: 40px;
     > .example-wrap {
+      margin-top: 50px;
     }
   }
   > .api {
     padding: 10px;
     margin-top: 40px;
     > .apiIntro {
+      margin-top: 50px;
     }
   }
 }
