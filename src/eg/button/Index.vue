@@ -37,7 +37,7 @@
     <!--    api介绍部分-->
     <section class="api">
       <Title :level="4" id="ex-button-api">接口</Title>
-      <div class="apiIntro">
+      <div class="apiIntro scroll-container">
         <Api />
       </div>
     </section>
@@ -91,6 +91,7 @@ const wrap = ref<HTMLElement | null>(null)
     margin-top: 40px;
     > .apiIntro {
       margin-top: 50px;
+      overflow-x: auto;
     }
   }
 }
