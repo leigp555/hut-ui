@@ -9,13 +9,13 @@
       >
         <AnchorLink href="#ex-button-title" title="简介" />
         <AnchorLink href="#ex-button-demo" title="案例" />
-        <AnchorLink href="#button-demo1" title="按钮类型" style="margin-left: 8px" />
-        <AnchorLink href="#button-demo2" title="圆形按钮" style="margin-left: 8px" />
-        <AnchorLink href="#button-demo3" title="加载中状态" style="margin-left: 8px" />
-        <AnchorLink href="#button-demo4" title="大小可选" style="margin-left: 8px" />
-        <AnchorLink href="#button-demo5" title="禁用按钮" style="margin-left: 8px" />
-        <AnchorLink href="#button-demo6" title="支持icon" style="margin-left: 8px" />
-        <AnchorLink href="#button-demo7" title="危险按钮" style="margin-left: 8px" />
+        <AnchorLink href="#button-demo-0" title="按钮类型" style="margin-left: 8px" />
+        <AnchorLink href="#button-demo-1" title="圆形按钮" style="margin-left: 8px" />
+        <AnchorLink href="#button-demo-2" title="加载中状态" style="margin-left: 8px" />
+        <AnchorLink href="#button-demo-3" title="大小可选" style="margin-left: 8px" />
+        <AnchorLink href="#button-demo-4" title="禁用按钮" style="margin-left: 8px" />
+        <AnchorLink href="#button-demo-5" title="支持icon" style="margin-left: 8px" />
+        <AnchorLink href="#button-demo-6" title="危险按钮" style="margin-left: 8px" />
         <AnchorLink href="#ex-button-api" title="接口" />
       </Anchor>
     </section>
