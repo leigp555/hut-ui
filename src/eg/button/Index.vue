@@ -3,7 +3,7 @@
     <!--    导航部分-->
     <Anchor
       customClass="customClass"
-      style="top: 60px; right: 10px"
+      style="top: 60px; right: 16px"
       :scroll-container="() => wrap"
     >
       <AnchorLink href="#ex-button-title" title="简介" />
@@ -61,8 +61,11 @@ const wrap = ref<HTMLElement | null>(null)
   overflow-x: auto;
   max-height: 100%;
   scroll-behavior: smooth;
-  padding: 0 120px 80px 32px;
+  padding: 0 170px 80px 32px;
   @media (max-width: 1000px) {
+    padding: 0 120px 80px 10px;
+  }
+  @media (max-width: 600px) {
     padding: 0 10px 80px 10px;
   }
   p {

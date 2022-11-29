@@ -90,7 +90,7 @@ onMounted(() => {
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 10;
+  z-index: 1000;
   overflow: hidden;
   color: #000000d9;
   > .ui-drawer-mask {
@@ -108,6 +108,8 @@ onMounted(() => {
     line-height: 1.5em;
     position: absolute;
     z-index: 100;
+    display: flex;
+    flex-direction: column;
     &.drawer-body-left {
       top: 0;
       left: 0;
@@ -143,6 +145,8 @@ onMounted(() => {
     > .ui-drawer-title {
     }
     > .ui-drawer-content {
+      overflow: hidden;
+      flex-grow: 10;
     }
   }
 }

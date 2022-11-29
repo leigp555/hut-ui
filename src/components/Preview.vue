@@ -21,7 +21,7 @@
 </template>
 
 <script setup lang="ts">
-import { withDefaults, defineProps, ref, computed, VNode, toRefs } from 'vue'
+import { withDefaults, defineProps, ref, computed, toRefs } from 'vue'
 import HideCode from '@/components/HideCode.vue'
 import ShowCode from '@/components/ShowCode.vue'
 import { alert, Button, SvgIcon } from '@/lib'
