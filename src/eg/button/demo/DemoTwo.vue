@@ -15,7 +15,6 @@ import { Button } from '@/lib'
 .wrap {
   display: flex;
   flex-wrap: wrap;
-  gap: 40px;
-  margin-top: 20px;
+  gap: 20px;
 }
 </style>

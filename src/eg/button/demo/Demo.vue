@@ -110,7 +110,7 @@ const html6 = computed<{ html: string; title: string }>(() => {
 .demo-wrap {
   display: flex;
   flex-direction: column;
-  gap: 50px;
+  gap: 40px;
   > .demo-wrap-item {
     gap: 20px;
     display: flex;

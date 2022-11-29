@@ -41,7 +41,7 @@ const displayHtml = computed<string>(() => {
 const show = ref<boolean>(false)
 const codeWrapRef = ref<HTMLElement | null>(null)
 const codeRef = ref<HTMLElement | null>(null)
-const getCode = computed<{ vNode: VNode; key: string }>(() => {
+const getCode = computed(() => {
   return show.value
     ? { vNode: HideCode, key: 'hide' }
     : { vNode: ShowCode, key: 'show' }
@@ -51,9 +51,7 @@ const onClick = () => {
   show.value = !show.value
   if (show.value && codeRef.value && codeWrapRef.value) {
     codeWrapRef.value.style.height = `${codeRef.value.clientHeight + 14}px`
-  } else {
-    codeWrapRef.value.style.height = `${0}px`
-  }
+  } else if (codeWrapRef.value) codeWrapRef.value.style.height = `${0}px`
 }
 const copy = async () => {
   try {
