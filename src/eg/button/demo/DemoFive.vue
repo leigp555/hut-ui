@@ -3,7 +3,11 @@
 </demo>
 <template>
   <div class="wrap">
-    <Button disabled>toggle</Button>
+    <Button type="primary" disabled>toggle</Button>
+    <Button type="text" disabled>toggle</Button>
+    <Button type="link" disabled>toggle</Button>
+    <Button type="dashed" disabled>toggle</Button>
+    <Button type="default" disabled>toggle</Button>
   </div>
 </template>
 

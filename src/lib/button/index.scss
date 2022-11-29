@@ -4,6 +4,7 @@ $white: #ffffff;
 $font_color: #f5f5f5;
 $disable_color: #b8b8cb;
 $active_color:#096dd9;
+$danger_color:#ff4d4f;
 .ui-button {
   border-radius: 2px;
   text-align: center;
@@ -37,25 +38,44 @@ $active_color:#096dd9;
     &:after{
       box-shadow: 0 0 0 5px rgba(9, 109, 217,.1);
     }
-
+    &.danger{
+      &:after{
+        box-shadow: 0 0 0 5px rgba(217, 54, 62,.1);
+      }
+    }
   }
   &.primary {
     background-color: $normal_color;
     color: $font_color;
     outline: 1px solid $normal_color;
-    &:active{
+
+    &:active {
       outline: 1px solid $active_color;
       background-color: $active_color !important;
     }
+
     &:hover {
       outline: 1px solid $normal_color;
       background-color: lighten($normal_color, 10);
     }
+
     &.disabled {
       background-color: $font_color;
       color: $disable_color;
       outline: 1px solid $disable_color;
-      &:hover {
+    }
+    &.danger{
+      background-color: $danger_color;
+      outline: 1px solid $danger_color;
+      color: white;
+      &:active{
+        outline: 1px solid $danger_color;
+        background-color: $danger_color !important;
+      }
+      &:hover{
+        outline: 1px solid $danger_color;
+        color: white;
+        background-color: lighten($danger_color, 10);
       }
     }
   }
@@ -75,6 +95,16 @@ $active_color:#096dd9;
       background-color: $font_color;
       color: $disable_color;
     }
+    &.danger{
+      outline: 1px solid $danger_color;
+      color: $danger_color;
+      &:active{
+        outline: 1px solid $danger_color;
+      }
+      &:hover{
+        outline: 1px solid $danger_color;
+      }
+    }
   }
   &.text {
     background-color: $white;
@@ -93,6 +123,9 @@ $active_color:#096dd9;
       outline: 1px solid $disable_color;
       &:hover {
       }
+    }
+    &.danger{
+      color: $danger_color;
     }
 
   }
@@ -115,6 +148,16 @@ $active_color:#096dd9;
       &:hover {
       }
     }
+    &.danger{
+      outline: 1px dashed $danger_color;
+      color: $danger_color;
+      &:active{
+        outline: 1px dashed $danger_color;
+      }
+      &:hover{
+        outline: 1px dashed $danger_color;
+      }
+    }
   }
   &.link {
     background-color: inherit;
@@ -126,6 +169,9 @@ $active_color:#096dd9;
     }
     &.disabled {
       color: $disable_color;
+    }
+    &.danger{
+      color: $danger_color;
     }
   }
   & > .ui-button-icon {
@@ -140,11 +186,11 @@ $active_color:#096dd9;
   }
   &.normal {
     padding: 4px 15px;
-    font-size: 16px;
+    font-size: 14px;
   }
   &.small {
     padding: 2px 8px;
-    font-size: 14px;
+    font-size: 12px;
   }
   &.loading {
     padding: 6px 10px;
@@ -161,16 +207,21 @@ $active_color:#096dd9;
   &.disabled {
     cursor: not-allowed;
     color: #00000040 !important;
-    border-color: #d9d9d9;
+    border-color: #d9d9d9 !important;
     background: #f5f5f5;
     text-shadow: none;
     box-shadow: none;
+    outline: 1px solid #d9d9d9;
     &:active{
       color: #00000040 !important;
-      border-color: #d9d9d9;
+      outline: 1px solid #d9d9d9;
       background: #f5f5f5 !important;
       text-shadow: none;
       box-shadow: none;
+    }
+    &:hover{
+      color: #00000040 !important;
+      outline: 1px solid #d9d9d9;
     }
     &:after{
       display: none;

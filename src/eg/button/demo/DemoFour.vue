@@ -18,5 +18,6 @@ import { Button } from '@/lib'
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
+  align-items: center;
 }
 </style>

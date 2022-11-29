@@ -4,11 +4,11 @@
 
 <template>
   <div class="wrap">
-    <Button type="primary">toggle</Button>
-    <Button type="text">toggle</Button>
-    <Button type="link">toggle</Button>
-    <Button type="dashed">toggle</Button>
-    <Button type="default">toggle</Button>
+    <Button type="primary" danger>toggle</Button>
+    <Button type="text" danger>toggle</Button>
+    <Button type="link" danger>toggle</Button>
+    <Button type="dashed" danger>toggle</Button>
+    <Button type="default" danger>toggle</Button>
   </div>
 </template>
 

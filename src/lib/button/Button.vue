@@ -1,7 +1,7 @@
 <template>
   <button
     class="ui-button"
-    :class="{ radius, disabled, [size]: true, [type]: true, loading }"
+    :class="{ radius, disabled, danger, [size]: true, [type]: true, loading }"
     @click="onClick"
     ref="buttonRef"
   >
@@ -23,15 +23,17 @@ type Props = {
   size?: 'big' | 'normal' | 'small'
   type?: 'primary' | 'text' | 'link' | 'dashed' | 'default'
   loading?: boolean
+  danger: boolean
 }
 const props = withDefaults(defineProps<Props>(), {
   radius: false,
   disabled: false,
   size: 'normal',
   type: 'primary',
-  loading: false
+  loading: false,
+  danger: false
 })
-const { radius, disabled, size, type, loading } = toRefs(props)
+const { radius, disabled, size, type, loading, danger } = toRefs(props)
 
 const buttonRef = ref<HTMLElement | null>(null)
 const onClick = (e: Event) => {

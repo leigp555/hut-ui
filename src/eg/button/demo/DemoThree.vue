@@ -4,6 +4,7 @@
 <template>
   <div class="wrap">
     <Button loading>toggle</Button>
+    <Button loading radius></Button>
   </div>
 </template>
 
