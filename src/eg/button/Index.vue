@@ -14,6 +14,7 @@
       <AnchorLink href="#button-demo4" title="大小可选" style="margin-left: 8px" />
       <AnchorLink href="#button-demo5" title="禁用按钮" style="margin-left: 8px" />
       <AnchorLink href="#button-demo6" title="支持icon" style="margin-left: 8px" />
+      <AnchorLink href="#button-demo7" title="危险按钮" style="margin-left: 8px" />
       <AnchorLink href="#ex-button-api" title="接口" />
     </Anchor>
 

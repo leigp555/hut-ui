@@ -72,6 +72,18 @@
         </div>
       </section>
     </div>
+    <!--    案例二-->
+    <div class="demo-wrap-item" id="button-demo7">
+      <section class="item-display-wrap">
+        <Divider leftDistance="40px" position="normal">{{ html7.title }}</Divider>
+        <div class="item-display">
+          <DemoSeven />
+        </div>
+        <div class="sourceCode-display">
+          <Preview :html="html7.html" />
+        </div>
+      </section>
+    </div>
   </div>
 </template>
 
@@ -83,6 +95,7 @@ import DemoThree from './DemoThree.vue'
 import DemoFour from './DemoFour.vue'
 import DemoFive from './DemoFive.vue'
 import DemoSix from './DemoSix.vue'
+import DemoSeven from './DemoSeven.vue'
 import Preview from '@/components/Preview.vue'
 import Divider from '@/lib/divider/Divider.vue'
 
@@ -103,6 +116,9 @@ const html5 = computed<{ html: string; title: string }>(() => {
 })
 const html6 = computed<{ html: string; title: string }>(() => {
   return { html: DemoSix.__sourceCode, title: DemoSix.__sourceTitle }
+})
+const html7 = computed<{ html: string; title: string }>(() => {
+  return { html: DemoSeven.__sourceCode, title: DemoSeven.__sourceTitle }
 })
 </script>
 
