@@ -47,33 +47,33 @@ $danger_color:#ff4d4f;
   &.primary {
     background-color: $normal_color;
     color: $font_color;
-    outline: 1px solid $normal_color;
+    border: 1px solid $normal_color;
 
     &:active {
-      outline: 1px solid $active_color;
+      border: 1px solid $active_color;
       background-color: $active_color !important;
     }
 
     &:hover {
-      outline: 1px solid $normal_color;
+      border: 1px solid $normal_color;
       background-color: lighten($normal_color, 10);
     }
 
     &.disabled {
       background-color: $font_color;
       color: $disable_color;
-      outline: 1px solid $disable_color;
+      border: 1px solid $disable_color;
     }
     &.danger{
       background-color: $danger_color;
-      outline: 1px solid $danger_color;
+      border: 1px solid $danger_color;
       color: white;
       &:active{
-        outline: 1px solid $danger_color;
+        border: 1px solid $danger_color;
         background-color: $danger_color !important;
       }
       &:hover{
-        outline: 1px solid $danger_color;
+        border: 1px solid $danger_color;
         color: white;
         background-color: lighten($danger_color, 10);
       }
@@ -82,13 +82,13 @@ $danger_color:#ff4d4f;
   &.default {
     background-color: $white;
     color: $normal_color;
-    outline: 1px solid $normal_color;
+    border: 1px solid $normal_color;
     &:hover {
-      outline: 1px solid $normal_color;
+      border: 1px solid $normal_color;
       color: $normal_color;
     }
     &:active{
-      outline: 1px solid $active_color;
+      border: 1px solid $active_color;
       color: $active_color ;
     }
     &.disabled {
@@ -96,13 +96,13 @@ $danger_color:#ff4d4f;
       color: $disable_color;
     }
     &.danger{
-      outline: 1px solid $danger_color;
+      border: 1px solid $danger_color;
       color: $danger_color;
       &:active{
-        outline: 1px solid $danger_color;
+        border: 1px solid $danger_color;
       }
       &:hover{
-        outline: 1px solid $danger_color;
+        border: 1px solid $danger_color;
       }
     }
   }
@@ -110,7 +110,7 @@ $danger_color:#ff4d4f;
     background-color: $white;
     color: $default_font_color;
     box-shadow: none;
-    outline: none;
+    border: none;
     &:after{
       display: none;
     }
@@ -120,7 +120,7 @@ $danger_color:#ff4d4f;
     &.disabled {
       background-color: $font_color;
       color: $disable_color;
-      outline: 1px solid $disable_color;
+      border: 1px solid $disable_color;
       &:hover {
       }
     }
@@ -132,30 +132,30 @@ $danger_color:#ff4d4f;
   &.dashed {
     background-color: $white;
     color: $default_font_color;
-    outline: 1px dashed $disable_color;
+    border: 1px dashed $disable_color;
     &:hover {
       color: $normal_color;
-      outline: 1px dashed $normal_color;
+      border: 1px dashed $normal_color;
     }
     &:active{
-      outline: 1px dashed $active_color;
+      border: 1px dashed $active_color;
       color: $active_color ;
     }
     &.disabled {
       background-color: $font_color;
       color: $disable_color;
-      outline: 1px solid $disable_color;
+      border: 1px solid $disable_color;
       &:hover {
       }
     }
     &.danger{
-      outline: 1px dashed $danger_color;
+      border: 1px dashed $danger_color;
       color: $danger_color;
       &:active{
-        outline: 1px dashed $danger_color;
+        border: 1px dashed $danger_color;
       }
       &:hover{
-        outline: 1px dashed $danger_color;
+        border: 1px dashed $danger_color;
       }
     }
   }
@@ -163,7 +163,7 @@ $danger_color:#ff4d4f;
     background-color: inherit;
     color: $normal_color;
     box-shadow: none;
-    outline: none;
+    border: none;
     &:after{
       display: none;
     }
@@ -207,21 +207,20 @@ $danger_color:#ff4d4f;
   &.disabled {
     cursor: not-allowed;
     color: #00000040 !important;
-    border-color: #d9d9d9 !important;
     background: #f5f5f5;
     text-shadow: none;
     box-shadow: none;
-    outline: 1px solid #d9d9d9;
+    border: 1px solid #d9d9d9;
     &:active{
       color: #00000040 !important;
-      outline: 1px solid #d9d9d9;
+      border: 1px solid #d9d9d9;
       background: #f5f5f5 !important;
       text-shadow: none;
       box-shadow: none;
     }
     &:hover{
       color: #00000040 !important;
-      outline: 1px solid #d9d9d9;
+      border: 1px solid #d9d9d9;
     }
     &:after{
       display: none;

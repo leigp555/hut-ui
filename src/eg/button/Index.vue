@@ -65,10 +65,10 @@ const wrap = ref<HTMLElement | null>(null)
   scroll-behavior: smooth;
   padding: 0 170px 80px 32px;
   @media (max-width: 1000px) {
-    padding: 0 120px 80px 10px;
+    padding: 0 120px 100px 10px;
   }
   @media (max-width: 600px) {
-    padding: 0 10px 80px 10px;
+    padding: 0 10px 100px 10px;
   }
   p {
     line-height: 2em;
