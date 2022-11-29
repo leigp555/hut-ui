@@ -1,70 +1,34 @@
 <template>
-  <div class="api-intro-wrap">
-    <section>
-      <Title :level="5">属性</Title>
-      <Table
-        :headSource="titleData"
-        :bodySource="dataBody"
-        style-mode="auto"
-        custom-class="table-display"
-      >
-        <template #tableHead="item">
-          <span>{{ item.dataValue }}</span>
-        </template>
-        <template #tableBody="item">
-          <span v-if="item.keyValue === '类型'" style="color: #c41d7f">{{
-            item.dataValue
-          }}</span>
-          <span
-            v-else-if="item.keyValue === '属性'"
-            style="color: #595959; font-weight: 600; white-space: nowrap"
-            >{{ item.dataValue }}</span
-          >
-          <span
-            v-else-if="item.keyValue === '默认值'"
-            style="
-              padding: 0.2em 0.4em;
-              background-color: #f2f4f5;
-              border-radius: 3px;
-              border: 1px solid #f0f0f0;
-            "
-            >{{ item.dataValue }}</span
-          >
-          <span v-else>{{ item.dataValue }}</span>
-        </template>
-      </Table>
-    </section>
-    <section>
-      <Title :level="5">事件</Title>
-      <Table
-        :headSource="titleData2"
-        :bodySource="dataBody2"
-        style-mode="auto"
-        custom-class="table-display"
-      >
-        <template #tableHead="item">
-          <span>{{ item.dataValue }}</span>
-        </template>
-        <template #tableBody="item">
-          <span v-if="item.keyValue === '回调参数'" style="color: #c41d7f">{{
-            item.dataValue
-          }}</span>
-          <span
-            v-else-if="item.keyValue === '事件名称'"
-            style="color: #595959; font-weight: 600; white-space: nowrap"
-            >{{ item.dataValue }}</span
-          >
-          <span v-else>{{ item.dataValue }}</span>
-        </template>
-      </Table>
-    </section>
-  </div>
+  <ApiIntro
+    :attr-title="attrTitle"
+    :attr-content="attrContent"
+    :event-title="eventTitle"
+    :event-content="eventContent"
+  />
 </template>
 
 <script lang="ts" setup>
-import { Table, Title } from '@/lib'
+import ApiIntro from '@/components/ApiIntro.vue'
 
-const dataBody = [
+const attrTitle = [
+  {
+    label: '属性',
+    key: '属性'
+  },
+  {
+    label: '说明',
+    key: '说明'
+  },
+  {
+    label: '类型',
+    key: '类型'
+  },
+  {
+    label: '默认值',
+    key: '默认值'
+  }
+]
+const attrContent = [
   {
     rowIndex: 1,
     属性: 'radius',
@@ -108,26 +72,8 @@ const dataBody = [
     默认值: 'false'
   }
 ]
-const titleData = [
-  {
-    label: '属性',
-    key: '属性'
-  },
-  {
-    label: '说明',
-    key: '说明'
-  },
-  {
-    label: '类型',
-    key: '类型'
-  },
-  {
-    label: '默认值',
-    key: '默认值'
-  }
-]
 
-const titleData2 = [
+const eventTitle = [
   {
     label: '事件名称',
     key: '事件名称'
@@ -141,7 +87,7 @@ const titleData2 = [
     key: '回调参数'
   }
 ]
-const dataBody2 = [
+const eventContent = [
   {
     rowIndex: 1,
     事件名称: 'click',
@@ -151,19 +97,4 @@ const dataBody2 = [
 ]
 </script>
 
-<style lang="scss">
-.api-intro-wrap {
-  display: flex;
-  flex-direction: column;
-  gap: 50px;
-  .table-display {
-    border: 1px solid #f0f0f0;
-    border-bottom: none;
-    border-radius: 2px;
-    font-size: 13px;
-    td {
-      text-align: center;
-    }
-  }
-}
-</style>
+<style lang="scss"></style>
