@@ -1,22 +1,24 @@
 <template>
   <div class="ui-template-wrap scroll-container" ref="wrap">
     <!--    导航部分-->
-    <Anchor
-      customClass="customClass"
-      style="top: 60px; right: 16px"
-      :scroll-container="() => wrap"
-    >
-      <AnchorLink href="#ex-button-title" title="简介" />
-      <AnchorLink href="#ex-button-demo" title="案例" />
-      <AnchorLink href="#button-demo1" title="按钮类型" style="margin-left: 8px" />
-      <AnchorLink href="#button-demo2" title="圆形按钮" style="margin-left: 8px" />
-      <AnchorLink href="#button-demo3" title="加载中状态" style="margin-left: 8px" />
-      <AnchorLink href="#button-demo4" title="大小可选" style="margin-left: 8px" />
-      <AnchorLink href="#button-demo5" title="禁用按钮" style="margin-left: 8px" />
-      <AnchorLink href="#button-demo6" title="支持icon" style="margin-left: 8px" />
-      <AnchorLink href="#button-demo7" title="危险按钮" style="margin-left: 8px" />
-      <AnchorLink href="#ex-button-api" title="接口" />
-    </Anchor>
+    <section class="nav">
+      <Anchor
+        customClass="customClass"
+        style="top: 60px; right: 16px"
+        :scroll-container="() => wrap"
+      >
+        <AnchorLink href="#ex-button-title" title="简介" />
+        <AnchorLink href="#ex-button-demo" title="案例" />
+        <AnchorLink href="#button-demo1" title="按钮类型" style="margin-left: 8px" />
+        <AnchorLink href="#button-demo2" title="圆形按钮" style="margin-left: 8px" />
+        <AnchorLink href="#button-demo3" title="加载中状态" style="margin-left: 8px" />
+        <AnchorLink href="#button-demo4" title="大小可选" style="margin-left: 8px" />
+        <AnchorLink href="#button-demo5" title="禁用按钮" style="margin-left: 8px" />
+        <AnchorLink href="#button-demo6" title="支持icon" style="margin-left: 8px" />
+        <AnchorLink href="#button-demo7" title="危险按钮" style="margin-left: 8px" />
+        <AnchorLink href="#ex-button-api" title="接口" />
+      </Anchor>
+    </section>
 
     <!--    介绍部分-->
     <section class="title">
@@ -71,8 +73,13 @@ const wrap = ref<HTMLElement | null>(null)
   p {
     line-height: 2em;
   }
-  > .customClass {
-    font-size: 12px;
+  > .nav {
+    @media (max-width: 600px) {
+      display: none;
+    }
+    > .customClass {
+      font-size: 12px;
+    }
   }
   > .title {
     margin-top: 50px;
