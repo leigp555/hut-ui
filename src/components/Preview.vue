@@ -47,11 +47,34 @@ const getCode = computed(() => {
     : { vNode: ShowCode, key: 'show' }
 })
 
+const height = ref<number>(0)
+
+function openAction() {
+  height.value += 40 // 修改图像的位置
+  codeWrapRef.value!.style.height = `${height.value}px`
+  if (height.value < codeRef.value!.clientHeight + 14) {
+    // 在动画没有结束前，递归渲染
+    window.requestAnimationFrame(openAction)
+  }
+}
+function closeAction() {
+  height.value -= 40 // 修改图像的位置
+  codeWrapRef.value!.style.height = `${height.value}px`
+  if (height.value >= 0) {
+    // 在动画没有结束前，递归渲染
+    window.requestAnimationFrame(closeAction)
+  }
+}
+
 const onClick = () => {
   show.value = !show.value
   if (show.value && codeRef.value && codeWrapRef.value) {
-    codeWrapRef.value.style.height = `${codeRef.value.clientHeight + 14}px`
-  } else if (codeWrapRef.value) codeWrapRef.value.style.height = `${0}px`
+    // codeWrapRef.value.style.height = `${codeRef.value.clientHeight + 14}px`
+    window.requestAnimationFrame(openAction)
+  } else if (codeWrapRef.value) {
+    // codeWrapRef.value.style.height = `${0}px`
+    window.requestAnimationFrame(closeAction)
+  }
 }
 const copy = async () => {
   try {
@@ -77,7 +100,7 @@ const copy = async () => {
   > .html-show {
     height: 0;
     overflow: hidden;
-    transition: height 300ms;
+    //transition: height 300ms;
 
     > .language-html {
       border-radius: 2px;

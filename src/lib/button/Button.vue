@@ -23,7 +23,7 @@ type Props = {
   size?: 'big' | 'normal' | 'small'
   type?: 'primary' | 'text' | 'link' | 'dashed' | 'default'
   loading?: boolean
-  danger: boolean
+  danger?: boolean
 }
 const props = withDefaults(defineProps<Props>(), {
   radius: false,
@@ -40,10 +40,12 @@ const onClick = (e: Event) => {
   if (disabled.value) {
     e.stopPropagation()
     e.stopPropagation()
-  } else {
+    return
+  }
+  if (buttonRef.value) {
     buttonRef.value!.classList.add('ui-button-active')
     const id = setTimeout(() => {
-      buttonRef.value!.classList.remove('ui-button-active')
+      buttonRef.value && buttonRef.value.classList.remove('ui-button-active')
       window.clearTimeout(id)
     }, 300)
   }
