@@ -6,6 +6,7 @@ const Components = () => import('@/views/Components.vue')
 const NotFound = () => import('@/views/NotFound.vue')
 const Button = () => import('@/eg/button/Index.vue')
 const Typography = () => import('@/eg/typography/Index.vue')
+const Palette = () => import('@/eg/palette/Index.vue')
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -34,6 +35,11 @@ const routes: Array<RouteRecordRaw> = [
         path: 'typography',
         name: 'typography',
         component: Typography
+      },
+      {
+        path: 'palette',
+        name: 'palette',
+        component: Palette
       }
     ]
   },
