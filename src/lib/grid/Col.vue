@@ -30,6 +30,10 @@ const style = computed(() => {
 .ui-grid-col {
   white-space: nowrap;
   display: flex;
+  justify-content: center;
+  align-items: center;
   flex-wrap: nowrap;
+  min-height: 30px;
+  height: 100%;
 }
 </style>

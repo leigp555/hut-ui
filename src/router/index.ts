@@ -8,6 +8,7 @@ const Button = () => import('@/eg/button/Index.vue')
 const Typography = () => import('@/eg/typography/Index.vue')
 const Palette = () => import('@/eg/palette/Index.vue')
 const Divider = () => import('@/eg/divider/Index.vue')
+const Grid = () => import('@/eg/grid/Index.vue')
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -46,6 +47,11 @@ const routes: Array<RouteRecordRaw> = [
         path: 'divider',
         name: 'divider',
         component: Divider
+      },
+      {
+        path: 'grid',
+        name: 'grid',
+        component: Grid
       }
     ]
   },
