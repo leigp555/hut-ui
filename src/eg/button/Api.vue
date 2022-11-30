@@ -96,5 +96,3 @@ const eventContent = [
   }
 ]
 </script>
-
-<style lang="scss"></style>

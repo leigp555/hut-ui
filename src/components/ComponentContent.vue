@@ -19,7 +19,7 @@
 
     <!--    介绍部分-->
     <section class="title">
-      <Title :level="2" id="ex-button-title">{{ title }}</Title>
+      <Title :level="2" :id="`ex-${componentName}-title`">{{ title }}</Title>
       <div class="title-description">
         <slot name="intro" />
       </div>
@@ -27,7 +27,7 @@
 
     <!--    示例部分-->
     <section class="example">
-      <Title :level="4" class="demo" id="ex-button-demo">案例</Title>
+      <Title :level="4" class="demo" :id="`ex-${componentName}-demo`">案例</Title>
       <div class="example-wrap">
         <slot name="demo" />
       </div>
@@ -35,7 +35,7 @@
 
     <!--    api介绍部分-->
     <section class="api">
-      <Title :level="4" id="ex-button-api">接口</Title>
+      <Title :level="4" :id="`ex-${componentName}-api`">接口</Title>
       <div class="apiIntro scroll-container">
         <slot name="api" />
       </div>
@@ -51,6 +51,7 @@ withDefaults(
   defineProps<{
     navArr: { id: string; title: string; nested: boolean }[]
     title: string
+    componentName: string
   }>(),
   {}
 )
@@ -63,7 +64,7 @@ const wrap = ref<HTMLElement | null>(null)
   overflow-x: auto;
   max-height: 100%;
   scroll-behavior: smooth;
-  padding: 0 170px 80px 32px;
+  padding: 0 160px 80px 32px;
   @media (max-width: 1000px) {
     padding: 0 120px 100px 10px;
   }

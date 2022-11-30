@@ -1,17 +1,5 @@
 <template>
-  <div class="demo-wrap">
-    <div v-for="item in demoArr" :key="item.id" class="demo-wrap-item" :id="item.id">
-      <section class="item-display-wrap">
-        <Divider leftDistance="40px" position="normal">{{ item.title }}</Divider>
-        <div class="item-display">
-          <Component :is="item.demo" />
-        </div>
-        <div class="sourceCode-display">
-          <Preview :html="item.html" />
-        </div>
-      </section>
-    </div>
-  </div>
+  <DemoDisplay :demo-arr="demoArr" />
 </template>
 
 <script setup lang="ts">
@@ -23,9 +11,8 @@ import DemoFour from './DemoFour.vue'
 import DemoFive from './DemoFive.vue'
 import DemoSix from './DemoSix.vue'
 import DemoSeven from './DemoSeven.vue'
-import Preview from '@/components/Preview.vue'
-import Divider from '@/lib/divider/Divider.vue'
 import { getDemo } from '@/eg/helper'
+import DemoDisplay from '@/components/DemoDisplay.vue'
 
 const demoArr = computed(() => {
   return [DemoOne, DemoTwo, DemoThree, DemoFour, DemoFive, DemoSix, DemoSeven].map(
