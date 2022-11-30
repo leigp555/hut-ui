@@ -5,7 +5,7 @@
         <Component :is="getCode.vNode" :key="getCode.key" @click="onClick" />
       </transition>
       <Button type="link" @click="copy" style="padding: 4px 10px">
-        <SvgIcon name="copy" height="1em" width="1em" fill="#00000073" />
+        <SvgIcon name="copy" height="1.2em" width="1.2em" fill="#00000073" />
       </Button>
     </div>
 

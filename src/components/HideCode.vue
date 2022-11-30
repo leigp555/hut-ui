@@ -1,6 +1,6 @@
 <template>
   <Button type="link" style="padding: 4px 10px">
-    <SvgIcon name="code_hide" height="1em" width="1em" fill="#00000073"
+    <SvgIcon name="code_hide" height="1.2em" width="1.2em" fill="#00000073"
   /></Button>
 </template>
 

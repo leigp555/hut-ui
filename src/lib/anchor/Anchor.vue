@@ -121,7 +121,7 @@ function handle() {
 }
 
 // 绑定监听滚动事件
-const scrollHandle = throttle(handle, 50)
+const scrollHandle = throttle(handle, 20)
 onMounted(() => {
   getElInfo()
   selectItem.value = elInfo.value[0]
