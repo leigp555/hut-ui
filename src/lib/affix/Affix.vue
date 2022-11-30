@@ -14,8 +14,17 @@
 
 <script lang="ts" setup>
 // 此组件的外层元素必须是一个滑动的元素因为要监听他的滑动式事件
-import { withDefaults, defineProps, ref, onMounted, onUnmounted, toRefs } from 'vue'
+import {
+  withDefaults,
+  defineProps,
+  ref,
+  onMounted,
+  onUnmounted,
+  toRefs,
+  watch
+} from 'vue'
 
+const emits = defineEmits(['change'])
 const props = withDefaults(
   defineProps<{
     offsetTop?: number
@@ -32,6 +41,19 @@ const innerRef = ref<HTMLDivElement | null>(null)
 const initHeight = ref<number>(0)
 const shouldFix = ref<boolean>(false)
 
+// 简单的节流函数
+
+function throttle(func: () => void, wait: number) {
+  let startTime = new Date().getTime() as number
+  return () => {
+    const curTime = new Date().getTime() as number
+    if (curTime - startTime >= wait) {
+      func()
+      startTime = curTime
+    }
+  }
+}
+
 const containerScroll = () => {
   const containerTop = containerRef.value!.getBoundingClientRect().top
   if (containerTop < props.offsetTop) {
@@ -40,14 +62,19 @@ const containerScroll = () => {
     shouldFix.value = false
   }
 }
+const handle = throttle(containerScroll, 100)
 onMounted(() => {
-  scrollContainer.value().addEventListener('scroll', containerScroll)
+  scrollContainer.value().addEventListener('scroll', handle)
   // 保留原位置的高度
   initHeight.value = innerRef.value!.getBoundingClientRect().height
   containerRef.value!.style.height = `${initHeight.value}px`
 })
 onUnmounted(() => {
-  scrollContainer.value().removeEventListener('scroll', containerScroll)
+  scrollContainer.value().removeEventListener('scroll', handle)
+})
+
+watch(shouldFix, () => {
+  emits('change', shouldFix.value)
 })
 </script>
 
