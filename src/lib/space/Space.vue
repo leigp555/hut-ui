@@ -4,8 +4,8 @@
     :style="{
       flexDirection: direction,
       gap: realSize,
-      alineItems,
-      justifyContent: justifyContent
+      alignItems,
+      justifyContent
     }"
   >
     <slot />
@@ -19,19 +19,18 @@ const props = withDefaults(
   defineProps<{
     direction?: 'row' | 'column'
     size?: string | number
-    alineItems?: 'start' | 'center' | 'end' | 'baseline'
+    alignItems?: 'start' | 'center' | 'end' | 'baseline'
     justifyContent?: 'start' | 'center' | 'end'
   }>(),
   {
     direction: 'row',
     size: '5px',
-    alineItems: 'center',
+    alignItems: 'start',
     justifyContent: 'start'
   }
 )
 
 const realSize = computed(() => {
-  console.log(props.size)
   if (typeof props.size === 'string') {
     return props.size
   }

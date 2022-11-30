@@ -1,0 +1,30 @@
+<template>
+  <ComponentContent :nav-arr="navArr" title="Space 间距" component-name="space">
+    <template #intro>
+      <Intro />
+    </template>
+    <template #demo>
+      <Demo />
+    </template>
+    <template #api>
+      <Api />
+    </template>
+  </ComponentContent>
+</template>
+
+<script setup lang="ts">
+import { computed, ref } from 'vue'
+import ComponentContent from '@/components/ComponentContent.vue'
+
+import Intro from './Intro.vue'
+import Api from './Api.vue'
+import Demo from './demo/Demo.vue'
+import { generateNav } from '@/eg/helper'
+
+const wrap = ref<HTMLElement | null>(null)
+
+const titleArr = ['基本用法', '自定义间距', '垂直间距', '设置对齐模式']
+const navArr = computed<{ id: string; title: string; nested: boolean }[]>(() => {
+  return generateNav('space', titleArr)
+})
+</script>
