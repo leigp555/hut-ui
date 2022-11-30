@@ -9,6 +9,7 @@ const Typography = () => import('@/eg/typography/Index.vue')
 const Palette = () => import('@/eg/palette/Index.vue')
 const Divider = () => import('@/eg/divider/Index.vue')
 const Grid = () => import('@/eg/grid/Index.vue')
+const Layout = () => import('@/eg/layout/Index.vue')
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -52,6 +53,11 @@ const routes: Array<RouteRecordRaw> = [
         path: 'grid',
         name: 'grid',
         component: Grid
+      },
+      {
+        path: 'layout',
+        name: 'layout',
+        component: Layout
       }
     ]
   },
