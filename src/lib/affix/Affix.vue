@@ -14,17 +14,19 @@
 
 <script lang="ts" setup>
 // 此组件的外层元素必须是一个滑动的元素因为要监听他的滑动式事件
-import { withDefaults, defineProps, ref, onMounted, onUnmounted } from 'vue'
+import { withDefaults, defineProps, ref, onMounted, onUnmounted, toRefs } from 'vue'
 
 const props = withDefaults(
   defineProps<{
     offsetTop?: number
+    scrollContainer: () => HTMLElement
   }>(),
   {
-    offsetTop: 50
+    offsetTop: 50,
+    scrollContainer: () => window
   }
 )
-
+const { scrollContainer } = toRefs(props)
 const containerRef = ref<HTMLDivElement | null>(null)
 const innerRef = ref<HTMLDivElement | null>(null)
 const initHeight = ref<number>(0)
@@ -32,9 +34,6 @@ const shouldFix = ref<boolean>(false)
 
 const containerScroll = () => {
   const containerTop = containerRef.value!.getBoundingClientRect().top
-  // 保留原位置的高度
-  initHeight.value = innerRef.value!.getBoundingClientRect().height
-  containerRef.value!.style.height = `${initHeight.value}px`
   if (containerTop < props.offsetTop) {
     shouldFix.value = true
   } else if (containerTop > props.offsetTop) {
@@ -42,11 +41,13 @@ const containerScroll = () => {
   }
 }
 onMounted(() => {
-  if (containerRef.value!.parentNode)
-    containerRef.value!.parentNode.addEventListener('scroll', containerScroll)
+  scrollContainer.value().addEventListener('scroll', containerScroll)
+  // 保留原位置的高度
+  initHeight.value = innerRef.value!.getBoundingClientRect().height
+  containerRef.value!.style.height = `${initHeight.value}px`
 })
 onUnmounted(() => {
-  window.removeEventListener('scroll', containerScroll)
+  scrollContainer.value().removeEventListener('scroll', containerScroll)
 })
 </script>
 
@@ -59,6 +60,7 @@ onUnmounted(() => {
   }
   > .ui-affix-inner.fixed {
     position: fixed;
+    z-index: 2000;
   }
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div class="ui-template-wrap scroll-container" ref="wrap">
+  <div class="ui-template-wrap scroll-container" ref="wrap" id="display-container-wrap">
     <!--    导航部分-->
     <section class="nav" v-if="navArr[0]">
       <Anchor

@@ -1,4 +1,5 @@
 <template>
+  <!--  修改-->
   <ComponentContent
     :nav-arr="navArr"
     title="Typography 排版"
@@ -27,6 +28,7 @@ import { generateNav } from '@/eg/helper'
 
 const wrap = ref<HTMLElement | null>(null)
 
+// 修改
 const titleArr = ['示例一', '示例二', '标题组件', '文字标记']
 const navArr = computed<{ id: string; title: string; nested: boolean }[]>(() => {
   return generateNav('typography', titleArr)

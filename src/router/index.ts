@@ -11,6 +11,7 @@ const Divider = () => import('@/eg/divider/Index.vue')
 const Grid = () => import('@/eg/grid/Index.vue')
 const Layout = () => import('@/eg/layout/Index.vue')
 const Space = () => import('@/eg/space/Index.vue')
+const Affix = () => import('@/eg/affix/Index.vue')
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -64,6 +65,11 @@ const routes: Array<RouteRecordRaw> = [
         path: 'space',
         name: 'space',
         component: Space
+      },
+      {
+        path: 'affix',
+        name: 'affix',
+        component: Affix
       }
     ]
   },
