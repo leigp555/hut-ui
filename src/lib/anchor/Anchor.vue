@@ -20,8 +20,20 @@ const props = withDefaults(
   }
 )
 const { scrollContainer } = toRefs(props)
-const slots = useSlots().default!()
+let slots: VNode[] = []
 
+const getSlots = () => {
+  let s: VNode[] = []
+  if (useSlots().default) {
+    s = useSlots().default()
+  }
+  if (s.length === 1 && s[0].children) {
+    slots = s[0].children
+    return
+  }
+  slots = s
+}
+getSlots()
 // 选中的节点
 const selectItem = ref<{
   titleVNode?: VNode | null

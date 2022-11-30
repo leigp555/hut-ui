@@ -7,16 +7,13 @@
         style="top: 60px; right: 16px"
         :scroll-container="() => wrap"
       >
-        <AnchorLink href="#ex-button-title" title="简介" />
-        <AnchorLink href="#ex-button-demo" title="案例" />
-        <AnchorLink href="#button-demo-0" title="按钮类型" style="margin-left: 8px" />
-        <AnchorLink href="#button-demo-1" title="圆形按钮" style="margin-left: 8px" />
-        <AnchorLink href="#button-demo-2" title="加载中状态" style="margin-left: 8px" />
-        <AnchorLink href="#button-demo-3" title="大小可选" style="margin-left: 8px" />
-        <AnchorLink href="#button-demo-4" title="禁用按钮" style="margin-left: 8px" />
-        <AnchorLink href="#button-demo-5" title="支持icon" style="margin-left: 8px" />
-        <AnchorLink href="#button-demo-6" title="危险按钮" style="margin-left: 8px" />
-        <AnchorLink href="#ex-button-api" title="接口" />
+        <AnchorLink
+          v-for="item in navArr"
+          :key="item.id"
+          :href="item.id"
+          :title="item.title"
+          :nested="item.nested"
+        />
       </Anchor>
     </section>
 
@@ -47,14 +44,41 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
+import { Anchor, AnchorLink, Title } from '@/lib/index'
+
 import Intro from './Intro.vue'
 import Api from './Api.vue'
-
-import { Anchor, AnchorLink, Title } from '@/lib/index'
 import Demo from './demo/Demo.vue'
 
 const wrap = ref<HTMLElement | null>(null)
+
+const generateNav = (componentName: string, titleArr: string[]) => {
+  const arr: { id: string; title: string; nested: boolean }[] = [
+    { id: `#ex-${componentName}-title`, title: '简介', nested: false },
+    { id: `#ex-${componentName}-demo`, title: '案例', nested: false }
+  ]
+  const demoNavArr = titleArr.map((item, index) => {
+    return { id: `#${componentName}-demo-${index}`, title: `${item}`, nested: true }
+  })
+  return [
+    ...arr,
+    ...demoNavArr,
+    { id: `#ex-${componentName}-api`, title: '接口', nested: false }
+  ]
+}
+const titleArr = [
+  '按钮类型',
+  '圆形按钮',
+  '加载中状态',
+  '大小可选',
+  '禁用按钮',
+  '支持icon',
+  '危险按钮'
+]
+const navArr = computed<{ id: string; title: string; nested: boolean }[]>(() => {
+  return generateNav('button', titleArr)
+})
 </script>
 
 <style lang="scss">
