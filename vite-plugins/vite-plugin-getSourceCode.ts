@@ -35,9 +35,9 @@ export const getSourceCode = (): PluginOption => {
       } catch (e) {
         const regx = /<demo>((.|\n)*?)<\/demo>/
         if (file.match(regx)) {
-          titleCode = file.match(regx)![1]
+          titleCode = file.match(regx)![1].trim()
         }
-        bodyCode = file.replace(regx, '')
+        bodyCode = file.replace(regx, '').trim()
       }
       return `export default Component => {
       Component.__sourceCode = ${JSON.stringify(bodyCode)}
