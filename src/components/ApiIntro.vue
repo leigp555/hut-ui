@@ -1,10 +1,10 @@
 <template>
   <div class="api-intro-wrap">
-    <section v-if="attrContent[0]">
-      <Title :level="5">属性</Title>
+    <section v-for="s in attrContentArr" :key="s.componentName">
+      <Title :level="5">{{ s.componentName }}</Title>
       <Table
         :headSource="attrTitle"
-        :bodySource="attrContent"
+        :bodySource="s.attrContent"
         style-mode="auto"
         custom-class="table-display"
       >
@@ -34,6 +34,7 @@
         </template>
       </Table>
     </section>
+
     <section v-if="eventContent[0]">
       <Title :level="5">事件</Title>
       <Table
@@ -67,15 +68,16 @@ import { Table, Title } from '@/lib'
 
 const props = withDefaults(
   defineProps<{
-    attrTitle: { label: string; key: string }[]
-    attrContent: {
-      rowIndex: number
-      属性: string
-      说明: string
-      类型: string
-      默认值: string
+    attrContentArr: {
+      componentName: string
+      attrContent: {
+        rowIndex: number
+        属性: string
+        说明: string
+        类型: string
+        默认值: string
+      }[]
     }[]
-    eventTitle?: { label: string; key: string }[]
     eventContent?: {
       rowIndex: number
       事件名称: string
@@ -84,12 +86,42 @@ const props = withDefaults(
     }[]
   }>(),
   {
-    attrTitle: () => [],
-    attrContent: () => [],
-    eventContent: () => [],
-    eventTitle: () => []
+    attrContentArr: () => [],
+    eventContent: () => []
   }
 )
+const attrTitle = [
+  {
+    label: '属性',
+    key: '属性'
+  },
+  {
+    label: '说明',
+    key: '说明'
+  },
+  {
+    label: '类型',
+    key: '类型'
+  },
+  {
+    label: '默认值',
+    key: '默认值'
+  }
+]
+const eventTitle = [
+  {
+    label: '事件名称',
+    key: '事件名称'
+  },
+  {
+    label: '说明',
+    key: '说明'
+  },
+  {
+    label: '回调参数',
+    key: '回调参数'
+  }
+]
 </script>
 
 <style lang="scss">

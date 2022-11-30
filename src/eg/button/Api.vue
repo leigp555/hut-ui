@@ -1,33 +1,10 @@
 <template>
-  <ApiIntro
-    :attr-title="attrTitle"
-    :attr-content="attrContent"
-    :event-title="eventTitle"
-    :event-content="eventContent"
-  />
+  <ApiIntro :attr-content-arr="attrContentArr" :event-content="eventContent" />
 </template>
 
 <script lang="ts" setup>
 import ApiIntro from '@/components/ApiIntro.vue'
 
-const attrTitle = [
-  {
-    label: '属性',
-    key: '属性'
-  },
-  {
-    label: '说明',
-    key: '说明'
-  },
-  {
-    label: '类型',
-    key: '类型'
-  },
-  {
-    label: '默认值',
-    key: '默认值'
-  }
-]
 const attrContent = [
   {
     rowIndex: 1,
@@ -73,20 +50,6 @@ const attrContent = [
   }
 ]
 
-const eventTitle = [
-  {
-    label: '事件名称',
-    key: '事件名称'
-  },
-  {
-    label: '说明',
-    key: '说明'
-  },
-  {
-    label: '回调参数',
-    key: '回调参数'
-  }
-]
 const eventContent = [
   {
     rowIndex: 1,
@@ -95,4 +58,6 @@ const eventContent = [
     回调参数: '(event) => void'
   }
 ]
+
+const attrContentArr = [{ componentName: 'Button', attrContent }]
 </script>

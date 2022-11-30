@@ -1,7 +1,7 @@
 // 代码高亮
 import 'prismjs'
 import 'prismjs/themes/prism-tomorrow.css'
-import { VNode } from 'vue'
+import { DefineComponent, VNode } from 'vue'
 
 const Prism = (window as any).Prism
 
@@ -21,11 +21,7 @@ export const getSourceCode = (sourceCode: string) => {
   return ''
 }
 // 获取demo-display列表
-export const getDemo = (
-  demo: VNode & { __sourceCode: string; __sourceTitle: string },
-  prefix: string,
-  suffix: number
-) => {
+export const getDemo = (demo: any, prefix: string, suffix: number) => {
   return {
     html: demo.__sourceCode,
     title: demo.__sourceTitle,

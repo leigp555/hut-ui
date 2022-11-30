@@ -35,6 +35,7 @@ withDefaults(
 .ui-typography-text {
   display: inline-flex;
   gap: 5px;
+  line-height: 1.4em;
   &.ui-keyboard {
     line-height: 1em;
     padding: 2px 5px;
@@ -56,9 +57,10 @@ withDefaults(
   }
   &.ui-code {
     display: inline-block;
-    padding: 0.1em 0.4em;
+    padding: 0.1em 0.2em;
     font-size: 14px;
     margin: 0 0.2em;
+    line-height: 1.4em;
     border-radius: 2px;
     border: 1px solid rgba(100, 100, 100, 0.2);
     color: white;

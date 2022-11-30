@@ -5,9 +5,12 @@
 <script setup lang="ts">
 import { withDefaults, defineProps } from 'vue'
 
-withDefaults(defineProps<{ level?: 1 | 2 | 3 | 4 | 5 | 6 }>(), {
-  level: 4
-})
+withDefaults(
+  defineProps<{ level?: 1 | 2 | 3 | 4 | 5 | 6 | '1' | '2' | '3' | '4' | '5' | '6' }>(),
+  {
+    level: 4
+  }
+)
 </script>
 
 <style lang="scss">

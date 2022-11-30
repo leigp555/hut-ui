@@ -44,7 +44,8 @@
     </Paragraph>
 
     <Paragraph> Press <Text keyboard>Esc</Text> to exit... </Paragraph>
-
+  </Typography>
+  <Typography>
     <Title>Introduction</Title>
     <Paragraph>
       Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus, animi aut

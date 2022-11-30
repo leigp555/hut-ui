@@ -1,11 +1,18 @@
 <template>
-  <div class="home">Home组件</div>
+  <div class="home">
+    <Head />
+    <TypographyEg />
+  </div>
 </template>
 
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import TypographyEg from '@/eg/TypographyEg.vue'
+import Head from '@/views/Head.vue'
+</script>
 
 <style scoped lang="scss">
 .home {
-  color: red;
+  height: 100%;
+  overflow: auto;
 }
 </style>

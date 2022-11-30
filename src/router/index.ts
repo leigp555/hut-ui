@@ -5,6 +5,7 @@ const Guide = () => import('@/views/Guide.vue')
 const Components = () => import('@/views/Components.vue')
 const NotFound = () => import('@/views/NotFound.vue')
 const Button = () => import('@/eg/button/Index.vue')
+const Typography = () => import('@/eg/typography/Index.vue')
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -26,8 +27,13 @@ const routes: Array<RouteRecordRaw> = [
       {
         path: '',
         alias: 'button',
-        name: 'ButtonEg',
+        name: 'button',
         component: Button
+      },
+      {
+        path: 'typography',
+        name: 'typography',
+        component: Typography
       }
     ]
   },
