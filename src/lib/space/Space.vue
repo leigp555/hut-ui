@@ -41,5 +41,6 @@ const realSize = computed(() => {
 <style lang="scss">
 .ui-space-wrap {
   display: flex;
+  flex-wrap: wrap;
 }
 </style>

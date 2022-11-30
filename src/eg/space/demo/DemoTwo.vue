@@ -1,7 +1,6 @@
 <demo>
 自定义间距
 </demo>
-
 <template>
   <div>
     <Slider v-model:value="size" />

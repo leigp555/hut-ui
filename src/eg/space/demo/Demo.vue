@@ -11,6 +11,7 @@ import DemoTwo from './DemoTwo.vue'
 import DemoThree from './DemoThree.vue'
 import DemoFour from './DemoFour.vue'
 
+console.log(DemoTwo)
 const demoArr = computed(() => {
   return [DemoOne, DemoTwo, DemoThree, DemoFour].map((item, index) => {
     return getDemo(item, 'space', index)

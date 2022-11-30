@@ -14,10 +14,10 @@ export const getSourceCode = (): PluginOption => {
         return code
       }
       let filePath: string = ''
+      filePath = id.match(/src\/.*\.vue/)![0]
+      const fileAbsolutePath = path.resolve(__dirname, '../', filePath)
+      const file = fs.readFileSync(fileAbsolutePath).toString()
       try {
-        filePath = id.match(/src\/.*\.vue/)![0]
-        const fileAbsolutePath = path.resolve(__dirname, '../', filePath)
-        const file = fs.readFileSync(fileAbsolutePath).toString()
         const parsed = baseParse(file).children.find(
           (n: TemplateChildNode | { tag: string }) => {
             return !!('tag' in n && n.tag)
@@ -33,7 +33,11 @@ export const getSourceCode = (): PluginOption => {
             .replace(/@\/lib/, 'ant')
         }
       } catch (e) {
-        filePath = ''
+        const regx = /<demo>((.|\n)*?)<\/demo>/
+        if (file.match(regx)) {
+          titleCode = file.match(regx)![1]
+        }
+        bodyCode = file.replace(regx, '')
       }
       return `export default Component => {
       Component.__sourceCode = ${JSON.stringify(bodyCode)}
