@@ -2,7 +2,7 @@
   <div class="demo-wrap">
     <div v-for="item in demoArr" :key="item.id" class="demo-wrap-item" :id="item.id">
       <section class="item-display-wrap">
-        <Divider leftDistance="40px" position="normal">{{ item.title }}</Divider>
+        <Divider leftDistance="40px">{{ item.title }}</Divider>
         <div class="item-display">
           <Component :is="item.demo" />
         </div>

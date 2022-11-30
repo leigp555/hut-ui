@@ -3,7 +3,7 @@
     <div
       class="left"
       :class="{ positionLeft: position === 'left' }"
-      :style="{ width: leftDistance }"
+      :style="{ width: position ? '8%' : leftDistance }"
     ></div>
     <div class="inner">
       <slot />
@@ -11,7 +11,7 @@
     <div
       class="right"
       :class="{ positionRight: position === 'right' }"
-      :style="{ width: rightDistance }"
+      :style="{ width: position ? '8%' : rightDistance }"
     ></div>
   </div>
 </template>
@@ -19,13 +19,13 @@
 <script lang="ts" setup>
 import { withDefaults, defineProps } from 'vue'
 
-withDefaults(
+const props = withDefaults(
   defineProps<{
     position?: 'left' | 'right' | 'center' | 'normal'
     leftDistance?: string
     rightDistance?: string
   }>(),
-  { position: 'normal', leftDistance: '100%', rightDistance: '100%' }
+  { leftDistance: '100%', rightDistance: '100%' }
 )
 </script>
 
@@ -36,6 +36,7 @@ withDefaults(
   align-items: center;
   .left {
     border-top: 1px solid #f0f0f0;
+    flex-grow: 10;
     &.positionLeft {
       flex-grow: 0;
       width: 10%;
@@ -43,6 +44,7 @@ withDefaults(
   }
   .right {
     border-top: 1px solid #f0f0f0;
+    flex-grow: 10;
     &.positionRight {
       flex-grow: 0;
       width: 10%;

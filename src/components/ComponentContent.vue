@@ -1,7 +1,7 @@
 <template>
   <div class="ui-template-wrap scroll-container" ref="wrap">
     <!--    导航部分-->
-    <section class="nav">
+    <section class="nav" v-if="navArr[0]">
       <Anchor
         customClass="customClass"
         style="top: 60px; right: 16px"
@@ -34,7 +34,7 @@
     </section>
 
     <!--    api介绍部分-->
-    <section class="api">
+    <section class="api" v-if="$slots.api">
       <Title :level="4" :id="`ex-${componentName}-api`">接口</Title>
       <div class="apiIntro scroll-container">
         <slot name="api" />
@@ -49,11 +49,11 @@ import { Anchor, AnchorLink, Title } from '@/lib/index'
 
 withDefaults(
   defineProps<{
-    navArr: { id: string; title: string; nested: boolean }[]
+    navArr?: { id: string; title: string; nested: boolean }[]
     title: string
     componentName: string
   }>(),
-  {}
+  { navArr: () => [] }
 )
 const wrap = ref<HTMLElement | null>(null)
 </script>
@@ -64,7 +64,7 @@ const wrap = ref<HTMLElement | null>(null)
   overflow-x: auto;
   max-height: 100%;
   scroll-behavior: smooth;
-  padding: 0 160px 80px 32px;
+  padding: 0 150px 80px 32px;
   @media (max-width: 1000px) {
     padding: 0 120px 100px 10px;
   }

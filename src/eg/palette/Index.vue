@@ -1,5 +1,5 @@
 <template>
-  <ComponentContent title="Palette 排版" component-name="palette">
+  <ComponentContent title="Palette 调色板" component-name="palette">
     <template #intro>
       <Intro />
     </template>
