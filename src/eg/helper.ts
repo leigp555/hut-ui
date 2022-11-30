@@ -33,3 +33,18 @@ export const getDemo = (
     demo
   }
 }
+// 获取导航内容
+export const generateNav = (componentName: string, titleArr: string[]) => {
+  const arr: { id: string; title: string; nested: boolean }[] = [
+    { id: `#ex-${componentName}-title`, title: '简介', nested: false },
+    { id: `#ex-${componentName}-demo`, title: '案例', nested: false }
+  ]
+  const demoNavArr = titleArr.map((item, index) => {
+    return { id: `#${componentName}-demo-${index}`, title: `${item}`, nested: true }
+  })
+  return [
+    ...arr,
+    ...demoNavArr,
+    { id: `#ex-${componentName}-api`, title: '接口', nested: false }
+  ]
+}
