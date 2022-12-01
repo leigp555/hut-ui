@@ -1,0 +1,28 @@
+<template>
+  <ComponentContent :nav-arr="navArr" title="Affix 固钉" component-name="affix">
+    <template #intro>
+      <Intro />
+    </template>
+    <template #demo>
+      <Demo />
+    </template>
+    <template #api>
+      <Api />
+    </template>
+  </ComponentContent>
+</template>
+
+<script setup lang="ts">
+import { computed } from 'vue'
+import ComponentContent from '@/components/ComponentContent.vue'
+
+import Intro from './Intro.vue'
+import Api from './Api.vue'
+import Demo from './demo/Demo.vue'
+import { generateNav } from '@/eg/helper'
+
+const titleArr = ['基本用法', '状态改变的回调', '设置滚动容器']
+const navArr = computed<{ id: string; title: string; nested: boolean }[]>(() => {
+  return generateNav('affix', titleArr)
+})
+</script>
