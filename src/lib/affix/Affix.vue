@@ -16,7 +16,8 @@ import {
   onMounted,
   onUnmounted,
   toRefs,
-  watch
+  watch,
+  onBeforeUnmount
 } from 'vue'
 
 const emits = defineEmits(['change'])
@@ -60,18 +61,18 @@ const containerScroll = () => {
 }
 const handle = throttle(containerScroll, 10)
 onMounted(() => {
-  scrollContainer.value().addEventListener('scroll', handle)
   if (scrollContainer.value() === 'window') {
     realScrollEl.value = document.documentElement
   } else {
     realScrollEl.value = scrollContainer.value()
   }
+  realScrollEl.value.addEventListener('scroll', handle)
   // 保留原位置的高度
   initHeight.value = innerRef.value!.getBoundingClientRect().height
   containerRef.value!.style.height = `${initHeight.value}px`
 })
-onUnmounted(() => {
-  scrollContainer.value().removeEventListener('scroll', handle)
+onBeforeUnmount(() => {
+  realScrollEl.value.removeEventListener('scroll', handle)
 })
 
 watch(shouldFix, () => {
