@@ -25,7 +25,7 @@ import { generateNav } from '@/eg/helper'
 const wrap = ref<HTMLElement | null>(null)
 
 // 修改
-const titleArr = ['示例一', '示例二', '标题组件', '文字标记']
+const titleArr = ['常规用法', '不浮动']
 const navArr = computed<{ id: string; title: string; nested: boolean }[]>(() => {
   return generateNav('anchor', titleArr)
 })

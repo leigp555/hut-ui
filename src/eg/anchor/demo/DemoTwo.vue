@@ -1,65 +1,101 @@
 <demo>
-示例二
+不浮动
 </demo>
+
 <template>
-  <Typography>
-    <Title level="2">Introduction</Title>
-    <Paragraph>
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus, animi aut
-      deserunt exercitationem ipsa ut. Ab, amet aut consequatur doloribus excepturi id
-      labore maiores perspiciatis quidem suscipit totam unde voluptatibus.
-    </Paragraph>
-    <Paragraph>
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet enim molestias
-      perferendis sed vel. Deleniti distinctio facilis fugiat officiis quo! Est fugit
-      magnam officia provident quidem, vitae. In pariatur, tempore.
-      <Text mark>『amet』和『dolor』</Text>
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit
-      <Text strong>Lorem ipsum dolor sit amet, consectetur adipisicing elit</Text>。
-    </Paragraph>
-    <Title level="2">Lorem ipsum dolor sit amet, consectetur adipisicing elit</Title>
-    <Paragraph>
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam at cum
-      distinctio ea eveniet exercitationem facilis iusto maiores minus mollitia nostrum,
-      nulla placeat rem repellendus rerum, sed veniam vero voluptatibus?（<Text code
-        >Sketch</Text
-      >
-      和 <Text code>Axure</Text>），Lorem ipsum dolor sit amet, consectetur adipisicing
-      elit. Adipisci amet blanditiis consectetur consequatur ducimus, earum, error fugit
-      in mollitia quam quibusdam quod reiciendis rem reprehenderit, rerum sed ullam
-      voluptates voluptatum.。
-    </Paragraph>
+  <div class="ui-template-wrap scroll-container" ref="scrollWrap">
+    <section>
+      <div id="a" style="margin-bottom: 20px">
+        <h3>我是a导航</h3>
+        <p v-for="item in 2" :key="item">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet blanditiis
+          consequuntur deserunt dicta, ex, impedit incidunt laboriosam, officia officiis
+          saepe sunt tempore voluptas voluptate? A beatae dolores eveniet tempora totam?
+        </p>
+      </div>
+      <Affix :scroll-container="() => scrollWrap" :offset-top="0">
+        <Anchor
+          customClass="customClass"
+          :scroll-container="() => scrollWrap"
+          :affix="false"
+        >
+          <AnchorLink href="#a" title="A_nav" />
+          <AnchorLink href="#b" title="B_nav" />
+          <AnchorLink href="#c" title="C_nav" />
+          <AnchorLink href="#d" title="D_nav" />
+          <AnchorLink href="#d_a" title="D_A_nav" nested />
+          <AnchorLink href="#d_b" title="D_B_nav" nested />
+          <AnchorLink href="#e" title="E_nav" />
+        </Anchor>
+      </Affix>
 
-    <Paragraph>
-      <ul>
-        <li>
-          <a href="/docs/spec/proximity-cn">reprehenderit</a>
-        </li>
-        <li>
-          <a href="/docs/spec/overview-cn">reprehenderit</a>
-        </li>
-        <li>
-          <a href="/docs/resources-cn">reprehenderit</a>
-        </li>
-      </ul>
-    </Paragraph>
+      <div id="b" style="margin-top: 20px">
+        <h3>我是b导航</h3>
+        <p v-for="item in 4" :key="item">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet blanditiis
+          consequuntur deserunt dicta, ex, impedit incidunt laboriosam, officia officiis
+          saepe sunt tempore voluptas voluptate? A beatae dolores eveniet tempora totam?
+        </p>
+      </div>
+      <div id="c">
+        <h3>我是c导航</h3>
+        <p v-for="item in 4" :key="item">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet blanditiis
+          consequuntur deserunt dicta, ex, impedit incidunt laboriosam, officia officiis
+          saepe sunt tempore voluptas voluptate? A beatae dolores eveniet tempora totam?
+        </p>
+      </div>
 
-    <Paragraph>
-      <blockquote>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad alias aliquam
-        aliquid doloribus, ducimus enim explicabo fugiat, harum nulla praesentium quia
-        quis repellendus temporibus unde velit voluptatem voluptatibus! Fugit, saepe?
-      </blockquote>
-    </Paragraph>
-    <Paragraph>
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium doloremque
-      error illum laboriosam odit, provident quaerat reiciendis rem velit voluptatibus!
-      Cupiditate dignissimos est illum impedit natus neque reiciendis unde voluptatibus?
-    </Paragraph>
-    <Paragraph> press<Text keyboard>Esc</Text>out </Paragraph>
-  </Typography>
+      <div id="d">
+        <h3>我是d导航</h3>
+        <p v-for="item in 4" :key="item">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet blanditiis
+          consequuntur deserunt dicta, ex, impedit incidunt laboriosam, officia officiis
+          saepe sunt tempore voluptas voluptate? A beatae dolores eveniet tempora totam?
+        </p>
+      </div>
+      <div id="d_a">
+        <h3>我是d_a导航</h3>
+        <p v-for="item in 4" :key="item">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet blanditiis
+          consequuntur deserunt dicta, ex, impedit incidunt laboriosam, officia officiis
+          saepe sunt tempore voluptas voluptate? A beatae dolores eveniet tempora totam?
+        </p>
+      </div>
+
+      <div id="d_b">
+        <h3>我是d_b导航</h3>
+        <p v-for="item in 4" :key="item">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet blanditiis
+          consequuntur deserunt dicta, ex, impedit incidunt laboriosam, officia officiis
+          saepe sunt tempore voluptas voluptate? A beatae dolores eveniet tempora totam?
+        </p>
+      </div>
+      <div id="e">
+        <h3>我是e导航</h3>
+        <p v-for="item in 10" :key="item">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet blanditiis
+          consequuntur deserunt dicta, ex, impedit incidunt laboriosam, officia officiis
+          saepe sunt tempore voluptas voluptate? A beatae dolores eveniet tempora totam?
+        </p>
+      </div>
+    </section>
+  </div>
 </template>
 
 <script setup lang="ts">
-import { Paragraph, Typography, Title, Text } from '@/lib'
+import { ref } from 'vue'
+import { Anchor, AnchorLink, Affix } from '@/lib'
+
+const scrollWrap = ref<HTMLElement | null>(null)
 </script>
+
+<style lang="scss" scoped>
+.ui-template-wrap {
+  height: 500px;
+  overflow-y: scroll;
+  p {
+    line-height: 2em;
+  }
+}
+</style>
