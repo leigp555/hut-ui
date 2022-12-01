@@ -1,75 +1,182 @@
+<script setup lang="ts">
+import { ref, toRefs, withDefaults } from 'vue'
+
+const props = withDefaults(
+  defineProps<{ trigger?: 'hover' | 'click' | 'contextmenu' }>(),
+  {
+    trigger: 'hover'
+  }
+)
+const { trigger } = toRefs(props)
+const isOpen = ref<boolean>(false)
+const isEnterPop = ref<boolean>(false)
+const dropdown_pop_wrap = ref<HTMLElement | null>(null)
+const dropdown_wrap_ref = ref<HTMLElement | null>(null)
+
+// 监听click事件
+const onClick = () => {
+  if (trigger.value === 'click') isOpen.value = !isOpen.value
+  if (trigger.value === 'contextmenu') isOpen.value = false
+}
+const hide = () => {
+  if (trigger.value === 'click') {
+    const id = setTimeout(() => {
+      isOpen.value = false
+      window.clearTimeout(id)
+    }, 100)
+  }
+}
+// 监听hover事件
+const onMouseenter = () => {
+  if (trigger.value === 'hover') isOpen.value = true
+}
+const onMouseleave = () => {
+  const outerId = setTimeout(() => {
+    if (trigger.value === 'hover' && !isEnterPop.value) {
+      const innerId = setTimeout(() => {
+        isOpen.value = false
+        window.clearTimeout(innerId)
+      }, 100)
+    }
+    window.clearTimeout(outerId)
+  }, 100)
+}
+
+const onPopMouseenter = () => {
+  if (trigger.value === 'hover') isEnterPop.value = true
+}
+const onPopMouseleave = () => {
+  if (trigger.value === 'hover') {
+    const id = setTimeout(() => {
+      isOpen.value = false
+      isEnterPop.value = false
+      window.clearTimeout(id)
+    }, 100)
+  }
+}
+
+// 监听contextmenu
+const onContextmenu = (e: MouseEvent) => {
+  e.preventDefault()
+  if (isOpen.value) {
+    isOpen.value = false
+    setTimeout(() => {
+      isOpen.value = true
+    }, 50)
+  } else {
+    isOpen.value = true
+  }
+
+  const x = e.clientX - dropdown_wrap_ref.value!.offsetLeft
+  const y = e.clientY - dropdown_wrap_ref.value!.getBoundingClientRect().top
+  dropdown_pop_wrap.value!.style.top = `${y}px`
+  dropdown_pop_wrap.value!.style.left = `${x}px`
+}
+const popClick = () => {
+  const id = setTimeout(() => {
+    isOpen.value = false
+    window.clearTimeout(id)
+  }, 100)
+}
+</script>
+
 <template>
-  <div class="ui-dropdown-wrap">
-    <div tabindex="-1" class="ui-dropdown-tip" @click="toggle" @blur="hide">
+  <div
+    class="ui-dropdown-wrap"
+    ref="dropdown_wrap_ref"
+    :class="{ 'dropdown-wrap-contextmenu': trigger === 'contextmenu' }"
+  >
+    <div
+      tabindex="-1"
+      class="ui-dropdown-tip"
+      @click="onClick"
+      @blur="hide"
+      @mouseenter="onMouseenter"
+      @mouseleave="onMouseleave"
+      @contextmenu="onContextmenu"
+    >
       <slot />
     </div>
-    <div class="ui-dropdown-pop" :class="{ opening: isOpen }">
-      <slot name="pop" />
+    <div
+      class="ui-dropdown-pop"
+      @mouseenter="onPopMouseenter"
+      @mouseleave="onPopMouseleave"
+      ref="dropdown_pop_wrap"
+      :class="{ 'dropdown-pop-contextmenu': trigger === 'contextmenu' }"
+    >
+      <Transition name="drawer">
+        <div class="dropdown-pop-content" v-show="isOpen" @click="popClick">
+          <slot name="pop" />
+        </div>
+      </Transition>
     </div>
   </div>
 </template>
 
-<script setup lang="ts">
-import { ref } from 'vue'
-
-const isOpen = ref<boolean>(false)
-const toggle = () => {
-  isOpen.value = !isOpen.value
-}
-const hide = () => {
-  isOpen.value = false
-}
-</script>
-
 <style lang="scss">
 .ui-dropdown-wrap {
   position: relative;
+  color: #000000d9;
   display: inline-block;
+  &.dropdown-wrap-contextmenu {
+    display: block;
+  }
   .ui-dropdown-tip {
-    color: #1890ff;
     font-size: 14px;
     cursor: pointer;
     user-select: none;
-    display: inline-block;
   }
   .ui-dropdown-pop {
-    display: inline-flex;
-    font-size: 14px;
-    flex-direction: column;
-    gap: 5px;
-    background-color: white;
-    box-shadow: 0 0 30px 3px rgba(0, 0, 0, 0.1);
-    min-width: 120px;
-    padding: 8px 0;
     position: absolute;
     bottom: -2px;
     left: 0;
     z-index: 10;
     transform: translateY(100%);
-    opacity: 0;
-    overflow: hidden;
-    transition: all 250ms;
-    max-height: 8em;
-    overflow-y: auto;
-    &::-webkit-scrollbar {
-      //整个滚动条的宽高设置
-      width: 4px; //宽高只有一个能生效，如果是横向滚动条高度生效，纵向滚动条宽度生效
-      height: 4px;
+    display: inline-block;
+
+    &.dropdown-pop-contextmenu {
+      transform: translateY(0);
+      bottom: auto;
+      display: block;
     }
-    &::-webkit-scrollbar-thumb {
-      //滚动条滑块的设置
-      border-radius: 3px;
-      -moz-border-radius: 3px;
-      -webkit-border-radius: 3px;
-      background-color: #c3c3c3;
-    }
-    &::-webkit-scrollbar-track {
-      //滚动条轨道设置
-      background-color: transparent;
-    }
-    &.opening {
-      opacity: 1;
+    > .dropdown-pop-content {
+      min-width: 80px;
+      max-height: 8em;
+      overflow-y: auto;
+      white-space: nowrap;
+      padding: 8px 0;
+      border-radius: 2px;
+      background-color: white;
+      &::-webkit-scrollbar {
+        //整个滚动条的宽高设置
+        width: 4px; //宽高只有一个能生效，如果是横向滚动条高度生效，纵向滚动条宽度生效
+        height: 4px;
+      }
+      &::-webkit-scrollbar-thumb {
+        //滚动条滑块的设置
+        border-radius: 3px;
+        -moz-border-radius: 3px;
+        -webkit-border-radius: 3px;
+        background-color: #c3c3c3;
+      }
+      &::-webkit-scrollbar-track {
+        //滚动条轨道设置
+        background-color: transparent;
+      }
+      box-shadow: 0 3px 6px -4px #0000001f, 0 6px 16px #00000014,
+        0 9px 28px 8px #0000000d;
+      transform-origin: top;
+      transition: all 250ms;
     }
   }
+}
+.drawer-enter-from,
+.drawer-leave-to {
+  transform: scale(1, 0.5);
+  opacity: 0;
+}
+.drawer-enter-active,
+.drawer-leave-active {
+  transition: all 1s;
 }
 </style>
