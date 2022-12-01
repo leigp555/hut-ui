@@ -221,6 +221,7 @@ const jump = (e: Event) => {
   align-items: center;
   &.disabled {
     cursor: not-allowed;
+    opacity: 0.6;
   }
   > .disabled {
     pointer-events: none;

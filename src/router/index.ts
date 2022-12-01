@@ -17,6 +17,7 @@ const Breadcrumb = () => import('@/eg/breadcrumb/Index.vue')
 const Dropdown = () => import('@/eg/dropdown/Index.vue')
 const Menu = () => import('@/eg/menu/Index.vue')
 const PageHeader = () => import('@/eg/pageHeader/Index.vue')
+const Pagination = () => import('@/eg/pagination/Index.vue')
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -100,6 +101,11 @@ const routes: Array<RouteRecordRaw> = [
         path: 'pageHeader',
         name: 'pageHeader',
         component: PageHeader
+      },
+      {
+        path: 'pagination',
+        name: 'pagination',
+        component: Pagination
       }
     ]
   },
