@@ -41,7 +41,7 @@
 
 <script lang="ts" setup>
 import Col from '@/lib/grid/Col.vue'
-import Row from '@/lib/grid/row.vue'
+import Row from '@/lib/grid/Row.vue'
 </script>
 
 <style lang="scss" scoped>
