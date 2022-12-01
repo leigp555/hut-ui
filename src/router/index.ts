@@ -12,6 +12,7 @@ const Grid = () => import('@/eg/grid/Index.vue')
 const Layout = () => import('@/eg/layout/Index.vue')
 const Space = () => import('@/eg/space/Index.vue')
 const Affix = () => import('@/eg/affix/Index.vue')
+const Anchor = () => import('@/eg/anchor/Index.vue')
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -70,6 +71,11 @@ const routes: Array<RouteRecordRaw> = [
         path: 'affix',
         name: 'affix',
         component: Affix
+      },
+      {
+        path: 'anchor',
+        name: 'anchor',
+        component: Anchor
       }
     ]
   },

@@ -2,7 +2,7 @@
 import { withDefaults, defineProps, toRefs } from 'vue'
 
 const props = withDefaults(
-  defineProps<{ title: string; href: string; nested: boolean }>(),
+  defineProps<{ title: string; href: string; nested?: boolean }>(),
   {
     nested: false
   }

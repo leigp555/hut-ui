@@ -13,7 +13,7 @@ import {
 type ContainerType = () => HTMLElement | null
 
 const props = withDefaults(
-  defineProps<{ customClass?: string; scrollContainer: ContainerType | null }>(),
+  defineProps<{ customClass?: string; scrollContainer?: ContainerType | null }>(),
   {
     customClass: 'custom-class',
     scrollContainer: null

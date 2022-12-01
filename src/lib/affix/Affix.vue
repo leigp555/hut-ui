@@ -14,7 +14,6 @@ import {
   defineProps,
   ref,
   onMounted,
-  onUnmounted,
   toRefs,
   watch,
   onBeforeUnmount
