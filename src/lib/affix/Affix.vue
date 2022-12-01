@@ -1,12 +1,7 @@
 <template>
   <!--  外层元素不能删除，需要占位,这点很重要-->
   <div class="ui-affix-wrap" ref="containerRef">
-    <div
-      ref="innerRef"
-      class="ui-affix-inner"
-      :style="{ top: `${offsetTop}px` }"
-      :class="{ fixed: shouldFix }"
-    >
+    <div ref="innerRef" class="ui-affix-inner" :class="{ fixed: shouldFix }">
       <slot />
     </div>
   </div>
@@ -28,18 +23,19 @@ const emits = defineEmits(['change'])
 const props = withDefaults(
   defineProps<{
     offsetTop?: number
-    scrollContainer: () => HTMLElement
+    scrollContainer?: () => HTMLElement
   }>(),
   {
     offsetTop: 50,
     scrollContainer: () => window
   }
 )
-const { scrollContainer } = toRefs(props)
+const { scrollContainer, offsetTop } = toRefs(props)
 const containerRef = ref<HTMLDivElement | null>(null)
 const innerRef = ref<HTMLDivElement | null>(null)
 const initHeight = ref<number>(0)
 const shouldFix = ref<boolean>(false)
+const realScrollEl = ref<HTMLElement | null>(null)
 
 // 简单的节流函数
 
@@ -55,16 +51,21 @@ function throttle(func: () => void, wait: number) {
 }
 
 const containerScroll = () => {
-  const containerTop = containerRef.value!.getBoundingClientRect().top
-  if (containerTop < props.offsetTop) {
+  const containerTop = containerRef.value!.offsetTop - realScrollEl.value.offsetTop
+  if (realScrollEl.value.scrollTop > containerTop - offsetTop.value) {
     shouldFix.value = true
-  } else if (containerTop > props.offsetTop) {
+  } else if (realScrollEl.value.scrollTop < containerTop - offsetTop.value) {
     shouldFix.value = false
   }
 }
-const handle = throttle(containerScroll, 100)
+const handle = throttle(containerScroll, 10)
 onMounted(() => {
   scrollContainer.value().addEventListener('scroll', handle)
+  if (scrollContainer.value() === 'window') {
+    realScrollEl.value = document.documentElement
+  } else {
+    realScrollEl.value = scrollContainer.value()
+  }
   // 保留原位置的高度
   initHeight.value = innerRef.value!.getBoundingClientRect().height
   containerRef.value!.style.height = `${initHeight.value}px`
@@ -75,6 +76,11 @@ onUnmounted(() => {
 
 watch(shouldFix, () => {
   emits('change', shouldFix.value)
+  if (shouldFix.value) {
+    innerRef.value!.style.top = `${
+      offsetTop.value + realScrollEl.value.getBoundingClientRect().top
+    }px`
+  }
 })
 </script>
 
