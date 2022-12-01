@@ -15,6 +15,7 @@ const Affix = () => import('@/eg/affix/Index.vue')
 const Anchor = () => import('@/eg/anchor/Index.vue')
 const Breadcrumb = () => import('@/eg/breadcrumb/Index.vue')
 const Dropdown = () => import('@/eg/dropdown/Index.vue')
+const Menu = () => import('@/eg/menu/Index.vue')
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -88,6 +89,11 @@ const routes: Array<RouteRecordRaw> = [
         path: 'dropdown',
         name: 'dropdown',
         component: Dropdown
+      },
+      {
+        path: 'menu',
+        name: 'menu',
+        component: Menu
       }
     ]
   },

@@ -17,7 +17,7 @@ const props = withDefaults(
     keyValue: string
     paddingLeft?: number
     totalTitle?: string[]
-    collapsible: boolean
+    collapsible?: boolean
   }>(),
   {
     paddingLeft: 24,
