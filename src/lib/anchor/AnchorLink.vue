@@ -32,6 +32,10 @@ const onClick = () => {
   cursor: pointer;
   transition: all 250ms;
   height: 16px;
+  max-width: 110px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   &.ui-anchorLink-nested {
     margin-left: 8px;
   }

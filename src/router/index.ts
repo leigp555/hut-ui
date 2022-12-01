@@ -16,6 +16,7 @@ const Anchor = () => import('@/eg/anchor/Index.vue')
 const Breadcrumb = () => import('@/eg/breadcrumb/Index.vue')
 const Dropdown = () => import('@/eg/dropdown/Index.vue')
 const Menu = () => import('@/eg/menu/Index.vue')
+const PageHeader = () => import('@/eg/pageHeader/Index.vue')
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -94,6 +95,11 @@ const routes: Array<RouteRecordRaw> = [
         path: 'menu',
         name: 'menu',
         component: Menu
+      },
+      {
+        path: 'pageHeader',
+        name: 'pageHeader',
+        component: PageHeader
       }
     ]
   },
