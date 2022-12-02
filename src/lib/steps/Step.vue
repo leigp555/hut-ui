@@ -12,7 +12,8 @@
         'step-not-complete': current < order
       }"
     >
-      {{ order }}
+      <span v-if="$slots.icon"><slot name="icon"></slot></span>
+      <span v-else>{{ order }}</span>
     </div>
     <span class="ui-step-title" :class="{ 'step-complete': current >= order }">
       {{ title }}
@@ -56,26 +57,39 @@ const totalStep = inject<number>('ui_step_totalStep')
     display: flex;
     align-items: center;
     justify-content: center;
+
     background-color: #ffffff;
     color: #bfbfbf;
     border: 1px solid #bfbfbf;
     transition: all 250ms;
+    svg {
+      fill: #bfbfbf;
+    }
+    & > span {
+      text-align: center;
+      vertical-align: middle;
+    }
     &.step-pending {
       background-color: #1890ff;
       color: #ffffff;
+      svg {
+        fill: #ffffff;
+      }
       border: 1px solid #1890ff;
     }
 
     &.step-complete {
       border: 1px solid #1890ff;
       color: #1890ff;
+      svg {
+        fill: #1890ff;
+      }
       background-color: #ffffff;
     }
 
     &.step-icon {
       background-color: #07c160;
       border: 1px solid #07c160;
-
       svg {
         fill: #ffffff;
       }
@@ -84,7 +98,7 @@ const totalStep = inject<number>('ui_step_totalStep')
 
   > .ui-step-title {
     color: #bfbfbf;
-    font-size: 16px;
+    font-size: 14px;
     white-space: nowrap;
     &.step-complete {
       color: #262626;
