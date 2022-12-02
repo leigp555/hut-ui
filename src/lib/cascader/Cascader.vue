@@ -1,5 +1,13 @@
 <script setup lang="ts">
-import { computed, defineProps, provide, ref, toRefs, withDefaults } from 'vue'
+import {
+  computed,
+  defineProps,
+  onMounted,
+  provide,
+  ref,
+  toRefs,
+  withDefaults
+} from 'vue'
 import CascaderPop from './CascaderPop.vue'
 import { CascaderOptions } from './type'
 
@@ -61,6 +69,15 @@ const addParentAttr = (list: CascaderOptions[]) => {
 const newOptions = computed(() => {
   return addParentAttr(options.value)
 })
+
+const cascaderWrap = ref<HTMLElement>()
+const mount = ref<HTMLElement>()
+mount.value = document.createElement('div')
+mount.value?.classList.add('xxx')
+
+onMounted(() => {
+  cascaderWrap.value.appendChild(mount.value)
+})
 </script>
 
 <template>
@@ -74,9 +91,12 @@ const newOptions = computed(() => {
         readonly
       />
     </div>
+    <div>
+      <div class="pop-list" ref="cascaderWrap"></div>
+    </div>
 
     <div class="cascader-pop-content" v-show="popVisibility">
-      <CascaderPop :options="newOptions" />
+      <CascaderPop :options="newOptions" :toEl="mount" />
     </div>
   </div>
 </template>
@@ -85,8 +105,15 @@ const newOptions = computed(() => {
 $font_color: rgba(0, 0, 0, 0.85);
 $main_color: #1890ff;
 $selected_color: #f5f5f5;
+.pop-list {
+  display: flex;
+  box-shadow: 0 3px 6px -4px #0000001f, 0 6px 16px #00000014, 0 9px 28px 8px #0000000d;
+}
+.xxx {
+  display: flex;
+}
 .ui-cascader-wrap {
-  display: inline-flex;
+  display: inline-block;
   position: relative;
   .ui-cascader-input {
     flex-grow: 10;

@@ -3,7 +3,7 @@ import { withDefaults, defineProps, ref, inject, Ref, computed } from 'vue'
 import { CascaderOptions } from './type'
 import SvgIcon from '@/lib/common/SvgIcon.vue'
 
-withDefaults(defineProps<{ options: CascaderOptions[] | null }>(), {
+withDefaults(defineProps<{ options: CascaderOptions[] | null; toEl: HTMLElement }>(), {
   options: null
 })
 const popVisibility = inject<Ref<boolean>>('popVisibility')
@@ -28,7 +28,7 @@ const selectedArr = computed(() => {
 </script>
 
 <template>
-  <keep-alive>
+  <Teleport :to="toEl">
     <div class="ui-cascader-pop" ref="popRef" v-if="options">
       <div v-for="item in options" :key="item.label" class="cascader-list-item">
         <div
@@ -45,16 +45,18 @@ const selectedArr = computed(() => {
             class="item-label-icon"
           />
         </div>
-        <div
-          class="cascader-loop"
-          :class="{ open: clickLabelChild === item.children[0].value }"
-          v-if="item.children"
-        >
-          <CascaderPop :options="item.children" />
-        </div>
+        <Teleport :to="toEl">
+          <div
+            class="cascader-loop"
+            :class="{ open: clickLabelChild === item.children[0].value }"
+            v-if="item.children && clickLabelChild === item.children[0].value"
+          >
+            <CascaderPop :options="item.children" :to-el="toEl" />
+          </div>
+        </Teleport>
       </div>
     </div>
-  </keep-alive>
+  </Teleport>
 </template>
 
 <style lang="scss">
@@ -63,13 +65,15 @@ $main_color: #1890ff;
 $selected_color: #f5f5f5;
 
 .ui-cascader-pop {
-  box-shadow: 0 0 30px 3px rgba(0, 0, 0, 0.1);
-  border-left: none;
+  min-width: 111px;
+  height: 180px;
+  &:not(:last-child) {
+    border-right: 1px solid #f0f0f0;
+  }
+
   .cascader-list-item {
     font-size: 14px;
     line-height: 2em;
-    position: relative;
-    z-index: 100;
     background: #fff;
     .cascader-label {
       padding: 0 8px 0 10px;
@@ -93,19 +97,18 @@ $selected_color: #f5f5f5;
         font-weight: 600;
       }
     }
-    .cascader-loop {
-      position: absolute;
-      top: 0;
-      right: -2px;
-      transform: translateX(100%);
-      opacity: 0;
-      visibility: hidden;
-      transition: opacity 250ms;
-      &.open {
-        opacity: 1;
-        visibility: visible;
-      }
-    }
+  }
+}
+</style>
+
+<style lang="scss">
+.cascader-loop {
+  transition: opacity 250ms;
+  display: none;
+  border: 5px solid red !important;
+  &.open {
+    opacity: 1;
+    visibility: visible;
   }
 }
 </style>
