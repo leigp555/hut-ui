@@ -85,7 +85,6 @@ const inputBlur = () => {
               'autoComplete-list-item': !custom
             }"
             data-value="list"
-            :title="item.value"
           >
             <div class="autoComplete-list-item-inner" v-if="$slots.option">
               <slot name="option" :value="item.value"></slot>

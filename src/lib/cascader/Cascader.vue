@@ -37,11 +37,13 @@ const onBlur = () => {
 // 改造options像option数据结构中添加parent属性
 const addParentAttr = (list: CascaderOptions[]) => {
   for (let i = 0; i < list.length; i++) {
+    list[i].show = false
     if (!list[i].parent) {
       list[i].parent = list[i].value
     }
     if (list[i].children) {
       for (let j = 0; j < list[i].children!.length; j++) {
+        list[i].children![j].show = false
         if (list[i].parent) {
           list[i].children![j].parent = `${list[i].parent}/${
             list[i].children![j].value
@@ -73,7 +75,7 @@ const newOptions = computed(() => {
       />
     </div>
 
-    <div class="cascader-pop-content" :class="{ shouldShow: popVisibility }">
+    <div class="cascader-pop-content" v-show="popVisibility">
       <CascaderPop :options="newOptions" />
     </div>
   </div>
@@ -100,6 +102,7 @@ $selected_color: #f5f5f5;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    transition: all 250ms;
     &:focus {
       box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
       border: 1px solid $main_color;
@@ -111,14 +114,8 @@ $selected_color: #f5f5f5;
     left: 0;
     transform: translateY(calc(100% + 4px));
     transition: all 250ms;
-    opacity: 0;
-    visibility: hidden;
     z-index: 100;
     background: white;
-    &.shouldShow {
-      opacity: 1;
-      visibility: visible;
-    }
   }
 }
 </style>

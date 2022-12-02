@@ -3,4 +3,5 @@ export interface CascaderOptions {
   label: string
   children?: CascaderOptions[] | null
   parent?: string
+  show?: boolean
 }

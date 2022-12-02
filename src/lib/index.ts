@@ -98,4 +98,4 @@ export { default as Paragraph } from './typography/Paragraph.vue'
 export { default as Upload } from './upload/Upload.vue'
 
 // types
-export { CascaderOptions } from './cascader/type'
+export type { CascaderOptions } from './cascader/type'
