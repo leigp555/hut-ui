@@ -7,11 +7,17 @@ export interface OptionType {
   value: string
 }
 const props = withDefaults(
-  defineProps<{ value: string; options: OptionType[]; placeholder: string }>(),
+  defineProps<{
+    value: string
+    options: OptionType[]
+    placeholder: string
+    custom?: boolean
+  }>(),
   {
     value: '',
     options: () => [],
-    placeholder: ''
+    placeholder: '',
+    custom: false
   }
 )
 const { value, options, placeholder } = toRefs(props)
@@ -33,7 +39,7 @@ watch(value, () => {
 const userSelect = (e: Event) => {
   const el = e.target as HTMLElement
   const spec = el.getAttribute('data-value')
-  if (el.tagName.toLowerCase() === 'p' && spec === 'list') {
+  if (el.tagName.toLowerCase() === 'div' && spec === 'list') {
     emits('select', el.innerText)
     shouldPopShow.value = false
     if (el.innerText !== value.value) {
@@ -66,21 +72,28 @@ const inputBlur = () => {
     <div class="ui-autoComplete-pop">
       <Transition name="autoComplete-pop" mode="out-in">
         <div
-          class="autoComplete-pop-content"
+          class="autoComplete-pop-content ui-scroll-container"
           @mousedown="userSelect"
           ref="popRef"
           v-show="shouldPopShow"
         >
-          <p
+          <div
             v-for="item in options"
             :key="item"
-            class="autoComplete-list-item"
-            :class="{ selected: item.value === value }"
+            :class="{
+              selected: item.value === value,
+              'autoComplete-list-item': !custom
+            }"
             data-value="list"
             :title="item.value"
           >
-            {{ item.value }}
-          </p>
+            <div class="autoComplete-list-item-inner" v-if="$slots.option">
+              <slot name="option" :value="item.value"></slot>
+            </div>
+            <div class="autoComplete-list-item-inner" v-else>
+              {{ item.value }}
+            </div>
+          </div>
         </div>
       </Transition>
     </div>
@@ -88,6 +101,7 @@ const inputBlur = () => {
 </template>
 
 <style lang="scss">
+@import '../common/scrollBar';
 $font_color: rgba(0, 0, 0, 0.85);
 $main_color: #1890ff;
 $selected_color: #f5f5f5;
@@ -116,17 +130,20 @@ $selected_color: #f5f5f5;
   }
   .ui-autoComplete-pop {
     position: absolute;
-    width: 100%;
+    min-width: 100%;
     bottom: 0;
     left: 0;
     height: 0;
-    background: white;
+    z-index: 100;
     transform: translateY(calc(100% + 4px));
     > .autoComplete-pop-content {
       transform-origin: top;
       background: white;
       position: relative;
       z-index: 100;
+      max-height: 200px;
+      overflow-y: auto;
+      border-radius: 3px;
       box-shadow: 0 3px 6px -4px #0000001f, 0 6px 16px #00000014,
         0 9px 28px 8px #0000000d;
       > .autoComplete-list-item {
@@ -146,6 +163,9 @@ $selected_color: #f5f5f5;
         }
         &:hover {
           background-color: $selected_color;
+        }
+        > .autoComplete-list-item-inner {
+          pointer-events: none;
         }
       }
     }
