@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { withDefaults, defineProps, ref, inject, Ref, computed } from 'vue'
-import { CascaderOptions } from '@/lib/cascader/Cascader.vue'
+import { CascaderOptions } from './type'
 import SvgIcon from '@/lib/common/SvgIcon.vue'
 
 withDefaults(defineProps<{ options: CascaderOptions[] | null }>(), {
@@ -69,6 +69,8 @@ $selected_color: #f5f5f5;
     font-size: 14px;
     line-height: 2em;
     position: relative;
+    z-index: 100;
+    background: #fff;
     .cascader-label {
       padding: 0 8px 0 10px;
       cursor: pointer;

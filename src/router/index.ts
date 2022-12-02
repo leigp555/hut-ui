@@ -20,6 +20,7 @@ const PageHeader = () => import('@/eg/pageHeader/Index.vue')
 const Pagination = () => import('@/eg/pagination/Index.vue')
 const Steps = () => import('@/eg/steps/Index.vue')
 const AutoComplete = () => import('@/eg/autoComplete/Index.vue')
+const Cascader = () => import('@/eg/cascader/Index.vue')
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -118,6 +119,11 @@ const routes: Array<RouteRecordRaw> = [
         path: 'autoComplete',
         name: 'autoComplete',
         component: AutoComplete
+      },
+      {
+        path: 'cascader',
+        name: 'cascader',
+        component: Cascader
       }
     ]
   },

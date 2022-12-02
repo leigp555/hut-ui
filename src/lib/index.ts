@@ -96,3 +96,6 @@ export { default as Text } from './typography/Text.vue'
 export { default as Title } from './typography/Title.vue'
 export { default as Paragraph } from './typography/Paragraph.vue'
 export { default as Upload } from './upload/Upload.vue'
+
+// types
+export { CascaderOptions } from './cascader/type'

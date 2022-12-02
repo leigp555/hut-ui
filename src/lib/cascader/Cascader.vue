@@ -1,13 +1,7 @@
 <script setup lang="ts">
 import { computed, defineProps, provide, ref, toRefs, withDefaults } from 'vue'
-import CascaderPop from '@/lib/cascader/CascaderPop.vue'
-
-export interface CascaderOptions {
-  value: string
-  label: string
-  children?: CascaderOptions[] | null
-  parent?: string
-}
+import CascaderPop from './CascaderPop.vue'
+import { CascaderOptions } from './type'
 
 const emit = defineEmits(['update:value'])
 const props = withDefaults(
@@ -119,6 +113,8 @@ $selected_color: #f5f5f5;
     transition: all 250ms;
     opacity: 0;
     visibility: hidden;
+    z-index: 100;
+    background: white;
     &.shouldShow {
       opacity: 1;
       visibility: visible;
