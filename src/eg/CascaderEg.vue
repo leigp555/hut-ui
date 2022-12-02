@@ -6,7 +6,8 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import Cascader, { CascaderOptions } from '@/lib/cascader/Cascader.vue'
+import Cascader from '@/lib/cascader/Cascader.vue'
+import { CascaderOptions } from '@/lib'
 
 const value = ref<string>('')
 
