@@ -16,9 +16,10 @@ const props = withDefaults(
 )
 const { value, options, placeholder } = toRefs(props)
 const hasSelected = ref<boolean>(false)
-const popRef = ref<HTMLElement | null>(null)
+const shouldPopShow = ref<boolean>(false)
 const inputEvent = (e: Event) => {
   const el = e.target as HTMLInputElement
+  shouldPopShow.value = !!el.value
   emits('update:value', el.value)
 }
 watch(value, () => {
@@ -34,7 +35,7 @@ const userSelect = (e: Event) => {
   const spec = el.getAttribute('data-value')
   if (el.tagName.toLowerCase() === 'p' && spec === 'list') {
     emits('select', el.innerText)
-    popRef.value?.classList.remove('autoComplete-pop-show')
+    shouldPopShow.value = false
     if (el.innerText !== value.value) {
       emits('update:value', el.innerText)
       hasSelected.value = true
@@ -42,10 +43,12 @@ const userSelect = (e: Event) => {
   }
 }
 const inputFocus = () => {
-  popRef.value?.classList.add('autoComplete-pop-show')
+  if (value.value) {
+    shouldPopShow.value = true
+  }
 }
 const inputBlur = () => {
-  popRef.value?.classList.remove('autoComplete-pop-show')
+  shouldPopShow.value = false
 }
 </script>
 
@@ -61,18 +64,25 @@ const inputBlur = () => {
       @blur="inputBlur"
     />
     <div class="ui-autoComplete-pop">
-      <div class="autoComplete-pop-content" @mousedown="userSelect" ref="popRef">
-        <p
-          v-for="item in options"
-          :key="item"
-          class="autoComplete-list-item"
-          :class="{ selected: item.value === value }"
-          data-value="list"
-          :title="item.value"
+      <Transition name="autoComplete-pop" mode="out-in">
+        <div
+          class="autoComplete-pop-content"
+          @mousedown="userSelect"
+          ref="popRef"
+          v-show="shouldPopShow"
         >
-          {{ item.value }}
-        </p>
-      </div>
+          <p
+            v-for="item in options"
+            :key="item"
+            class="autoComplete-list-item"
+            :class="{ selected: item.value === value }"
+            data-value="list"
+            :title="item.value"
+          >
+            {{ item.value }}
+          </p>
+        </div>
+      </Transition>
     </div>
   </div>
 </template>
@@ -109,22 +119,16 @@ $selected_color: #f5f5f5;
     width: 100%;
     bottom: 0;
     left: 0;
-    z-index: 100;
+    height: 0;
     background: white;
     transform: translateY(calc(100% + 4px));
     > .autoComplete-pop-content {
-      opacity: 0;
-      //visibility: hidden;
-      transition: all 250ms;
       transform-origin: top;
-      transform: scale(1, 0.5);
+      background: white;
+      position: relative;
+      z-index: 100;
       box-shadow: 0 3px 6px -4px #0000001f, 0 6px 16px #00000014,
         0 9px 28px 8px #0000000d;
-      &.autoComplete-pop-show {
-        opacity: 1;
-        visibility: visible;
-        transform: scale(1, 1);
-      }
       > .autoComplete-list-item {
         text-overflow: ellipsis;
         overflow: hidden;
@@ -146,5 +150,14 @@ $selected_color: #f5f5f5;
       }
     }
   }
+}
+.autoComplete-pop-enter-from,
+.autoComplete-pop-leave-to {
+  transform: scale(1, 0.5);
+  opacity: 0;
+}
+.autoComplete-pop-enter-active,
+.autoComplete-pop-leave-active {
+  transition: all 250ms;
 }
 </style>
