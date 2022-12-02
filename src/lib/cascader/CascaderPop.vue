@@ -29,7 +29,7 @@ const selectedArr = computed(() => {
 
 <template>
   <Teleport :to="toEl">
-    <div class="ui-cascader-pop" ref="popRef" v-if="options">
+    <div class="ui-cascader-pop ui-scroll-container" ref="popRef" v-if="options">
       <div v-for="item in options" :key="item.label" class="cascader-list-item">
         <div
           class="cascader-label"
@@ -60,6 +60,7 @@ const selectedArr = computed(() => {
 </template>
 
 <style lang="scss">
+@import '../common/scrollBar';
 $font_color: rgba(0, 0, 0, 0.85);
 $main_color: #1890ff;
 $selected_color: #f5f5f5;
@@ -67,6 +68,7 @@ $selected_color: #f5f5f5;
 .ui-cascader-pop {
   min-width: 111px;
   height: 180px;
+  overflow-y: auto;
   &:not(:last-child) {
     border-right: 1px solid #f0f0f0;
   }

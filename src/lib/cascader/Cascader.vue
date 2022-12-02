@@ -106,7 +106,8 @@ $font_color: rgba(0, 0, 0, 0.85);
 $main_color: #1890ff;
 $selected_color: #f5f5f5;
 .pop-list {
-  display: flex;
+  margin-top: 2px;
+  display: inline-flex;
   box-shadow: 0 3px 6px -4px #0000001f, 0 6px 16px #00000014, 0 9px 28px 8px #0000000d;
 }
 .xxx {
