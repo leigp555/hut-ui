@@ -60,17 +60,19 @@ const inputBlur = () => {
       @focus="inputFocus"
       @blur="inputBlur"
     />
-    <div class="ui-autoComplete-pop" @mousedown="userSelect" ref="popRef">
-      <p
-        v-for="item in options"
-        :key="item"
-        class="autoComplete-list-item"
-        :class="{ selected: item.value === value }"
-        data-value="list"
-        :title="item.value"
-      >
-        {{ item.value }}
-      </p>
+    <div class="ui-autoComplete-pop">
+      <div class="autoComplete-pop-content" @mousedown="userSelect" ref="popRef">
+        <p
+          v-for="item in options"
+          :key="item"
+          class="autoComplete-list-item"
+          :class="{ selected: item.value === value }"
+          data-value="list"
+          :title="item.value"
+        >
+          {{ item.value }}
+        </p>
+      </div>
     </div>
   </div>
 </template>
@@ -93,6 +95,7 @@ $selected_color: #f5f5f5;
     line-height: 1.5em;
     height: 30px;
     border-radius: 2px;
+    transition: all 250ms;
     &:focus {
       box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
       border: 1px solid $main_color;
@@ -106,32 +109,40 @@ $selected_color: #f5f5f5;
     width: 100%;
     bottom: 0;
     left: 0;
+    z-index: 100;
+    background: white;
     transform: translateY(calc(100% + 4px));
-    box-shadow: 0 0 30px 3px rgba(0, 0, 0, 0.1);
-    opacity: 0;
-    visibility: hidden;
-    transition: all 250ms;
-    &.autoComplete-pop-show {
-      opacity: 1;
-      visibility: visible;
-    }
-    > .autoComplete-list-item {
-      text-overflow: ellipsis;
-      overflow: hidden;
-      white-space: nowrap;
-      font-size: 14px;
-      color: $font_color;
-      padding: 0 11px;
-      line-height: 2.5em;
-      cursor: pointer;
-      &:last-child {
-        margin-bottom: 4px;
+    > .autoComplete-pop-content {
+      opacity: 0;
+      //visibility: hidden;
+      transition: all 250ms;
+      transform-origin: top;
+      transform: scale(1, 0.5);
+      box-shadow: 0 3px 6px -4px #0000001f, 0 6px 16px #00000014,
+        0 9px 28px 8px #0000000d;
+      &.autoComplete-pop-show {
+        opacity: 1;
+        visibility: visible;
+        transform: scale(1, 1);
       }
-      &.selected {
-        background-color: $selected_color;
-      }
-      &:hover {
-        background-color: $selected_color;
+      > .autoComplete-list-item {
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        font-size: 14px;
+        color: $font_color;
+        padding: 0 11px;
+        line-height: 2.5em;
+        cursor: pointer;
+        &:last-child {
+          margin-bottom: 4px;
+        }
+        &.selected {
+          background-color: $selected_color;
+        }
+        &:hover {
+          background-color: $selected_color;
+        }
       }
     }
   }
