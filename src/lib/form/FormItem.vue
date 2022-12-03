@@ -77,7 +77,7 @@ const changeValue = (value: string) => {
 
 <template>
   <div class="ui-formItem-wrap">
-    <Row alignItems="center" justify="center">
+    <Row alignItems="start" justify="center" style="margin: 0">
       <!--      有input输入框的-->
       <Col
         v-if="$slots.label"
@@ -97,7 +97,7 @@ const changeValue = (value: string) => {
           </div>
         </Col>
         <div class="ui-formItem-content">
-          <div>
+          <div class="ui-formItem-input">
             <Component :is="slots[0]" @update:value="changeValue" />
           </div>
           <div class="formItem-content-error-wrap">
@@ -124,7 +124,7 @@ const changeValue = (value: string) => {
           :class="{ 'formItem-content-No-label-vertical-wrap': layout === 'vertical' }"
         >
           <div class="ui-formItem-content">
-            <div>
+            <div class="ui-formItem-input">
               <Component :is="slots[0]" @update:value="changeValue" />
             </div>
             <div class="formItem-content-error-wrap" v-if="name">
@@ -145,6 +145,8 @@ const changeValue = (value: string) => {
 $error_color: #ff4d4f;
 .ui-formItem-wrap {
   .formItem-content-wrap {
+    justify-content: start;
+    align-items: start;
     &.formItem-content-vertical-wrap {
       flex-direction: column;
     }
@@ -165,16 +167,21 @@ $error_color: #ff4d4f;
     }
   }
   .ui-formItem-content {
+    width: 100%;
     flex-grow: 10;
     margin-left: 10px;
     position: relative;
+    > .ui-formItem-input {
+      position: relative;
+      z-index: 100;
+    }
     > .formItem-content-error-wrap {
       position: absolute;
       bottom: 0;
       left: 0;
       width: 100%;
       transform: translateY(100%);
-      z-index: -1;
+      z-index: 10;
       > .formItem-content-error {
         color: $error_color;
         overflow: hidden;

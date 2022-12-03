@@ -23,6 +23,7 @@ const AutoComplete = () => import('@/eg/autoComplete/Index.vue')
 const Cascader = () => import('@/eg/cascader/Index.vue')
 const Checkbox = () => import('@/eg/checkbox/Index.vue')
 const DatePicker = () => import('@/eg/datePicker/Index.vue')
+const Form = () => import('@/eg/form/Index.vue')
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -136,6 +137,11 @@ const routes: Array<RouteRecordRaw> = [
         path: 'datePicker',
         name: 'datePicker',
         component: DatePicker
+      },
+      {
+        path: 'form',
+        name: 'form',
+        component: Form
       }
     ]
   },

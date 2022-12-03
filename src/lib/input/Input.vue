@@ -50,7 +50,7 @@ const eyeClose = () => {
 </script>
 
 <template>
-  <div class="ui-input-wrap">
+  <div class="ui-input-wrap" tabindex="-1">
     <div class="prefix-outer" v-if="$.slots.prefix_outer">
       <slot name="prefix_outer" />
     </div>

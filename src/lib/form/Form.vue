@@ -16,8 +16,8 @@
 import { withDefaults, defineProps, useSlots, toRefs, ref, provide, Ref } from 'vue'
 
 export type User = {
-  username: string
-  password: string
+  username?: string
+  password?: string
 }
 export type ErrorType = {
   reason: string[]

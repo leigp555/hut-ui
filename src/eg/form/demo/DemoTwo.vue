@@ -1,65 +1,53 @@
 <demo>
-示例二
+没有title
 </demo>
+
 <template>
-  <Typography>
-    <Title level="2">Introduction</Title>
-    <Paragraph>
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus, animi aut
-      deserunt exercitationem ipsa ut. Ab, amet aut consequatur doloribus excepturi id
-      labore maiores perspiciatis quidem suscipit totam unde voluptatibus.
-    </Paragraph>
-    <Paragraph>
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet enim molestias
-      perferendis sed vel. Deleniti distinctio facilis fugiat officiis quo! Est fugit
-      magnam officia provident quidem, vitae. In pariatur, tempore.
-      <Text mark>『amet』和『dolor』</Text>
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit
-      <Text strong>Lorem ipsum dolor sit amet, consectetur adipisicing elit</Text>。
-    </Paragraph>
-    <Title level="2">Lorem ipsum dolor sit amet, consectetur adipisicing elit</Title>
-    <Paragraph>
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam at cum
-      distinctio ea eveniet exercitationem facilis iusto maiores minus mollitia nostrum,
-      nulla placeat rem repellendus rerum, sed veniam vero voluptatibus?（<Text code
-        >Sketch</Text
-      >
-      和 <Text code>Axure</Text>），Lorem ipsum dolor sit amet, consectetur adipisicing
-      elit. Adipisci amet blanditiis consectetur consequatur ducimus, earum, error fugit
-      in mollitia quam quibusdam quod reiciendis rem reprehenderit, rerum sed ullam
-      voluptates voluptatum.。
-    </Paragraph>
+  <Form
+    :data="formState"
+    layout="line"
+    :wrapperCol="{ span: 50 }"
+    autocomplete="off"
+    @finish="onFinish"
+    @finishFailed="onFinishFailed"
+  >
+    <FormItem
+      name="username"
+      :rules="[{ pattern: /^\d{0,5}\d$/, message: 'Please input your username!' }]"
+    >
+      <Input v-model:value="formState.username" />
+    </FormItem>
 
-    <Paragraph>
-      <ul>
-        <li>
-          <a href="/docs/spec/proximity-cn">reprehenderit</a>
-        </li>
-        <li>
-          <a href="/docs/spec/overview-cn">reprehenderit</a>
-        </li>
-        <li>
-          <a href="/docs/resources-cn">reprehenderit</a>
-        </li>
-      </ul>
-    </Paragraph>
-
-    <Paragraph>
-      <blockquote>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad alias aliquam
-        aliquid doloribus, ducimus enim explicabo fugiat, harum nulla praesentium quia
-        quis repellendus temporibus unde velit voluptatem voluptatibus! Fugit, saepe?
-      </blockquote>
-    </Paragraph>
-    <Paragraph>
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium doloremque
-      error illum laboriosam odit, provident quaerat reiciendis rem velit voluptatibus!
-      Cupiditate dignissimos est illum impedit natus neque reiciendis unde voluptatibus?
-    </Paragraph>
-    <Paragraph> press<Text keyboard>Esc</Text>out </Paragraph>
-  </Typography>
+    <FormItem
+      name="password"
+      :rules="[{ pattern: /^\d{0,5}\d$/, message: 'Please input your password!' }]"
+    >
+      <Input v-model:value="formState.password" type="password" />
+    </FormItem>
+    <FormItem :wrapperCol="{ span: 50 }">
+      <Button type="primary">Submit</Button>
+    </FormItem>
+  </Form>
 </template>
 
 <script setup lang="ts">
-import { Paragraph, Typography, Title, Text } from '@/lib'
+import { reactive } from 'vue'
+import { Form, FormItem, Button, Input } from '@/lib'
+
+interface FormState {
+  username: string
+  password: string
+}
+const formState = reactive<FormState>({
+  username: '',
+  password: ''
+})
+
+const onFinish = (values: any) => {
+  console.log('Success:', values)
+}
+
+const onFinishFailed = (errorInfo: any) => {
+  console.log('Failed:', errorInfo)
+}
 </script>

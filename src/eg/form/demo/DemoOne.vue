@@ -1,56 +1,50 @@
 <demo>
-示例一
+基本用法
 </demo>
 
 <template>
-  <Typography>
-    <Title level="2">Introduction</Title>
-    <Paragraph>
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut debitis dignissimos
-      dolore, doloribus enim eveniet, explicabo fugiat id impedit iure laboriosam
-      laborum nobis officia praesentium quasi sed sequi tempora, unde.
-    </Paragraph>
-    <Paragraph>
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis dolore
-      dolorem ducimus facilis hic possimus praesentium totam unde? Ipsa nam, soluta? Ad
-      et quasi, ratione repudiandae sunt tempora temporibus veritatis.
-      <Text strong>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore, et, natus? Ad
-        delectus deserunt doloribus, error explicabo id illum incidunt laborum minima,
-        officiis, pariatur quasi reprehenderit sint? Dolores, tempora, vitae.
-      </Text>
-    </Paragraph>
-    <Title level="2"> Lorem ipsum dolor sit amet,</Title>
-    <Paragraph>
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab aspernatur commodi
-      corporis debitis, doloribus ducimus error excepturi exercitationem facilis id iure
-      maxime modi nostrum optio quas recusandae repellendus sed suscipit? (<Text code
-        >Lorem</Text
-      >
-      and <Text code>Lorem</Text>), Lorem ipsum dolor sit amet, consectetur adipisicing
-      elit. Aliquid, aspernatur consequuntur deserunt dolorum ex inventore ipsa ipsam
-      magnam magni minus molestias nam natus numquam optio perspiciatis quos temporibus
-      vel veniam?
-    </Paragraph>
+  <Form
+    :data="formState"
+    layout="vertical"
+    :labelCol="{ span: 10 }"
+    :wrapperCol="{ span: 50 }"
+    autocomplete="off"
+    @finish="onFinish"
+    @finishFailed="onFinishFailed"
+  >
+    <FormItem name="username">
+      <template #label><span>USERNAME :</span></template>
+      <Input v-model:value="formState.username" />
+    </FormItem>
 
-    <Paragraph>
-      <ul>
-        <li>
-          <a href="/docs/spec/proximity">Principles</a>
-        </li>
-        <li>
-          <a href="/docs/spec/overview">Patterns</a>
-        </li>
-        <li>
-          <a href="/docs/resources">Resource Download</a>
-        </li>
-      </ul>
-    </Paragraph>
-
-    <Paragraph> Press <Text keyboard>Esc</Text> to exit... </Paragraph>
-  </Typography>
+    <FormItem name="password">
+      <template #label><span>PASSWORD :</span></template>
+      <Input v-model:value="formState.password" type="password" />
+    </FormItem>
+    <FormItem :wrapperCol="{ span: 50 }">
+      <Button type="primary">Submit</Button>
+    </FormItem>
+  </Form>
 </template>
 
 <script setup lang="ts">
-import { Paragraph, Typography, Title, Text } from '@/lib'
+import { reactive } from 'vue'
+import { Form, FormItem, Button, Input } from '@/lib'
+
+interface FormState {
+  username: string
+  password: string
+}
+const formState = reactive<FormState>({
+  username: '',
+  password: ''
+})
+
+const onFinish = (values: any) => {
+  console.log('Success:', values)
+}
+
+const onFinishFailed = (errorInfo: any) => {
+  console.log('Failed:', errorInfo)
+}
 </script>

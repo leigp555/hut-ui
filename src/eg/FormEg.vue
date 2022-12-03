@@ -29,7 +29,7 @@ const onFinishFailed = (errorInfo: any) => {
       :data="formState"
       layout="vertical"
       :labelCol="{ span: 10 }"
-      :wrapperCol="{ span: 60 }"
+      :wrapperCol="{ span: 40 }"
       autocomplete="off"
       @finish="onFinish"
       @finishFailed="onFinishFailed"
@@ -49,7 +49,7 @@ const onFinishFailed = (errorInfo: any) => {
         <template #label><span>PASSWORD :</span></template>
         <Input v-model:value="formState.password" type="password" />
       </FormItem>
-      <FormItem :wrapperCol="{ span: 60 }">
+      <FormItem :wrapperCol="{ span: 40 }">
         <Button type="primary">Submit</Button>
       </FormItem>
     </Form>
