@@ -9,9 +9,10 @@ import {
   withDefaults
 } from 'vue'
 import CascaderPop from './CascaderPop.vue'
+import { Input, SvgIcon } from '@/lib'
 import { CascaderOptions } from './type'
 
-const emit = defineEmits(['update:value'])
+const emit = defineEmits(['update:value', 'change'])
 const props = withDefaults(
   defineProps<{
     value: string
@@ -21,7 +22,7 @@ const props = withDefaults(
   {
     value: '',
     options: () => [],
-    placeholder: 'Please select'
+    placeholder: ''
   }
 )
 
@@ -30,6 +31,7 @@ const popEnter = ref<boolean>(false)
 
 const changeValue = (newValue: string) => {
   emit('update:value', newValue)
+  emit('change', newValue)
 }
 
 const { value, options } = toRefs(props)
@@ -38,6 +40,7 @@ const { value, options } = toRefs(props)
 const inputFocus = () => {
   popVisibility.value = true
 }
+
 const onBlur = () => {
   const id = setTimeout(() => {
     if (!popEnter.value) {
@@ -90,17 +93,22 @@ mount.value = document.createElement('div')
 mount.value?.classList.add('ui-cascader-pop-item')
 
 onMounted(() => {
-  cascaderWrap.value.appendChild(mount.value)
+  cascaderWrap.value?.appendChild(mount.value!)
 })
 provide('popVisibility', popVisibility)
 provide('changeValue', changeValue)
 provide('initValue', value)
+
+const clear = () => {
+  emit('update:value', '')
+  emit('change', '')
+}
 </script>
 
 <template>
   <div class="ui-cascader-wrap">
     <div :title="value">
-      <input
+      <Input
         class="ui-cascader-input"
         type="text"
         :placeholder="placeholder"
@@ -109,7 +117,17 @@ provide('initValue', value)
         :value="value"
         :autofocus="false"
         readonly
-      />
+      >
+        <template #suffix>
+          <SvgIcon
+            name="error_radius"
+            width="1em"
+            height="1em"
+            fill="#d9d9d9"
+            @click.stop.prevent="clear"
+          />
+        </template>
+      </Input>
     </div>
     <!--    //挂载点-->
     <div class="ui-cascader-pop-wrap" @focus="popFocus" @blur="popBlur" tabindex="-1">
@@ -138,15 +156,15 @@ $border_color: #d9d9d9;
   position: relative;
   .ui-cascader-input {
     flex-grow: 10;
-    padding: 0 11px;
-    outline: none;
-    box-shadow: none;
-    border: 1px solid $border_color;
-    font-size: 14px;
-    color: $font_color;
-    line-height: 1.5em;
-    height: 32px;
-    border-radius: 2px;
+    //padding: 0 11px;
+    //outline: none;
+    //box-shadow: none;
+    //border: 1px solid $border_color;
+    //font-size: 14px;
+    //color: $font_color;
+    //line-height: 1.5em;
+    //height: 32px;
+    //border-radius: 2px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;

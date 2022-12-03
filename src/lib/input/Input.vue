@@ -1,3 +1,9 @@
+<script lang="ts">
+export default {
+  inheritAttrs: false
+}
+</script>
+
 <script setup lang="ts">
 import { withDefaults, defineProps, toRefs, ref } from 'vue'
 import SvgIcon from '@/lib/common/SvgIcon.vue'
@@ -66,6 +72,7 @@ const eyeClose = () => {
         @focus="onFocus"
         @blur="onBlur"
         @input="onInput"
+        v-bind="$attrs"
       />
 
       <span class="input-icon" v-if="type === 'password'" style="position: relative">
@@ -167,6 +174,7 @@ $error_shadow: rgba(255, 77, 79, 0.2);
       white-space: nowrap;
       font-size: 14px;
       border: none;
+      padding: 0;
       outline: none;
       box-shadow: none;
       color: $font_color;

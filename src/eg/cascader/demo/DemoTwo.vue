@@ -1,9 +1,14 @@
 <demo>
-基本用法
+更复杂的数据
 </demo>
 <template>
   <div class="wrap">
-    <Cascader v-model:value="value" :options="options" placeholder="Please select" />
+    <Cascader
+      v-model:value="value"
+      :options="options"
+      placeholder="Please select"
+      @change="onChange"
+    />
   </div>
 </template>
 
@@ -14,6 +19,9 @@ import { Cascader, CascaderOptions } from '@/lib'
 
 const value = ref<string>('')
 
+const onChange = (newValue: string) => {
+  console.log(newValue)
+}
 const options: CascaderOptions[] = [
   {
     value: 'zhinan',
