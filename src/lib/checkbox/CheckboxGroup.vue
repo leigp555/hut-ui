@@ -1,56 +1,37 @@
 <script setup lang="ts">
 import { withDefaults, defineProps, toRefs } from 'vue'
-
-type Option = {
-  label: string
-  value: string
-}
+import Checkbox from './Checkbox.vue'
+import { CheckBoxOption } from './type'
 
 const props = withDefaults(
   defineProps<{
-    value?: { label: string; value: string }[]
-    options?: Option[]
-    disabled?: boolean
+    value?: CheckBoxOption[]
+    options?: CheckBoxOption[]
     direction?: 'row' | 'column'
   }>(),
   {
     value: () => [],
     options: () => [],
-    disabled: false,
     direction: 'row'
   }
 )
 
-const emits = defineEmits(['update:value'])
+const emits = defineEmits(['update:value', 'change'])
 const { options, value } = toRefs(props)
 
-const onInput = (item: Option) => {
-  if (value.value.length > 0) {
-    for (let i = 0; i < value.value.length; i++) {
-      if (value.value[i].value === item.value) {
-        const newArr = [...value.value]
-        newArr.splice(i, 1)
-        emits('update:value', newArr)
-      } else {
-        emits('update:value', [...value.value, item])
-      }
-    }
+const onChange = (item: CheckBoxOption, isChecked: boolean) => {
+  item.checked = isChecked
+  const newArr = [...value.value]
+  const index = value.value.findIndex((s) => {
+    return s.value === item.value
+  })
+  if (index >= 0) {
+    newArr.splice(index, 1)
   } else {
-    emits('update:value', [...value.value, item])
+    newArr.push(item)
   }
-}
-
-const checked = (item: Option): boolean => {
-  let x: boolean = false
-  for (let i = 0; i < value.value.length; i++) {
-    if (value.value[i].value === item.value) {
-      x = true
-      break
-    } else {
-      x = false
-    }
-  }
-  return x
+  emits('update:value', newArr)
+  emits('change', newArr)
 }
 </script>
 
@@ -59,19 +40,14 @@ const checked = (item: Option): boolean => {
     class="ui-checkboxGroup-wrap"
     :class="{ 'ui-checkboxGroup-column': direction === 'column' }"
   >
-    <label class="ui-checkboxGroup-label" v-for="item in options" :key="item">
-      <input
-        class="ui-checkbox-input"
-        type="checkbox"
-        :checked="checked(item)"
-        @input="onInput(item)"
-        role="checkbox"
-        :disabled="disabled"
-      />
-      <span class="ui-checkbox-title">
-        {{ typeof item === 'string' ? item : item.label }}
-      </span>
-    </label>
+    <div class="" v-for="item in options" :key="item">
+      <Checkbox
+        :checked="item.checked ? item.checked : false"
+        :disabled="item.disabled ? item.disabled : false"
+        @change="onChange(item, $event)"
+        >{{ item.label }}</Checkbox
+      >
+    </div>
   </div>
 </template>
 
@@ -80,29 +56,12 @@ const checked = (item: Option): boolean => {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
+  gap: 6px;
   &.ui-checkboxGroup-column {
     flex-direction: column;
     align-items: start;
     justify-content: center;
-  }
-  > .ui-checkboxGroup-label {
-    display: flex;
-    align-items: center;
-    font-size: 16px;
-    padding: 4px 0;
-    > .ui-checkbox-input {
-      width: 1em;
-      height: 1em;
-      font-size: 14px;
-    }
-    > .ui-checkbox-title {
-      font-size: 14px;
-      padding: 0 8px;
-      white-space: nowrap;
-      display: flex;
-      align-items: center;
-      vertical-align: center;
-    }
+    gap: 4px;
   }
 }
 </style>

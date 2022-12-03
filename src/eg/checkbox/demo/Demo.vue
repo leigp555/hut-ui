@@ -10,10 +10,11 @@ import DemoOne from './DemoOne.vue'
 import DemoTwo from './DemoTwo.vue'
 import DemoThree from './DemoThree.vue'
 import DemoFour from './DemoFour.vue'
+import DemoFive from './DemoFive.vue'
 
 const demoArr = computed(() => {
-  return [DemoOne, DemoTwo, DemoThree, DemoFour].map((item, index) => {
-    return getDemo(item, 'typography', index)
+  return [DemoOne, DemoTwo, DemoThree, DemoFour, DemoFive].map((item, index) => {
+    return getDemo(item, 'checkbox', index)
   })
 })
 </script>

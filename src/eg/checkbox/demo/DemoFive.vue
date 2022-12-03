@@ -1,9 +1,14 @@
 <demo>
-多选组
+垂直分布
 </demo>
 
 <template>
-  <CheckboxGroup v-model:value="value" :options="options" @change="onChange" />
+  <CheckboxGroup
+    v-model:value="value"
+    :options="options"
+    direction="column"
+    @change="onChange"
+  />
 </template>
 
 <script setup lang="ts">

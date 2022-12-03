@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { withDefaults, defineProps, toRefs, ref } from 'vue'
 
-const emits = defineEmits(['update:checked'])
+const emits = defineEmits(['update:checked', 'change'])
 const props = withDefaults(defineProps<{ checked?: boolean; disabled?: boolean }>(), {
   checked: false,
   disabled: false
@@ -11,6 +11,7 @@ const { checked, disabled } = toRefs(props)
 const inputRef = ref<HTMLInputElement>()
 const onInput = () => {
   emits('update:checked', !checked.value)
+  emits('change', !checked.value)
   inputRef.value?.classList.add('ui-button-active')
   const id = setTimeout(() => {
     inputRef.value?.classList.remove('ui-button-active')
@@ -39,7 +40,7 @@ const onInput = () => {
 
 <style lang="scss">
 .ui-checkbox-wrap {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   font-size: 16px;
   padding: 4px 0;
