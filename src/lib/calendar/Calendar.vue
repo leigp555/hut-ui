@@ -6,10 +6,11 @@ import SvgIcon from '../common/SvgIcon.vue'
 
 const emits = defineEmits(['update:value', 'change'])
 const props = withDefaults(
-  defineProps<{ value: string; size?: 'small' | 'normal' }>(),
+  defineProps<{ value: string; size?: 'small' | 'normal'; noBorder?: boolean }>(),
   {
     value: dayjs().format('YYYY-MM-DD'),
-    size: 'normal'
+    size: 'normal',
+    noBorder: false
   }
 )
 const { value } = toRefs(props)
@@ -148,8 +149,17 @@ const goToday = () => {
 </script>
 
 <template>
-  <div class="ui-calendar-wrap" :class="{ 'ui-calendar-wrap-small': size === 'small' }">
-    <div class="ui-calendar-actions">
+  <div
+    class="ui-calendar-wrap"
+    :class="{
+      'ui-calendar-wrap-small': size === 'small',
+      'ui-calendar-wrap-noBorder': noBorder
+    }"
+  >
+    <div class="ui-calendar-header" v-if="$slots.header">
+      <slot name="header" />
+    </div>
+    <div v-else class="ui-calendar-actions">
       <span class="calendar-actions-icon">
         <SvgIcon
           name="calendar"
@@ -202,6 +212,9 @@ const goToday = () => {
         </tr>
       </table>
     </div>
+    <div class="ui-calendar-header" v-if="$slots.footer">
+      <slot name="footer" />
+    </div>
   </div>
 </template>
 
@@ -217,6 +230,7 @@ $border_color: #d9d9d9;
   background-color: #ffffff;
   width: 350px;
   max-width: 400px;
+  user-select: none;
   > .ui-calendar-actions {
     display: flex;
     justify-content: space-between;
@@ -237,6 +251,7 @@ $border_color: #d9d9d9;
     table {
       border-collapse: collapse;
       width: 100%;
+      table-layout: fixed;
       th {
         border: none;
         span {
@@ -254,6 +269,7 @@ $border_color: #d9d9d9;
     table {
       border-collapse: collapse;
       width: 100%;
+      table-layout: fixed;
       td {
         border: none;
         padding: 3px 0;
@@ -300,8 +316,23 @@ $border_color: #d9d9d9;
       }
     }
   }
+  &.ui-calendar-wrap-noBorder {
+    border: none;
+    > .ui-calendar-actions {
+      padding-left: 0;
+      padding-right: 0;
+    }
+    > .ui-calendar-week {
+      padding-left: 8px;
+      padding-right: 8px;
+    }
+    > .ui-calendar-day {
+      padding-left: 8px;
+      padding-right: 8px;
+    }
+  }
 }
-tr {
-  margin: 0 3px;
-}
+//tr {
+//  margin: 0 3px;
+//}
 </style>
