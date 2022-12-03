@@ -1,13 +1,13 @@
 <script lang="ts">
+import { withDefaults, defineProps, toRefs, ref } from 'vue'
+import SvgIcon from '@/lib/common/SvgIcon.vue'
+
 export default {
   inheritAttrs: false
 }
 </script>
 
 <script setup lang="ts">
-import { withDefaults, defineProps, toRefs, ref } from 'vue'
-import SvgIcon from '@/lib/common/SvgIcon.vue'
-
 const emits = defineEmits(['update:value'])
 const props = withDefaults(
   defineProps<{
