@@ -26,19 +26,33 @@ const props = withDefaults(
 )
 
 const popVisibility = ref<boolean>(false)
+const popEnter = ref<boolean>(false)
+
 const changeValue = (newValue: string) => {
   emit('update:value', newValue)
 }
 
 const { value, options } = toRefs(props)
-provide('popVisibility', popVisibility)
-provide('changeValue', changeValue)
-provide('initValue', value)
 
+// input元素事件
 const inputFocus = () => {
   popVisibility.value = true
 }
 const onBlur = () => {
+  const id = setTimeout(() => {
+    if (!popEnter.value) {
+      popVisibility.value = false
+      window.clearTimeout(id)
+    }
+  }, 100)
+}
+// pop弹出框元素事件
+const popFocus = () => {
+  popEnter.value = true
+  popVisibility.value = true
+}
+const popBlur = () => {
+  popEnter.value = false
   popVisibility.value = false
 }
 
@@ -73,46 +87,52 @@ const newOptions = computed(() => {
 const cascaderWrap = ref<HTMLElement>()
 const mount = ref<HTMLElement>()
 mount.value = document.createElement('div')
-mount.value?.classList.add('xxx')
+mount.value?.classList.add('ui-cascader-pop-item')
 
 onMounted(() => {
   cascaderWrap.value.appendChild(mount.value)
 })
+provide('popVisibility', popVisibility)
+provide('changeValue', changeValue)
+provide('initValue', value)
 </script>
 
 <template>
-  <div class="ui-cascader-wrap" tabindex="-1" @blur="onBlur">
+  <div class="ui-cascader-wrap">
     <div :title="value">
       <input
         class="ui-cascader-input"
         type="text"
+        :placeholder="placeholder"
         @focus="inputFocus"
+        @blur="onBlur"
         :value="value"
+        :autofocus="false"
         readonly
       />
     </div>
-    <div>
-      <div class="pop-list" ref="cascaderWrap"></div>
+    <!--    //挂载点-->
+    <div class="ui-cascader-pop-wrap" @focus="popFocus" @blur="popBlur" tabindex="-1">
+      <Transition name="cascader">
+        <div
+          class="ui-cascader-pop-list"
+          ref="cascaderWrap"
+          v-show="popVisibility"
+        ></div>
+      </Transition>
     </div>
 
-    <div class="cascader-pop-content" v-show="popVisibility">
+    <div class="cascader-pop-content">
       <CascaderPop :options="newOptions" :toEl="mount" />
     </div>
   </div>
 </template>
 
 <style lang="scss">
-$font_color: rgba(0, 0, 0, 0.85);
+$font_color: #000000d9;
 $main_color: #1890ff;
-$selected_color: #f5f5f5;
-.pop-list {
-  margin-top: 2px;
-  display: inline-flex;
-  box-shadow: 0 3px 6px -4px #0000001f, 0 6px 16px #00000014, 0 9px 28px 8px #0000000d;
-}
-.xxx {
-  display: flex;
-}
+$border_color: #d9d9d9;
+
 .ui-cascader-wrap {
   display: inline-block;
   position: relative;
@@ -121,7 +141,7 @@ $selected_color: #f5f5f5;
     padding: 0 11px;
     outline: none;
     box-shadow: none;
-    border: 1px solid darken($selected_color, 20%);
+    border: 1px solid $border_color;
     font-size: 14px;
     color: $font_color;
     line-height: 1.5em;
@@ -136,14 +156,33 @@ $selected_color: #f5f5f5;
       border: 1px solid $main_color;
     }
   }
-  .cascader-pop-content {
+  > .ui-cascader-pop-wrap {
     position: absolute;
     bottom: 0;
     left: 0;
     transform: translateY(calc(100% + 4px));
-    transition: all 250ms;
     z-index: 100;
-    background: white;
+    margin-top: 2px;
+    > .ui-cascader-pop-list {
+      display: inline-flex;
+      box-shadow: 0 3px 6px -4px #0000001f, 0 6px 16px #00000014,
+        0 9px 28px 8px #0000000d;
+      background: white;
+      transform-origin: top;
+      > .ui-cascader-pop-item {
+        display: flex;
+      }
+    }
   }
+}
+
+.cascader-enter-from,
+.cascader-leave-to {
+  transform: scale(1, 0.5);
+  opacity: 0;
+}
+.cascader-enter-active,
+.cascader-leave-active {
+  transition: all 250ms;
 }
 </style>

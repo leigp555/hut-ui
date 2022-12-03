@@ -72,7 +72,6 @@ $selected_color: #f5f5f5;
   &:not(:last-child) {
     border-right: 1px solid #f0f0f0;
   }
-
   .cascader-list-item {
     font-size: 14px;
     line-height: 2em;
@@ -96,21 +95,8 @@ $selected_color: #f5f5f5;
       }
       &.selected {
         background-color: #e6f7ff;
-        font-weight: 600;
       }
     }
-  }
-}
-</style>
-
-<style lang="scss">
-.cascader-loop {
-  transition: opacity 250ms;
-  display: none;
-  border: 5px solid red !important;
-  &.open {
-    opacity: 1;
-    visibility: visible;
   }
 }
 </style>
