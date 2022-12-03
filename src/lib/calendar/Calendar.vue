@@ -5,9 +5,13 @@ import Select, { OptionType } from '../select/Select.vue'
 import SvgIcon from '../common/SvgIcon.vue'
 
 const emits = defineEmits(['update:value', 'change'])
-const props = withDefaults(defineProps<{ value: string }>(), {
-  value: dayjs().format('YYYY-MM-DD')
-})
+const props = withDefaults(
+  defineProps<{ value: string; size?: 'small' | 'normal' }>(),
+  {
+    value: dayjs().format('YYYY-MM-DD'),
+    size: 'normal'
+  }
+)
 const { value } = toRefs(props)
 const dateArr = computed<string[]>(() => {
   return value.value.split('-')
@@ -116,7 +120,6 @@ const dateShow = (row: number, column: number) => {
   if (day < 10) {
     day = `0${day}`
   }
-  console.log([year, month, day])
   return [year, month, day]
 }
 
@@ -135,13 +138,26 @@ const onClick = (e: Event) => {
     }
   }
 }
+const goToday = () => {
+  const nowArr = dayjs().format('YYYY-MM-DD').split('-')
+  emits('update:value', dayjs().format('YYYY-MM-DD'))
+  year.value = nowArr[0]
+  month.value = nowArr[1]
+  emits('change', dayjs().format('YYYY-MM-DD'))
+}
 </script>
 
 <template>
-  <div class="ui-calendar-wrap">
+  <div class="ui-calendar-wrap" :class="{ 'ui-calendar-wrap-small': size === 'small' }">
     <div class="ui-calendar-actions">
       <span class="calendar-actions-icon">
-        <SvgIcon name="calendar" width="1.5em" height="1.5em" fill="#1890ff" />
+        <SvgIcon
+          name="calendar"
+          width="1.5em"
+          height="1.5em"
+          fill="#1890ff"
+          @click="goToday"
+        />
       </span>
       <div class="calendar-actions-input">
         <Select
@@ -193,19 +209,20 @@ const onClick = (e: Event) => {
 $font_color: #000000d9;
 $main_color: #1890ff;
 $selected_color: #ffffff;
+$border_color: #d9d9d9;
 .ui-calendar-wrap {
   display: flex;
   flex-direction: column;
-  border: 1px solid darken($selected_color, 20);
+  border: 1px solid $border_color;
   background-color: #ffffff;
-  min-width: 300px;
+  width: 350px;
   max-width: 400px;
-  .ui-calendar-actions {
+  > .ui-calendar-actions {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 8px 12px;
-    border-bottom: 1px solid darken($selected_color, 20);
+    padding: 4px 12px;
+    border-bottom: 1px solid $border_color;
     > .calendar-actions-icon {
       margin-left: 20px;
     }
@@ -242,16 +259,14 @@ $selected_color: #ffffff;
         padding: 3px 0;
         cursor: pointer;
         .ui-calendar-item {
-          min-height: 40px;
+          //min-height: 40px;
+          height: 38px;
           width: 100%;
-          height: 100%;
           display: flex;
           justify-content: center;
           align-items: center;
           font-size: 14px;
           color: $font_color;
-          line-height: 18px;
-          font-weight: 400;
           border-radius: 2px;
           transition: all 250ms;
           &:hover {
@@ -265,6 +280,23 @@ $selected_color: #ffffff;
             color: $selected_color;
           }
         }
+      }
+    }
+  }
+  &.ui-calendar-wrap-small {
+    width: 280px;
+    //border: 1px solid red;
+    .ui-calendar-actions {
+      padding: 4px 10px;
+      > .calendar-actions-icon {
+        margin-left: 0;
+      }
+    }
+    th,
+    td {
+      .ui-calendar-item {
+        //border: 1px solid red;
+        height: 1.6em !important;
       }
     }
   }

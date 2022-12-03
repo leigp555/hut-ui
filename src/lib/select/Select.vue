@@ -62,6 +62,7 @@ const inputBlur = () => {
 $font_color: rgba(0, 0, 0, 0.85);
 $main_color: #1890ff;
 $selected_color: #f5f5f5;
+$border_color: #d9d9d9;
 .ui-select-wrap {
   display: inline-flex;
   position: relative;
@@ -73,7 +74,7 @@ $selected_color: #f5f5f5;
     display: flex;
     flex-grow: 10;
     align-items: center;
-    border: 1px solid darken($selected_color, 20);
+    border: 1px solid $border_color;
     border-radius: 2px;
     font-size: 14px;
     color: $font_color;

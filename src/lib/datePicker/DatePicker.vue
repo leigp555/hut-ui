@@ -1,55 +1,41 @@
 <template>
-  <label class="ui-datePicker-wrap">
-    <input type="date" :value="value" @input="onInput" ref="inputRef" />
-  </label>
+  <div class="ui-datePicker-wrap">
+    <Input v-model:value="value" :placeholder="placeholder" readonly>
+      <template #suffix>
+        <SvgIcon name="calendar" width="1em" height="1em" />
+      </template>
+    </Input>
+    <div class="ui-datePicker-pop">
+      <Calendar :value="value" @change="onchange" size="small" />
+    </div>
+  </div>
 </template>
 
 <script setup lang="ts">
 import { withDefaults, defineProps, toRefs, ref } from 'vue'
-import dayjs from 'dayjs'
+import dayjs, { Dayjs } from 'dayjs'
+import { Input, SvgIcon, Calendar } from '@/lib'
 
 const props = withDefaults(
   defineProps<{
     value: string
+    placeholder?: string
   }>(),
   {
-    value: dayjs().format('YYYY-MM-DD')
+    value: dayjs().format('YYYY-MM-DD'),
+    placeholder: '请选择日期'
   }
 )
 const emits = defineEmits(['update:value'])
 const { value } = toRefs(props)
-const inputRef = ref<HTMLInputElement | null>(null)
-const onInput = () => {
-  emits('update:value', inputRef.value?.value)
+
+const onchange = (newDate: Dayjs) => {
+  emits('update:value', newDate)
 }
 </script>
 
 <style lang="scss">
 .ui-datePicker-wrap {
-  input {
-    line-height: 2em;
-    display: flex;
-    gap: 5px;
-    justify-content: start;
-    align-items: center;
-    color: #000000d9;
-    border: 1px solid #d9d9d9;
-    padding: 0 11px;
-    outline: none;
-    border-radius: 2px;
-    font-size: 14px;
-    transition: all 250ms;
-    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue,
-      Arial, Noto Sans, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-      Segoe UI Symbol, 'Noto Color Emoji';
-    &:focus {
-      border: 1px solid #1890ff;
-      box-shadow: 0 0 0 2px rgba(24, 114, 255, 0.2);
-    }
-    &:hover {
-      border: 1px solid #1890ff;
-      box-shadow: 0 0 0 2px rgba(24, 114, 255, 0.2);
-    }
-  }
+  width: 150px;
 }
 </style>
