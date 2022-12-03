@@ -75,7 +75,7 @@ const props = withDefaults(
     placeholder: '请选择日期'
   }
 )
-const emits = defineEmits(['update:value'])
+const emits = defineEmits(['update:value', 'change'])
 const { value } = toRefs(props)
 
 const popShow = ref<boolean>(false)
@@ -83,6 +83,7 @@ const popEnter = ref<boolean>(false)
 
 const onchange = (newDate: Dayjs) => {
   emits('update:value', newDate)
+  emits('change', newDate)
   popEnter.value = true
   popShow.value = false
 }
@@ -100,27 +101,37 @@ const popFocus = () => {
   popEnter.value = true
 }
 const quick_back = () => {
-  emits('update:value', dayjs(value.value).subtract(1, 'year').format('YYYY-MM-DD'))
+  const newDate = dayjs(value.value).subtract(1, 'year').format('YYYY-MM-DD')
+  emits('update:value', newDate)
+  emits('change', newDate)
   popEnter.value = true
   popShow.value = true
 }
 const backward = () => {
-  emits('update:value', dayjs(value.value).subtract(1, 'month').format('YYYY-MM-DD'))
+  const newDate = dayjs(value.value).subtract(1, 'month').format('YYYY-MM-DD')
+  emits('update:value', newDate)
+  emits('change', newDate)
   popEnter.value = true
   popShow.value = true
 }
 const forward = () => {
-  emits('update:value', dayjs(value.value).add(1, 'month').format('YYYY-MM-DD'))
+  const newDate = dayjs(value.value).add(1, 'month').format('YYYY-MM-DD')
+  emits('update:value', newDate)
+  emits('change', newDate)
   popEnter.value = true
   popShow.value = true
 }
 const quick_forward = () => {
-  emits('update:value', dayjs(value.value).add(1, 'year').format('YYYY-MM-DD'))
+  const newDate = dayjs(value.value).add(1, 'year').format('YYYY-MM-DD')
+  emits('update:value', newDate)
+  emits('change', newDate)
   popEnter.value = true
   popShow.value = true
 }
 const toDay = () => {
-  emits('update:value', dayjs().format('YYYY-MM-DD'))
+  const newDate = dayjs().format('YYYY-MM-DD')
+  emits('update:value', newDate)
+  emits('update:value', newDate)
   popEnter.value = false
   popShow.value = false
 }
@@ -151,6 +162,9 @@ const toDay = () => {
         justify-content: space-between;
         align-items: center;
         border-bottom: 1px solid #f0f0f0;
+        svg {
+          cursor: pointer;
+        }
         > .ui-datePicker-icon-left {
           display: flex;
           gap: 16px;

@@ -3,17 +3,17 @@
 </demo>
 
 <template>
-  <DatePicker v-model:value="value" />
+  <DatePicker v-model:value="value" @change="onChange" />
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+import { ref } from 'vue'
 import { Dayjs } from 'dayjs'
 import { DatePicker } from '@/lib'
 
 const value = ref<Dayjs>()
 
-watch(value, () => {
+const onChange = () => {
   console.log(value.value)
-})
+}
 </script>
