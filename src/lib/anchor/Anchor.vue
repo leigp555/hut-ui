@@ -10,7 +10,7 @@ import {
   withDefaults
 } from 'vue'
 
-type ContainerType = () => HTMLElement | null
+type ContainerType = () => HTMLElement | Window
 type VNodeItem = {
   titleVNode?: VNode | null
   targetOffsetTop?: number
@@ -26,7 +26,7 @@ const props = withDefaults(
   }>(),
   {
     customClass: 'custom-class',
-    scrollContainer: null,
+    scrollContainer: () => window,
     affix: true
   }
 )
@@ -36,10 +36,10 @@ let slots: VNode[] = []
 const getSlots = () => {
   let s: VNode[] = []
   if (useSlots().default) {
-    s = useSlots().default()
+    s = useSlots().default?.() || []
   }
   if (s.length === 1 && s[0].children) {
-    slots = s[0].children
+    slots = s[0].children as VNode[]
     return
   }
   slots = s
@@ -48,7 +48,7 @@ const getSlots = () => {
 getSlots()
 
 // 选中的节点
-const selectItem = ref<VNodeItem>({})
+const selectItem = ref<VNodeItem | null>(null)
 
 // 改造所有节点
 const elInfo = ref<VNodeItem[]>([])
@@ -85,7 +85,7 @@ const getElInfo = () => {
     if (item.titleVNode && item.titleVNode.props) {
       target = document.querySelector(item.titleVNode.props.href) as HTMLElement
       if (target) {
-        item.targetOffsetTop = target.offsetTop - realScrollEl.value.offsetTop
+        item.targetOffsetTop = target.offsetTop - realScrollEl.value!.offsetTop
         item.targetClientHeight = target.clientHeight
       } else {
         item.targetOffsetTop = 0
@@ -102,33 +102,33 @@ function handle() {
   if (realScrollEl.value) scrollDistance = realScrollEl.value.scrollTop
   elInfo.value.forEach((item) => {
     if (
-      item.targetOffsetTop >= scrollDistance - item.targetClientHeight &&
-      item.targetOffsetTop <= scrollDistance + 80
+      item.targetOffsetTop! >= scrollDistance - item.targetClientHeight! &&
+      item.targetOffsetTop! <= scrollDistance + 80
     ) {
       selectItem.value = item
       currentOrder.value = item.order
     }
     item.active = false
   })
-  selectItem.value.active = true
+  selectItem.value!.active = true
 }
 
 // 绑定监听滚动事件
 const scrollHandle = throttle(handle, 20)
 onMounted(() => {
-  if (scrollContainer.value() === 'window' || !scrollContainer.value()) {
+  if (scrollContainer.value?.() === window || !scrollContainer.value?.()) {
     realScrollEl.value = document.documentElement
   } else {
-    realScrollEl.value = scrollContainer.value()
+    realScrollEl.value = scrollContainer.value() as HTMLElement
   }
   getElInfo()
   selectItem.value = elInfo.value[0]
   if (realScrollEl.value) {
-    realScrollEl.value.addEventListener('scroll', scrollHandle)
+    realScrollEl.value?.addEventListener('scroll', scrollHandle)
   }
 })
 onBeforeUnmount(() => {
-  realScrollEl.value.removeEventListener('scroll', scrollHandle)
+  realScrollEl.value?.removeEventListener('scroll', scrollHandle)
 })
 </script>
 

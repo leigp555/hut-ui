@@ -23,7 +23,7 @@ const emits = defineEmits(['change'])
 const props = withDefaults(
   defineProps<{
     offsetTop?: number
-    scrollContainer?: () => HTMLElement
+    scrollContainer?: () => HTMLElement | Window
   }>(),
   {
     offsetTop: 50,
@@ -35,7 +35,7 @@ const containerRef = ref<HTMLDivElement | null>(null)
 const innerRef = ref<HTMLDivElement | null>(null)
 const initHeight = ref<number>(0)
 const shouldFix = ref<boolean>(false)
-const realScrollEl = ref<HTMLElement | null>(null)
+const realScrollEl = ref<HTMLElement>()
 
 // 简单的节流函数
 
@@ -51,32 +51,34 @@ function throttle(func: () => void, wait: number) {
 }
 
 const containerScroll = () => {
-  const containerTop = containerRef.value!.offsetTop - realScrollEl.value.offsetTop
-  if (realScrollEl.value.scrollTop > containerTop - offsetTop.value) {
-    shouldFix.value = true
-  } else if (realScrollEl.value.scrollTop < containerTop - offsetTop.value) {
-    shouldFix.value = false
+  if (realScrollEl.value) {
+    const containerTop = containerRef.value!.offsetTop - realScrollEl.value.offsetTop
+    if (realScrollEl.value.scrollTop > containerTop - offsetTop.value) {
+      shouldFix.value = true
+    } else if (realScrollEl.value.scrollTop < containerTop - offsetTop.value) {
+      shouldFix.value = false
+    }
   }
 }
 const handle = throttle(containerScroll, 10)
 onMounted(() => {
-  if (scrollContainer.value() === 'window') {
+  if (scrollContainer.value() === window) {
     realScrollEl.value = document.documentElement
   } else {
-    realScrollEl.value = scrollContainer.value()
+    realScrollEl.value = scrollContainer.value() as HTMLElement
   }
-  realScrollEl.value.addEventListener('scroll', handle)
+  realScrollEl.value?.addEventListener('scroll', handle)
   // 保留原位置的高度
   initHeight.value = innerRef.value!.getBoundingClientRect().height
   containerRef.value!.style.height = `${initHeight.value}px`
 })
 onBeforeUnmount(() => {
-  realScrollEl.value.removeEventListener('scroll', handle)
+  realScrollEl.value?.removeEventListener('scroll', handle)
 })
 
 watch(shouldFix, () => {
   emits('change', shouldFix.value)
-  if (shouldFix.value) {
+  if (shouldFix.value && realScrollEl.value) {
     innerRef.value!.style.top = `${
       offsetTop.value + realScrollEl.value.getBoundingClientRect().top
     }px`
