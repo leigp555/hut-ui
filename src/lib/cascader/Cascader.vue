@@ -145,7 +145,7 @@ $border_color: #d9d9d9;
     font-size: 14px;
     color: $font_color;
     line-height: 1.5em;
-    height: 30px;
+    height: 32px;
     border-radius: 2px;
     overflow: hidden;
     text-overflow: ellipsis;

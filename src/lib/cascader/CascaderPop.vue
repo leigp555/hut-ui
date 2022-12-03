@@ -69,6 +69,7 @@ $selected_color: #f5f5f5;
   min-width: 111px;
   height: 180px;
   overflow-y: auto;
+  padding: 4px 0;
   &:not(:last-child) {
     border-right: 1px solid #f0f0f0;
   }
