@@ -32,12 +32,16 @@ const onInput = () => {
     gap: 5px;
     justify-content: start;
     align-items: center;
-    color: rgba(0, 0, 0, 0.85);
-    border: 1px solid rgba(0, 0, 0, 0.85);
+    color: #000000d9;
+    border: 1px solid #d9d9d9;
     padding: 0 11px;
     outline: none;
     border-radius: 2px;
     font-size: 14px;
+    transition: all 250ms;
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue,
+      Arial, Noto Sans, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+      Segoe UI Symbol, 'Noto Color Emoji';
     &:focus {
       border: 1px solid #1890ff;
       box-shadow: 0 0 0 2px rgba(24, 114, 255, 0.2);
