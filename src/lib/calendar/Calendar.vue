@@ -25,6 +25,7 @@ const changeYear = (newYear: string) => {
   year.value = newYear
   const newDate = [newYear, ...dateArr.value.slice(1)].join('-')
   emits('update:value', newDate)
+  emits('change', newDate)
 }
 // 月选择
 const month = ref<string>(dateArr.value[1])
@@ -36,6 +37,7 @@ const changeMonth = (newMonth: string) => {
   month.value = newMonth
   const newDate = [dateArr.value[0], newMonth, dateArr.value[2]].join('-')
   emits('update:value', newDate)
+  emits('change', newDate)
 }
 
 // 周
@@ -75,7 +77,7 @@ const dateShow = (row: number, column: number) => {
   // eslint-disable-next-line no-shadow
   let month = parseInt(dateArr.value[1], 10)
   // eslint-disable-next-line no-shadow
-  const year: number = parseInt(dateArr.value[0], 10)
+  let year: number = parseInt(dateArr.value[0], 10)
   // 获取当月首日星期
   const firstWeekDay = getWeekday(getFirstMonthDay(value.value))
   // 获取当月总天数
@@ -93,6 +95,7 @@ const dateShow = (row: number, column: number) => {
         month -= 1
       } else {
         month = 12
+        year -= 1
       }
     } else if (column - firstWeekDay >= 0 && row === 1) {
       day = column - firstWeekDay + 1
@@ -107,11 +110,13 @@ const dateShow = (row: number, column: number) => {
       month += 1
     } else {
       month = 1
+      year += 1
     }
   }
   if (day < 10) {
     day = `0${day}`
   }
+  console.log([year, month, day])
   return [year, month, day]
 }
 
