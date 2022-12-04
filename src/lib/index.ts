@@ -100,3 +100,4 @@ export { default as Upload } from './upload/Upload.vue'
 // types
 export type { CascaderOptions } from './cascader/type'
 export type { CheckBoxOption } from './checkbox/type'
+export type { MentionsOptions } from './mentions/type'
