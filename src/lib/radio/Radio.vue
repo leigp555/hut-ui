@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { withDefaults, defineProps, toRefs, ref } from 'vue'
 
-const emits = defineEmits(['update:checked', 'select'])
+const emits = defineEmits(['update:checked', 'select', 'change'])
 const props = withDefaults(
   defineProps<{ checked?: boolean; disabled?: boolean; value?: any; name?: string }>(),
   {
@@ -10,11 +10,12 @@ const props = withDefaults(
   }
 )
 
-const { disabled } = toRefs(props)
+const { disabled, checked } = toRefs(props)
 
 const inputRef = ref<HTMLInputElement | null>(null)
 const onInput = () => {
-  emits('update:checked', true)
+  emits('update:checked', !checked.value)
+  emits('change', !checked.value)
   emits('select', inputRef.value?.value)
 }
 const onBlur = () => {
@@ -23,7 +24,7 @@ const onBlur = () => {
 </script>
 
 <template>
-  <label class="ui-radio-label">
+  <label class="ui-radio-label" :class="{ 'ui-radio-label-disabled': disabled }">
     <input
       :disabled="disabled"
       class="ui-radio"
@@ -51,10 +52,14 @@ $size: 14px;
   display: inline-flex;
   align-items: center;
   gap: 8px;
+  &.ui-radio-label-disabled {
+    cursor: not-allowed;
+  }
   > .ui-radio-title {
     display: flex;
     align-items: center;
     font-size: 14px;
+    user-select: none;
     font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue,
       Arial, Noto Sans, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
       Segoe UI Symbol, 'Noto Color Emoji';

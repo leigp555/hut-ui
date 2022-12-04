@@ -9,11 +9,10 @@ import DemoDisplay from '@/components/DemoDisplay.vue'
 import DemoOne from './DemoOne.vue'
 import DemoTwo from './DemoTwo.vue'
 import DemoThree from './DemoThree.vue'
-import DemoFour from './DemoFour.vue'
 
 const demoArr = computed(() => {
-  return [DemoOne, DemoTwo, DemoThree, DemoFour].map((item, index) => {
-    return getDemo(item, 'typography', index)
+  return [DemoOne, DemoTwo, DemoThree].map((item, index) => {
+    return getDemo(item, 'radio', index)
   })
 })
 </script>

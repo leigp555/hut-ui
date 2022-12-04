@@ -8,47 +8,61 @@ import ApiIntro from '@/components/ApiIntro.vue'
 const attrContent1 = [
   {
     rowIndex: 1,
-    属性: 'strong',
-    说明: '加粗文字',
+    属性: 'checked',
+    说明: '选中状态',
     类型: 'boolean',
     默认值: 'false'
   },
   {
     rowIndex: 2,
-    属性: 'code',
-    说明: '代码标记',
+    属性: 'disabled',
+    说明: '禁用选项',
     类型: 'boolean',
     默认值: 'false'
   },
   {
     rowIndex: 3,
-    属性: 'keyboard',
-    说明: '键盘标记',
-    类型: 'boolean',
-    默认值: 'false'
+    属性: 'value',
+    说明: '根据 value 进行比较，判断是否选中',
+    类型: 'any',
+    默认值: ''
   },
   {
     rowIndex: 4,
-    属性: 'mark',
-    说明: '文字标记',
-    类型: 'boolean',
-    默认值: 'false'
+    属性: 'name',
+    说明: 'input[type="radio"] 的 name 属性',
+    类型: 'string',
+    默认值: ''
   }
 ]
 const attrContent2 = [
   {
     rowIndex: 1,
-    属性: 'level',
-    说明: '标题等级',
-    类型: 'string(1-6)|number(1-6)',
-    默认值: '4'
+    属性: 'value',
+    说明: '用于设置当前选中的值',
+    类型: 'any',
+    默认值: ''
+  },
+  {
+    rowIndex: 2,
+    属性: 'name',
+    说明: 'RadioGroup 下所有 input[type="radio"] 的 name 属性',
+    类型: 'string',
+    默认值: ''
   }
 ]
 
-const eventContent = []
+const eventContent = [
+  {
+    rowIndex: 1,
+    事件名称: 'change',
+    说明: '选项变化时的回调函数',
+    回调参数: 'Function(checked:boolean)'
+  }
+]
 
 const attrContentArr = [
-  { componentName: 'Text', attrContent: attrContent1 },
-  { componentName: 'Title', attrContent: attrContent2 }
+  { componentName: 'Radio', attrContent: attrContent1 },
+  { componentName: 'RadioGroup', attrContent: attrContent2 }
 ]
 </script>

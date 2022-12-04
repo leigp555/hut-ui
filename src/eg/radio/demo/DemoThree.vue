@@ -1,16 +1,22 @@
 <demo>
-标题组件
+单选组
 </demo>
+
 <template>
-  <div class="wrap">
-    <Title level="1">h1.Introduction</Title>
-    <Title level="2">h2.Introduction</Title>
-    <Title level="3">h3.Introduction</Title>
-    <Title level="4">h4.Introduction</Title>
-    <Title level="5">h5.Introduction</Title>
-  </div>
+  <RadioGroup v-model:value="value" name="test" @change="onChange">
+    <Radio :value="1">Option A</Radio>
+    <Radio :value="2">Option B</Radio>
+    <Radio :value="3">Option C</Radio>
+  </RadioGroup>
 </template>
 
 <script setup lang="ts">
-import { Title } from '@/lib'
+import { ref } from 'vue'
+import { RadioGroup, Radio } from '@/lib'
+
+const value = ref<number>(1)
+
+const onChange = (current: number) => {
+  console.log(current)
+}
 </script>
