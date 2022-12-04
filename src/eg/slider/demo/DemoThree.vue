@@ -1,16 +1,19 @@
 <demo>
-标题组件
+禁用
 </demo>
+
 <template>
-  <div class="wrap">
-    <Title level="1">h1.Introduction</Title>
-    <Title level="2">h2.Introduction</Title>
-    <Title level="3">h3.Introduction</Title>
-    <Title level="4">h4.Introduction</Title>
-    <Title level="5">h5.Introduction</Title>
+  <div>
+    <Slider v-model:value="value" disabled :style="{ width: '300px' }" />
+    <div style="margin-top: 50px">
+      {{ value }}
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { Title } from '@/lib'
+import { ref } from 'vue'
+import { Slider } from '@/lib'
+
+const value = ref<number>(20)
 </script>

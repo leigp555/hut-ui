@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import { withDefaults, defineProps, ref, onMounted, toRefs } from 'vue'
 
-const emits = defineEmits(['update:value'])
-const props = withDefaults(defineProps<{ value?: number }>(), {
+const emits = defineEmits(['update:value', 'change', 'afterChange'])
+const props = withDefaults(defineProps<{ value?: number; disabled?: boolean }>(), {
+  disabled: false,
   value: 0
 })
-const { value } = toRefs(props)
+const { value, disabled } = toRefs(props)
 
 const sliderWrapRef = ref<HTMLDivElement | null>(null)
 const sliderLineRef = ref<HTMLDivElement | null>(null)
@@ -49,15 +50,18 @@ const onMousemove = (e: MouseEvent) => {
       sliderBlockRef.value.style.transform = `translate3d(${distance.value}px,-50%,0)`
       sliderLineRef.value.style.transform = `translate3d(${distance.value}px,0,0)`
       emits('update:value', Math.ceil((result / wrapWidth.value) * 100))
+      emits('change', Math.ceil((result / wrapWidth.value) * 100))
     } else if (result > wrapWidth.value) {
       sliderBlockRef.value.style.transform = `translate3d(${wrapWidth.value}px,-50%,0)`
       sliderLineRef.value.style.transform = `translate3d(${wrapWidth.value}px,0,0)`
       emits('update:value', 100)
+      emits('change', 100)
       distance.value = wrapWidth.value
     } else if (result < 0) {
       sliderBlockRef.value.style.transform = `translate3d(0px,-50%,0)`
       sliderLineRef.value.style.transform = `translate3d(0px,0,0)`
       emits('update:value', 0)
+      emits('change', 0)
       distance.value = 0
     }
   }
@@ -68,9 +72,15 @@ const onMouseup = () => {
   document.documentElement.removeEventListener('mousemove', onMousemove)
   document.documentElement.removeEventListener('mouseup', onMouseup)
   sliderBlockRef.value!.classList.remove('ui-slider-drag')
+  emits('afterChange', value.value)
 }
 
 const onMouseDown = (e: MouseEvent) => {
+  if (disabled.value) {
+    e.stopPropagation()
+    e.preventDefault()
+    return
+  }
   isMove.value = true
   initClickX.value = e.clientX
   // 初始化点击时的位置
@@ -83,7 +93,11 @@ const onMouseDown = (e: MouseEvent) => {
 </script>
 
 <template>
-  <div class="ui-slider-wrap" ref="sliderWrapRef">
+  <div
+    class="ui-slider-wrap"
+    :class="{ 'ui-slider-disabled': disabled }"
+    ref="sliderWrapRef"
+  >
     <div class="ui-slider-view">
       <div class="ui-slider-line" ref="sliderLineRef" />
     </div>
@@ -92,6 +106,7 @@ const onMouseDown = (e: MouseEvent) => {
       ref="sliderBlockRef"
       @mousedown="onMouseDown"
       @mouseup="onMouseup"
+      :class="{ 'ui-slider-block-disabled': disabled }"
     >
       <span class="ui-slider-tip">{{ value }}</span>
     </div>
@@ -108,6 +123,7 @@ $tip_color: #404040;
 
   position: relative;
   border-radius: 8px;
+
   > .ui-slider-view {
     overflow: hidden;
     position: relative;
@@ -134,6 +150,9 @@ $tip_color: #404040;
     border-radius: 50%;
     transform: translateY(-50%);
     cursor: pointer;
+    &.ui-slider-block-disabled {
+      cursor: not-allowed;
+    }
     > .ui-slider-tip {
       background-color: $tip_color;
       font-size: 14px;
@@ -168,6 +187,15 @@ $tip_color: #404040;
     &:hover .ui-slider-tip {
       opacity: 1;
       visibility: visible;
+    }
+  }
+  &.ui-slider-disabled {
+    cursor: not-allowed;
+    .ui-slider-line {
+      background: #b8b8b8;
+    }
+    .ui-slider-block {
+      border-color: #00000040;
     }
   }
 }
