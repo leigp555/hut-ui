@@ -1,6 +1,10 @@
 <template>
   <!--  修改-->
-  <ComponentContent :nav-arr="navArr" title="Switch 开关" component-name="switch">
+  <ComponentContent
+    :nav-arr="navArr"
+    title="TimePicker 时间选择框"
+    component-name="timePicker"
+  >
     <template #intro>
       <Intro />
     </template>
@@ -25,8 +29,8 @@ import { generateNav } from '@/eg/helper'
 const wrap = ref<HTMLElement | null>(null)
 
 // 修改
-const titleArr = ['示例一', '示例二', '标题组件', '文字标记']
+const titleArr = ['基本用法']
 const navArr = computed<{ id: string; title: string; nested: boolean }[]>(() => {
-  return generateNav('switch', titleArr)
+  return generateNav('timePicker', titleArr)
 })
 </script>

@@ -6,7 +6,7 @@
 </template>
 
 <script lang="ts" setup>
-import TypographyEg from '@/eg/SwitchEg.vue'
+import TypographyEg from '@/eg/TimePickerEg.vue'
 import Head from '@/views/Head.vue'
 </script>
 

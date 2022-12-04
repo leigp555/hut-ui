@@ -3,7 +3,7 @@ import { withDefaults, defineProps, ref, computed } from 'vue'
 import dayjs from 'dayjs'
 import SvgIcon from '@/lib/common/SvgIcon.vue'
 
-const emits = defineEmits(['update:value'])
+const emits = defineEmits(['update:value', 'change'])
 const props = withDefaults(defineProps<{ value?: string }>(), {
   value: dayjs().format('HH:mm:ss')
 })
@@ -27,6 +27,7 @@ const onBlur = () => {
 }
 const now = () => {
   emits('update:value', dayjs().format('HH:mm:ss'))
+  emits('change', dayjs().format('HH:mm:ss'))
   wrapRef.value?.classList.remove('wrap-focus')
   shouldPopShow.value = false
 }
@@ -42,6 +43,7 @@ const userSelect = (e: Event) => {
   if (el.tagName.toLowerCase() === 'li' && spec && spec === 'hour') {
     const newTime = [el.innerText, ...timeArr.value.slice(1)]
     emits('update:value', newTime.join(':'))
+    emits('change', newTime.join(':'))
   }
   if (el.tagName.toLowerCase() === 'li' && spec && spec === 'minute') {
     const newTime = [
@@ -50,10 +52,12 @@ const userSelect = (e: Event) => {
       ...timeArr.value.slice(2)
     ]
     emits('update:value', newTime.join(':'))
+    emits('change', newTime.join(':'))
   }
   if (el.tagName.toLowerCase() === 'li' && spec && spec === 'second') {
     const newTime = [...timeArr.value.slice(0, 2), el.innerText]
     emits('update:value', newTime.join(':'))
+    emits('change', newTime.join(':'))
   }
 }
 </script>
@@ -83,7 +87,7 @@ const userSelect = (e: Event) => {
       ref="popRef"
     >
       <section class="ui-timePicker-time">
-        <ol>
+        <ol class="ui-scroll-container">
           <li
             v-for="item in 24"
             :key="item"
@@ -94,7 +98,7 @@ const userSelect = (e: Event) => {
             {{ item >= 11 ? item - 1 : `0${item - 1}` }}
           </li>
         </ol>
-        <ol>
+        <ol class="ui-scroll-container">
           <li
             v-for="item in 60"
             :key="item"
@@ -105,7 +109,7 @@ const userSelect = (e: Event) => {
             {{ item >= 11 ? item - 1 : `0${item - 1}` }}
           </li>
         </ol>
-        <ol>
+        <ol class="ui-scroll-container">
           <li
             v-for="item in 60"
             :key="item"
@@ -125,6 +129,7 @@ const userSelect = (e: Event) => {
 </template>
 
 <style lang="scss">
+@import '../common/scrollBar.scss';
 $font_color: #000000d9;
 $border_color: #d9d9d9;
 $main_color: #1890ff;
@@ -157,6 +162,7 @@ $select_color: #e6f7ff;
       font-size: 14px;
     }
     > .ui-input {
+      padding: 0;
       width: 100%;
       text-overflow: ellipsis;
       overflow: hidden;
@@ -186,6 +192,8 @@ $select_color: #e6f7ff;
     color: $font_color;
     box-shadow: 0 3px 6px -4px #0000001f, 0 6px 16px #00000014, 0 9px 28px 8px #0000000d;
     position: absolute;
+    z-index: 100;
+    background: #ffffff;
     bottom: 0;
     left: 0;
     transform: translateY(calc(100% + 5px));
@@ -208,17 +216,6 @@ $select_color: #e6f7ff;
         }
         &::-webkit-scrollbar {
           width: 4px;
-        }
-        &::-webkit-scrollbar-thumb {
-          //滚动条滑块的设置
-          border-radius: 2px;
-          -moz-border-radius: 2px;
-          -webkit-border-radius: 2px;
-          background-color: #c3c3c3;
-        }
-        &::-webkit-scrollbar-track {
-          //滚动条轨道设置
-          background-color: transparent;
         }
 
         > li {

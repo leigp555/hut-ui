@@ -8,31 +8,10 @@ import ApiIntro from '@/components/ApiIntro.vue'
 const attrContent1 = [
   {
     rowIndex: 1,
-    属性: 'strong',
-    说明: '加粗文字',
-    类型: 'boolean',
-    默认值: 'false'
-  },
-  {
-    rowIndex: 2,
-    属性: 'code',
-    说明: '代码标记',
-    类型: 'boolean',
-    默认值: 'false'
-  },
-  {
-    rowIndex: 3,
-    属性: 'keyboard',
-    说明: '键盘标记',
-    类型: 'boolean',
-    默认值: 'false'
-  },
-  {
-    rowIndex: 4,
-    属性: 'mark',
-    说明: '文字标记',
-    类型: 'boolean',
-    默认值: 'false'
+    属性: 'value',
+    说明: 'value(v-model)',
+    类型: 'dayjs(HH:mm:ss)',
+    默认值: `dayjs().format('HH:mm:ss')`
   }
 ]
 const attrContent2 = [
@@ -45,10 +24,14 @@ const attrContent2 = [
   }
 ]
 
-const eventContent = []
-
-const attrContentArr = [
-  { componentName: 'Text', attrContent: attrContent1 },
-  { componentName: 'Title', attrContent: attrContent2 }
+const eventContent = [
+  {
+    rowIndex: 1,
+    事件名称: 'change',
+    说明: '时间发生变化的回调',
+    回调参数: 'function(time: dayjs ): void'
+  }
 ]
+
+const attrContentArr = [{ componentName: 'TimePicker', attrContent: attrContent1 }]
 </script>
