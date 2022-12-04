@@ -1,5 +1,5 @@
 <template>
-  <div class="ui-template-wrap scroll-container" ref="wrap" id="display-container-wrap">
+  <div class="template-wrap scroll-container" ref="wrap" id="display-container-wrap">
     <!--    导航部分-->
     <section class="nav" v-if="navArr[0]">
       <Anchor
@@ -58,8 +58,8 @@ withDefaults(
 const wrap = ref<HTMLElement | null>(null)
 </script>
 
-<style lang="scss">
-.ui-template-wrap {
+<style lang="scss" scoped>
+.template-wrap {
   overflow-y: auto;
   overflow-x: auto;
   max-height: 100%;

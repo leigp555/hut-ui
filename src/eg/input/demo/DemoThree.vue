@@ -1,16 +1,18 @@
 <demo>
-标题组件
+输入框外添加元素
 </demo>
+
 <template>
-  <div class="wrap">
-    <Title level="1">h1.Introduction</Title>
-    <Title level="2">h2.Introduction</Title>
-    <Title level="3">h3.Introduction</Title>
-    <Title level="4">h4.Introduction</Title>
-    <Title level="5">h5.Introduction</Title>
-  </div>
+  <Input v-model:value="value" placeholder="Basic usage">
+    <template #suffix_outer>
+      <Button :style="{ marginLeft: '4px' }">search</Button>
+    </template>
+  </Input>
 </template>
 
 <script setup lang="ts">
-import { Title } from '@/lib'
+import { ref } from 'vue'
+import { Input, Button } from '@/lib'
+
+const value = ref<string>('')
 </script>

@@ -94,6 +94,7 @@ $main_color: #1890ff;
     color: $font_color;
     line-height: 1.5em;
     border: 1px solid $border_color;
+    border-radius: 2px;
     padding: 4px 11px;
     font-family: -apple-system, 'Noto Sans', 'Helvetica Neue', Helvetica,
       'Nimbus Sans L', Arial, 'Liberation Sans', 'PingFang SC', 'Hiragino Sans GB',

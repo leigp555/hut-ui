@@ -1,9 +1,9 @@
 <demo>
-基本用法
+密码输入框
 </demo>
 
 <template>
-  <Input v-model:value="value" placeholder="Basic usage" />
+  <Input v-model:value="value" placeholder="Basic usage" type="password" />
 </template>
 
 <script setup lang="ts">

@@ -24,6 +24,17 @@ const Cascader = () => import('@/eg/cascader/Index.vue')
 const Checkbox = () => import('@/eg/checkbox/Index.vue')
 const DatePicker = () => import('@/eg/datePicker/Index.vue')
 const Form = () => import('@/eg/form/Index.vue')
+const Input = () => import('@/eg/input/Index.vue')
+const InputNumber = () => import('@/eg/inputNumber/Index.vue')
+const Mentions = () => import('@/eg/mentions/Index.vue')
+const Radio = () => import('@/eg/radio/Index.vue')
+const Rate = () => import('@/eg/rate/Index.vue')
+const Select = () => import('@/eg/select/Index.vue')
+const Slider = () => import('@/eg/slider/Index.vue')
+const TimePicker = () => import('@/eg/timePicker/Index.vue')
+const Transfer = () => import('@/eg/transfer/Index.vue')
+const TreeSelect = () => import('@/eg/treeSelect/Index.vue')
+const Upload = () => import('@/eg/upload/Index.vue')
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -142,6 +153,61 @@ const routes: Array<RouteRecordRaw> = [
         path: 'form',
         name: 'form',
         component: Form
+      },
+      {
+        path: 'input',
+        name: 'input',
+        component: Input
+      },
+      {
+        path: 'inputNumber',
+        name: 'inputNumber',
+        component: InputNumber
+      },
+      {
+        path: 'mentions',
+        name: 'mentions',
+        component: Mentions
+      },
+      {
+        path: 'radio',
+        name: 'radio',
+        component: Radio
+      },
+      {
+        path: 'rate',
+        name: 'rate',
+        component: Rate
+      },
+      {
+        path: 'select',
+        name: 'select',
+        component: Select
+      },
+      {
+        path: 'slider',
+        name: 'slider',
+        component: Slider
+      },
+      {
+        path: 'timePicker',
+        name: 'timePicker',
+        component: TimePicker
+      },
+      {
+        path: 'transfer',
+        name: 'transfer',
+        component: Transfer
+      },
+      {
+        path: 'treeSelect',
+        name: 'treeSelect',
+        component: TreeSelect
+      },
+      {
+        path: 'upload',
+        name: 'upload',
+        component: Upload
       }
     ]
   },
