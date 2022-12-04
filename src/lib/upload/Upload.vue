@@ -44,9 +44,7 @@ const onDrop = (e: InputEvent) => {
 
 <template>
   <div class="ui-upload-wrap">
-    <section class="ui-upload-tip">
-      <slot />
-    </section>
+    <slot />
     <input
       class="ui-upload-input"
       type="file"
@@ -62,33 +60,19 @@ const onDrop = (e: InputEvent) => {
 $font_color: #000000d9;
 $border_color: #d9d9d9;
 .ui-upload-wrap {
-  border: 1px dashed $border_color;
+  color: $font_color;
   position: relative;
-  display: flex;
-  min-height: 150px;
-  flex-direction: column;
-  background-color: #fafafa;
+  display: inline-block;
   > .ui-upload-input {
-    display: block;
     flex-grow: 10;
     opacity: 0;
     cursor: pointer;
-  }
-  > .ui-upload-tip {
-    color: $font_color;
     position: absolute;
-
-    top: 50%;
-    left: 50%;
+    top: 0;
+    left: 0;
     width: 100%;
-    transform: translate(-50%, -50%);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    padding: 16px 10px;
-    text-align: center;
+    height: 100%;
+    z-index: 100;
   }
 }
 </style>
