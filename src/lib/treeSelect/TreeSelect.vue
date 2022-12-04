@@ -2,15 +2,9 @@
 import { withDefaults, defineProps, ref, toRefs, provide } from 'vue'
 import SvgIcon from '@/lib/common/SvgIcon.vue'
 import TreePop from './TreePop.vue'
+import { TreeSelectOptions } from './type'
 
-// const emits = defineEmits(['update:value'])
-export interface TreeSelectOptions {
-  title: string
-  value: string
-  children?: TreeSelectOptions[]
-}
-
-const emits = defineEmits(['update:value'])
+const emits = defineEmits(['update:value', 'change'])
 const props = withDefaults(
   defineProps<{
     value?: string
@@ -48,6 +42,7 @@ const userSelect = () => {
 }
 const onSelect = (selectStr: string) => {
   emits('update:value', selectStr)
+  emits('change', selectStr)
 }
 provide('change_treeSelect_value', onSelect)
 </script>
@@ -70,7 +65,7 @@ provide('change_treeSelect_value', onSelect)
     </label>
     <div
       tabindex="-1"
-      class="ui-treeSelect-pop"
+      class="ui-treeSelect-pop ui-scroll-container"
       :class="{ 'treeSelect-pop-show': shouldPopShow }"
       @mousedown="userSelect"
       @blur="popBlur"
@@ -82,6 +77,7 @@ provide('change_treeSelect_value', onSelect)
 </template>
 
 <style lang="scss">
+@import '../common/scrollBar.scss';
 $font_color: #000000d9;
 $border_color: #d9d9d9;
 $main_color: #1890ff;
@@ -123,6 +119,7 @@ $select_color: #e6f7ff;
       line-height: 1.5em;
       display: flex;
       align-items: center;
+      padding: 0;
       &:hover {
         border: none;
         outline: none;
@@ -146,6 +143,8 @@ $select_color: #e6f7ff;
     position: absolute;
     bottom: 0;
     left: 0;
+    background: #ffffff;
+    z-index: 100;
     transform: translateY(calc(100% + 5px));
     opacity: 0;
     visibility: hidden;
@@ -153,22 +152,6 @@ $select_color: #e6f7ff;
     &.treeSelect-pop-show {
       opacity: 1;
       visibility: visible;
-    }
-    &::-webkit-scrollbar {
-      //整个滚动条的宽高设置
-      width: 8px; //宽高只有一个能生效，如果是横向滚动条高度生效，纵向滚动条宽度生效
-      height: 8px;
-    }
-    &::-webkit-scrollbar-thumb {
-      //滚动条滑块的设置
-      border-radius: 3px;
-      -moz-border-radius: 3px;
-      -webkit-border-radius: 3px;
-      background-color: #c3c3c3;
-    }
-    &::-webkit-scrollbar-track {
-      //滚动条轨道设置
-      background-color: transparent;
     }
   }
 }
