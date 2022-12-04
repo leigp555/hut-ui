@@ -45,16 +45,16 @@ const sub = () => {
       <span class="ui-up ui-span" @click="add">
         <SvgIcon
           name="back"
-          width="1em"
-          height="1em"
+          width="0.8em"
+          height="0.8em"
           :style="{ transform: 'rotate(90deg)' }"
         />
       </span>
       <span class="ui-down ui-span" @click="sub">
         <SvgIcon
           name="back"
-          width="1em"
-          height="1em"
+          width="0.8em"
+          height="0.8em"
           :style="{ transform: 'rotate(-90deg)' }"
         />
       </span>
@@ -86,7 +86,7 @@ $main_color: #1890ff;
     flex-direction: column;
     align-items: start;
     justify-content: start;
-    font-size: 14px;
+    font-size: 12px;
     > .ui-span {
       border-left: 1px solid $border_color;
       cursor: pointer;
