@@ -1,21 +1,16 @@
 <script setup lang="ts">
-import { withDefaults, defineProps, computed, ref } from 'vue'
+import { withDefaults, defineProps, computed, ref, toRefs } from 'vue'
 import SvgIcon from '../common/SvgIcon.vue'
 import Button from '../button/Button.vue'
 import CheckboxGroup from '../checkbox/CheckboxGroup.vue'
 import Checkbox from '../checkbox/Checkbox.vue'
-
-export interface MockData {
-  label: string
-  value: string
-  description: string
-}
+import { TransferOptions } from './type'
 
 const emits = defineEmits(['change', 'update:source', 'update:selected'])
 const props = withDefaults(
   defineProps<{
-    source?: MockData[]
-    selected?: MockData[]
+    source?: TransferOptions[]
+    selected?: TransferOptions[]
     titles?: string[]
   }>(),
   {
@@ -24,37 +19,50 @@ const props = withDefaults(
     titles: () => []
   }
 )
-
+const { source, selected, titles } = toRefs(props)
 const checkedSource = ref<boolean>(false)
 const checkedSelect = ref<boolean>(false)
 // source数据
-const value2 = ref<MockData[]>([])
+const value2 = ref<TransferOptions[]>([])
 const title2 = computed(() => {
   return `${value2.value.length} / ${props.source.length} 项 ${props.titles[0]}`
 })
 // target数据
-const value3 = ref<MockData[]>([])
+const value3 = ref<TransferOptions[]>([])
 const title3 = computed(() => {
   return `${value3.value.length} / ${props.selected.length} 项 ${props.titles[1]}`
 })
 
-const onCheckedSource = () => {
-  checkedSource.value = !checkedSource.value
-  if (checkedSource.value) {
-    value2.value = props.source
+const onCheckedSource = (checked: boolean) => {
+  if (checked) {
+    source.value.forEach((item) => {
+      item.checked = true
+    })
+    value2.value = source.value
   } else {
     value2.value = []
+    source.value.forEach((item) => {
+      item.checked = false
+    })
   }
 }
-const onCheckedSelect = () => {
-  checkedSelect.value = !checkedSelect.value
-  if (checkedSelect.value) {
-    value3.value = props.selected
+const onCheckedSelect = (checked: boolean) => {
+  if (checked) {
+    selected.value.forEach((item) => {
+      item.checked = true
+    })
+    value3.value = selected.value
   } else {
+    selected.value.forEach((item) => {
+      item.checked = false
+    })
     value3.value = []
   }
 }
 const toSelect = () => {
+  value2.value.forEach((item) => {
+    item.checked = false
+  })
   const newSelectArr = [...value2.value, ...props.selected]
   emits('update:selected', newSelectArr)
   const newSourceArr = [...props.source]
@@ -74,6 +82,9 @@ const toSelect = () => {
   if (checkedSource.value) checkedSource.value = false
 }
 const toSource = () => {
+  value3.value.forEach((item) => {
+    item.checked = false
+  })
   const newSourceArr = [...value3.value, ...props.source]
   emits('update:source', newSourceArr)
   const newSelectArr = [...props.selected]
@@ -98,7 +109,7 @@ const toSource = () => {
   <div class="ui-transfer-wrap">
     <section class="ui-transfer-source">
       <div class="transfer-source-title">
-        <Checkbox :checked="checkedSource" @update:checked="onCheckedSource">{{
+        <Checkbox v-model:checked="checkedSource" @change="onCheckedSource">{{
           title2
         }}</Checkbox>
       </div>
@@ -127,7 +138,7 @@ const toSource = () => {
     </section>
     <section class="ui-transfer-source">
       <div class="transfer-source-title">
-        <Checkbox :checked="checkedSelect" @update:checked="onCheckedSelect">{{
+        <Checkbox v-model:checked="checkedSelect" @change="onCheckedSelect">{{
           title3
         }}</Checkbox>
       </div>
