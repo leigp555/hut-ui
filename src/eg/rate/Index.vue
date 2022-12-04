@@ -1,10 +1,6 @@
 <template>
   <!--  修改-->
-  <ComponentContent
-    :nav-arr="navArr"
-    title="Typography 排版"
-    component-name="typography"
-  >
+  <ComponentContent :nav-arr="navArr" title="Rate 评分" component-name="rate">
     <template #intro>
       <Intro />
     </template>
@@ -29,8 +25,8 @@ import { generateNav } from '@/eg/helper'
 const wrap = ref<HTMLElement | null>(null)
 
 // 修改
-const titleArr = ['示例一', '示例二', '标题组件', '文字标记']
+const titleArr = ['基本用法']
 const navArr = computed<{ id: string; title: string; nested: boolean }[]>(() => {
-  return generateNav('typography', titleArr)
+  return generateNav('rate', titleArr)
 })
 </script>

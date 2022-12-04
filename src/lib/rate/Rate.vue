@@ -19,11 +19,11 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, toRefs } from 'vue'
+import { defineProps, toRefs, withDefaults } from 'vue'
 import SvgIcon from '@/lib/common/SvgIcon.vue'
 
-const emits = defineEmits(['update:value'])
-const props = defineProps<{ value: number }>()
+const emits = defineEmits(['update:value', 'change'])
+const props = withDefaults(defineProps<{ value: number }>(), { value: 1 })
 const { value } = toRefs(props)
 
 const onClick = (e: Event) => {
@@ -31,6 +31,7 @@ const onClick = (e: Event) => {
   if (el.tagName.toLowerCase() === 'li' && el.getAttribute('data-star')) {
     const count = parseInt(el.getAttribute('data-star')!, 10)
     emits('update:value', count)
+    emits('change', count)
   }
 }
 </script>
