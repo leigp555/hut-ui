@@ -8,47 +8,28 @@ import ApiIntro from '@/components/ApiIntro.vue'
 const attrContent1 = [
   {
     rowIndex: 1,
-    属性: 'strong',
-    说明: '加粗文字',
+    属性: 'checked',
+    说明: '开关状态',
     类型: 'boolean',
     默认值: 'false'
   },
   {
     rowIndex: 2,
-    属性: 'code',
-    说明: '代码标记',
-    类型: 'boolean',
-    默认值: 'false'
-  },
-  {
-    rowIndex: 3,
-    属性: 'keyboard',
-    说明: '键盘标记',
-    类型: 'boolean',
-    默认值: 'false'
-  },
-  {
-    rowIndex: 4,
-    属性: 'mark',
-    说明: '文字标记',
+    属性: 'disabled',
+    说明: '禁用',
     类型: 'boolean',
     默认值: 'false'
   }
 ]
-const attrContent2 = [
+
+const eventContent = [
   {
     rowIndex: 1,
-    属性: 'level',
-    说明: '标题等级',
-    类型: 'string(1-6)|number(1-6)',
-    默认值: '4'
+    事件名称: 'change',
+    说明: '变化时回调函数',
+    回调参数: 'Function(checked: boolean)'
   }
 ]
 
-const eventContent = []
-
-const attrContentArr = [
-  { componentName: 'Text', attrContent: attrContent1 },
-  { componentName: 'Title', attrContent: attrContent2 }
-]
+const attrContentArr = [{ componentName: 'Switch', attrContent: attrContent1 }]
 </script>

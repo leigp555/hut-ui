@@ -31,6 +31,7 @@ const Radio = () => import('@/eg/radio/Index.vue')
 const Rate = () => import('@/eg/rate/Index.vue')
 const Select = () => import('@/eg/select/Index.vue')
 const Slider = () => import('@/eg/slider/Index.vue')
+const Switch = () => import('@/eg/switch/Index.vue')
 const TimePicker = () => import('@/eg/timePicker/Index.vue')
 const Transfer = () => import('@/eg/transfer/Index.vue')
 const TreeSelect = () => import('@/eg/treeSelect/Index.vue')
@@ -188,6 +189,11 @@ const routes: Array<RouteRecordRaw> = [
         path: 'slider',
         name: 'slider',
         component: Slider
+      },
+      {
+        path: 'switch',
+        name: 'switch',
+        component: Switch
       },
       {
         path: 'timePicker',

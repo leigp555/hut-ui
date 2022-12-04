@@ -6,7 +6,7 @@
 </template>
 
 <script lang="ts" setup>
-import TypographyEg from '@/eg/SliderEg.vue'
+import TypographyEg from '@/eg/SwitchEg.vue'
 import Head from '@/views/Head.vue'
 </script>
 

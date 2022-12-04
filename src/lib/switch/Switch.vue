@@ -11,7 +11,7 @@
 <script setup lang="ts">
 import { withDefaults, defineProps } from 'vue'
 
-const emits = defineEmits(['update:checked'])
+const emits = defineEmits(['update:checked', 'change'])
 
 const props = withDefaults(defineProps<{ checked?: boolean; disabled?: boolean }>(), {
   checked: false,
@@ -19,7 +19,10 @@ const props = withDefaults(defineProps<{ checked?: boolean; disabled?: boolean }
 })
 
 const onClick = () => {
-  if (!props.disabled) emits('update:checked', !props.checked)
+  if (!props.disabled) {
+    emits('update:checked', !props.checked)
+    emits('change', !props.checked)
+  }
 }
 </script>
 
