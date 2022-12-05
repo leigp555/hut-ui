@@ -7,3 +7,9 @@ export type TableDataType = {
   rowspan?: number
   customCell?: (index: number) => { colspan?: number; rowspan?: number }
 }
+
+export interface ListData {
+  title: string
+  avatar?: string
+  description: string
+}

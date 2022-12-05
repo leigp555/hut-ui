@@ -39,16 +39,11 @@
 import { withDefaults, defineProps, useSlots, computed, toRefs } from 'vue'
 import Skeleton from '../skeleton/Skeleton.vue'
 import Spin from '../spin/Spin.vue'
-
-export interface DataItem {
-  title: string
-  avatar?: string
-  description: string
-}
+import { ListData } from './Type'
 
 const props = withDefaults(
   defineProps<{
-    dataSource: DataItem[]
+    dataSource: ListData[]
     loading?: boolean
     mode?: 'loadMore' | 'normal' | 'pagination'
     skeletonAvatar?: boolean

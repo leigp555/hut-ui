@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { withDefaults, defineProps, ref, toRefs, computed } from 'vue'
 import dayjs from 'dayjs'
-import Select, { OptionType } from '../select/Select.vue'
-import SvgIcon from '../common/SvgIcon.vue'
+
+import { SvgIcon, SelectOption, Select } from '../index'
 
 const emits = defineEmits(['update:value', 'change'])
 const props = withDefaults(
@@ -22,7 +22,7 @@ const now = computed(() => {
 })
 // 年选择
 const year = ref<string>(dateArr.value[0])
-const yearOptions = ref<OptionType[]>([])
+const yearOptions = ref<SelectOption[]>([])
 for (let i = 0; i < 12; i++) {
   yearOptions.value.push({ value: (2022 - 6 + i).toString() })
 }
@@ -34,7 +34,7 @@ const changeYear = (newYear: string) => {
 }
 // 月选择
 const month = ref<string>(dateArr.value[1])
-const monthOptions = ref<OptionType[]>([])
+const monthOptions = ref<SelectOption[]>([])
 for (let i = 0; i < 12; i++) {
   monthOptions.value.push({ value: (i + 1).toString() })
 }
@@ -160,7 +160,7 @@ const goToday = () => {
       <slot name="header" />
     </div>
     <div v-else class="ui-calendar-actions">
-      <span class="calendar-actions-icon">
+      <span class="calendar-actions-icon" v-if="size !== 'small'">
         <SvgIcon
           name="calendar"
           width="1.5em"
@@ -235,6 +235,7 @@ $border_color: #d9d9d9;
     display: flex;
     justify-content: space-between;
     align-items: center;
+
     padding: 4px 12px;
     border-bottom: 1px solid $border_color;
     > .calendar-actions-icon {
@@ -304,6 +305,7 @@ $border_color: #d9d9d9;
     //border: 1px solid red;
     .ui-calendar-actions {
       padding: 4px 10px;
+      justify-content: end;
       > .calendar-actions-icon {
         margin-left: 0;
       }
@@ -312,7 +314,7 @@ $border_color: #d9d9d9;
     td {
       .ui-calendar-item {
         //border: 1px solid red;
-        height: 1.6em !important;
+        height: 24px !important;
       }
     }
   }

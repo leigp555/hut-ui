@@ -10,8 +10,8 @@ import {
   VNode
 } from 'vue'
 
-const emits = defineEmits(['update:activeKey'])
-const props = withDefaults(defineProps<{ activeKey?: string; centered: boolean }>(), {
+const emits = defineEmits(['update:activeKey', 'change'])
+const props = withDefaults(defineProps<{ activeKey?: string; centered?: boolean }>(), {
   activeKey: '1',
   centered: false
 })
@@ -39,10 +39,17 @@ const titleArr = computed(() => {
 
 const onChange = (e: Event) => {
   const el = e.target as HTMLElement
+  const isDisabled = el.getAttribute('data-disabled')
+  if (isDisabled === 'disabled') {
+    e.stopPropagation()
+    e.preventDefault()
+    return
+  }
   const spec = el.getAttribute('data-title')
   if (el.tagName.toLowerCase() === 'div' && spec === 'tabs') {
     const newKey = el.getAttribute('data-key')
     emits('update:activeKey', newKey)
+    emits('change', newKey)
   }
 }
 
@@ -74,6 +81,7 @@ onMounted(() => {
         :key="item"
         data-title="tabs"
         :data-key="item.key"
+        :data-disabled="item.disabled ? 'disabled' : 'normal'"
       >
         {{ item.title }}
       </div>
@@ -129,9 +137,8 @@ onMounted(() => {
         color: #1890ff;
       }
       &.disabled {
-        pointer-events: none;
         color: #00000040;
-        cursor: default;
+        cursor: not-allowed;
       }
       &:not(:first-child) {
         margin-left: 32px;

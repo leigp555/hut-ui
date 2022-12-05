@@ -33,7 +33,7 @@ const { visible, maskClosable } = toRefs(props)
 const onClose = () => {
   if (maskClosable.value) {
     emits('update:visible', false)
-    emits('afterClose')
+    emits('afterClose', false)
   }
 }
 

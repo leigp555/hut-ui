@@ -11,10 +11,11 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import Select, { OptionType } from '@/lib/select/Select.vue'
+import Select from '@/lib/select/Select.vue'
+import { SelectOption } from '@/lib'
 
 const value = ref<string>('a')
-const options = ref<OptionType[]>([
+const options = ref<SelectOption[]>([
   { value: 'a' },
   { value: 'b' },
   { value: 'c' },

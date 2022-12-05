@@ -1,19 +1,9 @@
 <script setup lang="ts">
 import { withDefaults, defineProps, toRefs, computed, provide, Ref } from 'vue'
 import TreeNode from './TreeNode.vue'
+import { TreeOptions } from './type'
 
-export interface TreeOptions {
-  title: string
-  value: string
-  show?: boolean
-  color?: string
-  href?: string
-  children?: TreeOptions[]
-  parent?: string
-  checked?: boolean
-}
-
-const emits = defineEmits(['select', 'update:selectedValues'])
+const emits = defineEmits(['select', 'update:selectedValues', 'change'])
 
 const props = withDefaults(
   defineProps<{
@@ -62,6 +52,7 @@ const getPosition = (position: string) => {
 const selectValueFn = (position: string) => {
   const selectedArr = position.split('/')
   emits('update:selectedValues', selectedArr)
+  emits('change', selectedArr)
 }
 // 提供给子组件修改层级用的函数
 // eslint-disable-next-line no-unused-vars

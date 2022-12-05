@@ -25,6 +25,7 @@ withDefaults(defineProps<{ border?: boolean; title?: string; shadow?: boolean }>
 $font_color: #000000d9;
 $border_color: #d9d9d9;
 .ui-card-wrap {
+  transition: all 250ms;
   &.bordered {
     border: 1px solid $border_color;
   }

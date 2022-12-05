@@ -26,9 +26,9 @@ withDefaults(defineProps<{ color?: string }>(), {
 .ui-timelineItem-wrap {
   padding: 0 20px 40px 20px;
   position: relative;
-  border-left: 1px solid rgba(0, 0, 0, 0.2);
+  border-left: 2px solid #f0f0f0;
   &:last-child {
-    border: none;
+    border-color: transparent;
   }
   > .ui-timelineItem-content {
     display: inline-flex;

@@ -4,7 +4,7 @@ import SvgIcon from '@/lib/common/SvgIcon.vue'
 import { AlertType } from '@/lib/alert/type'
 
 const emits = defineEmits(['close'])
-withDefaults(
+const props = withDefaults(
   defineProps<{
     message: string
     type?: AlertType
@@ -25,7 +25,7 @@ withDefaults(
 const wrapRef = ref<HTMLElement | null>(null)
 const onClose = () => {
   wrapRef.value?.classList.add('alert-close')
-  emits('close')
+  emits('close', props.message)
 }
 </script>
 

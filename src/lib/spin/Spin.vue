@@ -78,6 +78,7 @@ onMounted(() => {
     > .ui-spin-tip {
       font-size: 14px;
       color: #1890ff;
+      margin-top: 8px;
       text-shadow: 0 1px 2px #fff;
     }
     > .ui-spin-icon {

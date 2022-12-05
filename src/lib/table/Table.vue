@@ -2,7 +2,7 @@
 import { withDefaults, defineProps, computed, toRefs } from 'vue'
 import Spin from '../spin/Spin.vue'
 import Skeleton from '../skeleton/Skeleton.vue'
-import { TableDataType } from '@/lib/list/Type'
+import { TableDataType } from '../index'
 
 export default {
   inheritAttrs: false

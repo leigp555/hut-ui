@@ -3,7 +3,7 @@ import { withDefaults, defineProps, ref, onMounted, watch } from 'vue'
 import SvgIcon from '@/lib/common/SvgIcon.vue'
 import { bodyAddClass } from '@/lib/common/bodyAddClass'
 
-withDefaults(defineProps<{ src: string; width?: number }>(), {})
+withDefaults(defineProps<{ src: string }>(), {})
 
 const imgOpen = ref<boolean>(false)
 const imgRef = ref<HTMLImageElement | null>(null)
@@ -129,6 +129,7 @@ onMounted(() => {
   height: 100vh;
   overflow: hidden;
   position: fixed;
+  z-index: 1000;
   background-color: rgba(0, 0, 0, 0.2);
   user-select: none;
   top: 0;
@@ -149,7 +150,7 @@ onMounted(() => {
     width: 100%;
     gap: 30px;
     z-index: 10;
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: #00000073;
     padding: 12px 50px;
     > span {
       display: flex;

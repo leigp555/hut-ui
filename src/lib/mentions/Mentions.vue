@@ -22,7 +22,7 @@ const spanEl = document.createElement('span')
 spanEl.classList.add('mentions-pop-left')
 
 const inputEvent = (e: Event) => {
-  const el = e.target as HTMLInputElement
+  const el = e.target as HTMLTextAreaElement
   emits('update:value', el.value)
 
   if (el && el.value.substring(el.selectionStart - 1, el.selectionStart) === '@') {

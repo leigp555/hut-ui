@@ -8,7 +8,7 @@ const props = withDefaults(
     value?: string | number | Dayjs
     precision?: number
     suffix?: string
-    valueStyle?: CSSStyleRule
+    valueStyle?: Partial<CSSStyleDeclaration>
   }>(),
   { precision: 0, suffix: '', value: 0 }
 )

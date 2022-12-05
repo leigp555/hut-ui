@@ -6,10 +6,11 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import Mentions, { Options } from '@/lib/mentions/Mentions.vue'
+import Mentions from '@/lib/mentions/Mentions.vue'
+import { MentionsOptions } from '@/lib'
 
 const value = ref<string>('')
-const options: Options[] = [
+const options: MentionsOptions[] = [
   {
     label: 'afc163',
     value: 'afc163'
@@ -24,7 +25,7 @@ const options: Options[] = [
   }
 ]
 
-const onSelect = (option: Options) => {
+const onSelect = (option: MentionsOptions) => {
   console.log('select', option)
 }
 </script>

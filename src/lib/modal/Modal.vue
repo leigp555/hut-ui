@@ -17,7 +17,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-const emits = defineEmits(['update:visible'])
+const emits = defineEmits(['update:visible', 'change'])
 
 const props = withDefaults(
   defineProps<{
@@ -40,6 +40,7 @@ const { visible, maskClosable, width, top } = toRefs(props)
 const onClose = () => {
   if (maskClosable.value) {
     emits('update:visible', false)
+    emits('change', false)
   }
 }
 // 整个组件是否展示

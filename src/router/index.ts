@@ -36,6 +36,36 @@ const TimePicker = () => import('@/eg/timePicker/Index.vue')
 const Transfer = () => import('@/eg/transfer/Index.vue')
 const TreeSelect = () => import('@/eg/treeSelect/Index.vue')
 const Upload = () => import('@/eg/upload/Index.vue')
+const Avatar = () => import('@/eg/avatar/Index.vue')
+const Badge = () => import('@/eg/badge/Index.vue')
+const Calendar = () => import('@/eg/calendar/Index.vue')
+const Card = () => import('@/eg/card/Index.vue')
+const Carousel = () => import('@/eg/carousel/Index.vue')
+const Collapse = () => import('@/eg/collapse/Index.vue')
+const Comment = () => import('@/eg/comment/Index.vue')
+const Descriptions = () => import('@/eg/descriptions/Index.vue')
+const Empty = () => import('@/eg/empty/Index.vue')
+const Image = () => import('@/eg/image/Index.vue')
+const List = () => import('@/eg/list/Index.vue')
+const Popover = () => import('@/eg/popover/Index.vue')
+const Statistic = () => import('@/eg/statistic/Index.vue')
+const Table = () => import('@/eg/table/Index.vue')
+const Tabs = () => import('@/eg/tabs/Index.vue')
+const Tag = () => import('@/eg/tag/Index.vue')
+const Timeline = () => import('@/eg/timeline/Index.vue')
+const Tooltip = () => import('@/eg/tooltip/Index.vue')
+const Tree = () => import('@/eg/tree/Index.vue')
+const Alert = () => import('@/eg/alert/Index.vue')
+const Drawer = () => import('@/eg/drawer/Index.vue')
+const Message = () => import('@/eg/message/Index.vue')
+const Modal = () => import('@/eg/modal/Index.vue')
+const Notification = () => import('@/eg/notification/Index.vue')
+const Popconfirm = () => import('@/eg/popconfirm/Index.vue')
+const Progress = () => import('@/eg/progress/Index.vue')
+const Result = () => import('@/eg/result/Index.vue')
+const Skeleton = () => import('@/eg/skeleton/Index.vue')
+const Spin = () => import('@/eg/spin/Index.vue')
+const BackTop = () => import('@/eg/backtop/Index.vue')
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -214,6 +244,156 @@ const routes: Array<RouteRecordRaw> = [
         path: 'upload',
         name: 'upload',
         component: Upload
+      },
+      {
+        path: 'avatar',
+        name: 'avatar',
+        component: Avatar
+      },
+      {
+        path: 'badge',
+        name: 'badge',
+        component: Badge
+      },
+      {
+        path: 'calendar',
+        name: 'calendar',
+        component: Calendar
+      },
+      {
+        path: 'card',
+        name: 'card',
+        component: Card
+      },
+      {
+        path: 'carousel',
+        name: 'carousel',
+        component: Carousel
+      },
+      {
+        path: 'collapse',
+        name: 'collapse',
+        component: Collapse
+      },
+      {
+        path: 'comment',
+        name: 'comment',
+        component: Comment
+      },
+      {
+        path: 'descriptions',
+        name: 'descriptions',
+        component: Descriptions
+      },
+      {
+        path: 'empty',
+        name: 'empty',
+        component: Empty
+      },
+      {
+        path: 'image',
+        name: 'image',
+        component: Image
+      },
+      {
+        path: 'list',
+        name: 'list',
+        component: List
+      },
+      {
+        path: 'popover',
+        name: 'popover',
+        component: Popover
+      },
+      {
+        path: 'statistic',
+        name: 'statistic',
+        component: Statistic
+      },
+      {
+        path: 'table',
+        name: 'table',
+        component: Table
+      },
+      {
+        path: 'tabs',
+        name: 'tabs',
+        component: Tabs
+      },
+      {
+        path: 'tag',
+        name: 'tag',
+        component: Tag
+      },
+      {
+        path: 'timeline',
+        name: 'timeline',
+        component: Timeline
+      },
+      {
+        path: 'tooltip',
+        name: 'tooltip',
+        component: Tooltip
+      },
+      {
+        path: 'tree',
+        name: 'tree',
+        component: Tree
+      },
+      {
+        path: 'alert',
+        name: 'alert',
+        component: Alert
+      },
+      {
+        path: 'drawer',
+        name: 'drawer',
+        component: Drawer
+      },
+      {
+        path: 'message',
+        name: 'message',
+        component: Message
+      },
+      {
+        path: 'modal',
+        name: 'modal',
+        component: Modal
+      },
+      {
+        path: 'notification',
+        name: 'notification',
+        component: Notification
+      },
+      {
+        path: 'popconfirm',
+        name: 'popconfirm',
+        component: Popconfirm
+      },
+      {
+        path: 'progress',
+        name: 'progress',
+        component: Progress
+      },
+      {
+        path: 'result',
+        name: 'result',
+        component: Result
+      },
+      {
+        path: 'skeleton',
+        name: 'skeleton',
+        component: Skeleton
+      },
+      {
+        path: 'spin',
+        name: 'spin',
+        component: Spin
+      },
+      {
+        path: 'backTop',
+        name: 'backTop',
+        component: BackTop
       }
     ]
   },

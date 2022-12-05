@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import Comment, { CommentData } from '@/lib/comment/Comment.vue'
+import Comment from '@/lib/comment/Comment.vue'
 import SvgIcon from '@/lib/common/SvgIcon.vue'
 import Button from '@/lib/button/Button.vue'
+import { CommentData } from '@/lib'
 
 const data: CommentData[] = [
   {

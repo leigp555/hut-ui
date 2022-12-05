@@ -1,5 +1,14 @@
 <script setup lang="ts">
-import { withDefaults, defineProps, useSlots, toRefs, onMounted, ref, VNode } from 'vue'
+import {
+  withDefaults,
+  defineProps,
+  useSlots,
+  toRefs,
+  onMounted,
+  ref,
+  VNode,
+  computed
+} from 'vue'
 import SvgIcon from '../common/SvgIcon.vue'
 
 const emits = defineEmits(['change', 'update:init'])
@@ -18,7 +27,7 @@ const props = withDefaults(
     init: 0,
     quickJump: false,
     direction: 'forward',
-    indicator: false
+    indicator: true
   }
 )
 
@@ -88,13 +97,19 @@ const onForward = () => {
     emits('change', init.value + 1)
   }
 }
+const actionName = computed(() => {
+  if (direction.value === 'forward') {
+    return 'carousel-forward'
+  }
+  return 'carousel-back'
+})
 </script>
 
 <template>
   <div class="ui-carousel-wrap">
     <div class="ui-carousel-content" ref="contentRef">
       <ol ref="olRef" class="carousel-content">
-        <TransitionGroup name="list">
+        <TransitionGroup :name="actionName">
           <li
             v-for="(item, index) in slots"
             :key="item"
@@ -182,22 +197,35 @@ const onForward = () => {
       cursor: pointer;
       top: 50%;
       right: 10px;
-      transform: translateY(-50%);
+      transform: translateY(-50%) rotate(180deg);
       z-index: 10;
     }
   }
 }
 
-.list-enter-active,
-.list-leave-active {
+.carousel-forward-enter-active,
+.carousel-forward-leave-active {
   transition: all 500ms;
 }
-.list-enter-from {
+.carousel-forward-enter-from {
   opacity: 0;
   transform: translateX(100%);
 }
-.list-leave-to {
+.carousel-forward-leave-to {
   opacity: 0;
   transform: translateX(-100%);
+}
+
+.carousel-back-enter-active,
+.carousel-back-leave-active {
+  transition: all 500ms;
+}
+.carousel-back-enter-from {
+  opacity: 0;
+  transform: translateX(-100%);
+}
+.carousel-back-leave-to {
+  opacity: 0;
+  transform: translateX(100%);
 }
 </style>

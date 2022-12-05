@@ -10,7 +10,8 @@
 
 <script setup lang="ts">
 import { ref, watch } from 'vue'
-import TreeSelect, { TreeSelectOptions } from '@/lib/treeSelect/TreeSelect.vue'
+import TreeSelect from '@/lib/treeSelect/TreeSelect.vue'
+import { TreeSelectOptions } from '@/lib'
 
 const treeData: TreeSelectOptions[] = [
   {

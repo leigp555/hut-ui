@@ -99,7 +99,8 @@
 
 <script setup lang="ts">
 import { onMounted, Ref, ref } from 'vue'
-import List, { DataItem } from '@/lib/list/List.vue'
+import List from '@/lib/list/List.vue'
+import { ListData } from '@/lib'
 import ListItem from '@/lib/list/ListItem.vue'
 import Avatar from '@/lib/avatar/Avatar.vue'
 import SvgIcon from '@/lib/common/SvgIcon.vue'
@@ -107,9 +108,9 @@ import Button from '@/lib/button/Button.vue'
 import Pagination from '@/lib/pagination/Pagination.vue'
 import { ajax } from '@/eg/ajax'
 
-const data1 = ref<DataItem[]>([])
-const data2 = ref<DataItem[]>([])
-const data3 = ref<DataItem[]>([])
+const data1 = ref<ListData[]>([])
+const data2 = ref<ListData[]>([])
+const data3 = ref<ListData[]>([])
 const loading1 = ref<boolean>(false)
 const loading2 = ref<boolean>(false)
 const loading3 = ref<boolean>(false)
@@ -121,13 +122,13 @@ const dataNum = ref<number>(0)
 
 const fetch = (
   url: string,
-  dataArr: Ref<DataItem[]>,
+  dataArr: Ref<ListData[]>,
   loading: Ref<boolean>,
   count: number = 3
 ) => {
   if (url === '/mock') {
     loading.value = true
-    ;(ajax(url, count, 0, 0) as Promise<DataItem[]>)
+    ;(ajax(url, count, 0, 0) as Promise<ListData[]>)
       .then((res) => {
         dataArr.value = [...dataArr.value, ...res]
         loading.value = false
@@ -140,7 +141,7 @@ const fetch = (
     loading.value = true
     ;(
       ajax(url, count, current.value, pageSize.value) as Promise<{
-        data: DataItem[]
+        data: ListData[]
         totalDateNum: number
       }>
     )
@@ -161,10 +162,10 @@ onMounted(() => {
   fetch('/pagination', data3, loading3, 0)
 })
 
-const onEdit = (item: DataItem) => {
+const onEdit = (item: ListData) => {
   console.log(item)
 }
-const onMore = (item: DataItem) => {
+const onMore = (item: ListData) => {
   console.log(item)
 }
 // 加载更多

@@ -69,7 +69,6 @@ $border_color: #d9d9d9;
 .ui-select-wrap {
   display: inline-flex;
   flex-direction: column;
-  gap: 4px;
   position: relative;
   cursor: default;
   .ui-select-input {
@@ -105,7 +104,7 @@ $border_color: #d9d9d9;
     z-index: 100;
     > .ui-select-pop-content {
       position: absolute;
-      top: 0;
+      top: 4px;
       left: 0;
       width: 100%;
       max-height: 180px;

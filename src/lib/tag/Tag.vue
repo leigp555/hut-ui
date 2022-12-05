@@ -40,7 +40,7 @@ const bacColor = computed(() => {
   return justColor(nameToHex(props.color), 180)
 })
 
-const onClick = () => {
+const onClick = (e: MouseEvent) => {
   emits('close', contentRef.value)
   tagHide.value = true
 }
