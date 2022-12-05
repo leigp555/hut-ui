@@ -24,5 +24,5 @@ const attrContent1 = [
 
 const eventContent = []
 
-const attrContentArr = [{ componentName: 'Text', attrContent: attrContent1 }]
+const attrContentArr = [{ componentName: 'Popover', attrContent: attrContent1 }]
 </script>
