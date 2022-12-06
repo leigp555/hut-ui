@@ -4,7 +4,12 @@
       <Head />
     </section>
     <section class="components-Body">
-      <Button type="primary" @click="showDrawer" class="menu-pop-button">Menu</Button>
+      <Button type="link" @click="showDrawer" class="menu-pop-button">
+        <template #icon>
+          <SvgIcon name="menu" width="1em" height="1em" fill="#1890ff" />
+        </template>
+        菜单
+      </Button>
       <section class="display-menu scroll-container">
         <ComponentsMenu />
         <Drawer v-model:visible="visible" placement="left" classname="custom">
@@ -26,7 +31,7 @@
 import { ref } from 'vue'
 import Head from '@/views/Head.vue'
 import ComponentsMenu from '@/components/ComponentsMenu.vue'
-import { Drawer, Button } from '@/lib'
+import { Drawer, Button, SvgIcon } from '@/lib'
 
 const visible = ref<boolean>(false)
 const showDrawer = () => {
@@ -39,6 +44,7 @@ const showDrawer = () => {
   height: 100%;
   display: flex;
   flex-direction: column;
+  gap: 20px;
   > .components-Head {
     height: 50px;
     flex-shrink: 0;
@@ -50,8 +56,9 @@ const showDrawer = () => {
     position: relative;
     > .menu-pop-button {
       position: absolute;
-      top: 20px;
-      left: 20px;
+      font-size: 13px;
+      top: 0;
+      left: 10px;
       z-index: 10;
       @media (min-width: 800px) {
         display: none;
