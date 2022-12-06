@@ -1,0 +1,1 @@
+import"./Upload.vue_vue_type_style_index_0_lang-01c7e68e.js";const e=document.body,s=s=>{const o=e.className;s?e.classList.add("ui_pop"):"ui_pop"!==o?e.classList.remove("ui_pop"):e.removeAttribute("class")};export{s as b};

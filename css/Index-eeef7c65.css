@@ -1,1 +1,0 @@
-.wrap{display:flex;align-items:stretch}.wrap .item{display:flex;justify-content:space-between;align-items:center;width:300px;padding:4px 11px;line-height:1.5em}.wrap .item:hover{background:#1890ff;cursor:pointer}.wrap .item>.count{display:flex;align-items:center;gap:5px;text-align:center}.wrap .item>.count span{display:flex;align-items:center}
