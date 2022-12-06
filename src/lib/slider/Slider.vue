@@ -23,6 +23,8 @@ const lastDistance = ref<number>(0)
 // 记录当前此的移动距离
 const distance = ref<number>(0)
 
+// 记录设备类型
+
 onMounted(() => {
   if (sliderWrapRef.value && sliderBlockRef.value && sliderLineRef.value) {
     // 容器宽度
@@ -35,7 +37,33 @@ onMounted(() => {
   }
 })
 
-const onMousemove = (e: MouseEvent) => {
+function moveEl() {
+  // 记录滑动到的位置
+  if (!sliderBlockRef.value) {
+    return
+  }
+  const result = initDistance.value + distance.value - lastDistance.value
+  if (result <= wrapWidth.value && result >= 0) {
+    sliderBlockRef.value.style.transform = `translate3d(${distance.value}px,-50%,0)`
+    sliderLineRef.value!.style.transform = `translate3d(${distance.value}px,0,0)`
+    emits('update:value', Math.ceil((result / wrapWidth.value) * 100))
+    emits('change', Math.ceil((result / wrapWidth.value) * 100))
+  } else if (result > wrapWidth.value) {
+    sliderBlockRef.value.style.transform = `translate3d(${wrapWidth.value}px,-50%,0)`
+    sliderLineRef.value!.style.transform = `translate3d(${wrapWidth.value}px,0,0)`
+    emits('update:value', 100)
+    emits('change', 100)
+    distance.value = wrapWidth.value
+  } else if (result < 0) {
+    sliderBlockRef.value.style.transform = `translate3d(0px,-50%,0)`
+    sliderLineRef.value!.style.transform = `translate3d(0px,0,0)`
+    emits('update:value', 0)
+    emits('change', 0)
+    distance.value = 0
+  }
+}
+// pc端事件监听
+function onMousemove(e: MouseEvent) {
   // 这是组件核心重点，必须阻止默认事件不然mouseup事件会监听失败
   // 这是组件核心重点，必须阻止默认事件不然mouseup事件会监听失败
   // 这是组件核心重点，必须阻止默认事件不然mouseup事件会监听失败
@@ -44,29 +72,10 @@ const onMousemove = (e: MouseEvent) => {
   if (isMove.value && sliderBlockRef.value && sliderLineRef.value) {
     // 必须加上上一次的滑动距离不然会回弹
     distance.value = lastDistance.value + e.clientX - initClickX.value
-    // 记录滑动到的位置
-    const result = initDistance.value + distance.value - lastDistance.value
-    if (result <= wrapWidth.value && result >= 0) {
-      sliderBlockRef.value.style.transform = `translate3d(${distance.value}px,-50%,0)`
-      sliderLineRef.value.style.transform = `translate3d(${distance.value}px,0,0)`
-      emits('update:value', Math.ceil((result / wrapWidth.value) * 100))
-      emits('change', Math.ceil((result / wrapWidth.value) * 100))
-    } else if (result > wrapWidth.value) {
-      sliderBlockRef.value.style.transform = `translate3d(${wrapWidth.value}px,-50%,0)`
-      sliderLineRef.value.style.transform = `translate3d(${wrapWidth.value}px,0,0)`
-      emits('update:value', 100)
-      emits('change', 100)
-      distance.value = wrapWidth.value
-    } else if (result < 0) {
-      sliderBlockRef.value.style.transform = `translate3d(0px,-50%,0)`
-      sliderLineRef.value.style.transform = `translate3d(0px,0,0)`
-      emits('update:value', 0)
-      emits('change', 0)
-      distance.value = 0
-    }
+    moveEl()
   }
 }
-const onMouseup = () => {
+function onMouseup() {
   lastDistance.value = distance.value
   isMove.value = false
   document.documentElement.removeEventListener('mousemove', onMousemove)
@@ -74,7 +83,6 @@ const onMouseup = () => {
   sliderBlockRef.value!.classList.remove('ui-slider-drag')
   emits('afterChange', value.value)
 }
-
 const onMouseDown = (e: MouseEvent) => {
   if (disabled.value) {
     e.stopPropagation()
@@ -88,6 +96,43 @@ const onMouseDown = (e: MouseEvent) => {
   // 事件绑定在html元素上效果更好
   document.documentElement.addEventListener('mousemove', onMousemove)
   document.documentElement.addEventListener('mouseup', onMouseup)
+  sliderBlockRef.value!.classList.add('ui-slider-drag')
+}
+
+// 移动端事件监听
+function onTouchMove(e: TouchEvent) {
+  // 这是组件核心重点，必须阻止默认事件不然mouseup事件会监听失败
+  // 这是组件核心重点，必须阻止默认事件不然mouseup事件会监听失败
+  // 这是组件核心重点，必须阻止默认事件不然mouseup事件会监听失败
+  e.stopPropagation()
+  // e.preventDefault()
+  if (isMove.value && sliderBlockRef.value && sliderLineRef.value) {
+    // 必须加上上一次的滑动距离不然会回弹
+    distance.value = lastDistance.value + e.touches[0].clientX - initClickX.value
+    moveEl()
+  }
+}
+function onTouchend() {
+  lastDistance.value = distance.value
+  isMove.value = false
+  document.documentElement.removeEventListener('touchmove', onTouchMove)
+  document.documentElement.removeEventListener('touchend', onTouchend)
+  sliderBlockRef.value!.classList.remove('ui-slider-drag')
+  emits('afterChange', value.value)
+}
+const onTouchstart = (e: TouchEvent) => {
+  if (disabled.value) {
+    e.stopPropagation()
+    e.preventDefault()
+    return
+  }
+  isMove.value = true
+  initClickX.value = e.touches[0].clientX
+  // 初始化点击时的位置
+  initDistance.value = (value.value / 100) * wrapWidth.value
+  // 事件绑定在html元素上效果更好
+  document.documentElement.addEventListener('touchmove', onTouchMove)
+  document.documentElement.addEventListener('touchend', onTouchend)
   sliderBlockRef.value!.classList.add('ui-slider-drag')
 }
 </script>
@@ -106,6 +151,8 @@ const onMouseDown = (e: MouseEvent) => {
       ref="sliderBlockRef"
       @mousedown="onMouseDown"
       @mouseup="onMouseup"
+      @touchstart="onTouchstart"
+      @touchend="onTouchend"
       :class="{ 'ui-slider-block-disabled': disabled }"
     >
       <span class="ui-slider-tip">{{ value }}</span>
