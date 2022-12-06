@@ -34,8 +34,16 @@ const timeId = ref<number | null>(null)
 const timeId2 = ref<number | null>(null)
 
 let slots: VNode[] | []
-if (useSlots().default) {
-  slots = useSlots().default!()
+if (useSlots().default?.()) {
+  if (
+    typeof useSlots().default?.()?.[0].type === 'symbol' &&
+    useSlots().default?.()?.[0]?.children
+  ) {
+    slots = useSlots().default?.()?.[0].children as VNode[]
+  } else {
+    slots = useSlots().default!()
+  }
+  console.log(typeof useSlots().default!()[0].type)
 }
 
 const mode = inject<Ref<'column' | 'horizontal'>>('ui_menu_mode')
