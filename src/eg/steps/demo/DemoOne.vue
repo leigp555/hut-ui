@@ -35,7 +35,7 @@ const steps = [
 ]
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .wrap {
   .steps-content {
     margin-top: 16px;

@@ -3,9 +3,7 @@
 </demo>
 
 <template>
-  <div class="ui-template-wrap">
-    <Mentions v-model:value="value" :options="options" @select="onSelect" />
-  </div>
+  <Mentions v-model:value="value" :options="options" @select="onSelect" />
 </template>
 
 <script setup lang="ts">

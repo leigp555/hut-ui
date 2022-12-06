@@ -30,7 +30,7 @@ import { Steps, Step, SvgIcon } from '@/lib'
 const current = ref<number>(1)
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .wrap {
   .steps-content {
     margin-top: 16px;

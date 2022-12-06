@@ -54,7 +54,7 @@ const steps = [
 ]
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .wrap {
   display: flex;
   flex-direction: column;
