@@ -1,5 +1,4 @@
 import { createRouter, createWebHashHistory, Router, RouteRecordRaw } from 'vue-router'
-
 // import { defineAsyncComponent } from 'vue'
 // import Loading from '@/components/Loading.vue'
 // const Button = () =>

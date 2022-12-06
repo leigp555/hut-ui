@@ -10,7 +10,11 @@
           :key="item.keyValue"
           class="menuItem"
         >
-          <router-link :to="`/components/${item.keyValue}`" class="router-link">
+          <router-link
+            :to="`/components/${item.keyValue}`"
+            class="router-link"
+            :class="{ 'router-active': selectedKeys.indexOf(item.keyValue) }"
+          >
             {{ item.title }}
           </router-link>
         </MenuItem>
@@ -99,7 +103,7 @@
 </template>
 
 <script lang="ts" setup>
-import { reactive, ref, watch } from 'vue'
+import { onMounted, reactive, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import Menu from '@/lib/menu/Menu.vue'
 import MenuItem from '@/lib/menu/MenuItem.vue'
@@ -187,18 +191,24 @@ const componentsTitle: { [key: string]: { [s: string]: boolean } } = {
   }
 }
 
+const init = () => {
+  const navArr = route.path.split('/')
+  const componentName = navArr[navArr.length - 1]
+  const s = Object.keys(componentsTitle)
+  for (let i = 0; i < s.length; i++) {
+    const name = s[i]
+    if (componentsTitle[name][componentName]) {
+      selectedKeys.value = [name, componentName]
+    }
+  }
+}
+onMounted(() => {
+  init()
+})
 watch(
   () => route.path,
   () => {
-    const navArr = route.path.split('/')
-    const componentName = navArr[navArr.length - 1]
-    const s = Object.keys(componentsTitle)
-    for (let i = 0; i < s.length; i++) {
-      const name = s[i]
-      if (componentsTitle[name][componentName]) {
-        selectedKeys.value = [name, componentName]
-      }
-    }
+    init()
   }
 )
 
@@ -504,8 +514,12 @@ const sub7 = reactive<{ keyValue: string; title: string }[]>([
     padding-left: 48px;
     height: 100%;
     width: 100%;
-    padding-right: 20px;
+    padding-right: 40px;
     background-color: transparent;
+    transition: all 250ms;
+    &.router-link-exact-active {
+      border-right: 3px solid #1890ff;
+    }
   }
   > .components-Menu-title {
     font-weight: 600;
