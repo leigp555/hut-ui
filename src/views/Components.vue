@@ -44,7 +44,7 @@ const showDrawer = () => {
   height: 100%;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 10px;
   > .components-Head {
     height: 50px;
     flex-shrink: 0;

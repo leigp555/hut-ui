@@ -526,7 +526,8 @@ const sub7 = reactive<{ keyValue: string; title: string }[]>([
     display: flex;
     justify-content: center;
     padding: 20px 0 20px 0;
-    background: #fafafa;
+    //background: #fafafa;
+    background: #fff;
   }
 }
 </style>
