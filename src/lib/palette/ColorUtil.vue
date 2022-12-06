@@ -13,7 +13,7 @@
 
 <script setup lang="ts">
 import { withDefaults, defineProps } from 'vue'
-import { alert } from '../message/Message'
+import { alert } from '@/lib'
 
 withDefaults(defineProps<{ colors: string[] }>(), {})
 
@@ -36,9 +36,10 @@ const copyColor = async (e: Event) => {
   gap: 1px;
   flex-grow: 10;
   flex-wrap: wrap;
+  justify-content: center;
   > .ui-colorUtil-item {
     color: #222222;
-    min-width: 80px;
+    min-width: 68px;
     min-height: 40px;
     cursor: pointer;
     user-select: none;

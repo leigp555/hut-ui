@@ -31,7 +31,7 @@
     </ListItem>
     <template #loadMore>
       <div>
-        <Button type="default" @click="onLoadMore" v-show="!loading2"
+        <Button type="default" @click="onLoadMore" v-show="!loading"
           >loading more</Button
         >
       </div>

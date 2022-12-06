@@ -1,12 +1,10 @@
 <template>
   <div class="home">
     <Head />
-    <TypographyEg />
   </div>
 </template>
 
 <script lang="ts" setup>
-import TypographyEg from '@/eg/BackTopEg.vue'
 import Head from '@/views/Head.vue'
 </script>
 

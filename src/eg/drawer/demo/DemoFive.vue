@@ -14,7 +14,9 @@
     <template #title>
       <div class="title">
         <span>Basic Drawer</span>
-        <SvgIcon name="cha" width="1em" height="1em" @click="onClose" />
+        <span class="close"
+          ><SvgIcon name="cha" width="1em" height="1em" @click="onClose"
+        /></span>
       </div>
     </template>
     <template #content>
@@ -42,3 +44,19 @@ const showDrawer = () => {
   visible.value = true
 }
 </script>
+
+<style scoped lang="scss">
+.title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 24px;
+  border-bottom: 1px solid #f0f0f0;
+  .close {
+    cursor: pointer;
+  }
+}
+.content {
+  padding: 24px;
+}
+</style>

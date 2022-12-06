@@ -19,7 +19,8 @@ withDefaults(defineProps<{ separator?: string }>(), { separator: '/' })
   display: flex;
   align-items: center;
   gap: 5px;
-  font-size: 16px;
+  font-size: 14px;
+  flex-wrap: wrap;
 
   .breadcrumb-item {
     display: flex;

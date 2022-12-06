@@ -56,6 +56,8 @@ const steps = [
 
 <style lang="scss">
 .wrap {
+  display: flex;
+  flex-direction: column;
   .steps-content {
     margin-top: 16px;
     border: 1px dashed #e9e9e9;

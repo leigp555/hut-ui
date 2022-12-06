@@ -95,23 +95,19 @@ import { Tooltip, Button } from '@/lib'
 
 <style scoped lang="scss">
 .wrap {
-  width: 380px;
-  &.color {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-  }
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
   .top,
   .bottom {
     display: flex;
     gap: 40px;
     justify-content: center;
-    margin-bottom: 20px;
   }
   .left-right {
     display: flex;
-    justify-content: space-between;
-    margin-bottom: 20px;
+    justify-content: center;
+    gap: 240px;
     > .left,
     .right {
       display: flex;
