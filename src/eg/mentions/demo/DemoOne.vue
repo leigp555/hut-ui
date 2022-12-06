@@ -4,7 +4,7 @@
 
 <template>
   <div class="ui-template-wrap">
-    <Mentions v-model:value="value" :options="options" autofocus @select="onSelect" />
+    <Mentions v-model:value="value" :options="options" @select="onSelect" />
   </div>
 </template>
 

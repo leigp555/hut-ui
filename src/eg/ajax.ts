@@ -9,7 +9,7 @@ const totalDate: {
 let j = 0
 while (j < 1000) {
   totalDate.push({
-    title: `Ant Design Title ${j + 1}`,
+    title: `Lorem ipsum dolor ${j + 1}`,
     avatar: 'https://joeschmoe.io/api/v1/random',
     description:
       'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab aliquam asperiores, autem blanditiis cumque debitis dolorem est illo odit optio praesentium quasi recusandae rem sint tempora veritatis vitae voluptates voluptatibus.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab aliquam asperiores, autem blanditiis cumque debitis dolorem est illo odit optio praesentium quasi recusandae rem sint tempora veritatis vitae voluptates voluptatibus.'
@@ -61,7 +61,7 @@ export const ajax = (
       let i = 0
       while (i < count) {
         data.push({
-          title: `Ant Design Title ${num + 1}`,
+          title: `Lorem ipsum dolor ${num + 1}`,
           avatar: 'https://joeschmoe.io/api/v1/random',
           description:
             'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab aliquam asperiores, autem blanditiis cumque debitis dolorem est illo odit optio praesentium quasi recusandae rem sint tempora veritatis vitae voluptates voluptatibus.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab aliquam asperiores, autem blanditiis cumque debitis dolorem est illo odit optio praesentium quasi recusandae rem sint tempora veritatis vitae voluptates voluptatibus.'

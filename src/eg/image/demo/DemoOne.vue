@@ -3,10 +3,7 @@
 </demo>
 
 <template>
-  <Image
-    style="width: 200px"
-    src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-  />
+  <Image style="width: 200px" src="src/eg/image/img/star.jpg" />
 </template>
 
 <script setup lang="ts">

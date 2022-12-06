@@ -14,7 +14,7 @@
   >
     <FormItem
       name="username"
-      :rules="[{ pattern: /^\d{0,5}\d$/, message: 'Please input your username!' }]"
+      :rules="[{ pattern: /^\d{0,5}\d$/, message: '请输入0-6位数字 !' }]"
     >
       <template #label><span>USERNAME :</span></template>
       <Input v-model:value="formState.username" />
@@ -22,7 +22,7 @@
 
     <FormItem
       name="password"
-      :rules="[{ pattern: /^\d{0,5}\d$/, message: 'Please input your password!' }]"
+      :rules="[{ pattern: /^\d{0,5}\d$/, message: '请输入0-6位数字 !' }]"
     >
       <template #label><span>PASSWORD :</span></template>
       <Input v-model:value="formState.password" type="password" />
