@@ -1,7 +1,7 @@
 <template>
   <section class="components-Menu scroll-container">
     <h4 class="components-Menu-title">组件概览</h4>
-    <Menu v-model:selectedKeys="selectedKeys" style="width: 240px" mode="column">
+    <Menu v-model:selectedKeys="selectedKeys" mode="column">
       <SubMenu keyValue="sub1" :collapsible="false">
         <template #title><span style="font-weight: 600">通用</span></template>
         <MenuItem
@@ -388,6 +388,7 @@ const sub7 = reactive<{ keyValue: string; title: string }[]>([
     padding-left: 48px;
     height: 100%;
     width: 100%;
+    padding-right: 20px;
   }
   > .components-Menu-title {
     font-weight: 600;

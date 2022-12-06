@@ -7,12 +7,7 @@
       <Button type="primary" @click="showDrawer" class="menu-pop-button">Menu</Button>
       <section class="display-menu scroll-container">
         <ComponentsMenu />
-        <Drawer
-          v-model:visible="visible"
-          placement="left"
-          classname="custom"
-          :style="{ width: '240px' }"
-        >
+        <Drawer v-model:visible="visible" placement="left" classname="custom">
           <template #content>
             <section class="display-pop-menu scroll-container">
               <ComponentsMenu />
@@ -66,7 +61,7 @@ const showDrawer = () => {
       overflow-y: auto;
       overflow-x: hidden;
       scroll-behavior: smooth;
-      min-width: 220px;
+      flex-shrink: 0;
       @media (max-width: 800px) {
         display: none;
       }
