@@ -99,14 +99,108 @@
 </template>
 
 <script lang="ts" setup>
-import { reactive, ref } from 'vue'
+import { reactive, ref, watch } from 'vue'
+import { useRoute } from 'vue-router'
 import Menu from '@/lib/menu/Menu.vue'
 import MenuItem from '@/lib/menu/MenuItem.vue'
 import SubMenu from '@/lib/menu/SubMenu.vue'
 
-const current = ref<string[]>(['sub1', 'button'])
-
 const selectedKeys = ref<string[]>(['sub1', 'button'])
+const route = useRoute()
+
+const componentsTitle: { [key: string]: { [s: string]: boolean } } = {
+  sub1: {
+    button: true,
+    typography: true,
+    palette: true
+  },
+  sub2: {
+    divider: true,
+    grid: true,
+    layout: true,
+    space: true
+  },
+  sub3: {
+    affix: true,
+    anchor: true,
+    breadcrumb: true,
+    dropdown: true,
+    menu: true,
+    pageHeader: true,
+    pagination: true,
+    steps: true
+  },
+  sub4: {
+    autoComplete: true,
+    cascader: true,
+    checkbox: true,
+    datePicker: true,
+    form: true,
+    input: true,
+    inputNumber: true,
+    mentions: true,
+    radio: true,
+    rate: true,
+    select: true,
+    slider: true,
+    switch: true,
+    timePicker: true,
+    transfer: true,
+    treeSelect: true,
+    upload: true
+  },
+  sub5: {
+    avatar: true,
+    badge: true,
+    calendar: true,
+    card: true,
+    carousel: true,
+    collapse: true,
+    comment: true,
+    descriptions: true,
+    empty: true,
+    image: true,
+    list: true,
+    popover: true,
+    statistic: true,
+    table: true,
+    tabs: true,
+    tag: true,
+    timeline: true,
+    tooltip: true,
+    tree: true
+  },
+  sub6: {
+    alert: true,
+    drawer: true,
+    message: true,
+    modal: true,
+    notification: true,
+    popconfirm: true,
+    progress: true,
+    result: true,
+    skeleton: true,
+    spin: true
+  },
+  sub7: {
+    backTop: true
+  }
+}
+
+watch(
+  () => route.path,
+  () => {
+    const navArr = route.path.split('/')
+    const componentName = navArr[navArr.length - 1]
+    const s = Object.keys(componentsTitle)
+    for (let i = 0; i < s.length; i++) {
+      const name = s[i]
+      if (componentsTitle[name][componentName]) {
+        selectedKeys.value = [name, componentName]
+      }
+    }
+  }
+)
 
 const sub1 = reactive<{ keyValue: string; title: string }[]>([
   {
@@ -374,6 +468,28 @@ const sub7 = reactive<{ keyValue: string; title: string }[]>([
     title: ' BackTop回到顶部'
   }
 ])
+
+// 获取路由
+// const yyy = {}
+
+// const xxx = [
+//   { name: ' sub1', title: sub1 },
+//   { name: ' sub2', title: sub2 },
+//   { name: ' sub3', title: sub3 },
+//   { name: ' sub4', title: sub4 },
+//   { name: ' sub5', title: sub5 },
+//   { name: ' sub6', title: sub6 },
+//   { name: ' sub7', title: sub7 }
+// ]
+//
+// for (let i = 0; i < xxx.length; i++) {
+//   yyy[xxx[i].name] = {}
+//   for (let j = 0; j < Object.keys(xxx[i].title).length; j++) {
+//     const n = xxx[i].title[j].keyValue
+//     yyy[xxx[i].name][n] = true
+//   }
+// }
+// console.log(yyy)
 </script>
 
 <style lang="scss" scoped>
@@ -389,6 +505,7 @@ const sub7 = reactive<{ keyValue: string; title: string }[]>([
     height: 100%;
     width: 100%;
     padding-right: 20px;
+    background-color: transparent;
   }
   > .components-Menu-title {
     font-weight: 600;
