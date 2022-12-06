@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { withDefaults, defineProps, useSlots, VNode, toRefs, provide, Ref } from 'vue'
 
-const emits = defineEmits(['update:selectedKeys'])
+const emits = defineEmits(['update:selectedKeys', 'change'])
 const props = withDefaults(
   defineProps<{ selectedKeys?: string[]; mode?: 'horizontal' | 'column' }>(),
   {
@@ -22,6 +22,7 @@ const isSelected = (item: VNode): boolean => {
 }
 const changeSelectedArr = (newArr: string[]) => {
   emits('update:selectedKeys', newArr)
+  emits('change', newArr)
 }
 provide<Ref<string[]>>('ui_menu_selectedArr', selectedKeys)
 provide<Ref<'column' | 'horizontal'>>('ui_menu_mode', mode)

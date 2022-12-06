@@ -2,7 +2,12 @@
 垂直菜单栏
 </demo>
 <template>
-  <Menu v-model:selectedKeys="selectedKeys" style="width: 256px" mode="column">
+  <Menu
+    v-model:selectedKeys="selectedKeys"
+    style="width: 256px"
+    mode="column"
+    @change="onChange"
+  >
     <SubMenu keyValue="sub1">
       <template #icon>
         <SvgIcon name="email" width="1em" height="1em" />
@@ -44,12 +49,12 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watchEffect } from 'vue'
+import { ref } from 'vue'
 import { Menu, MenuItemGroup, MenuItem, SubMenu, SvgIcon } from '@/lib'
 
 const selectedKeys = ref<string[]>(['sub1', 'g1', '1'])
 
-watchEffect(() => {
-  console.log(selectedKeys.value)
-})
+const onChange = (selectKey: string[]) => {
+  console.log(selectKey)
+}
 </script>

@@ -3,7 +3,7 @@
 </demo>
 
 <template>
-  <Menu v-model:selectedKeys="selectedKeys" mode="horizontal">
+  <Menu v-model:selectedKeys="selectedKeys" mode="horizontal" @change="onChange">
     <MenuItem keyValue="mail">
       <template #icon>
         <SvgIcon name="email" width="1em" height="1em" />
@@ -34,12 +34,12 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watchEffect } from 'vue'
+import { ref } from 'vue'
 import { Menu, MenuItemGroup, MenuItem, SubMenu, SvgIcon } from '@/lib'
 
 const selectedKeys = ref<string[]>(['mail'])
 
-watchEffect(() => {
-  console.log(selectedKeys.value)
-})
+const onChange = (selectKey: string[]) => {
+  console.log(selectKey)
+}
 </script>

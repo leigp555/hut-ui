@@ -43,7 +43,6 @@ if (useSlots().default?.()) {
   } else {
     slots = useSlots().default!()
   }
-  console.log(typeof useSlots().default!()[0].type)
 }
 
 const mode = inject<Ref<'column' | 'horizontal'>>('ui_menu_mode')

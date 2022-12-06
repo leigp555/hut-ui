@@ -72,7 +72,7 @@ const attrContent4 = [
 const eventContent = [
   {
     rowIndex: 1,
-    事件名称: 'update:selectedKeys',
+    事件名称: 'change',
     说明: '点击标题时的回调',
     回调参数: '(string[]) => void'
   }
