@@ -1,9 +1,24 @@
 import { createRouter, createWebHashHistory, Router, RouteRecordRaw } from 'vue-router'
+
+// import { defineAsyncComponent } from 'vue'
+// import Loading from '@/components/Loading.vue'
+// const Button = () =>
+//   defineAsyncComponent({
+//     loader: () => import('@/eg/button/Index.vue'),
+//     // 加载异步组件时使用的组件
+//     loadingComponent: Loading,
+//     // 展示加载组件前的延迟时间，默认为 200ms
+//     delay: 200
+//   })
+
+// views
 import Home from '@/views/Home.vue'
 
 const Guide = () => import('@/views/Guide.vue')
 const Components = () => import('@/views/Components.vue')
 const NotFound = () => import('@/views/NotFound.vue')
+
+// components
 const Button = () => import('@/eg/button/Index.vue')
 const Typography = () => import('@/eg/typography/Index.vue')
 const Palette = () => import('@/eg/palette/Index.vue')

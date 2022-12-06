@@ -4,11 +4,11 @@
       <Head />
     </section>
     <section class="components-Body">
-      <Button type="primary" @click="showDrawer1" class="menu-pop-button">Menu</Button>
+      <Button type="primary" @click="showDrawer" class="menu-pop-button">Menu</Button>
       <section class="display-menu scroll-container">
         <ComponentsMenu />
         <Drawer
-          v-model:visible="visible1"
+          v-model:visible="visible"
           placement="left"
           classname="custom"
           :style="{ width: '240px' }"
@@ -33,12 +33,9 @@ import Head from '@/views/Head.vue'
 import ComponentsMenu from '@/components/ComponentsMenu.vue'
 import { Drawer, Button } from '@/lib'
 
-const visible1 = ref<boolean>(false)
-const showDrawer1 = () => {
-  visible1.value = true
-}
-const onClose1 = () => {
-  visible1.value = false
+const visible = ref<boolean>(false)
+const showDrawer = () => {
+  visible.value = true
 }
 </script>
 
@@ -50,9 +47,7 @@ const onClose1 = () => {
   > .components-Head {
     height: 50px;
     flex-shrink: 0;
-    background: #1890ff;
   }
-
   > .components-Body {
     flex-grow: 10;
     overflow-y: auto;
