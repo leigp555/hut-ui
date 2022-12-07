@@ -54,9 +54,7 @@ const showDrawer = () => {
   height: 100%;
   display: flex;
   flex-direction: column;
-  gap: 30px;
   > .components-Head {
-    height: 50px;
     flex-shrink: 0;
   }
   > .components-Body {
@@ -79,6 +77,15 @@ const showDrawer = () => {
       overflow-x: hidden;
       scroll-behavior: smooth;
       flex-shrink: 0;
+      &::-webkit-scrollbar-thumb {
+        background-color: #ffffff;
+        transition: all 250ms;
+      }
+      &:hover {
+        &::-webkit-scrollbar-thumb {
+          background-color: #b2b2b2;
+        }
+      }
       @media (max-width: 800px) {
         display: none;
       }

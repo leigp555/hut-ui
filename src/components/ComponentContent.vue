@@ -48,7 +48,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref, withDefaults } from 'vue'
+import { ref, withDefaults } from 'vue'
 import { Anchor, AnchorLink, Title } from '@/lib/index'
 import Footer from '@/components/Footer.vue'
 
@@ -61,12 +61,6 @@ withDefaults(
   { navArr: () => [] }
 )
 const wrap = ref<HTMLElement | null>(null)
-
-onMounted(() => {
-  wrap.value?.addEventListener('scroll', () => {
-    console.log(wrap.value?.scrollTop)
-  })
-})
 </script>
 
 <style lang="scss" scoped>

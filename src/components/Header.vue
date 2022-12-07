@@ -9,10 +9,11 @@
 
 <style lang="scss" scoped>
 .wrap {
-  height: 50px;
+  height: 64px;
   display: flex;
   gap: 100px;
   background: #ffffff;
-  box-shadow: 0 2px 8px #f0f1f2;
+  //box-shadow: 0 2px 8px #f0f1f2;
+  border-bottom: 1px solid #dcdfe6;
 }
 </style>
