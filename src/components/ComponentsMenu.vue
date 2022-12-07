@@ -1,6 +1,5 @@
 <template>
   <section class="components-Menu scroll-container">
-    <h4 class="components-Menu-title">组件概览</h4>
     <Menu v-model:selectedKeys="selectedKeys" mode="column">
       <SubMenu keyValue="sub1" :collapsible="false">
         <template #title><span style="font-weight: 600">通用</span></template>
@@ -504,6 +503,7 @@ const sub7 = reactive<{ keyValue: string; title: string }[]>([
 
 <style lang="scss" scoped>
 .components-Menu {
+  margin-top: 10px;
   display: inline-flex;
   flex-direction: column;
   .menuItem {
@@ -520,14 +520,6 @@ const sub7 = reactive<{ keyValue: string; title: string }[]>([
     &.router-link-exact-active {
       border-right: 3px solid #1890ff;
     }
-  }
-  > .components-Menu-title {
-    font-weight: 600;
-    display: flex;
-    justify-content: center;
-    padding: 20px 0 20px 0;
-    //background: #fafafa;
-    background: #fff;
   }
 }
 </style>
