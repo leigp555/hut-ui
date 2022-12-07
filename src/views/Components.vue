@@ -4,21 +4,8 @@
       <Header />
     </section>
     <section class="components-Body">
-      <Button type="link" @click="showDrawer" class="menu-pop-button">
-        <template #icon>
-          <SvgIcon name="menu" width="1em" height="1em" fill="#1890ff" />
-        </template>
-        菜单
-      </Button>
       <section class="display-menu scroll-container">
         <ComponentsMenu />
-        <Drawer v-model:visible="visible" placement="left" classname="custom">
-          <template #content>
-            <section class="display-pop-menu scroll-container">
-              <ComponentsMenu />
-            </section>
-          </template>
-        </Drawer>
       </section>
       <section class="display-content scroll-container">
         <!--        <Loading v-if="status" />-->
@@ -62,16 +49,6 @@ const showDrawer = () => {
     overflow-y: auto;
     display: flex;
     position: relative;
-    > .menu-pop-button {
-      position: absolute;
-      font-size: 13px;
-      top: 0;
-      left: 10px;
-      z-index: 10;
-      @media (min-width: 800px) {
-        display: none;
-      }
-    }
     > .display-menu {
       overflow-y: auto;
       overflow-x: hidden;
