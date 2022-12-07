@@ -1,7 +1,7 @@
 <template>
   <div class="components--wrap">
     <section class="components-Head">
-      <Head />
+      <Header />
     </section>
     <section class="components-Body">
       <Button type="link" @click="showDrawer" class="menu-pop-button">
@@ -29,7 +29,8 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue'
-import Head from '@/views/Head.vue'
+
+import Header from '@/views/Header.vue'
 import ComponentsMenu from '@/components/ComponentsMenu.vue'
 import { Drawer, Button, SvgIcon } from '@/lib'
 

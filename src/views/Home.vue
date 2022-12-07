@@ -1,12 +1,10 @@
 <template>
   <div class="home">
-    <Head />
+    <div>home</div>
   </div>
 </template>
 
-<script lang="ts" setup>
-import Head from '@/views/Head.vue'
-</script>
+<script lang="ts" setup></script>
 
 <style scoped lang="scss">
 .home {

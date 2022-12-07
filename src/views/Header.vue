@@ -2,13 +2,14 @@
   <div class="wrap">
     head
     <router-link to="/home">go home</router-link>
+    <router-link to="/guide">go guide</router-link>
     <router-link to="/components">go components</router-link>
   </div>
 </template>
 
 <style lang="scss" scoped>
 .wrap {
-  height: 100%;
+  height: 50px;
   display: flex;
   gap: 100px;
   background: #ffffff;
