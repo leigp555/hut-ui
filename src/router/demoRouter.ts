@@ -1,379 +1,377 @@
 import { RouteRecordRaw } from 'vue-router'
 
-// components
-const Button = () => import('@/eg/button/Index.vue')
-const Typography = () => import('@/eg/typography/Index.vue')
-const Palette = () => import('@/eg/palette/Index.vue')
-const Divider = () => import('@/eg/divider/Index.vue')
-const Grid = () => import('@/eg/grid/Index.vue')
-const Layout = () => import('@/eg/layout/Index.vue')
-const Space = () => import('@/eg/space/Index.vue')
-const Affix = () => import('@/eg/affix/Index.vue')
-const Anchor = () => import('@/eg/anchor/Index.vue')
-const Breadcrumb = () => import('@/eg/breadcrumb/Index.vue')
-const Dropdown = () => import('@/eg/dropdown/Index.vue')
-const Menu = () => import('@/eg/menu/Index.vue')
-const PageHeader = () => import('@/eg/pageHeader/Index.vue')
-const Pagination = () => import('@/eg/pagination/Index.vue')
-const Steps = () => import('@/eg/steps/Index.vue')
-const AutoComplete = () => import('@/eg/autoComplete/Index.vue')
-const Cascader = () => import('@/eg/cascader/Index.vue')
-const Checkbox = () => import('@/eg/checkbox/Index.vue')
-const DatePicker = () => import('@/eg/datePicker/Index.vue')
-const Form = () => import('@/eg/form/Index.vue')
-const Input = () => import('@/eg/input/Index.vue')
-const InputNumber = () => import('@/eg/inputNumber/Index.vue')
-const Mentions = () => import('@/eg/mentions/Index.vue')
-const Radio = () => import('@/eg/radio/Index.vue')
-const Rate = () => import('@/eg/rate/Index.vue')
-const Select = () => import('@/eg/select/Index.vue')
-const Slider = () => import('@/eg/slider/Index.vue')
-const Switch = () => import('@/eg/switch/Index.vue')
-const TimePicker = () => import('@/eg/timePicker/Index.vue')
-const Transfer = () => import('@/eg/transfer/Index.vue')
-const TreeSelect = () => import('@/eg/treeSelect/Index.vue')
-const Upload = () => import('@/eg/upload/Index.vue')
-const Avatar = () => import('@/eg/avatar/Index.vue')
-const Badge = () => import('@/eg/badge/Index.vue')
-const Calendar = () => import('@/eg/calendar/Index.vue')
-const Card = () => import('@/eg/card/Index.vue')
-const Carousel = () => import('@/eg/carousel/Index.vue')
-const Collapse = () => import('@/eg/collapse/Index.vue')
-const Comment = () => import('@/eg/comment/Index.vue')
-const Descriptions = () => import('@/eg/descriptions/Index.vue')
-const Empty = () => import('@/eg/empty/Index.vue')
-const Image = () => import('@/eg/image/Index.vue')
-const List = () => import('@/eg/list/Index.vue')
-const Popover = () => import('@/eg/popover/Index.vue')
-const Statistic = () => import('@/eg/statistic/Index.vue')
-const Table = () => import('@/eg/table/Index.vue')
-const Tabs = () => import('@/eg/tabs/Index.vue')
-const Tag = () => import('@/eg/tag/Index.vue')
-const Timeline = () => import('@/eg/timeline/Index.vue')
-const Tooltip = () => import('@/eg/tooltip/Index.vue')
-const Tree = () => import('@/eg/tree/Index.vue')
-const Alert = () => import('@/eg/alert/Index.vue')
-const Drawer = () => import('@/eg/drawer/Index.vue')
-const Message = () => import('@/eg/message/Index.vue')
-const Modal = () => import('@/eg/modal/Index.vue')
-const Notification = () => import('@/eg/notification/Index.vue')
-const Popconfirm = () => import('@/eg/popconfirm/Index.vue')
-const Progress = () => import('@/eg/progress/Index.vue')
-const Result = () => import('@/eg/result/Index.vue')
-const Skeleton = () => import('@/eg/skeleton/Index.vue')
-const Spin = () => import('@/eg/spin/Index.vue')
-const BackTop = () => import('@/eg/backtop/Index.vue')
-
 export const demoRouter: Array<RouteRecordRaw> = [
   {
     path: 'button',
     alias: '',
     name: 'button',
-    component: Button
+    meta: { loadingSkeleton: true },
+    component: () => import('@/eg/button/Index.vue')
   },
   {
     path: 'typography',
     name: 'typography',
-    component: Typography
+    meta: { loadingSkeleton: true },
+    component: () => import('@/eg/typography/Index.vue')
   },
   {
     path: 'palette',
     name: 'palette',
-    component: Palette
+    meta: { loadingSkeleton: true },
+    component: () => import('@/eg/palette/Index.vue')
   },
   {
     path: 'divider',
     name: 'divider',
-    component: Divider
+    meta: { loadingSkeleton: true },
+    component: () => import('@/eg/divider/Index.vue')
   },
   {
     path: 'grid',
     name: 'grid',
-    component: Grid
+    meta: { loadingSkeleton: true },
+    component: () => import('@/eg/grid/Index.vue')
   },
   {
     path: 'layout',
     name: 'layout',
-    component: Layout
+    meta: { loadingSkeleton: true },
+    component: () => import('@/eg/layout/Index.vue')
   },
   {
     path: 'space',
     name: 'space',
-    component: Space
+    meta: { loadingSkeleton: true },
+    component: () => import('@/eg/space/Index.vue')
   },
   {
     path: 'affix',
     name: 'affix',
-    component: Affix
+    meta: { loadingSkeleton: true },
+    component: () => import('@/eg/affix/Index.vue')
   },
   {
     path: 'anchor',
     name: 'anchor',
-    component: Anchor
+    meta: { loadingSkeleton: true },
+    component: () => import('@/eg/anchor/Index.vue')
   },
   {
     path: 'breadcrumb',
     name: 'breadcrumb',
-    component: Breadcrumb
+    meta: { loadingSkeleton: true },
+    component: () => import('@/eg/breadcrumb/Index.vue')
   },
   {
     path: 'dropdown',
     name: 'dropdown',
-    component: Dropdown
+    meta: { loadingSkeleton: true },
+    component: () => import('@/eg/dropdown/Index.vue')
   },
   {
     path: 'menu',
     name: 'menu',
-    component: Menu
+    meta: { loadingSkeleton: true },
+    component: () => import('@/eg/menu/Index.vue')
   },
   {
     path: 'pageHeader',
     name: 'pageHeader',
-    component: PageHeader
+    meta: { loadingSkeleton: true },
+    component: () => import('@/eg/pageHeader/Index.vue')
   },
   {
     path: 'pagination',
     name: 'pagination',
-    component: Pagination
+    meta: { loadingSkeleton: true },
+    component: () => import('@/eg/pagination/Index.vue')
   },
   {
     path: 'steps',
     name: 'steps',
-    component: Steps
+    meta: { loadingSkeleton: true },
+    component: () => import('@/eg/steps/Index.vue')
   },
   {
     path: 'autoComplete',
     name: 'autoComplete',
-    component: AutoComplete
+    meta: { loadingSkeleton: true },
+    component: () => import('@/eg/autoComplete/Index.vue')
   },
   {
     path: 'cascader',
     name: 'cascader',
-    component: Cascader
+    meta: { loadingSkeleton: true },
+    component: () => import('@/eg/cascader/Index.vue')
   },
   {
     path: 'checkbox',
     name: 'checkbox',
-    component: Checkbox
+    meta: { loadingSkeleton: true },
+    component: () => import('@/eg/checkbox/Index.vue')
   },
   {
     path: 'datePicker',
     name: 'datePicker',
-    component: DatePicker
+    meta: { loadingSkeleton: true },
+    component: () => import('@/eg/datePicker/Index.vue')
   },
   {
     path: 'form',
     name: 'form',
-    component: Form
+    meta: { loadingSkeleton: true },
+    component: () => import('@/eg/form/Index.vue')
   },
   {
     path: 'input',
     name: 'input',
-    component: Input
+    meta: { loadingSkeleton: true },
+    component: () => import('@/eg/input/Index.vue')
   },
   {
     path: 'inputNumber',
     name: 'inputNumber',
-    component: InputNumber
+    meta: { loadingSkeleton: true },
+    component: () => import('@/eg/inputNumber/Index.vue')
   },
   {
     path: 'mentions',
     name: 'mentions',
-    component: Mentions
+    meta: { loadingSkeleton: true },
+    component: () => import('@/eg/mentions/Index.vue')
   },
   {
     path: 'radio',
     name: 'radio',
-    component: Radio
+    meta: { loadingSkeleton: true },
+    component: () => import('@/eg/radio/Index.vue')
   },
   {
     path: 'rate',
     name: 'rate',
-    component: Rate
+    meta: { loadingSkeleton: true },
+    component: () => import('@/eg/rate/Index.vue')
   },
   {
     path: 'select',
     name: 'select',
-    component: Select
+    meta: { loadingSkeleton: true },
+    component: () => import('@/eg/select/Index.vue')
   },
   {
     path: 'slider',
     name: 'slider',
-    component: Slider
+    meta: { loadingSkeleton: true },
+    component: () => import('@/eg/slider/Index.vue')
   },
   {
     path: 'switch',
     name: 'switch',
-    component: Switch
+    meta: { loadingSkeleton: true },
+    component: () => import('@/eg/switch/Index.vue')
   },
   {
     path: 'timePicker',
     name: 'timePicker',
-    component: TimePicker
+    meta: { loadingSkeleton: true },
+    component: () => import('@/eg/timePicker/Index.vue')
   },
   {
     path: 'transfer',
     name: 'transfer',
-    component: Transfer
+    meta: { loadingSkeleton: true },
+    component: () => import('@/eg/transfer/Index.vue')
   },
   {
     path: 'treeSelect',
     name: 'treeSelect',
-    component: TreeSelect
+    meta: { loadingSkeleton: true },
+    component: () => import('@/eg/treeSelect/Index.vue')
   },
   {
     path: 'upload',
     name: 'upload',
-    component: Upload
+    meta: { loadingSkeleton: true },
+    component: () => import('@/eg/upload/Index.vue')
   },
   {
     path: 'avatar',
     name: 'avatar',
-    component: Avatar
+    meta: { loadingSkeleton: true },
+    component: () => import('@/eg/avatar/Index.vue')
   },
   {
     path: 'badge',
     name: 'badge',
-    component: Badge
+    meta: { loadingSkeleton: true },
+    component: () => import('@/eg/badge/Index.vue')
   },
   {
     path: 'calendar',
     name: 'calendar',
-    component: Calendar
+    meta: { loadingSkeleton: true },
+    component: () => import('@/eg/calendar/Index.vue')
   },
   {
     path: 'card',
     name: 'card',
-    component: Card
+    meta: { loadingSkeleton: true },
+    component: () => import('@/eg/card/Index.vue')
   },
   {
     path: 'carousel',
     name: 'carousel',
-    component: Carousel
+    meta: { loadingSkeleton: true },
+    component: () => import('@/eg/carousel/Index.vue')
   },
   {
     path: 'collapse',
     name: 'collapse',
-    component: Collapse
+    meta: { loadingSkeleton: true },
+    component: () => import('@/eg/collapse/Index.vue')
   },
   {
     path: 'comment',
     name: 'comment',
-    component: Comment
+    meta: { loadingSkeleton: true },
+    component: () => import('@/eg/comment/Index.vue')
   },
   {
     path: 'descriptions',
     name: 'descriptions',
-    component: Descriptions
+    meta: { loadingSkeleton: true },
+    component: () => import('@/eg/descriptions/Index.vue')
   },
   {
     path: 'empty',
     name: 'empty',
-    component: Empty
+    meta: { loadingSkeleton: true },
+    component: () => import('@/eg/empty/Index.vue')
   },
   {
     path: 'image',
     name: 'image',
-    component: Image
+    meta: { loadingSkeleton: true },
+    component: () => import('@/eg/image/Index.vue')
   },
   {
     path: 'list',
     name: 'list',
-    component: List
+    meta: { loadingSkeleton: true },
+    component: () => import('@/eg/list/Index.vue')
   },
   {
     path: 'popover',
     name: 'popover',
-    component: Popover
+    meta: { loadingSkeleton: true },
+    component: () => import('@/eg/popover/Index.vue')
   },
   {
     path: 'statistic',
     name: 'statistic',
-    component: Statistic
+    meta: { loadingSkeleton: true },
+    component: () => import('@/eg/statistic/Index.vue')
   },
   {
     path: 'table',
     name: 'table',
-    component: Table
+    meta: { loadingSkeleton: true },
+    component: () => import('@/eg/table/Index.vue')
   },
   {
     path: 'tabs',
     name: 'tabs',
-    component: Tabs
+    meta: { loadingSkeleton: true },
+    component: () => import('@/eg/tabs/Index.vue')
   },
   {
     path: 'tag',
     name: 'tag',
-    component: Tag
+    meta: { loadingSkeleton: true },
+    component: () => import('@/eg/tag/Index.vue')
   },
   {
     path: 'timeline',
     name: 'timeline',
-    component: Timeline
+    meta: { loadingSkeleton: true },
+    component: () => import('@/eg/timeline/Index.vue')
   },
   {
     path: 'tooltip',
     name: 'tooltip',
-    component: Tooltip
+    meta: { loadingSkeleton: true },
+    component: () => import('@/eg/tooltip/Index.vue')
   },
   {
     path: 'tree',
     name: 'tree',
-    component: Tree
+    meta: { loadingSkeleton: true },
+    component: () => import('@/eg/tree/Index.vue')
   },
   {
     path: 'alert',
     name: 'alert',
-    component: Alert
+    meta: { loadingSkeleton: true },
+    component: () => import('@/eg/alert/Index.vue')
   },
   {
     path: 'drawer',
     name: 'drawer',
-    component: Drawer
+    meta: { loadingSkeleton: true },
+    component: () => import('@/eg/drawer/Index.vue')
   },
   {
     path: 'message',
     name: 'message',
-    component: Message
+    meta: { loadingSkeleton: true },
+    component: () => import('@/eg/message/Index.vue')
   },
   {
     path: 'modal',
     name: 'modal',
-    component: Modal
+    meta: { loadingSkeleton: true },
+    component: () => import('@/eg/modal/Index.vue')
   },
   {
     path: 'notification',
     name: 'notification',
-    component: Notification
+    meta: { loadingSkeleton: true },
+    component: () => import('@/eg/notification/Index.vue')
   },
   {
     path: 'popconfirm',
     name: 'popconfirm',
-    component: Popconfirm
+    meta: { loadingSkeleton: true },
+    component: () => import('@/eg/popconfirm/Index.vue')
   },
   {
     path: 'progress',
     name: 'progress',
-    component: Progress
+    meta: { loadingSkeleton: true },
+    component: () => import('@/eg/progress/Index.vue')
   },
   {
     path: 'result',
     name: 'result',
-    component: Result
+    meta: { loadingSkeleton: true },
+    component: () => import('@/eg/result/Index.vue')
   },
   {
     path: 'skeleton',
     name: 'skeleton',
-    component: Skeleton
+    meta: { loadingSkeleton: true },
+    component: () => import('@/eg/skeleton/Index.vue')
   },
   {
     path: 'spin',
     name: 'spin',
-    component: Spin
+    meta: { loadingSkeleton: true },
+    component: () => import('@/eg/spin/Index.vue')
   },
   {
     path: 'backTop',
     name: 'backTop',
-    component: BackTop
+    meta: { loadingSkeleton: true },
+    component: () => import('@/eg/backtop/Index.vue')
   }
 ]

@@ -21,6 +21,7 @@
         </Drawer>
       </section>
       <section class="display-content scroll-container">
+        <!--        <Loading v-if="status" />-->
         <router-view />
       </section>
     </section>
@@ -28,16 +29,24 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 
 import Header from '@/views/Header.vue'
 import ComponentsMenu from '@/components/ComponentsMenu.vue'
+
 import { Drawer, Button, SvgIcon } from '@/lib'
 
 const visible = ref<boolean>(false)
 const showDrawer = () => {
   visible.value = true
 }
+// 骨架占位
+// import Loading from '@/components/Loading.vue'
+// import { useLoadingStore } from '@/store'
+// const loadStore = useLoadingStore()
+// const status = computed<boolean>(() => {
+//   return loadStore.getStatus
+// })
 </script>
 
 <style scoped lang="scss">

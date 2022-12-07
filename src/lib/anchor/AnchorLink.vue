@@ -32,7 +32,7 @@ const onClick = () => {
   cursor: pointer;
   transition: all 250ms;
   height: 16px;
-  max-width: 110px;
+  max-width: 90px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;

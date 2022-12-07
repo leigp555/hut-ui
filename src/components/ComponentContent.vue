@@ -83,7 +83,7 @@ const wrap = ref<HTMLElement | null>(null)
     }
   }
   > .title {
-    margin-top: 50px;
+    margin-top: 20px;
     > .title-description {
     }
   }
