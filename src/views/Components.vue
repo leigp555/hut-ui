@@ -31,7 +31,7 @@
 <script lang="ts" setup>
 import { computed, ref } from 'vue'
 
-import Header from '@/views/Header.vue'
+import Header from '@/components/Header.vue'
 import ComponentsMenu from '@/components/ComponentsMenu.vue'
 
 import { Drawer, Button, SvgIcon } from '@/lib'

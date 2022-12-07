@@ -33,7 +33,7 @@ import { reactive, ref } from 'vue'
 import Menu from '@/lib/menu/Menu.vue'
 import MenuItem from '@/lib/menu/MenuItem.vue'
 import SubMenu from '@/lib/menu/SubMenu.vue'
-import Header from '@/views/Header.vue'
+import Header from '@/components/Header.vue'
 
 const selectedKeys = ref<string[]>(['intro'])
 

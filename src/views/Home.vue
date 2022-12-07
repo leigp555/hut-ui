@@ -1,14 +1,13 @@
 <template>
-  <div class="home">
-    <div>home</div>
-  </div>
+  <div class="wrap">home</div>
 </template>
 
-<script lang="ts" setup></script>
-
-<style scoped lang="scss">
-.home {
-  height: 100%;
-  overflow: auto;
+<style lang="scss" scoped>
+.wrap {
+  height: 50px;
+  display: flex;
+  gap: 100px;
+  background: #ffffff;
+  box-shadow: 0 2px 8px #f0f1f2;
 }
 </style>
