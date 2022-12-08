@@ -1,0 +1,139 @@
+<template>
+  <div id="algolia-autocomplete" class="autocomplete-wrap"></div>
+</template>
+
+<script lang="ts" setup>
+import { autocomplete, getAlgoliaResults } from '@algolia/autocomplete-js'
+import algoliasearch from 'algoliasearch'
+import '@algolia/autocomplete-theme-classic'
+import { onMounted } from 'vue'
+
+const searchClient = algoliasearch('6QDXG2F1C8', '75833f367ec8d63a3e37b595c71ee9ad')
+
+onMounted(() => {
+  autocomplete({
+    container: '#algolia-autocomplete',
+    placeholder: '搜索',
+    getSources({ query }) {
+      return [
+        {
+          sourceId: 'component',
+          getItems() {
+            return getAlgoliaResults({
+              searchClient,
+              queries: [
+                {
+                  indexName: 'componentName',
+                  query,
+                  params: {
+                    hitsPerPage: 10
+                  }
+                }
+              ]
+            })
+          },
+          templates: {
+            item({ item, components, html }) {
+              return html`<div class="search-algolia">
+                <a class="search-algolia-item" href="#${item.url}">
+                  ${components.Highlight({
+                    hit: item,
+                    attribute: 'componentName'
+                  })}
+                </a>
+              </div>`
+            }
+          }
+        }
+      ]
+    }
+  })
+})
+
+// 上传
+// algoliasearch的一次个参数传入账号提供的Application ID ， 第二个传入Admin API Key
+// const client = algoliasearch('6QDXG2F1C8', '2765d6a1c530dad83b846459001bc8f3')
+// const index = client.initIndex('componentName')
+// 声明Json数组
+// const objects = []
+// index.saveObjects(objects).then(({ objectIDs }) => {
+//   console.log(objectIDs)
+// })
+</script>
+
+<style lang="scss">
+$main_color: #1890ff;
+.aa-Form {
+  height: 34px;
+  font-size: 14px;
+  max-width: 200px;
+  min-width: 100px;
+  border: 1px solid #d9d9d9;
+  transition: all 250ms;
+  &:focus-within {
+    box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+    border: 1px solid $main_color;
+  }
+  &:hover {
+    border: 1px solid $main_color;
+  }
+  > .aa-InputWrapperPrefix {
+    height: 34px;
+    button {
+      padding-top: 0;
+      padding-bottom: 0;
+      display: inline-flex;
+      align-items: center;
+      svg {
+        width: 18px;
+        height: 18px;
+        fill: rgba(0, 0, 0, 0.45);
+      }
+    }
+  }
+  > .aa-InputWrapper {
+    > input {
+      height: 34px;
+      font-size: 14px;
+      white-space: nowrap;
+      color: #000000d9;
+    }
+  }
+  > .aa-InputWrapperSuffix {
+    height: 34px;
+  }
+}
+
+.aa-Panel {
+  width: 100%;
+  box-shadow: 0 3px 6px -4px #0000001f, 0 6px 16px #00000014, 0 9px 28px 8px #0000000d;
+  transition: all 250ms;
+  z-index: 3000;
+  .aa-PanelLayout {
+    .aa-Item {
+      padding: 0 !important;
+      font-size: 14px;
+      height: auto;
+      &:hover {
+        background: #e6f7ff;
+      }
+      //border: 1px solid red;
+      > .search-algolia {
+        height: 100%;
+        a {
+          text-decoration: none;
+          width: 100%;
+          height: 100%;
+          display: flex;
+          align-items: center;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          padding: 4px 11px;
+          color: #000000d9;
+        }
+      }
+    }
+  }
+}
+</style>

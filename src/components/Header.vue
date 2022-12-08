@@ -8,9 +8,7 @@
       <router-link to="/home">首页</router-link>
       <router-link to="/guide/intro">指南</router-link>
       <router-link to="/components/button">组件</router-link>
-      <div>
-        <Input v-model:value="value" style="width: 200px" placeholder="搜索"> </Input>
-      </div>
+      <Search />
     </div>
     <div class="link">
       <div class="link-content">
@@ -37,6 +35,7 @@
 import { ref } from 'vue'
 import { Input, SvgIcon, Drawer, Button } from '@/lib'
 import ComponentsMenu from '@/components/ComponentsMenu.vue'
+import Search from '@/components/Search.vue'
 
 const value = ref<string>('')
 

@@ -214,267 +214,267 @@ watch(
 const sub1 = reactive<{ keyValue: string; title: string }[]>([
   {
     keyValue: 'button',
-    title: ' Button按钮'
+    title: ' Button 按钮'
   },
   {
     keyValue: 'typography',
-    title: ' Typography排版'
+    title: ' Typography 排版'
   },
   {
     keyValue: 'palette',
-    title: ' Palette调色板'
+    title: ' Palette 调色板'
   }
 ])
 const sub2 = reactive<{ keyValue: string; title: string }[]>([
   {
     keyValue: 'divider',
-    title: ' Divider分割线'
+    title: ' Divider 分割线'
   },
   {
     keyValue: 'grid',
-    title: ' Grid栅格'
+    title: ' Grid 栅格'
   },
   {
     keyValue: 'layout',
-    title: ' Layout布局'
+    title: ' Layout 布局'
   },
   {
     keyValue: 'space',
-    title: ' Space间距'
+    title: ' Space 间距'
   }
 ])
 const sub3 = reactive<{ keyValue: string; title: string }[]>([
   {
     keyValue: 'affix',
-    title: ' Affix固钉'
+    title: ' Affix 固钉'
   },
   {
     keyValue: 'anchor',
-    title: ' Anchor锚点'
+    title: ' Anchor 锚点'
   },
   {
     keyValue: 'breadcrumb',
-    title: ' Breadcrumb面包屑'
+    title: ' Breadcrumb 面包屑'
   },
   {
     keyValue: 'dropdown',
-    title: ' Dropdown下拉菜单'
+    title: ' Dropdown 下拉菜单'
   },
   {
     keyValue: 'menu',
-    title: ' Menu导航菜单'
+    title: ' Menu 导航菜单'
   },
   {
     keyValue: 'pageHeader',
-    title: ' PageHeader页头'
+    title: ' PageHeader 页头'
   },
   {
     keyValue: 'pagination',
-    title: ' Pagination分页'
+    title: ' Pagination 分页'
   },
   {
     keyValue: 'steps',
-    title: ' Steps步骤条'
+    title: ' Steps 步骤条'
   }
 ])
 
 const sub4 = reactive<{ keyValue: string; title: string }[]>([
   {
     keyValue: 'autoComplete',
-    title: ' AutoComplete自动完成'
+    title: ' AutoComplete 自动完成'
   },
   {
     keyValue: 'cascader',
-    title: ' Cascader级联选择'
+    title: ' Cascader 级联选择'
   },
   {
     keyValue: 'checkbox',
-    title: ' Checkbox多选框'
+    title: ' Checkbox 多选框'
   },
   {
     keyValue: 'datePicker',
-    title: ' DatePicker日期选择框'
+    title: ' DatePicker 日期选择框'
   },
   {
     keyValue: 'form',
-    title: ' Form表单'
+    title: ' Form 表单'
   },
   {
     keyValue: 'input',
-    title: ' Input输入框'
+    title: ' Input 输入框'
   },
   {
     keyValue: 'inputNumber',
-    title: ' InputNumber数字输入框'
+    title: ' InputNumber 数字输入框'
   },
   {
     keyValue: 'mentions',
-    title: ' Mentions提及'
+    title: ' Mentions 提及'
   },
   {
     keyValue: 'radio',
-    title: ' Radio单选框'
+    title: ' Radio 单选框'
   },
   {
     keyValue: 'rate',
-    title: ' Rate评分'
+    title: ' Rate 评分'
   },
   {
     keyValue: 'select',
-    title: ' Select选择器'
+    title: ' Select 选择器'
   },
   {
     keyValue: 'slider',
-    title: ' Slider滑动输入条'
+    title: ' Slider 滑动输入条'
   },
   {
     keyValue: 'switch',
-    title: ' Switch开关'
+    title: ' Switch 开关'
   },
   {
     keyValue: 'timePicker',
-    title: ' TimePicker时间选择框'
+    title: ' TimePicker 时间选择框'
   },
   {
     keyValue: 'transfer',
-    title: ' Transfer穿梭框'
+    title: ' Transfer 穿梭框'
   },
   {
     keyValue: 'treeSelect',
-    title: ' TreeSelect树选择'
+    title: ' TreeSelect 树选择'
   },
   {
     keyValue: 'upload',
-    title: ' Upload上传'
+    title: ' Upload 上传'
   }
 ])
 
 const sub5 = reactive<{ keyValue: string; title: string }[]>([
   {
     keyValue: 'avatar',
-    title: ' Avatar头像'
+    title: ' Avatar 头像'
   },
   {
     keyValue: 'badge',
-    title: ' Badge徽标数'
+    title: ' Badge 徽标数'
   },
   {
     keyValue: 'calendar',
-    title: ' Calendar日历'
+    title: ' Calendar 日历'
   },
   {
     keyValue: 'card',
-    title: ' Card卡片'
+    title: ' Card 卡片'
   },
   {
     keyValue: 'carousel',
-    title: ' Carousel走马灯'
+    title: ' Carousel 走马灯'
   },
   {
     keyValue: 'collapse',
-    title: ' Collapse折叠面板'
+    title: ' Collapse 折叠面板'
   },
   {
     keyValue: 'comment',
-    title: 'Comment评论'
+    title: 'Comment 评论'
   },
   {
     keyValue: 'descriptions',
-    title: ' Descriptions描述列表'
+    title: ' Descriptions 描述列表'
   },
   {
     keyValue: 'empty',
-    title: ' Empty空状态'
+    title: ' Empty 空状态'
   },
   {
     keyValue: 'image',
-    title: ' Image图片'
+    title: ' Image 图片'
   },
   {
     keyValue: 'list',
-    title: ' List列表'
+    title: ' List 列表'
   },
   {
     keyValue: 'popover',
-    title: ' Popover气泡卡片'
+    title: ' Popover 气泡卡片'
   },
   {
     keyValue: 'statistic',
-    title: ' Statistic统计数值'
+    title: ' Statistic 统计数值'
   },
   {
     keyValue: 'table',
-    title: ' Table表格'
+    title: ' Table 表格'
   },
   {
     keyValue: 'tabs',
-    title: ' Tabs标签页'
+    title: ' Tabs 标签页'
   },
   {
     keyValue: 'tag',
-    title: ' Tag标签'
+    title: ' Tag 标签'
   },
   {
     keyValue: 'timeline',
-    title: ' Timeline时间轴'
+    title: ' Timeline 时间轴'
   },
   {
     keyValue: 'tooltip',
-    title: ' Tooltip文字提示'
+    title: ' Tooltip 文字提示'
   },
   {
     keyValue: 'tree',
-    title: ' Tree树形控件'
+    title: ' Tree 树形控件'
   }
 ])
 
 const sub6 = reactive<{ keyValue: string; title: string }[]>([
   {
     keyValue: 'alert',
-    title: ' Alert警告提示'
+    title: ' Alert 警告提示'
   },
   {
     keyValue: 'drawer',
-    title: ' Drawer抽屉'
+    title: ' Drawer 抽屉'
   },
   {
     keyValue: 'message',
-    title: ' Message全局提示'
+    title: ' Message 全局提示'
   },
   {
     keyValue: 'modal',
-    title: ' Modal对话框'
+    title: ' Modal 对话框'
   },
   {
     keyValue: 'notification',
-    title: ' Notification通知提醒框'
+    title: ' Notification 通知提醒框'
   },
   {
     keyValue: 'popconfirm',
-    title: ' Popconfirm气泡确认框'
+    title: ' Popconfirm 气泡确认框'
   },
   {
     keyValue: 'progress',
-    title: ' Progress进度条'
+    title: ' Progress 进度条'
   },
   {
     keyValue: 'result',
-    title: ' Result结果'
+    title: ' Result 结果'
   },
   {
     keyValue: 'skeleton',
-    title: ' Skeleton骨架屏'
+    title: ' Skeleton 骨架屏'
   },
   {
     keyValue: 'spin',
-    title: ' Spin加载中'
+    title: ' Spin 加载中'
   }
 ])
 
 const sub7 = reactive<{ keyValue: string; title: string }[]>([
   {
     keyValue: 'backTop',
-    title: ' BackTop回到顶部'
+    title: ' BackTop 回到顶部'
   }
 ])
 
@@ -497,6 +497,19 @@ const sub7 = reactive<{ keyValue: string; title: string }[]>([
 //     const n = xxx[i].title[j].keyValue
 //     yyy[xxx[i].name][n] = true
 //   }
+// }
+// console.log(yyy)
+//= ===========================================
+// const yyy = []
+//
+// const xxx = [...sub1, ...sub2, ...sub3, ...sub4, ...sub5, ...sub6, ...sub7]
+//
+// for (let i = 0; i < xxx.length; i++) {
+//   yyy.push({
+//     componentName: xxx[i].title,
+//     url: `#/components/${xxx[i].keyValue}`,
+//     objectID: `myID${i + 1}`
+//   })
 // }
 // console.log(yyy)
 </script>
