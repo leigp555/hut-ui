@@ -6,8 +6,8 @@
     </div>
     <div class="nav">
       <router-link to="/home">首页</router-link>
-      <router-link to="/guide">指南</router-link>
-      <router-link to="/components">组件</router-link>
+      <router-link to="/guide/intro">指南</router-link>
+      <router-link to="/components/button">组件</router-link>
       <div>
         <Input v-model:value="value" style="width: 200px" placeholder="搜索"> </Input>
       </div>
