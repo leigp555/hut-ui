@@ -8,7 +8,9 @@
       <router-link to="/home">首页</router-link>
       <router-link to="/guide/intro">指南</router-link>
       <router-link to="/components/button">组件</router-link>
-      <Search />
+      <div class="search">
+        <Search />
+      </div>
     </div>
     <div class="link">
       <div class="link-content">
@@ -73,7 +75,8 @@ const showDrawer = () => {
     display: flex;
     gap: 60px;
     align-items: center;
-
+    .search {
+    }
     a {
       text-decoration: none;
       color: #1890ff;

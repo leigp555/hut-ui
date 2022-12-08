@@ -63,44 +63,54 @@ onMounted(() => {
 
 <style lang="scss">
 $main_color: #1890ff;
-.aa-Form {
+.aa-Autocomplete {
   height: 34px;
   font-size: 14px;
+  border: none;
   max-width: 200px;
-  min-width: 100px;
-  border: 1px solid #d9d9d9;
-  transition: all 250ms;
-  &:focus-within {
-    box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
-    border: 1px solid $main_color;
-  }
-  &:hover {
-    border: 1px solid $main_color;
-  }
-  > .aa-InputWrapperPrefix {
+  min-width: 120px;
+  button {
     height: 34px;
-    button {
-      padding-top: 0;
-      padding-bottom: 0;
-      display: inline-flex;
-      align-items: center;
-      svg {
-        width: 18px;
-        height: 18px;
-        fill: rgba(0, 0, 0, 0.45);
+  }
+  display: inline-block;
+  .aa-Form {
+    border: 1px solid #d9d9d9;
+    transition: all 250ms;
+    &:focus-within {
+      box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+      border: 1px solid $main_color;
+    }
+    &:hover {
+      border: 1px solid $main_color;
+    }
+    > .aa-InputWrapperPrefix {
+      height: 34px;
+      button {
+        padding-top: 0;
+        padding-bottom: 0;
+        display: inline-flex;
+        align-items: center;
+        padding-left: 10px;
+        width: 38px;
+        svg {
+          padding-right: 0 !important;
+          width: 18px;
+          height: 18px;
+          fill: rgba(0, 0, 0, 0.45);
+        }
       }
     }
-  }
-  > .aa-InputWrapper {
-    > input {
-      height: 34px;
-      font-size: 14px;
-      white-space: nowrap;
-      color: #000000d9;
+    > .aa-InputWrapper {
+      > input {
+        height: 34px;
+        font-size: 14px;
+        white-space: nowrap;
+        color: #000000d9;
+      }
     }
-  }
-  > .aa-InputWrapperSuffix {
-    height: 34px;
+    > .aa-InputWrapperSuffix {
+      height: 34px;
+    }
   }
 }
 
