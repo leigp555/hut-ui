@@ -78,13 +78,16 @@ const onChange = () => {
       border-radius: 0 4px 4px 0;
       cursor: pointer;
       box-shadow: 2px 0 8px #00000026;
-      z-index: 0;
+      z-index: 10;
       text-align: center;
       line-height: 40px;
       font-size: 16px;
       justify-content: center;
       align-items: center;
       background: #fff;
+      @media (min-width: 800px) {
+        display: none;
+      }
     }
     > .display-menu {
       overflow-y: auto;
