@@ -42,6 +42,9 @@ onMounted(() => {
                   })}
                 </a>
               </div>`
+            },
+            noResults() {
+              return 'No Result'
             }
           }
         }
