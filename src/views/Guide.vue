@@ -1,104 +1,117 @@
 <template>
-  <div class="guide-wrap">
-    <section class="guideHead">
+  <div class="components--wrap">
+    <section class="components-Head">
       <Header />
     </section>
-    <section class="guideBody">
-      <section class="guideMenu scroll-container">
-        <h4 class="guideMenu-title">指南</h4>
-        <Menu v-model:selectedKeys="selectedKeys" style="width: 240px" mode="column">
-          <SubMenu keyValue="sub1" :collapsible="false">
-            <MenuItem
-              v-for="item in sub1"
-              :keyValue="item.keyValue"
-              :key="item.keyValue"
-              class="menuItem"
-            >
-              <router-link :to="`/guide/${item.keyValue}`" class="router-link">
-                {{ item.title }}
-              </router-link>
-            </MenuItem>
-          </SubMenu>
-        </Menu>
+    <section class="components-Body">
+      <span class="menu-pop-button" @click="showDrawer">
+        <SvgIcon name="menu_outline" width="20px" height="20px" fill="#262626" />
+      </span>
+      <section class="display-menu scroll-container">
+        <GuideMenu />
       </section>
-      <section class="guideContent scroll-container">
-        <router-view />
+      <section class="display-content scroll-container">
+        <div style="padding: 10px 32px">
+          <router-view />
+        </div>
       </section>
     </section>
   </div>
+
+  <Drawer v-model:visible="visible" placement="left" classname="custom">
+    <template #content>
+      <section class="display-pop-menu scroll-container">
+        <GuideMenu @change="onChange" />
+      </section>
+    </template>
+  </Drawer>
 </template>
 
 <script lang="ts" setup>
-import { reactive, ref } from 'vue'
-import Menu from '@/lib/menu/Menu.vue'
-import MenuItem from '@/lib/menu/MenuItem.vue'
-import SubMenu from '@/lib/menu/SubMenu.vue'
+import { ref } from 'vue'
+
 import Header from '@/components/Header.vue'
+import GuideMenu from '@/components/GuideMenu.vue'
 
-const selectedKeys = ref<string[]>(['intro'])
+import { Drawer, Button, SvgIcon } from '@/lib'
 
-const sub1 = reactive<{ keyValue: string; title: string }[]>([
-  {
-    keyValue: 'intro',
-    title: '介绍'
-  },
-  {
-    keyValue: 'install',
-    title: ' 安装'
-  },
-  {
-    keyValue: 'usage',
-    title: '简单地案例'
-  }
-])
+const visible = ref<boolean>(false)
+const showDrawer = () => {
+  visible.value = true
+}
+const onChange = () => {
+  visible.value = false
+}
 </script>
 
 <style scoped lang="scss">
-.guide-wrap {
+.components--wrap {
   height: 100%;
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  > .guideHead {
-    height: 50px;
+  > .components-Head {
     flex-shrink: 0;
-    background: #1890ff;
   }
-
-  > .guideBody {
+  > .components-Body {
     flex-grow: 10;
     overflow-y: auto;
     display: flex;
-    > .guideMenu {
+    position: relative;
+    > .menu-pop-button {
       display: inline-flex;
-      flex-direction: column;
-      overflow-y: auto;
-      scroll-behavior: smooth;
-      background: #fafafa;
-      .menuItem {
-        padding: 0 !important;
-      }
-      .router-link {
-        display: block;
-        padding-left: 48px;
-        height: 100%;
-        width: 100%;
-      }
-      > .guideMenu-title {
-        font-weight: 600;
-        display: flex;
-        justify-content: center;
-        padding: 20px 0 20px 0;
-        background: #fafafa;
+      position: absolute;
+      top: 90px;
+      left: 0;
+      width: 41px;
+      height: 40px;
+      border-radius: 0 4px 4px 0;
+      cursor: pointer;
+      box-shadow: 2px 0 8px #00000026;
+      z-index: 10;
+      text-align: center;
+      line-height: 40px;
+      font-size: 16px;
+      justify-content: center;
+      align-items: center;
+      background: #fff;
+      @media (min-width: 800px) {
+        display: none;
       }
     }
-    > .guideContent {
+    > .display-menu {
+      overflow-y: auto;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+      flex-shrink: 0;
+      border-right: 1px solid #f0f0f0;
+      background: #fafafa;
+      &::-webkit-scrollbar-thumb {
+        background-color: #ffffff;
+        transition: all 250ms;
+      }
+      &:hover {
+        &::-webkit-scrollbar-thumb {
+          background-color: #b2b2b2;
+        }
+      }
+      @media (max-width: 800px) {
+        display: none;
+      }
+    }
+    > .display-content {
       background: #ffffff;
       flex-grow: 10;
-      padding: 20px;
-      overflow-y: auto;
-      scroll-behavior: smooth;
+      overflow: hidden;
     }
   }
+}
+</style>
+
+<style lang="scss">
+.display-pop-menu {
+  overflow-y: auto;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  height: 100%;
 }
 </style>

@@ -16,5 +16,10 @@ export const docsRouter: Array<RouteRecordRaw> = [
     path: 'usage',
     name: 'Usage',
     component: () => import('@/docs/Usage.vue')
+  },
+  {
+    path: 'changelog',
+    name: 'changelog',
+    component: () => import('@/docs/Log.vue')
   }
 ]

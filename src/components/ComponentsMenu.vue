@@ -9,11 +9,7 @@
           :key="item.keyValue"
           class="menuItem"
         >
-          <router-link
-            :to="`/components/${item.keyValue}`"
-            class="router-link"
-            :class="{ 'router-active': selectedKeys.indexOf(item.keyValue) }"
-          >
+          <router-link :to="`/components/${item.keyValue}`" class="router-link">
             {{ item.title }}
           </router-link>
         </MenuItem>
@@ -523,6 +519,7 @@ const sub7 = reactive<{ keyValue: string; title: string }[]>([
   margin-top: 10px;
   display: inline-flex;
   flex-direction: column;
+  width: 248px;
   .menuItem {
     padding: 0 !important;
   }

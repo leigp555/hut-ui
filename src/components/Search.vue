@@ -122,7 +122,7 @@ $main_color: #1890ff;
   transition: all 250ms;
   z-index: 3000;
   .aa-PanelLayout {
-    max-height: 200px !important;
+    max-height: 170px !important;
     &::-webkit-scrollbar {
       //整个滚动条的宽高设置
       width: 6px; //宽高只有一个能生效，如果是横向滚动条高度生效，纵向滚动条宽度生效

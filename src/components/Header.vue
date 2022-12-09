@@ -2,7 +2,7 @@
   <div class="wrap">
     <div class="logo">
       <img src="../assets/logo.png" alt="" />
-      <span class="title-description">Hut Ui</span>
+      <span class="title-description">Hut UI</span>
     </div>
     <div class="nav">
       <div class="nav-link">
