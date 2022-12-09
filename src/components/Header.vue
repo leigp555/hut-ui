@@ -95,6 +95,7 @@ const selectedKeys = ref<string[]>([])
     flex-shrink: 0;
     > img {
       height: 32px;
+      width: 28px;
     }
     > .title-description {
       font-size: 18px;
@@ -154,6 +155,7 @@ const selectedKeys = ref<string[]>([])
   }
 }
 </style>
+
 <style lang="scss">
 .display-dropdown {
   .ui-dropdown-pop {
