@@ -95,7 +95,9 @@ const popClick = () => {
       @mouseleave="onMouseleave"
       @contextmenu="onContextmenu"
     >
-      <slot />
+      <div style="pointer-events: none">
+        <slot />
+      </div>
     </div>
     <div
       class="ui-dropdown-pop"
@@ -105,7 +107,11 @@ const popClick = () => {
       :class="{ 'dropdown-pop-contextmenu': trigger === 'contextmenu' }"
     >
       <Transition name="drawer">
-        <div class="dropdown-pop-content" v-show="isOpen" @click="popClick">
+        <div
+          class="dropdown-pop-content ui-scroll-container"
+          v-show="isOpen"
+          @click="popClick"
+        >
           <slot name="pop" />
         </div>
       </Transition>
@@ -114,6 +120,8 @@ const popClick = () => {
 </template>
 
 <style lang="scss">
+@import '../common/scrollBar.scss';
+
 .ui-dropdown-wrap {
   position: relative;
   color: #000000d9;
@@ -133,7 +141,6 @@ const popClick = () => {
     z-index: 10;
     transform: translateY(100%);
     display: inline-block;
-
     &.dropdown-pop-contextmenu {
       transform: translateY(0);
       bottom: auto;
@@ -141,32 +148,15 @@ const popClick = () => {
     }
     > .dropdown-pop-content {
       min-width: 80px;
-      max-height: 8em;
+      max-height: 180px;
       overflow-y: auto;
       white-space: nowrap;
       padding: 8px 0;
       border-radius: 2px;
       background-color: white;
-      &::-webkit-scrollbar {
-        //整个滚动条的宽高设置
-        width: 4px; //宽高只有一个能生效，如果是横向滚动条高度生效，纵向滚动条宽度生效
-        height: 4px;
-      }
-      &::-webkit-scrollbar-thumb {
-        //滚动条滑块的设置
-        border-radius: 3px;
-        -moz-border-radius: 3px;
-        -webkit-border-radius: 3px;
-        background-color: #c3c3c3;
-      }
-      &::-webkit-scrollbar-track {
-        //滚动条轨道设置
-        background-color: transparent;
-      }
       box-shadow: 0 3px 6px -4px #0000001f, 0 6px 16px #00000014,
         0 9px 28px 8px #0000000d;
       transform-origin: top;
-      transition: all 250ms;
     }
   }
 }
@@ -177,6 +167,6 @@ const popClick = () => {
 }
 .drawer-enter-active,
 .drawer-leave-active {
-  transition: all 1s;
+  transition: all 250ms;
 }
 </style>
