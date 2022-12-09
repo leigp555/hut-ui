@@ -6,9 +6,19 @@
     </div>
     <div class="nav">
       <div class="nav-link">
-        <router-link to="/home">首页</router-link>
-        <router-link to="/guide/intro">指南</router-link>
-        <router-link to="/components/button">组件</router-link>
+        <router-link to="/home" :class="{ isActive: selectedKeys[0] === 'home' }"
+          >首页</router-link
+        >
+        <router-link
+          to="/guide/intro"
+          :class="{ isActive: selectedKeys[0] === 'guide' }"
+          >指南</router-link
+        >
+        <router-link
+          to="/components/button"
+          :class="{ isActive: selectedKeys[0] === 'components' }"
+          >组件</router-link
+        >
       </div>
       <div class="search">
         <Search />
@@ -32,21 +42,21 @@
               mode="column"
               class="head-menu-display"
             >
-              <SubMenu keyValue="sub1" :collapsible="false">
+              <SubMenu keyValue="home" :collapsible="false">
                 <template #title>
                   <router-link to="/home" class="router-link" style="font-weight: 600">
                     首页
                   </router-link>
                 </template>
               </SubMenu>
-              <SubMenu keyValue="sub2" :collapsible="false">
+              <SubMenu keyValue="guide" :collapsible="false">
                 <template #title>
                   <router-link to="/guide" class="router-link" style="font-weight: 600">
                     指南
                   </router-link>
                 </template>
               </SubMenu>
-              <SubMenu keyValue="sub3" :collapsible="false">
+              <SubMenu keyValue="components" :collapsible="false">
                 <template #title>
                   <router-link
                     to="/components"
@@ -66,11 +76,23 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, ref } from 'vue'
+import { onMounted, reactive, ref, watch, watchEffect } from 'vue'
+import { useRoute } from 'vue-router'
 import { SvgIcon, Drawer, Button, Menu, MenuItem, SubMenu, Dropdown } from '@/lib'
 import Search from '@/components/Search.vue'
 
-const selectedKeys = ref<string[]>([])
+const selectedKeys = ref<string[]>(['components'])
+
+const route = useRoute()
+
+const navArr = ['home', 'components', 'guide']
+
+onMounted(() => {
+  watchEffect(() => {
+    const currentRoute = route.path?.split('/')[1]
+    if (navArr.indexOf(currentRoute) >= 0) selectedKeys.value = [currentRoute]
+  })
+})
 </script>
 
 <style lang="scss" scoped>
@@ -131,7 +153,7 @@ const selectedKeys = ref<string[]>([])
       text-decoration: none;
       white-space: nowrap;
       color: inherit;
-      & .router-link-exact-active {
+      &.isActive {
         color: #1890ff;
       }
     }
@@ -142,13 +164,13 @@ const selectedKeys = ref<string[]>([])
       margin-left: 0;
     }
     > .link-github {
-      @media (max-width: 800px) {
+      @media (max-width: 900px) {
         display: none;
       }
     }
     > .link-menu {
       font-size: 13px;
-      @media (min-width: 800px) {
+      @media (min-width: 900px) {
         display: none;
       }
     }
@@ -182,8 +204,6 @@ const selectedKeys = ref<string[]>([])
               padding: 0 24px;
               &.router-link-exact-active {
                 color: #1890ff;
-                display: flex;
-                width: 100%;
               }
             }
           }
