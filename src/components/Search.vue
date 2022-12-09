@@ -26,7 +26,7 @@ onMounted(() => {
                   indexName: 'componentName',
                   query,
                   params: {
-                    hitsPerPage: 10
+                    hitsPerPage: 20
                   }
                 }
               ]
@@ -119,6 +119,27 @@ $main_color: #1890ff;
   transition: all 250ms;
   z-index: 3000;
   .aa-PanelLayout {
+    max-height: 200px !important;
+    &::-webkit-scrollbar {
+      //整个滚动条的宽高设置
+      width: 6px; //宽高只有一个能生效，如果是横向滚动条高度生效，纵向滚动条宽度生效
+      height: 6px;
+    }
+    &::-webkit-scrollbar-thumb {
+      //滚动条滑块的设置
+      border-radius: 3px;
+      -moz-border-radius: 3px;
+      -webkit-border-radius: 3px;
+      background-color: #cccccc;
+      border: none;
+      &:hover {
+        background-color: #b2b2b2;
+      }
+    }
+    &::-webkit-scrollbar-track {
+      //滚动条轨道设置
+      background-color: transparent;
+    }
     .aa-Item {
       padding: 0 !important;
       font-size: 14px;

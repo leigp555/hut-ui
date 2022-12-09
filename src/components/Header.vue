@@ -27,6 +27,37 @@
   <Drawer v-model:visible="visible" placement="left" classname="custom">
     <template #content>
       <section class="display-pop-menu scroll-container">
+        <h4 style="margin-top: 20px; text-align: center; margin-bottom: 20px">导航</h4>
+        <Menu v-model:selectedKeys="selectedKeys" style="width: 240px" mode="column">
+          <SubMenu keyValue="sub1" :collapsible="false">
+            <template #title>
+              <router-link :to="`/guide`" class="router-link" style="font-weight: 600">
+                首页
+              </router-link>
+            </template>
+          </SubMenu>
+          <SubMenu keyValue="sub2" :collapsible="false">
+            <template #title>
+              <router-link
+                :to="`/components`"
+                class="router-link"
+                style="font-weight: 600"
+              >
+                指南
+              </router-link>
+            </template>
+          </SubMenu>
+          <SubMenu keyValue="sub3" :collapsible="false">
+            <template #title>
+              <router-link :to="`/home`" class="router-link" style="font-weight: 600">
+                组件
+              </router-link>
+            </template>
+          </SubMenu>
+        </Menu>
+        <h4 style="margin-top: 40px; text-align: center; margin-bottom: 20px">
+          组件概览
+        </h4>
         <ComponentsMenu @change="onChange" />
       </section>
     </template>
@@ -34,8 +65,8 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-import { Input, SvgIcon, Drawer, Button } from '@/lib'
+import { reactive, ref } from 'vue'
+import { Input, SvgIcon, Drawer, Button, Menu, MenuItem, SubMenu } from '@/lib'
 import ComponentsMenu from '@/components/ComponentsMenu.vue'
 import Search from '@/components/Search.vue'
 
@@ -49,6 +80,8 @@ const showDrawer = () => {
 const onChange = () => {
   visible.value = false
 }
+
+const selectedKeys = ref<string[]>(['sub1'])
 </script>
 
 <style lang="scss" scoped>
