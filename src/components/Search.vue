@@ -67,8 +67,7 @@ $main_color: #1890ff;
   height: 34px;
   font-size: 14px;
   border: none;
-  max-width: 200px;
-  min-width: 120px;
+  width: 200px;
   button {
     height: 34px;
   }
@@ -124,8 +123,9 @@ $main_color: #1890ff;
       padding: 0 !important;
       font-size: 14px;
       height: auto;
+      background: #ffffff !important;
       &:hover {
-        background: #e6f7ff;
+        background: #e6f7ff !important;
       }
       //border: 1px solid red;
       > .search-algolia {
@@ -141,6 +141,9 @@ $main_color: #1890ff;
           text-overflow: ellipsis;
           padding: 4px 11px;
           color: #000000d9;
+          > mark {
+            font-weight: 700;
+          }
         }
       }
     }

@@ -1,6 +1,6 @@
 <template>
   <section class="components-Menu scroll-container">
-    <Menu v-model:selectedKeys="selectedKeys" mode="column">
+    <Menu v-model:selectedKeys="selectedKeys" mode="column" @change="onChange">
       <SubMenu keyValue="sub1" :collapsible="false">
         <template #title><span style="font-weight: 600">通用</span></template>
         <MenuItem
@@ -111,6 +111,10 @@ import SubMenu from '@/lib/menu/SubMenu.vue'
 const selectedKeys = ref<string[]>(['sub1', 'button'])
 const route = useRoute()
 
+const emit = defineEmits(['change'])
+const onChange = () => {
+  emit('change')
+}
 const componentsTitle: { [key: string]: { [s: string]: boolean } } = {
   sub1: {
     button: true,

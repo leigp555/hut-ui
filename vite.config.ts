@@ -6,6 +6,7 @@ import path, { resolve } from 'path'
 import { viteMockServe } from 'vite-plugin-mock'
 import viteCompression from 'vite-plugin-compression'
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
+import vueJsx from '@vitejs/plugin-vue-jsx'
 import { getSourceCode } from './vite-plugins/vite-plugin-getSourceCode'
 
 export default defineConfig({

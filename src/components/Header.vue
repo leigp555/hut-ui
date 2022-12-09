@@ -27,7 +27,7 @@
   <Drawer v-model:visible="visible" placement="left" classname="custom">
     <template #content>
       <section class="display-pop-menu scroll-container">
-        <ComponentsMenu />
+        <ComponentsMenu @change="onChange" />
       </section>
     </template>
   </Drawer>
@@ -45,6 +45,10 @@ const visible = ref<boolean>(false)
 const showDrawer = () => {
   visible.value = true
 }
+
+const onChange = () => {
+  visible.value = false
+}
 </script>
 
 <style lang="scss" scoped>
@@ -56,6 +60,7 @@ const showDrawer = () => {
   background: #ffffff;
   border-bottom: 1px solid #dcdfe6;
   font-size: 16px;
+  color: #000000d9;
   > .logo {
     width: 216px;
     display: flex;
@@ -75,12 +80,17 @@ const showDrawer = () => {
     display: flex;
     gap: 60px;
     align-items: center;
-    .search {
+    > .search {
+      width: 210px;
     }
+
     a {
       text-decoration: none;
-      color: #1890ff;
       white-space: nowrap;
+      color: inherit;
+    }
+    > .router-link-exact-active {
+      color: #1890ff;
     }
   }
   > .link {
