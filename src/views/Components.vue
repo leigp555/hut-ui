@@ -4,6 +4,9 @@
       <Header />
     </section>
     <section class="components-Body">
+      <span class="menu-pop-button" @click="showDrawer">
+        <SvgIcon name="menu_outline" width="20px" height="20px" fill="#262626" />
+      </span>
       <section class="display-menu scroll-container">
         <ComponentsMenu />
       </section>
@@ -13,19 +16,35 @@
       </section>
     </section>
   </div>
+
+  <Drawer v-model:visible="visible" placement="left" classname="custom">
+    <template #content>
+      <section class="display-pop-menu scroll-container">
+        <ComponentsMenu @change="onChange" />
+      </section>
+    </template>
+  </Drawer>
 </template>
 
 <script lang="ts" setup>
-import { computed, ref } from 'vue'
+import { ref } from 'vue'
 
 import Header from '@/components/Header.vue'
 import ComponentsMenu from '@/components/ComponentsMenu.vue'
 
 import { Drawer, Button, SvgIcon } from '@/lib'
 
+// const visible = ref<boolean>(false)
+// const showDrawer = () => {
+//   visible.value = true
+// }
+
 const visible = ref<boolean>(false)
 const showDrawer = () => {
   visible.value = true
+}
+const onChange = () => {
+  visible.value = false
 }
 // 骨架占位
 // import Loading from '@/components/Loading.vue'
@@ -49,6 +68,24 @@ const showDrawer = () => {
     overflow-y: auto;
     display: flex;
     position: relative;
+    > .menu-pop-button {
+      display: inline-flex;
+      position: absolute;
+      top: 90px;
+      left: 0;
+      width: 41px;
+      height: 40px;
+      border-radius: 0 4px 4px 0;
+      cursor: pointer;
+      box-shadow: 2px 0 8px #00000026;
+      z-index: 0;
+      text-align: center;
+      line-height: 40px;
+      font-size: 16px;
+      justify-content: center;
+      align-items: center;
+      background: #fff;
+    }
     > .display-menu {
       overflow-y: auto;
       overflow-x: hidden;
