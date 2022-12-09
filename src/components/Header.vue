@@ -30,25 +30,18 @@
               v-model:selectedKeys="selectedKeys"
               style="width: 120px"
               mode="column"
+              class="head-menu-display"
             >
               <SubMenu keyValue="sub1" :collapsible="false">
                 <template #title>
-                  <router-link
-                    :to="`/guide`"
-                    class="router-link"
-                    style="font-weight: 600"
-                  >
+                  <router-link to="/home" class="router-link" style="font-weight: 600">
                     首页
                   </router-link>
                 </template>
               </SubMenu>
               <SubMenu keyValue="sub2" :collapsible="false">
                 <template #title>
-                  <router-link
-                    :to="`/components`"
-                    class="router-link"
-                    style="font-weight: 600"
-                  >
+                  <router-link to="/guide" class="router-link" style="font-weight: 600">
                     指南
                   </router-link>
                 </template>
@@ -56,7 +49,7 @@
               <SubMenu keyValue="sub3" :collapsible="false">
                 <template #title>
                   <router-link
-                    :to="`/home`"
+                    to="/components"
                     class="router-link"
                     style="font-weight: 600"
                   >
@@ -77,7 +70,7 @@ import { reactive, ref } from 'vue'
 import { SvgIcon, Drawer, Button, Menu, MenuItem, SubMenu, Dropdown } from '@/lib'
 import Search from '@/components/Search.vue'
 
-const selectedKeys = ref<string[]>(['sub1'])
+const selectedKeys = ref<string[]>([])
 </script>
 
 <style lang="scss" scoped>
@@ -137,9 +130,9 @@ const selectedKeys = ref<string[]>(['sub1'])
       text-decoration: none;
       white-space: nowrap;
       color: inherit;
-    }
-    > .router-link-exact-active {
-      color: #1890ff;
+      & .router-link-exact-active {
+        color: #1890ff;
+      }
     }
   }
   > .link {
@@ -170,6 +163,31 @@ const selectedKeys = ref<string[]>(['sub1'])
   }
   .dropdown-pop-content {
     max-height: 500px !important;
+    .head-menu-display {
+      .ui-subMenu-title-wrap {
+        padding: 0 !important;
+        .ui-subMenu-title-inner {
+          flex-grow: 10;
+          .ui-subMenu-title {
+            display: block !important;
+            width: 100%;
+            a {
+              text-decoration: none;
+              white-space: nowrap;
+              color: inherit;
+              display: block;
+              width: 100%;
+              padding: 0 24px;
+              &.router-link-exact-active {
+                color: #1890ff;
+                display: flex;
+                width: 100%;
+              }
+            }
+          }
+        }
+      }
+    }
   }
 }
 </style>
