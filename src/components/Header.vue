@@ -1,7 +1,7 @@
 <template>
   <div class="wrap">
     <div class="logo">
-      <img src="src/assets/logo.png" alt="" />
+      <img src="../assets/logo.png" alt="" />
       <span class="title-description">Hut Ui</span>
     </div>
     <div class="nav">
