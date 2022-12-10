@@ -66,10 +66,10 @@ withDefaults(
       width: 38%;
       height: 16px;
       margin-top: 12px;
-      background: $bac_color;
+      background: var(--bac_color);
       border-radius: 4px;
       &.skeleton-title-active {
-        background: $active_bac_color;
+        background: var(--active_bac_color);
         background-size: 400% 100%;
         animation: skeleton_active 1.4s ease infinite;
       }
@@ -78,10 +78,10 @@ withDefaults(
       width: 100%;
       height: 16px;
       list-style: none;
-      background: $bac_color;
+      background: var(--bac_color);
       border-radius: 4px;
       &.skeleton-item-active {
-        background: $active_bac_color;
+        background: var(--active_bac_color);
         background-size: 400% 100%;
         animation: skeleton_active 1.4s ease infinite;
       }

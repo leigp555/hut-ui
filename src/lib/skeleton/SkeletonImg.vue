@@ -44,13 +44,13 @@ withDefaults(
   align-items: center;
   justify-content: center;
   vertical-align: top;
-  background-color: $bac_color;
+  background-color: var(--bac_color);
   width: 96px;
   height: 96px;
   line-height: 96px;
   border-radius: 2px;
   &.ui-skeletonImg-active {
-    background: $active_bac_color;
+    background: var(--active_bac_color);
     background-size: 400% 100%;
     animation: skeleton_active 1.4s ease infinite;
   }

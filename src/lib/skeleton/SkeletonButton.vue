@@ -34,13 +34,13 @@ withDefaults(
 .ui-skeletonButton-wrap {
   display: inline-block;
   vertical-align: top;
-  background-color: $bac_color;
+  background-color: var(--bac_color);
   border-radius: 2px;
   width: 64px;
   height: 32px;
   line-height: 32px;
   &.ui-skeletonButton-active {
-    background: $active_bac_color;
+    background: var(--active_bac_color);
     background-size: 400% 100%;
     animation: skeleton_active 1.4s ease infinite;
   }

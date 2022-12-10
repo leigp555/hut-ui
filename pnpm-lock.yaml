@@ -47,6 +47,7 @@ specifiers:
   rollup-plugin-scss: ^4.0.0
   rollup-plugin-terser: ^7.0.2
   rollup-plugin-vue: ^6.0.0
+  sass: ^1.56.2
   ts-jest: ^26.5.4
   typescript: ^4.6.4
   vite: ^2.9.9
@@ -58,6 +59,7 @@ specifiers:
   vue-jest: ^5.0.0-alpha.7
   vue-router: ^4.1.5
   vue-tsc: ^0.34.12
+  yarn: ^1.22.19
 
 dependencies:
   '@algolia/autocomplete-js': 1.7.3_algoliasearch@4.14.2
@@ -111,14 +113,16 @@ devDependencies:
   rollup-plugin-scss: 4.0.0
   rollup-plugin-terser: 7.0.2
   rollup-plugin-vue: 6.0.0_@vue+compiler-sfc@3.2.33
+  sass: 1.56.2
   ts-jest: 26.5.6_ip4jai7pxkumsngma2fb7ud2tm
   typescript: 4.6.4
-  vite: 2.9.9
+  vite: 2.9.9_sass@1.56.2
   vite-plugin-compression: 0.5.1_vite@2.9.9
   vite-plugin-mock: 2.9.6_mockjs@1.1.0+vite@2.9.9
   vite-plugin-style-import: 1.4.1_vite@2.9.9
   vue-jest: 5.0.0-alpha.10_deiatnd5ypobj34npqz2zfvare
   vue-tsc: 0.34.12_typescript@4.6.4
+  yarn: 1.22.19
 
 packages:
 
@@ -1766,7 +1770,7 @@ packages:
       '@babel/core': 7.20.5
       '@babel/plugin-transform-typescript': 7.20.2_@babel+core@7.20.5
       '@vue/babel-plugin-jsx': 1.1.1_@babel+core@7.20.5
-      vite: 2.9.9
+      vite: 2.9.9_sass@1.56.2
       vue: 3.2.33
     transitivePeerDependencies:
       - supports-color
@@ -1779,7 +1783,7 @@ packages:
       vite: ^2.5.10
       vue: ^3.2.25
     dependencies:
-      vite: 2.9.9
+      vite: 2.9.9_sass@1.56.2
       vue: 3.2.33
     dev: true
 
@@ -4647,6 +4651,10 @@ packages:
     hasBin: true
     dev: false
 
+  /immutable/4.1.0:
+    resolution: {integrity: sha512-oNkuqVTA8jqG1Q6c+UglTOD1xhC1BtjKI7XkCXRkZHrN5m18/XsnUp8Q89GkQO/z+0WjonSvl0FLhDYftp46nQ==}
+    dev: true
+
   /import-fresh/3.3.0:
     resolution: {integrity: sha512-veYYhQa+D1QBKznvhUHxb8faxlrwUnxseDAbAp457E0wLNio2bOSKnjYDhMj+YiAq61xrMGhQk9iXVk5FzgQMw==}
     engines: {node: '>=6'}
@@ -6939,6 +6947,16 @@ packages:
       - supports-color
     dev: true
 
+  /sass/1.56.2:
+    resolution: {integrity: sha512-ciEJhnyCRwzlBCB+h5cCPM6ie/6f8HrhZMQOf5vlU60Y1bI1rx5Zb0vlDZvaycHsg/MqFfF1Eq2eokAa32iw8w==}
+    engines: {node: '>=12.0.0'}
+    hasBin: true
+    dependencies:
+      chokidar: 3.5.3
+      immutable: 4.1.0
+      source-map-js: 1.0.2
+    dev: true
+
   /saxes/5.0.1:
     resolution: {integrity: sha512-5LBh1Tls8c9xgGjw3QrMwETmTMVk0oFgvrFSvWx62llR2hcEInrKNZ2GZCCuuy2lvWrdl5jhbpeqc5hRYKFOcw==}
     engines: {node: '>=10'}
@@ -7851,7 +7869,7 @@ packages:
       chalk: 4.1.2
       debug: 4.3.4
       fs-extra: 10.1.0
-      vite: 2.9.9
+      vite: 2.9.9_sass@1.56.2
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -7873,7 +7891,7 @@ packages:
       fast-glob: 3.2.11
       mockjs: 1.1.0
       path-to-regexp: 6.2.1
-      vite: 2.9.9
+      vite: 2.9.9_sass@1.56.2
     transitivePeerDependencies:
       - rollup
       - supports-color
@@ -7890,7 +7908,7 @@ packages:
       es-module-lexer: 0.9.3
       fs-extra: 10.1.0
       magic-string: 0.25.9
-      vite: 2.9.9
+      vite: 2.9.9_sass@1.56.2
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -7908,12 +7926,12 @@ packages:
       pathe: 0.2.0
       svg-baker: 1.7.0
       svgo: 2.8.0
-      vite: 2.9.9
+      vite: 2.9.9_sass@1.56.2
     transitivePeerDependencies:
       - supports-color
     dev: false
 
-  /vite/2.9.9:
+  /vite/2.9.9_sass@1.56.2:
     resolution: {integrity: sha512-ffaam+NgHfbEmfw/Vuh6BHKKlI/XIAhxE5QSS7gFLIngxg171mg1P3a4LSRME0z2ZU1ScxoKzphkipcYwSD5Ew==}
     engines: {node: '>=12.2.0'}
     hasBin: true
@@ -7933,6 +7951,7 @@ packages:
       postcss: 8.4.13
       resolve: 1.22.0
       rollup: 2.72.1
+      sass: 1.56.2
     optionalDependencies:
       fsevents: 2.3.2
     dev: true
@@ -8226,6 +8245,13 @@ packages:
       string-width: 4.2.3
       y18n: 5.0.8
       yargs-parser: 21.0.1
+    dev: true
+
+  /yarn/1.22.19:
+    resolution: {integrity: sha512-/0V5q0WbslqnwP91tirOvldvYISzaqhClxzyUKXYxs07yUILIs5jx/k6CFe8bvKSkds5w+eiOqta39Wk3WxdcQ==}
+    engines: {node: '>=4.0.0'}
+    hasBin: true
+    requiresBuild: true
     dev: true
 
   /yn/3.1.1:

@@ -35,12 +35,12 @@ withDefaults(
   width: 200px;
   display: inline-block;
   vertical-align: top;
-  background-color: $bac_color;
+  background-color: var(--bac_color);
   height: 32px;
   line-height: 32px;
   border-radius: 2px;
   &.ui-skeletonInput-active {
-    background: $active_bac_color;
+    background: var(--active_bac_color);
     background-size: 400% 100%;
     animation: skeleton_active 1.4s ease infinite;
   }

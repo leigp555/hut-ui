@@ -26,12 +26,12 @@ withDefaults(defineProps<{ size?: number; active?: boolean; loading?: boolean }>
   border-radius: 50%;
   display: inline-block;
   vertical-align: top;
-  background-color: $bac_color;
+  background-color: var(--bac_color);
   width: 32px;
   height: 32px;
   line-height: 32px;
   &.ui-skeletonAvatar-active {
-    background: $active_bac_color;
+    background: var(--active_bac_color);
     background-size: 400% 100%;
     animation: skeleton_active 1.4s ease infinite;
   }
