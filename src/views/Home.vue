@@ -1,5 +1,5 @@
 <template>
-  <div class="home-wrap scroll-container">
+  <div class="home-wrap">
     <Header />
     <div class="home-content scroll-container">
       <section class="content"></section>
@@ -26,6 +26,7 @@ import Header from '@/components/Header.vue'
     overflow-x: hidden;
     height: calc(100vh - 64px);
     scroll-behavior: smooth;
+    overflow-y: overlay;
     > .content {
       background: #fff;
       height: calc(100vh - 64px);
