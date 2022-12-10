@@ -58,7 +58,28 @@ onMounted(() => {
 // const client = algoliasearch('6QDXG2F1C8', '2765d6a1c530dad83b846459001bc8f3')
 // const index = client.initIndex('componentName')
 // 声明Json数组
-// const objects = []
+// const objects = [
+//   {
+//     componentName: 'intro 介绍',
+//     url: '/guide/intro',
+//     objectID: 'myID63'
+//   },
+//   {
+//     componentName: 'install 安装',
+//     url: '/guide/install',
+//     objectID: 'myID64'
+//   },
+//   {
+//     componentName: 'usage 快速上手',
+//     url: '/guide/usage',
+//     objectID: 'myID65'
+//   },
+//   {
+//     componentName: 'changelog 版本变更',
+//     url: '/guide/changelog',
+//     objectID: 'myID66'
+//   }
+// ]
 // index.saveObjects(objects).then(({ objectIDs }) => {
 //   console.log(objectIDs)
 // })

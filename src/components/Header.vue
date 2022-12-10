@@ -164,6 +164,7 @@ onMounted(() => {
       margin-left: 0;
     }
     > .link-github {
+      cursor: pointer;
       @media (max-width: 900px) {
         display: none;
       }

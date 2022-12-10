@@ -516,7 +516,6 @@ const sub7 = reactive<{ keyValue: string; title: string }[]>([
 
 <style lang="scss" scoped>
 .components-Menu {
-  margin-top: 10px;
   display: inline-flex;
   flex-direction: column;
   width: 248px;

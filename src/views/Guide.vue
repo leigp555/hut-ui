@@ -11,9 +11,7 @@
         <GuideMenu />
       </section>
       <section class="display-content scroll-container">
-        <div style="padding: 10px 32px">
-          <router-view />
-        </div>
+        <router-view />
       </section>
     </section>
   </div>

@@ -9,6 +9,7 @@ specifiers:
   '@types/jest': ^26.0.22
   '@types/mockjs': ^1.0.6
   '@types/nprogress': ^0.2.0
+  '@types/prismjs': ^1.26.0
   '@types/qs': ^6.9.7
   '@typescript-eslint/eslint-plugin': ^5.23.0
   '@typescript-eslint/parser': ^5.23.0
@@ -74,6 +75,7 @@ devDependencies:
   '@types/jest': 26.0.24
   '@types/mockjs': 1.0.6
   '@types/nprogress': 0.2.0
+  '@types/prismjs': 1.26.0
   '@types/qs': 6.9.7
   '@typescript-eslint/eslint-plugin': 5.23.0_mb64btdtw33wm6tnwldrxlgg2m
   '@typescript-eslint/parser': 5.23.0_e4zyhrvfnqudwdx5bevnvkluy4
@@ -1365,6 +1367,10 @@ packages:
 
   /@types/prettier/2.6.0:
     resolution: {integrity: sha512-G/AdOadiZhnJp0jXCaBQU449W2h716OW/EoXeYkCytxKL06X1WCXB4DZpp8TpZ8eyIJVS1cw4lrlkkSYU21cDw==}
+    dev: true
+
+  /@types/prismjs/1.26.0:
+    resolution: {integrity: sha512-ZTaqn/qSqUuAq1YwvOFQfVW1AR/oQJlLSZVustdjwI+GZ8kr0MSHBj0tsXPW1EqHubx50gtBEjbPGsdZwQwCjQ==}
     dev: true
 
   /@types/qs/6.9.7:

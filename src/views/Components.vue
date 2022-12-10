@@ -94,7 +94,6 @@ const onChange = () => {
       overflow-x: hidden;
       scroll-behavior: smooth;
       flex-shrink: 0;
-      background: #fafafa;
       &::-webkit-scrollbar-thumb {
         background-color: #ffffff;
         transition: all 250ms;

@@ -123,7 +123,6 @@ const sub3 = reactive<{ keyValue: string; title: string }[]>([
 
 <style lang="scss" scoped>
 .components-Menu {
-  margin-top: 10px;
   display: inline-flex;
   flex-direction: column;
   flex-grow: 10;
