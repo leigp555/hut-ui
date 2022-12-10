@@ -1,3 +1,3 @@
-export const getStatisticUrl = (url: string) => {
-  return new URL(url, import.meta.url).href
+export default function getStaticUrl(url: string) {
+  return new URL(`../${url}`, import.meta.url).href
 }

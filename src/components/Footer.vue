@@ -29,6 +29,9 @@
           <a href="mailto:907090585@qq.com">联系我</a>
         </li>
         <li>
+          <a href="mailto:907090585@qq.com">提建议</a>
+        </li>
+        <li>
           <a href="https://github.com/leigp555/vue-ui/issues/new">报告Bug</a>
         </li>
       </ul>
@@ -37,7 +40,7 @@
       <h4 class="title">社区</h4>
       <ul>
         <li>
-          <a href="mailto:907090585@qq.com">GitHub</a>
+          <a href="https://github.com/leigp555/vue-ui">GitHub</a>
         </li>
       </ul>
     </div>
