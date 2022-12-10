@@ -44,6 +44,34 @@ import Wave from '@/components/Wave.vue'
       height: calc(100vh - 64px);
       border-bottom: 1px solid #dcdfe6;
       position: relative;
+      &:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 300px;
+        height: 200px;
+        clip-path: ellipse(300px 200px at 0% 0%);
+        background: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 1) 0%,
+          rgba(241, 242, 251, 1) 100%
+        );
+      }
+      &:after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 300px;
+        height: 400px;
+        clip-path: ellipse(300px 330px at 100% 84%);
+        background: linear-gradient(
+          180deg,
+          rgba(241, 242, 251, 1) 0%,
+          rgba(255, 255, 255, 1) 100%
+        );
+      }
       > .intro {
         position: relative;
         top: 320px;
