@@ -33,6 +33,14 @@
         </li>
       </ul>
     </div>
+    <div class="footer-main">
+      <h4 class="title">社区</h4>
+      <ul>
+        <li>
+          <a href="mailto:907090585@qq.com">GitHub</a>
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 
@@ -43,7 +51,7 @@
   padding: 42px 60px;
   display: flex;
   gap: 130px;
-  @media (max-width: 500px) {
+  @media (max-width: 960px) {
     flex-direction: column;
     gap: 30px;
   }

@@ -51,7 +51,11 @@
               </SubMenu>
               <SubMenu keyValue="guide" :collapsible="false">
                 <template #title>
-                  <router-link to="/guide" class="router-link" style="font-weight: 600">
+                  <router-link
+                    to="/guide/intro"
+                    class="router-link"
+                    style="font-weight: 600"
+                  >
                     指南
                   </router-link>
                 </template>
@@ -59,7 +63,7 @@
               <SubMenu keyValue="components" :collapsible="false">
                 <template #title>
                   <router-link
-                    to="/components"
+                    to="/components/button"
                     class="router-link"
                     style="font-weight: 600"
                   >
