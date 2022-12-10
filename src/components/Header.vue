@@ -1,7 +1,7 @@
 <template>
   <div class="wrap">
     <div class="logo">
-      <img src="../assets/logo.png" alt="" />
+      <img :src="logoUrl" alt="" />
       <span class="title-description">Hut UI</span>
     </div>
     <div class="nav">
@@ -80,12 +80,12 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, reactive, ref, watch, watchEffect } from 'vue'
+import { computed, onMounted, reactive, ref, watch, watchEffect } from 'vue'
 import { useRoute } from 'vue-router'
 import { SvgIcon, Drawer, Button, Menu, MenuItem, SubMenu, Dropdown } from '@/lib'
 import Search from '@/components/Search.vue'
 
-const selectedKeys = ref<string[]>(['components'])
+const selectedKeys = ref<string[]>(['home'])
 
 const route = useRoute()
 
@@ -96,6 +96,9 @@ onMounted(() => {
     const currentRoute = route.path?.split('/')[1]
     if (navArr.indexOf(currentRoute) >= 0) selectedKeys.value = [currentRoute]
   })
+})
+const logoUrl = computed<string>(() => {
+  return new URL('../assets/logo.png', import.meta.url).href
 })
 </script>
 

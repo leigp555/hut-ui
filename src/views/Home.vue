@@ -57,6 +57,7 @@ import Wave from '@/components/Wave.vue'
           rgba(255, 255, 255, 1) 0%,
           rgba(241, 242, 251, 1) 100%
         );
+        z-index: -1;
       }
       &:after {
         content: '';
@@ -71,6 +72,7 @@ import Wave from '@/components/Wave.vue'
           rgba(241, 242, 251, 1) 0%,
           rgba(255, 255, 255, 1) 100%
         );
+        z-index: -1;
       }
       > .intro {
         position: relative;
