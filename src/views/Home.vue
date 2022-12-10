@@ -41,11 +41,6 @@ import Wave from '@/components/Wave.vue'
     scroll-behavior: smooth;
     overflow-y: overlay;
     > .content {
-      background: linear-gradient(
-        175deg,
-        rgba(180, 240, 180, 1) 0%,
-        rgba(237, 253, 239, 1) 100%
-      );
       height: calc(100vh - 64px);
       border-bottom: 1px solid #dcdfe6;
       position: relative;
