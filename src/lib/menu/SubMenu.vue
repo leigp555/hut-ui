@@ -103,7 +103,7 @@ const innerOnMouseLeave = () => {
 }
 
 const onClick = () => {
-  if (mode?.value !== 'column') return
+  if (mode?.value !== 'column' || !props.collapsible) return
   if (shouldShow.value) {
     isActionStart.value = false
     const id = setTimeout(() => {
