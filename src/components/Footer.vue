@@ -4,9 +4,6 @@
       <h4 class="title">资源</h4>
       <ul>
         <li>
-          <a href="https://github.com/leigp555/vue-ui">Github</a>
-        </li>
-        <li>
           <a href="https://cn.vuejs.org/guide/introduction.html">Vue</a>
         </li>
         <li>

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { withDefaults, defineProps, ref, toRefs, provide } from 'vue'
-import SvgIcon from '@/lib/common/SvgIcon.vue'
+import SvgIcon from '../common/SvgIcon.vue'
 import TreePop from './TreePop.vue'
 import { TreeSelectOptions } from './type'
 

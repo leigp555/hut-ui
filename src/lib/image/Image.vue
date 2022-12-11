@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { withDefaults, defineProps, ref, onMounted, watch } from 'vue'
-import SvgIcon from '@/lib/common/SvgIcon.vue'
-import { bodyAddClass } from '@/lib/common/bodyAddClass'
+import SvgIcon from '../common/SvgIcon.vue'
+import { bodyAddClass } from '../common/bodyAddClass'
 
 withDefaults(defineProps<{ src: string }>(), {})
 

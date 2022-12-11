@@ -13,7 +13,7 @@
 
 <script setup lang="ts">
 import { withDefaults, defineProps } from 'vue'
-import { alert } from '@/lib'
+import { alert } from '../index'
 
 withDefaults(defineProps<{ colors: string[] }>(), {})
 

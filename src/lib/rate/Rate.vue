@@ -20,7 +20,7 @@
 
 <script setup lang="ts">
 import { defineProps, toRefs, withDefaults } from 'vue'
-import SvgIcon from '@/lib/common/SvgIcon.vue'
+import SvgIcon from '../common/SvgIcon.vue'
 
 const emits = defineEmits(['update:value', 'change'])
 const props = withDefaults(defineProps<{ value: number }>(), { value: 1 })

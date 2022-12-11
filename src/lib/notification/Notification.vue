@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { defineProps, onMounted, ref, toRefs, VNode, withDefaults } from 'vue'
-import Button from '@/lib/button/Button.vue'
+import Button from '../button/Button.vue'
 
 import Alert from '../alert/Alert.vue'
 

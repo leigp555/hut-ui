@@ -32,7 +32,7 @@
 
 <script setup lang="ts">
 import { withDefaults, defineProps } from 'vue'
-import SvgIcon from '@/lib/common/SvgIcon.vue'
+import SvgIcon from '../common/SvgIcon.vue'
 
 withDefaults(defineProps<{ status?: 'error' | 'info' | 'warning' | 'success' }>(), {})
 </script>

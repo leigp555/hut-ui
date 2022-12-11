@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { withDefaults, defineProps, ref, inject, Ref, computed } from 'vue'
 import { CascaderOptions } from './type'
-import SvgIcon from '@/lib/common/SvgIcon.vue'
+import SvgIcon from '../common/SvgIcon.vue'
 
 withDefaults(defineProps<{ options: CascaderOptions[] | null; toEl: HTMLElement }>(), {
   options: null

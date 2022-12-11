@@ -15,7 +15,7 @@
 
 <script setup lang="ts">
 import { ref, toRefs, withDefaults } from 'vue'
-import SvgIcon from '@/lib/common/SvgIcon.vue'
+import SvgIcon from '../common/SvgIcon.vue'
 
 type Props = {
   radius?: boolean

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { withDefaults, defineProps, ref, computed } from 'vue'
 import dayjs from 'dayjs'
-import SvgIcon from '@/lib/common/SvgIcon.vue'
+import SvgIcon from '../common/SvgIcon.vue'
 
 const emits = defineEmits(['update:value', 'change'])
 const props = withDefaults(defineProps<{ value?: string }>(), {

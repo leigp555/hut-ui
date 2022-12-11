@@ -8,7 +8,7 @@ import {
   onMounted,
   ref
 } from 'vue'
-import SvgIcon from '@/lib/common/SvgIcon.vue'
+import SvgIcon from '../common/SvgIcon.vue'
 
 // v-model:current="current"
 // :total="50"

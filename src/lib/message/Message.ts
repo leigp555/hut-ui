@@ -2,7 +2,7 @@ import { createApp, h, VNode } from 'vue'
 import Alert from '../alert/Alert.vue'
 
 import './index.scss'
-import { AlertType } from '@/lib/alert/type'
+import { AlertType } from '../alert/type'
 
 type Options = {
   content?: string

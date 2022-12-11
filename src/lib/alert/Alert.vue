@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { withDefaults, defineProps, ref } from 'vue'
-import SvgIcon from '@/lib/common/SvgIcon.vue'
-import { AlertType } from '@/lib/alert/type'
+import SvgIcon from '../common/SvgIcon.vue'
+import { AlertType } from '../alert/type'
 
 const emits = defineEmits(['close'])
 const props = withDefaults(

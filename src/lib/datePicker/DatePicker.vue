@@ -63,7 +63,7 @@
 <script setup lang="ts">
 import { withDefaults, defineProps, toRefs, ref } from 'vue'
 import dayjs, { Dayjs } from 'dayjs'
-import { Input, SvgIcon, Calendar, Button } from '@/lib'
+import { Input, SvgIcon, Calendar, Button } from '../index'
 
 const props = withDefaults(
   defineProps<{

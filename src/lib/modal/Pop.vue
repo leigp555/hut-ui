@@ -10,8 +10,8 @@ import {
   watch,
   withDefaults
 } from 'vue'
-import Button from '@/lib/button/Button.vue'
-import { bodyAddClass } from '@/lib/common/bodyAddClass'
+import Button from '../button/Button.vue'
+import { bodyAddClass } from '../common/bodyAddClass'
 import Alert from '../alert/Alert.vue'
 
 const emits = defineEmits(['ok', 'cancel'])

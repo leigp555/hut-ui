@@ -9,7 +9,7 @@ import {
   withDefaults
 } from 'vue'
 import CascaderPop from './CascaderPop.vue'
-import { Input, SvgIcon } from '@/lib'
+import { Input, SvgIcon } from '../index'
 import { CascaderOptions } from './type'
 
 const emit = defineEmits(['update:value', 'change'])

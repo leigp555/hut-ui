@@ -2,7 +2,7 @@
 import { withDefaults, defineProps, useSlots, toRefs, ref, Ref, inject } from 'vue'
 import Col from '../grid/Col.vue'
 import Row from '../grid/Row.vue'
-import { ErrorType, User } from '@/lib/form/Form.vue'
+import { ErrorType, User } from './Form.vue'
 
 type Rule = {
   pattern: RegExp

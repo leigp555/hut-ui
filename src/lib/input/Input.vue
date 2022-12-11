@@ -1,6 +1,6 @@
 <script lang="ts">
 import { withDefaults, defineProps, toRefs, ref } from 'vue'
-import SvgIcon from '@/lib/common/SvgIcon.vue'
+import SvgIcon from '../common/SvgIcon.vue'
 
 export default {
   inheritAttrs: false
