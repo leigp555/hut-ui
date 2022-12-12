@@ -1,6 +1,6 @@
 {
   "name": "hut-ui",
-  "version": "0.0.4",
+  "version": "0.0.8",
   "private": false,
   "description": "vue ui",
   "files": [
@@ -14,8 +14,10 @@
     "iOS 7",
     "last 3 iOS versions"
   ],
-  "main": "./dist/hut.umd.js",
-  "module": "./dist/hut.es.js",
+  "main": "dist/hut-es.js",
+  "module": "dist/hut-es.js",
+  "types": "dist/lib/index.d.ts",
+  "unpkg": "dist/hut-es.js",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
