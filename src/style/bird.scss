@@ -126,7 +126,13 @@
   background: #64c2de;
   -webkit-transform-origin: 30px 10px;
   -webkit-transform: rotate(-20deg);
-  transition: all 0.5s ease;
+
+
+}
+
+.wing:nth-child(1){
+  transform: rotate(-20deg);
+  transition: all 500ms ease ;
 }
 
 .wing:nth-child(2){
@@ -134,6 +140,7 @@
   border-radius: 0 50px;
   -webkit-transform-origin: 20px 10px;
   -webkit-transform: rotate(20deg);
+  transition: all 500ms ease;
 }
 .feet {
   position: absolute;
@@ -209,10 +216,12 @@
 }
 
 .owl:hover .wing {
-  animation: wingLeftMove 500ms alternate linear infinite;
+  transform: rotate(90deg);
+  //animation: wingLeftMove 500ms alternate linear infinite;
 }
 .owl:hover .wing:nth-child(2) {
-  animation: wingRightMove 500ms alternate linear infinite;
+  transform: rotate(-90deg);
+  //animation: wingRightMove 500ms alternate linear infinite;
 }
 .owl:hover .head {
   top: 5px;
@@ -240,7 +249,7 @@
 
 @keyframes wingRightMove {
   0%{
-    -webkit-transform: rotate(0);
+    -webkit-transform: rotate(20deg);
   }
   100%{
     -webkit-transform: rotate(-90deg);
@@ -249,7 +258,7 @@
 
 @keyframes wingLeftMove {
   0%{
-    -webkit-transform: rotate(0);
+    -webkit-transform: rotate(-20deg);
   }
   100%{
     -webkit-transform: rotate(90deg);
