@@ -1,25 +1,51 @@
 import vue from 'rollup-plugin-vue'
-import css from 'rollup-plugin-css-only'
-import typescript from 'rollup-plugin-typescript'
-import scss from 'rollup-plugin-scss'
-import dartSass from 'sass'
+import typescript from 'rollup-plugin-typescript2'
+import postcss from 'rollup-plugin-postcss'
+import cssnano from 'cssnano'
+import { nodeResolve } from '@rollup/plugin-node-resolve'
+import autoprefixer from 'autoprefixer'
+import { terser } from 'rollup-plugin-terser'
+import babel from 'rollup-plugin-babel'
+import commonjs from 'rollup-plugin-commonjs'
+
+const overrides = {
+  compilerOptions: { declaration: true }, // 生成.d.ts的文件
+  exclude: ['tests/**/*.ts', 'tests/**/*.tsx']
+}
 
 export default {
   input: 'src/lib/index.ts',
-  output: {
-    format: 'esm',
-    file: 'dist/MyComponent.js'
-  },
-  external: ['vue', 'dayjs'],
-
+  output: [
+    {
+      file: './dist/hut-umd.js',
+      format: 'umd',
+      name: 'hut'
+    },
+    {
+      file: './dist/hut-es.js',
+      format: 'es'
+    },
+    {
+      file: './dist/hut-cjs.js',
+      format: 'cjs'
+    }
+  ],
   plugins: [
-    typescript({
-      tsconfig: false,
-      experimentalDecorators: true,
-      module: 'es2015'
+    vue({
+      style: {
+        postcssPlugins: [autoprefixer(), cssnano()]
+      }
     }),
-    scss({ include: /\.scss$/, sass: dartSass }),
-    css(),
-    vue({ css: false })
-  ]
+    babel({
+      exclude: 'node_modules/**'
+    }),
+    nodeResolve(),
+    typescript({ tsconfigOverride: overrides, check: false }),
+    postcss({
+      plugins: [autoprefixer(), cssnano()]
+    }),
+    commonjs(),
+    terser()
+  ],
+  external: ['vue', 'dayjs']
 }
