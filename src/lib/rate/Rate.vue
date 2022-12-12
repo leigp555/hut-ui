@@ -65,7 +65,4 @@ $normal_color: #f0f0f0;
     fill: $start_color;
   }
 }
-
-//fill="#FFEC00"
-//fill="#FFCE00"
 </style>

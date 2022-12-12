@@ -7,9 +7,9 @@ import Alert from '../alert/Alert.vue'
 const emits = defineEmits(['ok', 'close'])
 const props = withDefaults(
   defineProps<{
-    message: VNode
-    description: VNode
-    icon?: VNode
+    message: any
+    description: any
+    icon?: any
     okText?: string
     type: 'success' | 'error' | 'warning' | 'info'
     ok: boolean

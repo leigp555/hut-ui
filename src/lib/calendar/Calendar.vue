@@ -276,7 +276,6 @@ $border_color: #d9d9d9;
         padding: 3px 0;
         cursor: pointer;
         .ui-calendar-item {
-          //min-height: 40px;
           height: 38px;
           width: 100%;
           display: flex;
@@ -302,7 +301,6 @@ $border_color: #d9d9d9;
   }
   &.ui-calendar-wrap-small {
     width: 280px;
-    //border: 1px solid red;
     .ui-calendar-actions {
       padding: 4px 10px;
       justify-content: end;
@@ -313,7 +311,6 @@ $border_color: #d9d9d9;
     th,
     td {
       .ui-calendar-item {
-        //border: 1px solid red;
         height: 24px !important;
       }
     }
@@ -334,7 +331,4 @@ $border_color: #d9d9d9;
     }
   }
 }
-//tr {
-//  margin: 0 3px;
-//}
 </style>

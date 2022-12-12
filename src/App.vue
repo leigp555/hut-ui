@@ -11,7 +11,6 @@ import { useLoadingStore } from '@/store'
 
 const router = useRouter()
 const loadStore = useLoadingStore()
-
 NProgress.configure({
   easing: 'ease', // 动画方式
   speed: 500, // 递增进度条的速度

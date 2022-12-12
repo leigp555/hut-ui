@@ -6,7 +6,6 @@ import {
   reactive,
   ref,
   toRefs,
-  VNode,
   watch,
   withDefaults
 } from 'vue'
@@ -17,9 +16,9 @@ import Alert from '../alert/Alert.vue'
 const emits = defineEmits(['ok', 'cancel'])
 const props = withDefaults(
   defineProps<{
-    title: VNode
-    content: VNode
-    icon?: VNode
+    title: any
+    content: any
+    icon?: any
     cancelText?: string
     okText?: string
     type: 'success' | 'error' | 'warning' | 'info'
