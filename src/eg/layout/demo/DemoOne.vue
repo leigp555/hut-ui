@@ -38,11 +38,7 @@
 </template>
 
 <script lang="ts" setup>
-import Layout from '@/lib/layout/Layout.vue'
-import Aside from '@/lib/layout/Aside.vue'
-import Header from '@/lib/layout/Header.vue'
-import Content from '@/lib/layout/Content.vue'
-import Footer from '@/lib/layout/Footer.vue'
+import { Layout, Aside, Header, Content, Footer } from '@/lib'
 </script>
 
 <style lang="scss" scoped>

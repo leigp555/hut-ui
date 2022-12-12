@@ -30,7 +30,7 @@ export const getSourceCode = (): PluginOption => {
             .split(parsed.loc.source)
             .join('')
             .trim()
-            .replace(/@\/lib/, 'ant')
+            .replace(/@\/lib/, 'hut-ui')
         }
       } catch (e) {
         const regx = /<demo>((.|\n)*?)<\/demo>/
