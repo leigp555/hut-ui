@@ -26,7 +26,9 @@
     </div>
     <div class="link">
       <div class="link-github">
-        <SvgIcon name="github" width="20px" height="20px" />
+        <a href="https://github.com/leigp555/vue-ui"
+          ><SvgIcon name="github" width="20px" height="20px"
+        /></a>
       </div>
       <div class="link-menu">
         <Dropdown trigger="click" class="display-dropdown">
