@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { withDefaults, defineProps, toRefs, defineEmits, ref } from 'vue'
-import SvgIcon from '../common/SvgIcon.vue'
+
+import { Icon_down } from '@hut-ui/icons-vue'
 import { SelectOption } from './type'
 
 const emits = defineEmits(['update:value', 'change'])
@@ -38,7 +39,7 @@ const inputBlur = () => {
     <div class="ui-select-input" tabindex="-1" @blur="inputBlur" @focus="inputFocus">
       <span class="ui-select-content">{{ value }}</span>
       <span class="ui-select-icon">
-        <SvgIcon name="down" width="1em" height="1em" />
+        <Icon_down name="down" width="1em" height="1em" />
       </span>
     </div>
     <div class="ui-select-pop" @mousedown="userSelect">

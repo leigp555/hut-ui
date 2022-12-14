@@ -8,7 +8,7 @@ import {
   onMounted,
   ref
 } from 'vue'
-import SvgIcon from '../common/SvgIcon.vue'
+import { Icon_back } from '@hut-ui/icons-vue'
 
 // v-model:current="current"
 // :total="50"
@@ -154,7 +154,7 @@ const jump = (e: Event) => {
         class="ui-pagination-subIcon ui-pagination-item"
         :class="{ subDisabled: current <= 1 }"
       >
-        <SvgIcon name="back" width="1em" height="1em" />
+        <Icon_back name="back" width="1em" height="1em" />
       </li>
       <li
         v-for="item in totalPage <= 5 ? totalPage : 5"
@@ -172,7 +172,7 @@ const jump = (e: Event) => {
         class="ui-pagination-addIcon ui-pagination-item"
         :class="{ addDisabled: current >= totalPage }"
       >
-        <SvgIcon name="back" width="1em" height="1em" />
+        <Icon_back name="back" width="1em" height="1em" />
       </li>
     </ol>
     <!--    pageSizeList部分-->
@@ -186,7 +186,7 @@ const jump = (e: Event) => {
       >
         <slot name="buildOptionText" :value="pageSize" />
         <span class="ui-pageSizeIcon">
-          <SvgIcon name="back" width="1em" height="1em" />
+          <Icon_back name="back" width="1em" height="1em" />
         </span>
       </div>
       <ol class="pageSize-list" ref="pageSizeList" @mousedown="selectPageSize">

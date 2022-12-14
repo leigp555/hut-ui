@@ -1,3 +1,5 @@
+import './reset.css'
+
 export { default as Affix } from './affix/Affix.vue'
 export { default as Alert } from './alert/Alert.vue'
 export { default as Anchor } from './anchor/Anchor.vue'

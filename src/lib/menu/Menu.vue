@@ -87,10 +87,14 @@ $font_color: #000000d9;
     &:hover {
       color: $selected_color;
       .ui-menuItem-icon {
-        fill: $selected_color;
+        .iconfont {
+          color: $selected_color;
+        }
       }
       .ui-subMenu-icon {
-        fill: $selected_color;
+        .iconfont {
+          color: $selected_color;
+        }
       }
       &:after {
         background-color: $selected_color;
@@ -101,8 +105,10 @@ $font_color: #000000d9;
         color: $disabled_color;
         cursor: not-allowed;
         .ui-menuItem-icon {
-          fill: $disabled_color;
           cursor: not-allowed;
+          .iconfont {
+            color: $disabled_color;
+          }
         }
         .ui-menuItem-content {
           cursor: not-allowed;
@@ -111,7 +117,9 @@ $font_color: #000000d9;
           }
         }
         .ui-subMenu-icon {
-          fill: $disabled_color;
+          .iconfont {
+            color: $disabled_color;
+          }
           cursor: not-allowed;
         }
         &:after {
@@ -122,10 +130,14 @@ $font_color: #000000d9;
     &.ui-menu-item-selected {
       color: $selected_color;
       .ui-menuItem-icon {
-        fill: $selected_color;
+        .iconfont {
+          color: $selected_color;
+        }
       }
       .ui-subMenu-icon {
-        fill: $selected_color;
+        .iconfont {
+          color: $selected_color;
+        }
       }
       &:after {
         background-color: $selected_color;

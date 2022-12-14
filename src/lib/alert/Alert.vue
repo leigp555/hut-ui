@@ -1,6 +1,13 @@
 <script setup lang="ts">
 import { withDefaults, defineProps, ref } from 'vue'
-import SvgIcon from '../common/SvgIcon.vue'
+import {
+  Icon_error,
+  Icon_loading,
+  Icon_success,
+  Icon_info,
+  Icon_warning,
+  Icon_cha
+} from '@hut-ui/icons-vue'
 import { AlertType } from '../alert/type'
 
 const emits = defineEmits(['close'])
@@ -44,37 +51,27 @@ const onClose = () => {
       class="ui-alert-icon"
       :class="{ 'alert-icon-description': description || $slots.description }"
     >
-      <SvgIcon
-        name="error"
-        width="16px"
-        height="16px"
-        fill="#ff4d4f"
-        v-if="type === 'error'"
-      />
-      <SvgIcon
-        name="loading"
+      <Icon_error width="16px" height="16px" fill="#ff4d4f" v-if="type === 'error'" />
+      <Icon_loading
         width="16px"
         height="16px"
         fill="#1890ff"
         v-if="type === 'loading'"
         class="alert-icon-loading"
       />
-      <SvgIcon
-        name="info"
+      <Icon_info
         width="16px"
         height="16px"
         fill="#1890ff"
         v-else-if="type === 'info'"
       />
-      <SvgIcon
-        name="warning"
+      <Icon_warning
         width="16px"
         height="16px"
         fill="#faad14"
         v-else-if="type === 'warning'"
       />
-      <SvgIcon
-        name="success"
+      <Icon_success
         width="16px"
         height="16px"
         fill="#52c41a"
@@ -111,7 +108,7 @@ const onClose = () => {
       :class="{ 'ui-alert-description-close': description || $slots.description }"
       @click="onClose"
     >
-      <SvgIcon name="cha" width="12px" height="12px" />
+      <Icon_cha width="12px" height="12px" />
     </span>
   </div>
 </template>

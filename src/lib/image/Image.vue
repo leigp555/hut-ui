@@ -1,6 +1,13 @@
 <script setup lang="ts">
 import { withDefaults, defineProps, ref, onMounted, watch } from 'vue'
-import SvgIcon from '../common/SvgIcon.vue'
+import {
+  Icon_eyeShow,
+  Icon_turnLeft,
+  Icon_smaller,
+  Icon_biger,
+  Icon_cha
+} from '@hut-ui/icons-vue'
+
 import { bodyAddClass } from '../common/bodyAddClass'
 
 withDefaults(defineProps<{ src: string }>(), {})
@@ -56,7 +63,7 @@ onMounted(() => {
     <img :src="src" alt="图片" />
     <div class="ui-image-mask">
       <span class="ui-image-eye">
-        <SvgIcon name="eye_show" width="1.5em" height="1.5em" fill="#FFFFFF" />
+        <Icon_eyeShow name="eye_show" width="1.5em" height="1.5em" fill="#FFFFFF" />
         <span>预览</span>
       </span>
     </div>
@@ -64,19 +71,29 @@ onMounted(() => {
       <div class="ui-body-image-wrap" :class="{ imgOpen }">
         <div class="action">
           <span @click="onClickLeft">
-            <SvgIcon name="turnLeft" width="1.5em" height="1.5em" fill="#FFFFFF" />
+            <Icon_turnLeft
+              name="turnLeft"
+              width="1.5em"
+              height="1.5em"
+              fill="#FFFFFF"
+            />
           </span>
           <span @click="onClickRight" :style="{ transform: 'rotateY(180deg)' }">
-            <SvgIcon name="turnLeft" width="1.5em" height="1.5em" fill="#FFFFFF" />
+            <Icon_turnLeft
+              name="turnLeft"
+              width="1.5em"
+              height="1.5em"
+              fill="#FFFFFF"
+            />
           </span>
           <span @click="onClickSmall">
-            <SvgIcon name="smaller" height="1.4em" width="1.4em" fill="#FFFFFF" />
+            <Icon_smaller name="smaller" height="1.4em" width="1.4em" fill="#FFFFFF" />
           </span>
           <span @click="onClickBig">
-            <SvgIcon name="biger" height="1.4em" width="1.4em" fill="#FFFFFF" />
+            <Icon_biger name="biger" height="1.4em" width="1.4em" fill="#FFFFFF" />
           </span>
           <span @click="onClickClose">
-            <SvgIcon name="cha" height="1.2em" width="1.2em" fill="#FFFFFF" />
+            <Icon_cha name="cha" height="1.2em" width="1.2em" fill="#FFFFFF" />
           </span>
         </div>
         <div class="ui-body-image-content">

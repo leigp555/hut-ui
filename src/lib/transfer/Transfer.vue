@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { withDefaults, defineProps, computed, ref, toRefs } from 'vue'
-import SvgIcon from '../common/SvgIcon.vue'
+
+import { Icon_back } from '@hut-ui/icons-vue'
 import Button from '../button/Button.vue'
 import CheckboxGroup from '../checkbox/CheckboxGroup.vue'
 import Checkbox from '../checkbox/Checkbox.vue'
@@ -121,7 +122,7 @@ const toSource = () => {
       <div class="transfer-actions">
         <Button @click="toSelect">
           <template #icon>
-            <SvgIcon
+            <Icon_back
               name="back"
               width="1em"
               height="1em"
@@ -131,7 +132,7 @@ const toSource = () => {
         </Button>
         <Button type="default" @click="toSource">
           <template #icon>
-            <SvgIcon name="back" width="1em" height="1em" />
+            <Icon_back name="back" width="1em" height="1em" />
           </template>
         </Button>
       </div>

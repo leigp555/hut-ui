@@ -11,15 +11,15 @@
       <slot />
     </span>
     <span class="ui-tag-close" @click="onClick" v-if="closable">
-      <SvgIcon name="cha" width="1em" height="1em" :fill="color" />
+      <Icon_cha name="cha" width="1em" height="1em" :fill="color" />
     </span>
   </div>
 </template>
 
 <script setup lang="ts">
 import { withDefaults, defineProps, computed, ref } from 'vue'
+import { Icon_cha } from '@hut-ui/icons-vue'
 import { justColor, nameToHex, rgbToRgba } from './color_trans'
-import SvgIcon from '../common/SvgIcon.vue'
 
 const props = withDefaults(defineProps<{ color?: string; closable?: boolean }>(), {
   color: '#fff'

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { withDefaults, defineProps, ref, inject } from 'vue'
+import { Icon_sanjiao } from '@hut-ui/icons-vue'
 import { TreeSelectOptions } from './type'
-import SvgIcon from '../common/SvgIcon.vue'
 
 withDefaults(defineProps<{ options: TreeSelectOptions[] }>(), {})
 
@@ -37,7 +37,7 @@ const onSelect = (e: Event) => {
           @click="toggle(item)"
           :class="{ isOpen: clickLabelSelf === item.value }"
         >
-          <SvgIcon
+          <Icon_sanjiao
             v-if="item.children"
             name="sanjiao"
             width="0.6em"

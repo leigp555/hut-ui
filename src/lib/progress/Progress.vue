@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { withDefaults, defineProps, onMounted, ref, watchEffect, toRefs } from 'vue'
-import SvgIcon from '../common/SvgIcon.vue'
+
+import { Icon_error, Icon_success, Icon_gouxuan } from '@hut-ui/icons-vue'
 
 const props = withDefaults(
   defineProps<{
@@ -95,10 +96,10 @@ onMounted(() => {
       </div>
       <span class="progress-line-tip" :class="{ 'line-tip-small': size === 'small' }">
         <span v-if="status === 'exception'">
-          <SvgIcon name="error" width="14px" height="14px" fill="#ff4d4f" />
+          <Icon_error name="error" width="14px" height="14px" fill="#ff4d4f" />
         </span>
         <span v-else-if="percent >= 100">
-          <SvgIcon name="success" width="14px" height="14px" fill="#52c41a" />
+          <Icon_success name="success" width="14px" height="14px" fill="#52c41a" />
         </span>
         <span v-else-if="showInfo">{{ format ? format(percent) : percent + '%' }}</span>
       </span>
@@ -124,10 +125,10 @@ onMounted(() => {
       </svg>
       <div class="progress-circle-tip">
         <span v-if="status === 'exception'">
-          <SvgIcon name="error" width="32px" height="32px" fill="#ff4d4f" />
+          <Icon_error name="error" width="32px" height="32px" fill="#ff4d4f" />
         </span>
         <span v-else-if="percent >= 100">
-          <SvgIcon name="gouxuan" width="32px" height="32px" fill="#52c41a" />
+          <Icon_gouxuan name="gouxuan" width="32px" height="32px" fill="#52c41a" />
         </span>
         <span v-else-if="showInfo">{{ format ? format(percent) : percent + '%' }}</span>
       </div>
@@ -151,10 +152,10 @@ onMounted(() => {
         />
       </ol>
       <span v-if="status === 'exception'" class="progress-step-tip">
-        <SvgIcon name="error" width="14px" height="14px" fill="#ff4d4f" />
+        <Icon_error name="error" width="14px" height="14px" fill="#ff4d4f" />
       </span>
       <span v-else-if="percent >= 100" class="progress-step-tip">
-        <SvgIcon name="success" width="14px" height="14px" fill="#52c41a" />
+        <Icon_success name="success" width="14px" height="14px" fill="#52c41a" />
       </span>
       <span class="progress-step-tip" v-else-if="showInfo">{{
         format ? format(percent) : percent + '%'

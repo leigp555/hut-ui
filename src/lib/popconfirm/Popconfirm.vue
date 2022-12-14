@@ -1,14 +1,14 @@
 <script lang="ts">
-import { withDefaults, defineProps, ref } from 'vue'
-import Button from '../button/Button.vue'
-import SvgIcon from '../common/SvgIcon.vue'
-
 export default {
   inheritAttrs: false
 }
 </script>
 
 <script setup lang="ts">
+import { withDefaults, defineProps, ref } from 'vue'
+import { Icon_warning } from '@hut-ui/icons-vue'
+import Button from '../button/Button.vue'
+
 type Placement =
   | 'topLeft'
   | 'topCenter'
@@ -77,7 +77,13 @@ const cancelClick = () => {
         <div class="ui-popconfirm-content">
           <div class="ui-popconfirm-icon">
             <slot name="icon" v-if="$slots.icon" />
-            <SvgIcon name="warning" width="1em" height="1em" fill="#faad14" v-else />
+            <Icon_warning
+              name="warning"
+              width="1em"
+              height="1em"
+              fill="#faad14"
+              v-else
+            />
           </div>
           <div class="ui-popconfirm-title">
             <slot name="title" />

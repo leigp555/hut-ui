@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { withDefaults, defineProps, ref, computed } from 'vue'
 import dayjs from 'dayjs'
-import SvgIcon from '../common/SvgIcon.vue'
+import { Icon_clock } from '@hut-ui/icons-vue'
 
 const emits = defineEmits(['update:value', 'change'])
 const props = withDefaults(defineProps<{ value?: string }>(), {
@@ -75,7 +75,7 @@ const userSelect = (e: Event) => {
         readonly
       />
       <span class="input-icon">
-        <SvgIcon name="clock" width="1em" height="1em" />
+        <Icon_clock name="clock" width="1em" height="1em" />
       </span>
     </label>
     <div

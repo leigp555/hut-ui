@@ -7,7 +7,7 @@
   >
     <slot name="icon" />
     <span class="ui-button-icon" v-if="loading">
-      <SvgIcon name="loading" width="1em" height="1em" fill="#eff7ff" />
+      <Icon_loading width="1em" height="1em" fill="#eff7ff" />
     </span>
     <slot />
   </button>
@@ -15,7 +15,7 @@
 
 <script setup lang="ts">
 import { ref, toRefs, withDefaults } from 'vue'
-import SvgIcon from '../common/SvgIcon.vue'
+import { Icon_loading } from '@hut-ui/icons-vue'
 
 type Props = {
   radius?: boolean

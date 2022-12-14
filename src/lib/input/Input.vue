@@ -1,7 +1,4 @@
 <script lang="ts">
-import { withDefaults, defineProps, toRefs, ref } from 'vue'
-import SvgIcon from '../common/SvgIcon.vue'
-
 export default {
   inheritAttrs: false
 }
@@ -9,6 +6,10 @@ export default {
 
 <script setup lang="ts">
 const emits = defineEmits(['update:value'])
+import { withDefaults, defineProps, toRefs, ref } from 'vue'
+
+import { Icon_eyeOpen, Icon_eyeClose } from '@hut-ui/icons-vue'
+
 const props = withDefaults(
   defineProps<{
     value: string
@@ -77,7 +78,7 @@ const eyeClose = () => {
 
       <span class="input-icon" v-if="type === 'password'" style="position: relative">
         <TransitionGroup name="password">
-          <SvgIcon
+          <Icon_eyeOpen
             class="input-icon-password"
             name="eye_open"
             width="1em"
@@ -86,7 +87,7 @@ const eyeClose = () => {
             @click="eyeOpen"
             key="open"
           />
-          <SvgIcon
+          <Icon_eyeClose
             class="input-icon-password"
             name="eye_close"
             width="1em"

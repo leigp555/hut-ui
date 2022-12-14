@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { withDefaults, defineProps, ref, toRefs, provide } from 'vue'
-import SvgIcon from '../common/SvgIcon.vue'
+
+import { Icon_down } from '@hut-ui/icons-vue'
 import TreePop from './TreePop.vue'
 import { TreeSelectOptions } from './type'
 
@@ -60,7 +61,7 @@ provide('change_treeSelect_value', onSelect)
         readonly
       />
       <span class="input-icon">
-        <SvgIcon name="down" width="1em" height="1em" />
+        <Icon_down name="down" width="1em" height="1em" />
       </span>
     </label>
     <div

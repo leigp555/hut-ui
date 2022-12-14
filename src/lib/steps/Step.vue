@@ -1,7 +1,7 @@
 <template>
   <div class="ui-step-wrap">
     <div class="ui-step-order step-icon" v-if="current > order">
-      <SvgIcon name="yes" width="1em" height="1em" />
+      <Icon_ok name="yes" width="1em" height="1em" />
     </div>
     <div
       v-if="current <= order"
@@ -28,7 +28,7 @@
 
 <script setup lang="ts">
 import { withDefaults, defineProps, inject } from 'vue'
-import SvgIcon from '../common/SvgIcon.vue'
+import { Icon_ok } from '@hut-ui/icons-vue'
 
 withDefaults(defineProps<{ title?: string; order: number }>(), {
   title: 'title'

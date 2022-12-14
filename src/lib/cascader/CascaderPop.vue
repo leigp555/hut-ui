@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { withDefaults, defineProps, ref, inject, Ref, computed } from 'vue'
+import { Icon_back } from '@hut-ui/icons-vue'
 import { CascaderOptions } from './type'
-import SvgIcon from '../common/SvgIcon.vue'
 
 withDefaults(defineProps<{ options: CascaderOptions[] | null; toEl: HTMLElement }>(), {
   options: null
@@ -37,7 +37,7 @@ const selectedArr = computed(() => {
           @click="toggle(item)"
         >
           <span class="item-label-value">{{ item.label }}</span>
-          <SvgIcon
+          <Icon_back
             name="back"
             width="1em"
             height="1em"

@@ -8,7 +8,7 @@
     :class="{ 'ui-skeletonImg-active': active }"
     :style="{ width: `${width}px`, height: `${height}px`, lineHeight: `${height}px` }"
   >
-    <SvgIcon
+    <Icon_image
       name="icon-img"
       :width="`${width / 2}px`"
       :height="`${height / 2}px`"
@@ -19,7 +19,8 @@
 
 <script setup lang="ts">
 import { withDefaults, defineProps } from 'vue'
-import SvgIcon from '../common/SvgIcon.vue'
+
+import { Icon_image } from '@hut-ui/icons-vue'
 
 withDefaults(
   defineProps<{

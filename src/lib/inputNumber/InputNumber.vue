@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { withDefaults, defineProps, toRefs, ref } from 'vue'
-import SvgIcon from '../common/SvgIcon.vue'
+import { Icon_back } from '@hut-ui/icons-vue'
 
 const emits = defineEmits(['update:value'])
 const props = withDefaults(defineProps<{ value: number }>(), {
@@ -43,7 +43,7 @@ const sub = () => {
     />
     <div class="input-icon">
       <span class="ui-up ui-span" @click="add">
-        <SvgIcon
+        <Icon_back
           name="back"
           width="0.8em"
           height="0.8em"
@@ -51,7 +51,7 @@ const sub = () => {
         />
       </span>
       <span class="ui-down ui-span" @click="sub">
-        <SvgIcon
+        <Icon_back
           name="back"
           width="0.8em"
           height="0.8em"

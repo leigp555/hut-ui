@@ -10,7 +10,8 @@ import {
   VNode,
   computed
 } from 'vue'
-import SvgIcon from '../common/SvgIcon.vue'
+
+import { Icon_down } from '@hut-ui/icons-vue'
 
 const props = withDefaults(
   defineProps<{
@@ -163,7 +164,7 @@ const shouldTileLight = computed<boolean>(() => {
         class="ui-subMenu-content-open-icon"
         :class="{ 'subMenu-content-open': isActionStart }"
       >
-        <SvgIcon name="down" height="1em" width="1em" />
+        <Icon_down name="down" height="1em" width="1em" />
       </span>
     </div>
 

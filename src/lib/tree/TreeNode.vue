@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { withDefaults, defineProps, toRefs, inject, Ref } from 'vue'
 
-import SvgIcon from '../common/SvgIcon.vue'
+import { Icon_sanjiao } from '@hut-ui/icons-vue'
 import Checkbox from '../checkbox/Checkbox.vue'
 
 export interface TreeOptions {
@@ -127,7 +127,7 @@ const checked = (check: boolean, item: TreeOptions) => {
           :class="{ 'icon-rotate': item.show }"
           @click="onOpen(item)"
         >
-          <SvgIcon
+          <Icon_sanjiao
             v-if="item.children"
             name="sanjiao"
             width="10px"

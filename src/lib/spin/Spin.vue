@@ -1,13 +1,13 @@
 <script lang="ts">
-import { withDefaults, defineProps, ref, onMounted, watchEffect, toRefs } from 'vue'
-import SvgIcon from '../common/SvgIcon.vue'
-
 export default {
   inheritAttrs: false
 }
 </script>
 
 <script setup lang="ts">
+import { withDefaults, defineProps, ref, onMounted, watchEffect, toRefs } from 'vue'
+import { Icon_radiusLoading } from '@hut-ui/icons-vue'
+
 const props = withDefaults(
   defineProps<{ size?: number; loading?: boolean; tip?: string; delay?: number }>(),
   {
@@ -44,7 +44,7 @@ onMounted(() => {
     <div class="ui-spin-icon-wrap" v-if="isLoading" v-bind="$attrs">
       <div class="ui-spin-icon">
         <span v-if="!$slots.icon">
-          <SvgIcon
+          <Icon_radiusLoading
             name="icon_radius_loading"
             :width="`${size}px`"
             :height="`${size}px`"

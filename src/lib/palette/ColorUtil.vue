@@ -39,7 +39,7 @@ const copyColor = async (e: Event) => {
   justify-content: center;
   > .ui-colorUtil-item {
     color: #222222;
-    min-width: 68px;
+    min-width: 74px;
     min-height: 40px;
     cursor: pointer;
     user-select: none;

@@ -8,7 +8,7 @@
       @blur="onBlur"
     >
       <template #suffix>
-        <SvgIcon name="calendar" width="1em" height="1em" />
+        <Icon_calendar name="calendar" width="1em" height="1em" />
       </template>
     </Input>
     <div class="ui-datePicker-pop-wrap">
@@ -18,13 +18,13 @@
             <template #header>
               <div class="ui-datePicker-header-wrap">
                 <div class="ui-datePicker-icon-left">
-                  <SvgIcon
+                  <Icon_quickback
                     name="quick_back"
                     height="1em"
                     width="1em"
                     @click="quick_back"
                   />
-                  <SvgIcon
+                  <Icon_back
                     name="icon_back"
                     height="1em"
                     width="1em"
@@ -33,13 +33,13 @@
                 </div>
                 <div>{{ value }}</div>
                 <div class="ui-datePicker-icon-right">
-                  <SvgIcon
+                  <Icon_forward
                     name="icon_forward"
                     height="1em"
                     width="1em"
                     @click="forward"
                   />
-                  <SvgIcon
+                  <Icon_quickforward
                     name="quick_forward"
                     height="1em"
                     width="1em"
@@ -63,7 +63,14 @@
 <script setup lang="ts">
 import { withDefaults, defineProps, toRefs, ref } from 'vue'
 import dayjs, { Dayjs } from 'dayjs'
-import { Input, SvgIcon, Calendar, Button } from '../index'
+import {
+  Icon_quickforward,
+  Icon_quickback,
+  Icon_back,
+  Icon_forward,
+  Icon_calendar
+} from '@hut-ui/icons-vue'
+import { Input, Calendar, Button } from '../index'
 
 const props = withDefaults(
   defineProps<{

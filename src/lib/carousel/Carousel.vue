@@ -9,7 +9,7 @@ import {
   VNode,
   computed
 } from 'vue'
-import SvgIcon from '../common/SvgIcon.vue'
+import { Icon_left2 } from '@hut-ui/icons-vue'
 
 const emits = defineEmits(['change', 'update:init'])
 const props = withDefaults(
@@ -130,10 +130,20 @@ const actionName = computed(() => {
         </li>
       </ol>
       <div class="carousel-left-icon" @click="onBack" v-if="quickJump">
-        <SvgIcon name="left2" width="2em" height="2em" fill="rgba(255,255,255,0.3)" />
+        <Icon_left2
+          name="left2"
+          width="2em"
+          height="2em"
+          fill="rgba(255,255,255,0.3)"
+        />
       </div>
       <div class="carousel-right-icon" @click="onForward" v-if="quickJump">
-        <SvgIcon name="left2" width="2em" height="2em" fill="rgba(255,255,255,0.3)" />
+        <Icon_left2
+          name="left2"
+          width="2em"
+          height="2em"
+          fill="rgba(255,255,255,0.3)"
+        />
       </div>
     </div>
   </div>

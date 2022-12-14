@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { withDefaults, defineProps, defineEmits } from 'vue'
-import SvgIcon from '../common/SvgIcon.vue'
+import { Icon_left } from '@hut-ui/icons-vue'
 
 const emits = defineEmits(['back'])
 
@@ -45,7 +45,7 @@ const emitBack = () => {
     <div class="ui-PageHeader-content">
       <div class="ui-PageHeader-title">
         <span class="title-icon" @click="emitBack">
-          <SvgIcon name="left" width="1.2em" height="1.2em" />
+          <Icon_left name="left" width="1.2em" height="1.2em" />
         </span>
         <span class="title-item title-titleItem">{{ title }}</span>
         <span class="title-item title-subtitleItem">{{ subtitle }}</span>

@@ -47,5 +47,5 @@ export default {
     commonjs(),
     terser()
   ],
-  external: ['vue', 'dayjs']
+  external: ['vue', 'dayjs', '@hut-ui/icons-vue', 'sass']
 }

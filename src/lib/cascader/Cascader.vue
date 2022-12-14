@@ -8,8 +8,9 @@ import {
   toRefs,
   withDefaults
 } from 'vue'
+import { Icon_errorRadius } from '@hut-ui/icons-vue'
 import CascaderPop from './CascaderPop.vue'
-import { Input, SvgIcon } from '../index'
+import { Input } from '../index'
 import { CascaderOptions } from './type'
 
 const emit = defineEmits(['update:value', 'change'])
@@ -119,11 +120,10 @@ const clear = () => {
         readonly
       >
         <template #suffix>
-          <SvgIcon
+          <Icon_errorRadius
             name="error_radius"
-            width="1em"
-            height="1em"
-            fill="#d9d9d9"
+            size="1em"
+            color="#d9d9d9"
             @click.stop.prevent="clear"
           />
         </template>

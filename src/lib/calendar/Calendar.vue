@@ -2,7 +2,8 @@
 import { withDefaults, defineProps, ref, toRefs, computed } from 'vue'
 import dayjs from 'dayjs'
 
-import { SvgIcon, SelectOption, Select } from '../index'
+import { Icon_calendar } from '@hut-ui/icons-vue'
+import { SelectOption, Select } from '../index'
 
 const emits = defineEmits(['update:value', 'change'])
 const props = withDefaults(
@@ -161,13 +162,7 @@ const goToday = () => {
     </div>
     <div v-else class="ui-calendar-actions">
       <span class="calendar-actions-icon" v-if="size !== 'small'">
-        <SvgIcon
-          name="calendar"
-          width="1.5em"
-          height="1.5em"
-          fill="#1890ff"
-          @click="goToday"
-        />
+        <Icon_calendar width="1.5em" height="1.5em" fill="#1890ff" @click="goToday" />
       </span>
       <div class="calendar-actions-input">
         <Select

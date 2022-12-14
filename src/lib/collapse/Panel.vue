@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { withDefaults, defineProps, toRefs, ref, onMounted, watchEffect } from 'vue'
-import SvgIcon from '../common/SvgIcon.vue'
+import { Icon_down } from '@hut-ui/icons-vue'
 
 const emits = defineEmits(['change'])
 const props = withDefaults(
@@ -45,7 +45,7 @@ onMounted(() => {
   <div class="ui-panel-wrap">
     <div class="ui-panel-header" @click="headerClick" :class="{ disabled }">
       <span :class="{ 'icon-down': currentKey.indexOf(keyValue) >= 0 }">
-        <SvgIcon name="down" width="0.8em" height="0.8em" />
+        <Icon_down name="down" width="0.8em" height="0.8em" />
       </span>
       <p>{{ header }}</p>
     </div>

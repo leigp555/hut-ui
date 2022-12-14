@@ -1,16 +1,16 @@
 <template>
   <div class="ui-result-wrap">
     <div class="ui-result-icon" v-if="status === 'success' && !$slots.icon">
-      <SvgIcon name="success" width="1em" height="1em" fill="#52c41a" />
+      <Icon_success name="success" width="1em" height="1em" fill="#52c41a" />
     </div>
     <div class="ui-result-icon" v-if="status === 'info' && !$slots.icon">
-      <SvgIcon name="info" width="1em" height="1em" fill="#1890ff" />
+      <Icon_info name="info" width="1em" height="1em" fill="#1890ff" />
     </div>
     <div class="ui-result-icon" v-if="status === 'warning' && !$slots.icon">
-      <SvgIcon name="warning" width="1em" height="1em" fill="#faad14" />
+      <Icon_warning name="warning" width="1em" height="1em" fill="#faad14" />
     </div>
     <div class="ui-result-icon" v-if="status === 'error' && !$slots.icon">
-      <SvgIcon name="error" width="1em" height="1em" fill="#ff4d4f" />
+      <Icon_error name="error" width="1em" height="1em" fill="#ff4d4f" />
     </div>
     <div class="ui-result-icon" v-if="$slots.icon">
       <slot name="icon" />
@@ -32,7 +32,7 @@
 
 <script setup lang="ts">
 import { withDefaults, defineProps } from 'vue'
-import SvgIcon from '../common/SvgIcon.vue'
+import { Icon_success, Icon_error, Icon_info, Icon_warning } from '@hut-ui/icons-vue'
 
 withDefaults(defineProps<{ status?: 'error' | 'info' | 'warning' | 'success' }>(), {})
 </script>
