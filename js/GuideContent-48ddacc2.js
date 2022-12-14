@@ -1,1 +1,0 @@
-import{_ as s,d as a,c as e,e as t,n as o,A as n,f as c,M as r}from"./index-85b89606.js";const i={class:"template-wrap scroll-container"},d={class:"content"},l={class:"footer-wrap"};var p=s(a({__name:"GuideContent",setup:s=>(s,a)=>(e(),t("div",i,[o("section",d,[n(s.$slots,"content",{},void 0,!0)]),o("section",l,[c(r)])]))}),[["__scopeId","data-v-612ee93c"]]);export{p as G};
