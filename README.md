@@ -1,7 +1,7 @@
 
 <p align="center">
   <a href="https://leigp555.github.io/hut-ui/#/">
-    <img width="200" src="./src/assets/logo.png">
+    <img width="100" src="./src/assets/logo.png">
   </a>
 </p>
 
