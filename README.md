@@ -1,11 +1,23 @@
 
+<p align="center">
+  <a href="https://leigp555.github.io/hut-ui/#/">
+    <img width="200" src="./src/assets/logo.png">
+  </a>
+</p>
+
+<h1 align="center">
+  <a href="https://leigp555.github.io/hut-ui/#/" target="_blank">Hut UI</a>
+</h1>
+
+<div align="center">
+
+一个 Vue 3 组件库
+
+</div>
 
 
-<div align='center' > <img src="./src/assets/logo.png"> </div>
-
-<div align='center' ><font size='70' color="#1890ff">Hut UI</font></div>
-
-#### Hut UI 是一套链接开发者、设计师、交互和产品经理的桌面端组件库
+###### 介绍
+Hut UI 是一套链接开发者、设计师、交互和产品经理的桌面端组件库
 
 ###### 特性
 
@@ -69,3 +81,6 @@ import { Button } from 'hut-ui'
 </style>
 
 ```
+
+###### 许可
+使用 <a href="https://opensource.org/licenses/MIT">MIT license</a>  许可证书。
