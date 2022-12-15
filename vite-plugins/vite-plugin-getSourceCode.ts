@@ -37,7 +37,10 @@ export const getSourceCode = (): PluginOption => {
         if (file.match(regx)) {
           titleCode = file.match(regx)![1].trim()
         }
-        bodyCode = file.replace(regx, '').trim()
+        bodyCode = file
+          .replace(regx, '')
+          .replace(/@\/lib/, 'hut-ui')
+          .trim()
       }
       return `export default Component => {
       Component.__sourceCode = ${JSON.stringify(bodyCode)}
