@@ -81,6 +81,11 @@ import { Button } from 'hut-ui'
 </style>
 
 ```
+###### 图标
+```shell
+pnpm install @hut-ui/icons-vue
+```
+
 
 ###### 许可
 使用 <a href="https://opensource.org/licenses/MIT">MIT license</a>  许可证书。
