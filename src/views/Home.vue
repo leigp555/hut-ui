@@ -19,7 +19,7 @@
         <Footer style="margin-top: 0" />
       </section>
       <section class="version">
-        <p>Hut UI 0.0.1 · Made by Leigp</p>
+        <p>Hut UI 1.0.7 · Made by Leigp</p>
       </section>
     </div>
   </div>

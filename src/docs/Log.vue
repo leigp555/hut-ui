@@ -6,12 +6,12 @@
         <Paragraph style="margin-bottom: 40px">
           <p>版本变更</p>
         </Paragraph>
-        <Title :level="4">V 0.0.0</Title>
+        <Title :level="4">V 1.0.7</Title>
         <Paragraph>Docs</Paragraph>
         <Paragraph>
           <ul>
             <li>
-              <p>组件发布</p>
+              <p>组件正式发布</p>
             </li>
           </ul>
         </Paragraph>
