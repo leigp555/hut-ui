@@ -29,6 +29,7 @@ const onClick = () => {
 <style lang="scss">
 .ui-anchorLink-title {
   color: #000000d9;
+  font-size: 12px;
   cursor: pointer;
   transition: all 250ms;
   height: 16px;
