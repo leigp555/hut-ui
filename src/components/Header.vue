@@ -126,7 +126,6 @@ const logoUrl = computed<string>(() => {
     flex-shrink: 0;
     > img {
       height: 32px;
-      width: 28px;
     }
     > .title-description {
       font-size: 18px;
