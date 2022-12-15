@@ -7,13 +7,23 @@
       <template #header>
         <div class="header-wrap">
           <div class="icon-left">
-            <SvgIcon name="quick_back" height="1em" width="1em" @click="quick_back" />
-            <SvgIcon name="icon_back" height="1em" width="1em" @click="backward" />
+            <Icon_quickback
+              name="quick_back"
+              height="1em"
+              width="1em"
+              @click="quick_back"
+            />
+            <Icon_back2 name="icon_back" height="1em" width="1em" @click="backward" />
           </div>
           <div>{{ data }}</div>
           <div class="icon-right">
-            <SvgIcon name="icon_forward" height="1em" width="1em" @click="forward" />
-            <SvgIcon
+            <Icon_forward
+              name="icon_forward"
+              height="1em"
+              width="1em"
+              @click="forward"
+            />
+            <Icon_quickforward
               name="quick_forward"
               height="1em"
               width="1em"
@@ -35,7 +45,13 @@
 import { ref } from 'vue'
 import dayjs, { Dayjs } from 'dayjs'
 
-import { SvgIcon, Button, Calendar } from '@/lib'
+import {
+  Icon_quickback,
+  Icon_quickforward,
+  Icon_back2,
+  Icon_forward
+} from '@hut-ui/icons-vue'
+import { Button, Calendar } from '@/lib'
 
 const data = ref<string>(dayjs().format('YYYY-MM-DD'))
 

@@ -10,7 +10,7 @@
   >
     <SubMenu keyValue="sub1" :collapsible="false">
       <template #icon>
-        <SvgIcon name="email" width="1em" height="1em" />
+        <Icon_email name="email" width="1em" height="1em" />
       </template>
       <template #title>Navigation One</template>
       <MenuItemGroup keyValue="g1" title="Item 1">
@@ -24,7 +24,7 @@
     </SubMenu>
     <SubMenu keyValue="sub2" :collapsible="false">
       <template #icon>
-        <SvgIcon name="apps" width="1em" height="1em" />
+        <Icon_apps name="apps" width="1em" height="1em" />
       </template>
       <template #title>Navigation Two</template>
       <MenuItem keyValue="5">Option 5</MenuItem>
@@ -37,7 +37,7 @@
     </SubMenu>
     <SubMenu keyValue="sub4" :collapsible="false">
       <template #icon>
-        <SvgIcon name="setting" width="1em" height="1em" />
+        <Icon_setting name="setting" width="1em" height="1em" />
       </template>
       <template #title>Navigation Three</template>
       <MenuItem keyValue="9">Option 9</MenuItem>
@@ -50,7 +50,8 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { Menu, MenuItemGroup, MenuItem, SubMenu, SvgIcon } from '@/lib'
+import { Icon_email, Icon_setting, Icon_apps } from '@hut-ui/icons-vue'
+import { Menu, MenuItemGroup, MenuItem, SubMenu } from '@/lib'
 
 const selectedKeys = ref<string[]>(['sub1', 'g1', '1'])
 

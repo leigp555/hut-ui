@@ -7,7 +7,7 @@
     <Badge>
       <Avatar shape="square">
         <template #icon>
-          <SvgIcon name="user" width="2em" height="2em" />
+          <Icon_user name="user" width="2em" height="2em" />
         </template>
       </Avatar>
       <template #count
@@ -17,7 +17,7 @@
     <Badge>
       <Avatar shape="square">
         <template #icon>
-          <SvgIcon name="user" width="2em" height="2em" />
+          <Icon_user name="user" width="2em" height="2em" />
         </template>
       </Avatar>
       <template #count
@@ -27,7 +27,7 @@
     <Badge>
       <Avatar shape="square">
         <template #icon>
-          <SvgIcon name="user" width="2em" height="2em" />
+          <Icon_user name="user" width="2em" height="2em" />
         </template>
       </Avatar>
       <template #count
@@ -39,7 +39,8 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { Badge, SvgIcon, Avatar } from '@/lib'
+import { Icon_user } from '@hut-ui/icons-vue'
+import { Badge, Avatar } from '@/lib'
 
 const count = ref<number>(100)
 </script>

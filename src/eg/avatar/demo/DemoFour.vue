@@ -6,34 +6,35 @@
   <div class="wrap">
     <Avatar :size="42" shape="square" :style="{ background: randomColor() }">
       <template #icon>
-        <SvgIcon name="user" width="2em" height="2em" fill="#fff" />
+        <Icon_user name="user" width="2em" height="2em" fill="#fff" />
       </template>
     </Avatar>
     <Avatar :size="42" shape="square" :style="{ background: randomColor() }">
       <template #icon>
-        <SvgIcon name="user" width="2em" height="2em" fill="#fff" />
+        <Icon_user name="user" width="2em" height="2em" fill="#fff" />
       </template>
     </Avatar>
     <Avatar :size="42" shape="square" :style="{ background: randomColor() }">
       <template #icon>
-        <SvgIcon name="user" width="2em" height="2em" fill="#fff" />
+        <Icon_user name="user" width="2em" height="2em" fill="#fff" />
       </template>
     </Avatar>
     <Avatar :size="42" shape="square" :style="{ background: randomColor() }">
       <template #icon>
-        <SvgIcon name="user" width="2em" height="2em" fill="#fff" />
+        <Icon_user name="user" width="2em" height="2em" fill="#fff" />
       </template>
     </Avatar>
     <Avatar :size="42" shape="square" :style="{ background: randomColor() }">
       <template #icon>
-        <SvgIcon name="user" width="2em" height="2em" fill="#fff" />
+        <Icon_user name="user" width="2em" height="2em" fill="#fff" />
       </template>
     </Avatar>
   </div>
 </template>
 
 <script setup lang="ts">
-import { Avatar, SvgIcon } from '@/lib'
+import { Icon_user } from '@hut-ui/icons-vue'
+import { Avatar } from '@/lib'
 import { randomColor } from '@/eg/helper'
 </script>
 

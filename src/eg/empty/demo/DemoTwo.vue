@@ -5,7 +5,7 @@
 <template>
   <Empty>
     <template #icon>
-      <SvgIcon name="empty2" width="3em" height="3em" />
+      <Icon_empty2 name="empty2" width="3em" height="3em" />
     </template>
     <template #description>
       <p>
@@ -20,5 +20,6 @@
 </template>
 
 <script setup lang="ts">
+import { Icon_empty2 } from '@hut-ui/icons-vue'
 import { Empty, SvgIcon, Button } from '@/lib'
 </script>

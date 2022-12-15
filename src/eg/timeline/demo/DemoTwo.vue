@@ -10,7 +10,7 @@
     <TimelineItem>Network problems being solved 2015-09-01</TimelineItem>
     <TimelineItem>
       <template #dot>
-        <SvgIcon name="weixin" width="1em" height="1em" fill="#75d048" />
+        <Icon_wechat name="weixin" width="1em" height="1em" fill="#75d048" />
       </template>
       Technical testing 2015-09-01
     </TimelineItem>
@@ -18,5 +18,6 @@
 </template>
 
 <script setup lang="ts">
-import { Timeline, TimelineItem, SvgIcon } from '@/lib'
+import { Icon_wechat } from '@hut-ui/icons-vue'
+import { Timeline, TimelineItem } from '@/lib'
 </script>

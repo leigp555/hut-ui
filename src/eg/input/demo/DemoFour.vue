@@ -6,7 +6,7 @@
   <Input v-model:value="value" placeholder="Basic usage">
     <template #prefix_outer>
       <div class="prefix">
-        <SvgIcon name="search" width="1.5em" height="1.5em" />
+        <Icon_search name="search" width="1.5em" height="1.5em" />
       </div>
     </template>
     <template #suffix_outer>
@@ -17,7 +17,8 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { Input, Button, SvgIcon } from '@/lib'
+import { Icon_search } from '@hut-ui/icons-vue'
+import { Input, Button } from '@/lib'
 
 const value = ref<string>('')
 </script>

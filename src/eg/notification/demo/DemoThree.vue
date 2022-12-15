@@ -7,7 +7,8 @@
 
 <script setup lang="ts">
 import { h } from 'vue'
-import { SvgIcon, notification, Button } from '@/lib'
+import { Icon_wechat } from '@hut-ui/icons-vue'
+import { notification, Button } from '@/lib'
 
 const openNotification = () => {
   notification.custom({
@@ -17,7 +18,7 @@ const openNotification = () => {
       { style: { color: 'orange' } },
       " 'This is the content of the notification. This is the content of the notification. This is the content of the notification.'"
     ),
-    icon: h(SvgIcon, { name: 'weixin', width: '1em', height: '1em' }),
+    icon: h(Icon_wechat, { name: 'weixin', width: '1em', height: '1em' }),
     onOk: () => {
       console.log('ok')
     },

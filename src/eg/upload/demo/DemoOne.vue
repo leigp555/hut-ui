@@ -6,7 +6,7 @@
   <Upload @change="onChange">
     <Button>
       <template #icon>
-        <SvgIcon name="upload" fill="#fff" />
+        <Icon_upload name="upload" fill="#fff" />
       </template>
       upload
     </Button>
@@ -14,7 +14,8 @@
 </template>
 
 <script setup lang="ts">
-import { Upload, SvgIcon, Button } from '@/lib'
+import { Icon_upload } from '@hut-ui/icons-vue'
+import { Upload, Button } from '@/lib'
 
 const onChange = (data: { blobs: File[]; urlPromises: string[] }) => {
   console.log(data.blobs)

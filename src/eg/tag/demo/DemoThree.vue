@@ -6,19 +6,19 @@
   <div class="wrap">
     <Tag color="pink">
       <template #icon>
-        <SvgIcon name="email" width="1em" height="1em" fill="pink" />
+        <Icon_email name="email" width="1em" height="1em" fill="pink" />
       </template>
       email
     </Tag>
     <Tag color="red">
       <template #icon>
-        <SvgIcon name="setting" width="1em" height="1em" fill="red" />
+        <Icon_setting name="setting" width="1em" height="1em" fill="red" />
       </template>
       setting
     </Tag>
     <Tag color="#108ee9">
       <template #icon>
-        <SvgIcon name="weixin" width="1em" height="1em" fill="#108ee9" />
+        <Icon_wechat name="weixin" width="1em" height="1em" fill="#108ee9" />
       </template>
       wechat
     </Tag>
@@ -26,7 +26,8 @@
 </template>
 
 <script setup lang="ts">
-import { Tag, SvgIcon } from '@/lib'
+import { Icon_email, Icon_setting, Icon_wechat } from '@hut-ui/icons-vue'
+import { Tag } from '@/lib'
 </script>
 
 <style lang="scss" scoped>

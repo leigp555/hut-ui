@@ -14,7 +14,7 @@
       <div class="title">
         <span>Basic Drawer</span>
         <span class="close"
-          ><SvgIcon name="cha" width="1em" height="1em" @click="onClose"
+          ><Icon_cha name="cha" width="1em" height="1em" @click="onClose"
         /></span>
       </div>
     </template>
@@ -30,7 +30,8 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { Drawer, SvgIcon, Button } from '@/lib'
+import { Icon_cha } from '@hut-ui/icons-vue'
+import { Drawer, Button } from '@/lib'
 
 const visible = ref<boolean>(false)
 const onClose = () => {

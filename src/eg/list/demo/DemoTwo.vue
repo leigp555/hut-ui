@@ -12,7 +12,7 @@
           style="background-color: #ffffff; padding: 0"
         >
           <template #icon>
-            <SvgIcon name="user" width="2em" height="2em" />
+            <Icon_user name="user" width="2em" height="2em" />
           </template>
         </Avatar>
       </template>
@@ -41,7 +41,8 @@
 
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
-import { ListItem, List, Avatar, SvgIcon, Button, ListData } from '@/lib'
+import { Icon_user } from '@hut-ui/icons-vue'
+import { ListItem, List, Avatar, Button, ListData } from '@/lib'
 
 import { ajax } from '@/eg/ajax'
 

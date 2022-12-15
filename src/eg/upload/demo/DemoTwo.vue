@@ -7,7 +7,7 @@
     <div class="wrap">
       <div class="content">
         <p :style="{ marginBottom: '10px' }">
-          <SvgIcon name="img_push" width="2.5em" height="2.5em" />
+          <Icon_imgPush name="img_push" width="2.5em" height="2.5em" />
         </p>
         <p :style="{ marginBottom: '4px', fontSize: '16px' }">
           Click or drag file to this area to upload
@@ -22,7 +22,8 @@
 </template>
 
 <script setup lang="ts">
-import { Upload, SvgIcon, Button } from '@/lib'
+import { Icon_imgPush } from '@hut-ui/icons-vue'
+import { Upload, Button } from '@/lib'
 
 const onChange = (data: { blobs: File[]; urlPromises: string[] }) => {
   console.log(data.blobs)

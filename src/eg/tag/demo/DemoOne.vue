@@ -18,7 +18,7 @@
     <Tag color="#108ee9">#108ee9</Tag>
     <Tag color="#108ee9">
       <template #icon>
-        <SvgIcon name="weixin" width="1em" height="1em" fill="#108ee9" />
+        <Icon_wechat name="weixin" width="1em" height="1em" fill="#108ee9" />
       </template>
       Wechat
     </Tag>
@@ -27,7 +27,8 @@
 </template>
 
 <script setup lang="ts">
-import { Tag, SvgIcon } from '@/lib'
+import { Icon_wechat } from '@hut-ui/icons-vue'
+import { Tag } from '@/lib'
 
 const log = (el: HTMLSpanElement) => {
   console.log(el)

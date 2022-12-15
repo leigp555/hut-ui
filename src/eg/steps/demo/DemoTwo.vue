@@ -6,17 +6,17 @@
     <Steps :current="current" :totalStep="3">
       <Step title="First-content" :order="1">
         <template #icon>
-          <SvgIcon name="weixin" width="1em" height="1em" />
+          <Icon_wechat name="weixin" width="1em" height="1em" />
         </template>
       </Step>
       <Step title="First-content" :order="2">
         <template #icon>
-          <SvgIcon name="email" width="1em" height="1em" />
+          <Icon_email name="email" width="1em" height="1em" />
         </template>
       </Step>
       <Step title="First-content" :order="3">
         <template #icon>
-          <SvgIcon name="setting" width="1em" height="1em" />
+          <Icon_setting name="setting" width="1em" height="1em" />
         </template>
       </Step>
     </Steps>
@@ -25,7 +25,8 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { Steps, Step, SvgIcon } from '@/lib'
+import { Icon_email, Icon_setting, Icon_wechat } from '@hut-ui/icons-vue'
+import { Steps, Step } from '@/lib'
 
 const current = ref<number>(1)
 </script>

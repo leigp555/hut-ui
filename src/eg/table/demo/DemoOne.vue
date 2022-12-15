@@ -14,7 +14,12 @@
     <template #footer>Footer</template>
     <template #tableHead="item">
       <span v-if="item.keyValue === 'name'" style="color: red">
-        <SvgIcon name="weixin" width="1em " height="1em" style="margin-right: 4px" />
+        <Icon_wechat
+          name="weixin"
+          width="1em "
+          height="1em"
+          style="margin-right: 4px"
+        />
         {{ item.dataValue }}
       </span>
       <span v-else>{{ item.dataValue }}</span>
@@ -67,16 +72,8 @@
 
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
-import {
-  Table,
-  Pagination,
-  Popconfirm,
-  Tag,
-  SvgIcon,
-  Button,
-  TableDataType
-} from '@/lib'
-
+import { Icon_wechat } from '@hut-ui/icons-vue'
+import { Table, Pagination, Popconfirm, Tag, Button, TableDataType } from '@/lib'
 import { ajax } from '@/eg/ajax'
 import { randomColor } from '@/eg/helper'
 

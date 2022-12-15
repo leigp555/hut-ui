@@ -5,17 +5,18 @@
 <template>
   <Input v-model:value="value" placeholder="Basic usage">
     <template #prefix>
-      <SvgIcon name="user" width="1em" height="1em" />
+      <Icon_user name="user" width="1em" height="1em" />
     </template>
     <template #suffix>
-      <SvgIcon name="cha" width="1em" height="1em" @click="clear" />
+      <Icon_cha name="cha" width="1em" height="1em" @click="clear" />
     </template>
   </Input>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { Input, SvgIcon } from '@/lib'
+import { Icon_user, Icon_cha } from '@hut-ui/icons-vue'
+import { Input } from '@/lib'
 
 const value = ref<string>('')
 

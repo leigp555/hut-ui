@@ -13,5 +13,5 @@
 </template>
 
 <script setup lang="ts">
-import { Timeline, TimelineItem, SvgIcon } from '@/lib'
+import { Timeline, TimelineItem } from '@/lib'
 </script>

@@ -2,7 +2,8 @@
 基本用法
 </demo>
 <script setup lang="ts">
-import { Button, SvgIcon, Comment, CommentData } from '@/lib'
+import { Icon_agree } from '@hut-ui/icons-vue'
+import { Button, Comment, CommentData } from '@/lib'
 
 const data: CommentData[] = [
   {
@@ -104,13 +105,13 @@ const data: CommentData[] = [
           <div class="kudos">
             <div class="agree">
               <span>
-                <SvgIcon name="agree" width="1em" height="1em" />
+                <Icon_agree name="agree" width="1em" height="1em" />
               </span>
               <span>{{ kudosProps.item.like_num }}</span>
             </div>
             <div class="oppose">
               <span>
-                <SvgIcon
+                <Icon_agree
                   name="agree"
                   width="1em"
                   height="1em"

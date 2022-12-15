@@ -21,7 +21,7 @@
 </template>
 
 <script setup lang="ts">
-import { Tag, SvgIcon } from '@/lib'
+import { Tag } from '@/lib'
 import { randomColor } from '@/eg/helper'
 </script>
 
