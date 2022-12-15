@@ -6,19 +6,19 @@
   <Menu v-model:selectedKeys="selectedKeys" mode="horizontal" @change="onChange">
     <MenuItem keyValue="mail">
       <template #icon>
-        <SvgIcon name="email" width="1em" height="1em" />
+        <Icon_email name="email" width="1em" height="1em" />
       </template>
       Navigation One
     </MenuItem>
     <MenuItem keyValue="app" :disabled="true">
       <template #icon>
-        <SvgIcon name="apps" width="1em" height="1em" />
+        <Icon_apps name="apps" width="1em" height="1em" />
       </template>
       Navigation Two
     </MenuItem>
     <SubMenu keyValue="sub1">
       <template #icon>
-        <SvgIcon name="setting" width="1em" height="1em" />
+        <Icon_setting name="setting" width="1em" height="1em" />
       </template>
       <template #title>Navigation Three - Submenu</template>
       <MenuItemGroup title="Item 1" keyValue="Item 1">
@@ -35,7 +35,8 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { Menu, MenuItemGroup, MenuItem, SubMenu, SvgIcon } from '@/lib'
+import { Icon_email, Icon_setting, Icon_apps } from '@hut-ui/icons-vue'
+import { Menu, MenuItemGroup, MenuItem, SubMenu } from '@/lib'
 
 const selectedKeys = ref<string[]>(['mail'])
 

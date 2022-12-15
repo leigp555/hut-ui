@@ -73,9 +73,10 @@ $disabled_color: #00000040;
     color: $disabled_color;
     cursor: not-allowed;
     > .ui-menuItem-icon {
-      .iconfont {
-        color: $disabled_color;
+      svg {
+        fill: $disabled_color;
       }
+
       cursor: not-allowed;
     }
     > .ui-menuItem-content {

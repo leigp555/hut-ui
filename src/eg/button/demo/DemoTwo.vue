@@ -8,24 +8,25 @@
     <Button radius type="dashed">A</Button>
     <Button type="text" radius style="background-color: #67c23a">
       <template #icon>
-        <SvgIcon name="weixin" width="1em" height="1em" fill="#fff" />
+        <Icon_wechat name="weixin" width="1em" height="1em" fill="#fff" />
       </template>
     </Button>
     <Button type="text" radius style="background-color: #e6a23c">
       <template #icon>
-        <SvgIcon name="search" width="1em" height="1em" fill="#fff" />
+        <Icon_search name="search" width="1em" height="1em" fill="#fff" />
       </template>
     </Button>
     <Button type="primary" radius>
       <template #icon>
-        <SvgIcon name="email" width="1em" height="1em" fill="#fff" />
+        <Icon_email name="email" width="1em" height="1em" fill="#fff" />
       </template>
     </Button>
   </div>
 </template>
 
 <script setup lang="ts">
-import { Button, SvgIcon } from '@/lib'
+import { Icon_email, Icon_search, Icon_wechat } from '@hut-ui/icons-vue'
+import { Button } from '@/lib'
 </script>
 
 <style lang="scss" scoped>

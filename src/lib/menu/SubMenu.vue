@@ -144,7 +144,11 @@ const shouldTileLight = computed<boolean>(() => {
       :style="{ paddingLeft: mode === 'column' ? `${paddingLeft}px` : 0 }"
     >
       <div class="ui-subMenu-title-inner">
-        <span v-if="$slots.icon" class="ui-subMenu-icon">
+        <span
+          v-if="$slots.icon"
+          class="ui-subMenu-icon"
+          :class="{ 'ui-subMenu-icon-selected': shouldTileLight }"
+        >
           <slot name="icon" />
         </span>
         <span
@@ -214,18 +218,24 @@ const shouldTileLight = computed<boolean>(() => {
       transition: all 250ms linear;
       &.subMenu-content-open {
         transform: rotate(0);
-        fill: #1890ff;
+        svg {
+          fill: #1890ff;
+        }
       }
     }
     > .ui-subMenu-title-inner {
       display: flex;
-
       align-items: center;
       > .ui-subMenu-icon {
         min-width: 14px;
         font-size: 14px;
         display: flex;
         align-items: center;
+        &.ui-subMenu-icon-selected {
+          svg {
+            fill: #1890ff;
+          }
+        }
       }
       > .ui-subMenu-title {
         margin-left: 10px;
