@@ -1,10 +1,10 @@
 {
   "name": "hut-ui",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "private": false,
   "description": "vue ui",
   "files": [
-    "dist/lib","dist/hut-cjs.js","dist/hut-es.js","dist/hut-umd.js"
+    "lib/lib","lib/hut-cjs.js","lib/hut-es.js","lib/hut-umd.js"
   ],
   "browserslist": [
     "defaults",

@@ -17,4 +17,5 @@ dist
 prettier.config.js
 /src/mock/*
 mock/*
+./lib
 

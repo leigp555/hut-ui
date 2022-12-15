@@ -17,16 +17,16 @@ export default {
   input: 'src/lib/index.ts',
   output: [
     {
-      file: './dist/hut-umd.js',
+      file: './lib/hut-umd.js',
       format: 'umd',
       name: 'hut'
     },
     {
-      file: './dist/hut-es.js',
+      file: './lib/hut-es.js',
       format: 'es'
     },
     {
-      file: './dist/hut-cjs.js',
+      file: './lib/hut-cjs.js',
       format: 'cjs'
     }
   ],
