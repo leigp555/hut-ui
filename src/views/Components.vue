@@ -58,7 +58,7 @@ const onChange = () => {
 
 <style scoped lang="scss">
 .components--wrap {
-  height: 100%;
+  height: calc(100vh - 64px);
   display: flex;
   flex-direction: column;
   > .components-Body {
