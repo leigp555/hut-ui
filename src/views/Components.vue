@@ -12,7 +12,12 @@
       </section>
       <section class="display-content scroll-container">
         <!--        <Loading v-if="status" />-->
-        <router-view />
+        <router-view v-slot="{ Component }">
+          <transition name="fade">
+            <component :is="Component" />
+          </transition>
+        </router-view>
+        <!--        <router-view />-->
       </section>
     </section>
   </div>
@@ -113,6 +118,15 @@ const onChange = () => {
       overflow: hidden;
     }
   }
+}
+.fade-enter-active,
+.fade-leave-active {
+  transition: all 250ms;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>
 
