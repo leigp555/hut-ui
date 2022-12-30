@@ -35,7 +35,7 @@ onMounted(() => {
           templates: {
             item({ item, components, html }) {
               return html`<div class="search-algolia">
-                <a class="search-algolia-item" href="#${item.url}">
+                <a class="search-algolia-item" href="${item.url}">
                   ${components.Highlight({
                     hit: item,
                     attribute: 'componentName'
