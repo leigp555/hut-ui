@@ -1,8 +1,5 @@
 <template>
   <div class="components--wrap">
-    <section class="components-Head">
-      <Header />
-    </section>
     <section class="components-Body">
       <span class="menu-pop-button" @click="showDrawer">
         <SvgIcon name="menu_outline" width="20px" height="20px" fill="#262626" />
@@ -34,7 +31,6 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 
-import Header from '@/components/Header.vue'
 import ComponentsMenu from '@/components/ComponentsMenu.vue'
 
 import { Drawer, Button, SvgIcon } from '@/lib'
@@ -65,9 +61,6 @@ const onChange = () => {
   height: 100%;
   display: flex;
   flex-direction: column;
-  > .components-Head {
-    flex-shrink: 0;
-  }
   > .components-Body {
     flex-grow: 10;
     overflow-y: auto;

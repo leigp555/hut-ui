@@ -1,7 +1,9 @@
 <template>
   <div class="wrap">
     <div class="logo">
-      <img :src="logoUrl" alt="" />
+      <div class="img">
+        <img :src="logoUrl" alt="" />
+      </div>
       <span class="title-description">Hut UI</span>
     </div>
     <div class="nav">
@@ -124,9 +126,13 @@ const logoUrl = computed<string>(() => {
     align-items: center;
     margin-right: 12px;
     flex-shrink: 0;
-    > img {
-      height: 32px;
+    .img {
+      width: 24px;
+      > img {
+        height: 32px;
+      }
     }
+
     > .title-description {
       font-size: 18px;
       font-family: v-sans, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',

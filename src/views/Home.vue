@@ -1,6 +1,5 @@
 <template>
   <div class="home-wrap">
-    <Header />
     <div class="home-content scroll-container">
       <section class="content">
         <div class="bird">
@@ -27,7 +26,6 @@
 
 <script setup lang="ts">
 import Footer from '@/components/Footer.vue'
-import Header from '@/components/Header.vue'
 import Bird from '@/components/Bird.vue'
 import Wave from '@/components/Wave.vue'
 </script>
